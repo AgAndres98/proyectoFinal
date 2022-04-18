@@ -23,6 +23,8 @@ export function LoginForm() {
         validateOnChange: false,
         onSubmit: async (formValue) => {
             try {
+                console.log(formValue.email,
+                    formValue.password);
                 const auth = getAuth();
                 await signInWithEmailAndPassword(
                     auth,
@@ -30,12 +32,16 @@ export function LoginForm() {
                     formValue.password
                 );
                 navigation.navigate(screen.account.account);
+                console.log("registro ok");
+
             } catch (error) {
                 Toast.show({
                     type: "error",
                     position: "bottom",
                     text1: "Usuario o contraseña incorrectos",
                 });
+
+                console.log("registro noy");
             }
         },
     });
