@@ -1,5 +1,4 @@
-import { View, Text } from "react-native";
-import React, { useState } from "react";
+import { View } from "react-native";
 import { Input, Icon, Button } from "react-native-elements";
 import { styles } from "./LoginForm.styles";
 import { useState } from "react";
@@ -47,7 +46,7 @@ export function LoginForm() {
             <Button title="Iniciar sesion"
                 containerStyle={styles.btnContainer}
                 buttonStyle={styles.btn}
-                onPress={formik.handleSumbit}
+                onPress={formik.handleSubmit}
                 loading={formik.isSubmitting} />
 
         </View>
