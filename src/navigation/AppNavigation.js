@@ -6,6 +6,7 @@ import { FavoritesStack } from "./FavoritesStack";
 import { CalendarStack } from "./CalendarStack";
 import { AccountStack } from "./AccountStack";
 import { ObjectsStack } from "./ObjectsStack";
+import { RegisterStack } from "./RegisterStack"
 
 import { screen } from "../utils";
 //import { Tab } from "react-native-elements";
@@ -46,6 +47,12 @@ export function AppNavigation() {
         name={screen.account.tab}
         component={AccountStack}
         options={{ title: "cuenta" }}
+      />
+
+      <Tab.Screen
+        name={screen.register.tab}
+        component={RegisterStack}
+        options={{ title: "register" }}
       />
     </Tab.Navigator>
   );
