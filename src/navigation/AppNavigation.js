@@ -8,6 +8,7 @@ import { AccountStack } from "./AccountStack";
 import { ObjectsStack } from "./ObjectsStack";
 
 import { screen } from "../utils";
+import { LoginStack } from "./LoginStack";
 //import { Tab } from "react-native-elements";
 
 const Tab = createBottomTabNavigator();
@@ -46,6 +47,12 @@ export function AppNavigation() {
         name={screen.account.tab}
         component={AccountStack}
         options={{ title: "cuenta" }}
+      />
+
+      <Tab.Screen
+        name={screen.login.tab}
+        component={LoginStack}
+        options={{ title: "login" }}
       />
     </Tab.Navigator>
   );
