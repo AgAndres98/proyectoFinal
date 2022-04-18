@@ -1,3 +1,5 @@
+import { LoginStack } from "../navigation/LoginStack";
+
 const objectsStack = {
   tab: "ObjectsTab",
   objects: "Objects",
@@ -29,10 +31,16 @@ const accountStack = {
   register: "Register",
 };
 
+const loginStack = {
+  tab: "LoginTab",
+  login: "Login",
+};
+
 export const screen = {
   objects: objectsStack,
   favorites: favoritesStack,
   calendar: calendarStack,
   donation: donationStack,
   account: accountStack,
+  login: loginStack,
 };
