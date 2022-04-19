@@ -23,7 +23,10 @@ export function ListObjects(props) {
           return (
             <TouchableOpacity onPress={() => goToObject(objeto)}>
               <View style={styles.objeto}>
-                <Image source={{ uri: objeto.images }} style={styles.image} />
+                <Image
+                  source={{ uri: objeto.images[0] }}
+                  style={styles.image}
+                />
                 <View>
                   <Text style={styles.name}>{objeto.name}</Text>
                   <Text style={styles.info}>{objeto.city}</Text>
