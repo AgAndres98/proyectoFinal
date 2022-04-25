@@ -26,7 +26,7 @@ export function RegisterForm() {
                     formValues.email,
                     formValues.password
                 );
-                //falta el navigation pero no me funciona
+                navigation.navigate(screen.objects.tab);// en un futuro llevar a que llene los datos
             } catch (error){
                 Toast.show({
                     type: "error",
