@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { screen } from "../utils";
 import { ObjectsScreen } from "../screens/Objects/ObjectsScreen";
-import { ObjectDetailScreen } from "../screens/Objects/ObjectDetailScreen";
+import { ObjectScreen } from "../screens/Objects/ObjectScreen/ObjectScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +16,7 @@ export function ObjectsStack() {
 
       <Stack.Screen
         name={screen.objects.objeto}
-        component={ObjectDetailScreen}
+        component={ObjectScreen}
         options={{ tittle: "Objeto" }}
       />
     </Stack.Navigator>

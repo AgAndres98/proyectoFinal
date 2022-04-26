@@ -28,7 +28,6 @@
     "react-native-toast-message": "^2.1.5",
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.1",
-    "toast": "^0.3.47",
     "yup": "^0.32.11"
   },
   "devDependencies": {

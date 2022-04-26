@@ -6,6 +6,7 @@ import { FavoritesStack } from "./FavoritesStack";
 import { CalendarStack } from "./CalendarStack";
 import { AccountStack } from "./AccountStack";
 import { ObjectsStack } from "./ObjectsStack";
+import { RegisterStack } from "./RegisterStack"
 
 import { screen } from "../utils";
 import { LoginStack } from "./LoginStack";
@@ -26,27 +27,33 @@ export function AppNavigation() {
       <Tab.Screen
         name={screen.favorites.tab}
         component={FavoritesStack}
-        options={{ title: "favoritos" }}
+        options={{ title: "Tus favoritos" }}
       />
       <Tab.Screen
         name={screen.objects.tab}
         component={ObjectsStack}
-        options={{ title: "objetos" }}
+        options={{ title: "Objetos" }}
       />
       <Tab.Screen
         name={screen.donation.tab}
         component={DonationStack}
-        options={{ title: "donacion" }}
+        options={{ title: "Haz una donación" }}
       />
       <Tab.Screen
         name={screen.calendar.tab}
         component={CalendarStack}
-        options={{ title: "calendario" }}
+        options={{ title: "Calendario de eventos" }}
       />
       <Tab.Screen
         name={screen.account.tab}
         component={AccountStack}
-        options={{ title: "cuenta" }}
+        options={{ title: "Tu cuenta" }}
+      />
+
+      <Tab.Screen
+        name={screen.register.tab}
+        component={RegisterStack}
+        options={{ title: "register" }}
       />
 
       <Tab.Screen
@@ -66,15 +73,15 @@ function screenOptions(route, color, size) {
   }
 
   if (route.name === screen.objects.tab) {
-    iconName = "compass-outline";
+    iconName = "treasure-chest";
   }
 
   if (route.name === screen.donation.tab) {
-    iconName = "magnify";
+    iconName = "plus";
   }
 
   if (route.name === screen.calendar.tab) {
-    iconName = "star-outline";
+    iconName = "calendar";
   }
 
   if (route.name === screen.account.tab) {

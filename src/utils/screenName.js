@@ -14,6 +14,11 @@ const favoritesStack = {
   favorites: "Favorites",
 };
 
+const registerStack = {
+  tab: "RegisterTab",
+  register: "Register",
+};
+
 const calendarStack = {
   tab: "CalendarTab",
   calendar: "Calendar",
@@ -43,4 +48,5 @@ export const screen = {
   donation: donationStack,
   account: accountStack,
   login: loginStack,
+  register: registerStack,
 };
