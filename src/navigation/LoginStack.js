@@ -8,7 +8,7 @@ export function LoginStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={screen.account.login}
+        name={screen.login.login}
         component={LoginScreen}
         options={{ tittle: "Login" }}
       />

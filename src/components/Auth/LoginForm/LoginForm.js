@@ -31,6 +31,7 @@ export function LoginForm() {
                     formValue.email,
                     formValue.password
                 );
+                console.log("firebase ok");
                 navigation.navigate(screen.account.account);
                 console.log("registro ok");
 
@@ -41,7 +42,7 @@ export function LoginForm() {
                     text1: "Usuario o contraseña incorrectos",
                 });
 
-                console.log("registro noy");
+                console.log("registro no");
             }
         },
     });
