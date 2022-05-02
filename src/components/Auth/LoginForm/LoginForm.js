@@ -32,7 +32,7 @@ export function LoginForm() {
                     formValue.password
                 );
                 console.log("firebase ok");
-                navigation.navigate(screen.objects.tab);// en un futuro llevar a 
+                navigation.navigate(screen.account.tab);// en un futuro llevar a 
                 console.log("registro ok");
 
             } catch (error) {
