@@ -26,7 +26,12 @@ export function RegisterForm() {
                     formValues.email,
                     formValues.password
                 );
-                navigation.navigate(screen.objects.tab);// en un futuro llevar a que llene los datos
+                Toast.show({
+                    type: "success",
+                    position: "bottom",
+                    text1: "Se registró con exito",
+                });
+                navigation.navigate(screen.account.tab);// en un futuro llevar a que llene los datos
             } catch (error){
                 Toast.show({
                     type: "error",

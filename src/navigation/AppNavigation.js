@@ -6,9 +6,9 @@ import { FavoritesStack } from "./FavoritesStack";
 import { CalendarStack } from "./CalendarStack";
 import { AccountStack } from "./AccountStack";
 import { ObjectsStack } from "./ObjectsStack";
-import { RegisterStack } from "./RegisterStack"
 
 import { screen } from "../utils";
+
 //import { Tab } from "react-native-elements";
 
 const Tab = createBottomTabNavigator();
@@ -49,11 +49,6 @@ export function AppNavigation() {
         options={{ title: "Tu cuenta" }}
       />
 
-      <Tab.Screen
-        name={screen.register.tab}
-        component={RegisterStack}
-        options={{ title: "register" }}
-      />
     </Tab.Navigator>
   );
 }

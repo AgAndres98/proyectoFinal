@@ -1,3 +1,5 @@
+
+
 const objectsStack = {
   tab: "ObjectsTab",
   objects: "Objects",
@@ -10,11 +12,6 @@ const objectsStack = {
 const favoritesStack = {
   tab: "FavoritesTab",
   favorites: "Favorites",
-};
-
-const registerStack = {
-  tab: "RegisterTab",
-  register: "Register",
 };
 
 const calendarStack = {
@@ -34,11 +31,11 @@ const accountStack = {
   register: "Register",
 };
 
+
 export const screen = {
   objects: objectsStack,
   favorites: favoritesStack,
   calendar: calendarStack,
   donation: donationStack,
   account: accountStack,
-  register: registerStack,
 };
