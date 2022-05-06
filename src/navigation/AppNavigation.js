@@ -71,7 +71,7 @@ function screenOptions(route, color, size) {
   }
 
   if (route.name === screen.account.tab) {
-    iconName = "home-outline";
+    iconName = "account";
   }
 
   return (
