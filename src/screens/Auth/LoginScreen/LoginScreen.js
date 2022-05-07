@@ -11,7 +11,7 @@ export function LoginScreen() {
   const navigation = useNavigation();
 
   const irARegistrarse = () => {
-    navigation.navigate(screen.account.register);
+    navigation.navigate(screen.auth.register);
   };
   return (
     <KeyboardAwareScrollView>
