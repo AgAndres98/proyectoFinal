@@ -10,7 +10,8 @@ export function ListObjects(props) {
   const navigation = useNavigation();
 
   const goToObject = (objeto) => {
-    navigation.navigate(screen.objects.objeto, { id: objeto.id });
+    //navigation.navigate(screen.objects.objeto, { id: objeto.id });
+    navigation.navigate(screen.objects.objeto, { objeto: objeto });
   };
 
   return (

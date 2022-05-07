@@ -2,18 +2,19 @@ import React from "react";
 import { View } from "react-native";
 import { Image } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { RegisterForm } from "../../../components/Auth"
+import { RegisterForm } from "../../../components/Auth";
 import { styles } from "./RegisterScreen.styles";
 
 export function RegisterScreen() {
-    return(
-        <KeyboardAwareScrollView>
-            <Image source={require("../../../../assets/icon.png")}
-            style={styles.image} 
-            />
-            <View style={styles.content}>
-                <RegisterForm />
-            </View>
-        </KeyboardAwareScrollView>
-    );
+  return (
+    <KeyboardAwareScrollView>
+      <Image
+        source={require("../../../../assets/iconv1.png")}
+        style={styles.image}
+      />
+      <View style={styles.content}>
+        <RegisterForm />
+      </View>
+    </KeyboardAwareScrollView>
+  );
 }

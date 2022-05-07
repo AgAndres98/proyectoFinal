@@ -10,7 +10,7 @@ export function CalendarStack() {
       <Stack.Screen
         name={screen.calendar.calendar}
         component={CalendarScreen}
-        options={{ tittle: "Calendario" }}
+        options={{ title: "Calendario" }}
       />
     </Stack.Navigator>
   );
