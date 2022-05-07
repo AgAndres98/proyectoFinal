@@ -9,6 +9,7 @@ import { FavoritesStack } from "./FavoritesStack";
 import { CalendarStack } from "./CalendarStack";
 import { AccountStack } from "./AccountStack";
 import { ObjectsStack } from "./ObjectsStack";
+import { AuthStack } from "./AuthStack";
 
 import { screen } from "../utils";
 
@@ -75,8 +76,8 @@ export function AppNavigation() {
         })}
       >
         <Tab.Screen
-          name={screen.account.tab}
-          component={AccountStack}
+          name={screen.auth.tab}
+          component={AuthStack}
           options={{ tabBarStyle: { display: "none" } }}
           headerShown={false}
         />
