@@ -11,12 +11,12 @@ export function AuthStack() {
       <Stack.Screen
         name={screen.auth.login}
         component={LoginScreen}
-        options={{ tittle: "Iniciar sesión" }}
+        options={{ title: "Iniciar sesión" }}
       />
       <Stack.Screen
         name={screen.auth.register}
         component={RegisterScreen}
-        options={{ tittle: "Registrarse" }}
+        options={{ title: "Registrarse" }}
       />
     </Stack.Navigator>
   );

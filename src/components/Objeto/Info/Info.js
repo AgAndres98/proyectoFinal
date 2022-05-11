@@ -9,17 +9,17 @@ export function Info(props) {
   const listInfo = [
     {
       text: objeto.adress,
-      iconName: "map-marker",
+      iconName: "map-marker-outline",
       iconType: "material-community",
     },
     {
       text: objeto.phone,
-      iconName: "phone",
+      iconName: "phone-outline",
       iconType: "material-community",
     },
     {
       text: objeto.email,
-      iconName: "email",
+      iconName: "email-outline",
       iconType: "material-community",
     },
   ];

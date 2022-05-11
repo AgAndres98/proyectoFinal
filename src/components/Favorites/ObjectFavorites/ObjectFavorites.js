@@ -30,7 +30,7 @@ export function ObjectFavorites(props) {
           <Icon
             type="material-community"
             name="heart"
-            color="#f00"
+            color="#F02B2F"
             size={35}
             containerStyle={styles.iconContainer}
             onPress={onRemoveFavorite}
