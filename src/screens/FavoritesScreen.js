@@ -40,7 +40,7 @@ export function FavoritesScreen() {
     console.log("loading");
   }
 
-  if (size(favorites) === 0) return <NotFoundObjects />;
+  if (size(favoritesVacio) === 0) return <NotFoundObjects />;
 
   return (
     <ScrollView>
