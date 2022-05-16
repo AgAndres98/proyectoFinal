@@ -40,7 +40,7 @@ export function AppNavigation() {
         <Tab.Screen
           name={screen.favorites.tab}
           component={FavoritesStack}
-          options={{ title: "Tus favoritos" }}
+          options={{ title: "Favoritos" }}
         />
         <Tab.Screen
           name={screen.objects.tab}
@@ -50,17 +50,17 @@ export function AppNavigation() {
         <Tab.Screen
           name={screen.donation.tab}
           component={DonationStack}
-          options={{ title: "Haz una donación" }}
+          options={{ title: "Donar" }}
         />
         <Tab.Screen
           name={screen.calendar.tab}
           component={CalendarStack}
-          options={{ title: "Calendario de eventos" }}
+          options={{ title: "Eventos" }}
         />
         <Tab.Screen
           name={screen.account.tab}
           component={AccountStack}
-          options={{ title: "Tu cuenta" }}
+          options={{ title: "Cuenta" }}
         />
       </Tab.Navigator>
     );
@@ -94,7 +94,7 @@ function screenOptions(route, color, size) {
   }
 
   if (route.name === screen.objects.tab) {
-    iconName = "treasure-chest";
+    iconName = "archive-outline";
   }
 
   if (route.name === screen.donation.tab) {
@@ -106,7 +106,7 @@ function screenOptions(route, color, size) {
   }
 
   if (route.name === screen.account.tab) {
-    iconName = "account";
+    iconName = "account-outline";
   }
 
   return (
