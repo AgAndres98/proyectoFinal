@@ -10,17 +10,19 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo/webpack-config": "~0.16.2",
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.1",
-    "expo": "~44.0.0",
+    "expo": "^45.0.4",
     "expo-status-bar": "~1.2.0",
-    "expo-updates": "~0.11.7",
+    "expo-updates": "^0.13.1",
     "firebase": "^9.6.11",
     "formik": "^2.2.9",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-calendar": "^0.13.1",
     "react-native-elements": "^3.4.2",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-safe-area-context": "3.3.2",
@@ -28,6 +30,7 @@
     "react-native-toast-message": "^2.1.5",
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.1",
+    "webpack-dev-server": "~3.11.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
