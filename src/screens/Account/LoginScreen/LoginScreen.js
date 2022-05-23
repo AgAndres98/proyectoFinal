@@ -17,7 +17,7 @@ export function LoginScreen() {
     }
     return (
         <KeyboardAwareScrollView>
-            <Image source={require("../../../../assets/icon.png")}
+            <Image source={require("../../../../assets/logo.jpeg")}
                 style={styles.image}
             />
             <View style={styles.content}>
