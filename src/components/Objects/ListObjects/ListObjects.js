@@ -24,14 +24,10 @@ export function ListObjects(props) {
           return (
             <TouchableOpacity onPress={() => goToObject(objeto)}>
               <View style={styles.objeto}>
-                {
-                  {
-                    /*<Image source={{ uri: objeto.fotos[0] }} style={styles.image} />*/
-                  }
-                }
+                <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
+
                 <View>
                   <Text style={styles.name}>{objeto.titulo}</Text>
-                  <Text style={styles.info}>{objeto.titulo}</Text>
                   <Text style={styles.info}>{objeto.descripcion}</Text>
                 </View>
               </View>
@@ -42,3 +38,28 @@ export function ListObjects(props) {
     </View>
   );
 }
+/*
+    <FlatList
+      data={objects}
+      renderItem={(doc) => {
+        const objeto = doc.item; //.data();
+        console.log(objeto);
+        return (
+          <TouchableOpacity onPress={() => goToObject(objeto)}>
+            <View style={styles.objeto}>
+              {
+                {
+                  <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
+                }
+              }
+              <View>
+                <Text style={styles.name}>{objeto.titulo}</Text>
+                <Text style={styles.info}>{objeto.titulo}</Text>
+                <Text style={styles.info}>{objeto.descripcion}</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        );
+      }}
+    />
+  );*/

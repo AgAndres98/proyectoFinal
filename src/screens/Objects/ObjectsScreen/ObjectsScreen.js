@@ -3,12 +3,12 @@ import { View, Text } from "react-native";
 import { Icon } from "react-native-elements";
 import { Button } from "react-native-elements";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-
+import { LoadingModal } from "../../../components/Shared";
 import { screen, db } from "../../../utils";
 import { styles } from "./ObjectsScreen.styles";
 import { ListObjects } from "../../../components/Objects";
+
 export function ObjectsScreen(props) {
-  const { navigation } = props;
   const [objects, setObjects] = useState(null);
   const objects2 = [
     {
@@ -40,7 +40,7 @@ export function ObjectsScreen(props) {
   ];
 
   useEffect(() => {
-    const q = query(collection(db, "objetos"), orderBy("ceratedAt", "desc"));
+    const q = query(collection(db, "objetos"), orderBy("createdAt", "desc"));
 
     onSnapshot(q, (snapshot) => {
       setObjects(snapshot.docs);
@@ -49,7 +49,11 @@ export function ObjectsScreen(props) {
 
   return (
     <View>
-      <ListObjects objects={objects} />
+      {!objects ? (
+        <LoadingModal show text="Cargando" />
+      ) : (
+        <ListObjects objects={objects} />
+      )}
     </View>
   );
 }
