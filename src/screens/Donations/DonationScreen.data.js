@@ -1,6 +1,8 @@
 import * as Yup from "yup";
 
 export function initialValues() {
+
+
     return {
         titulo: "",
         descripcion: "",
@@ -8,6 +10,7 @@ export function initialValues() {
         tipo: "",
         fotos: [],
         activa: true,
+        idUsuario: "",
     };
 }
 

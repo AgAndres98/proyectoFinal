@@ -31,7 +31,7 @@ export function RegisterForm() {
                     position: "bottom",
                     text1: "Se registró con exito",
                 });
-                navigation.navigate(screen.objects.tab);// en un futuro llevar a que llene los datos
+                navigation.navigate(screen.account.informationPersonal);
             } catch (error){
                 Toast.show({
                     type: "error",
