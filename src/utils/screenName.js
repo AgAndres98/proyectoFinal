@@ -1,12 +1,7 @@
-
-
 const objectsStack = {
   tab: "ObjectsTab",
   objects: "Objects",
   objeto: "Objeto",
-  addRestaurant: "AddRestaurant",
-  restaurant: "Restaurant",
-  addReviewRestaurant: "AddReviewRestaurant",
 };
 
 const favoritesStack = {
@@ -27,10 +22,13 @@ const donationStack = {
 const accountStack = {
   tab: "AccountTab",
   account: "Account",
+};
+
+const authStack = {
+  tab: "AuthTab",
   login: "Login",
   register: "Register",
 };
-
 
 export const screen = {
   objects: objectsStack,
@@ -38,4 +36,5 @@ export const screen = {
   calendar: calendarStack,
   donation: donationStack,
   account: accountStack,
+  auth: authStack,
 };

@@ -10,7 +10,7 @@ export function DonationStack() {
       <Stack.Screen
         name={screen.donation.donation}
         component={DonationScreen}
-        options={{ tittle: "Donacion" }}
+        options={{ title: "Donar" }}
       />
     </Stack.Navigator>
   );

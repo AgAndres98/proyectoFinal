@@ -11,13 +11,13 @@ export function ObjectsStack() {
       <Stack.Screen
         name={screen.objects.objects}
         component={ObjectsScreen}
-        options={{ tittle: "Objetos" }}
+        options={{ title: "Listado de objetos" }}
       />
 
       <Stack.Screen
         name={screen.objects.objeto}
         component={ObjectScreen}
-        options={{ tittle: "Objeto" }}
+        options={{ title: "Detalle de objeto" }}
       />
     </Stack.Navigator>
   );
