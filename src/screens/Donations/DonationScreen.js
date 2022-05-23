@@ -10,6 +10,7 @@ import { styles } from "./DonationScreen.styles";
 import {doc, setDoc} from "firebase/firestore"
 import {useNavigation} from "@react-navigation/native"
 import {db, screen} from "../../utils"
+import {getAuth} from "firebase/auth";
 import { v4 as uuid} from "uuid"
 
 
@@ -17,6 +18,8 @@ import { initialValues, validationSchem } from "./DonationScreen.data"
 
 export function DonationScreen() {
   const navigation = useNavigation();
+  
+  const uid = getAuth().currentUser;
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -25,8 +28,9 @@ export function DonationScreen() {
     onSubmit: async (formValues) => {
         try {
           const nuevaData = formValues;
+          nuevaData.idUsuario = uid.uid;
           nuevaData.id = uuid();
-          nuevaData.ceratedAt = new Date();
+          nuevaData.createdAt = new Date();
 
           await setDoc(doc(db, "objetos", nuevaData.id), nuevaData);
 
