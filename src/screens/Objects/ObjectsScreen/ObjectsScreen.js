@@ -2,20 +2,15 @@ import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import { Icon } from "react-native-elements";
 import { Button } from "react-native-elements";
-import { screen } from "../../../utils";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+
+import { screen, db } from "../../../utils";
 import { styles } from "./ObjectsScreen.styles";
 import { ListObjects } from "../../../components/Objects";
-
 export function ObjectsScreen(props) {
   const { navigation } = props;
-
-  const goToObject = () => {
-    navigation.navigate(screen.objects.objeto);
-    //para viajar a otra pestaña/tab:
-    //navigation.navigate(screen.account.tab,{screen:screen.account.account});
-  };
-
-  const objects = [
+  const [objects, setObjects] = useState(null);
+  const objects2 = [
     {
       color: "purple",
       id: 1,
@@ -43,6 +38,15 @@ export function ObjectsScreen(props) {
       ],
     },
   ];
+
+  useEffect(() => {
+    const q = query(collection(db, "objetos"), orderBy("ceratedAt", "desc"));
+
+    onSnapshot(q, (snapshot) => {
+      setObjects(snapshot.docs);
+    });
+  }, []);
+
   return (
     <View>
       <ListObjects objects={objects} />
