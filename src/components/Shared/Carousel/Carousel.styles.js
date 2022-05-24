@@ -3,6 +3,8 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   content: {
     position: "relative",
+    borderBottomWidth: 1,
+    borderColor: "#8073BD",
   },
   dotsContainer: {
     position: "absolute",

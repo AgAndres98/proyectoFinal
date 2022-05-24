@@ -26,7 +26,7 @@ export function ListObjects(props) {
               <View style={styles.objeto}>
                 <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
 
-                <View>
+                <View style={styles.informacion}>
                   <Text style={styles.name}>{objeto.titulo}</Text>
                   <Text style={styles.info}>{objeto.descripcion}</Text>
                 </View>

@@ -2,31 +2,34 @@ import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Image, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { screen } from "../../../utils";
+import { doc, deleteDoc } from "firebase/firestore";
+import { db, screen } from "../../../utils";
 import { styles } from "./ObjectFavorites.styles";
 
 export function ObjectFavorites(props) {
-  const { favorites } = props;
+  const { objeto } = props;
   const navigation = useNavigation();
 
   const goToObject = () => {
     navigation.navigate(screen.objects.tab, {
       screen: screen.objects.objeto,
       params: {
-        objeto: favorites,
+        id: objeto.id,
       },
     });
   };
 
-  const onRemoveFavorite = () => {
-    console.log("eliminar favorito");
+  const onRemoveFavorite = async () => {
+    try {
+      await deleteDoc(doc(db, "favorites", objeto.idFavorite));
+    } catch (error) {}
   };
   return (
     <TouchableOpacity onPress={goToObject}>
       <View style={styles.content}>
-        <Image source={{ uri: favorites.images[0] }} style={styles.image} />
+        <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
         <View style={styles.infoContent}>
-          <Text style={styles.name}>{favorites.name}</Text>
+          <Text style={styles.name}>{objeto.titulo}</Text>
           <Icon
             type="material-community"
             name="heart"
