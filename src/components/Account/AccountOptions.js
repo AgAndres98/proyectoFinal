@@ -67,22 +67,22 @@ function getMenuOptions(selectedComponent){
         iconType:"material-community",
         iconNameRight:"arrow-right",
         iconColorRight:"#ccc",
-        onPress: ()=>console.log("cambiar contra")
+        onPress: ()=>console.log("cambiar contra"),
     },
     {
         title:"Editar formulario beneficiario",
         iconType:"material-community",
         iconNameRight:"arrow-right",
         iconColorRight:"#ccc",
-        onPress: ()=>console.log("cambiar contra")
+        onPress: ()=>console.log("cambiar contra"),
     },
     {
         title:"Editar formulario donante",
         iconType:"material-community",
         iconNameRight:"arrow-right",
         iconColorRight:"#ccc",
-        onPress: ()=>console.log("cambiar contra")
-    }
+        onPress: ()=>console.log("cambiar contra"),
+    },
 
     ];
 }

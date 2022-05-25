@@ -8,7 +8,7 @@ export const styles=StyleSheet.create({
         paddingVertical:30,
     },
     avatar:{
-        marginRight:20,
+        marginRight:0,
         backgroundColor:"green",
     },
     displayName:{

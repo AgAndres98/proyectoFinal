@@ -13,6 +13,9 @@ export function validationSchema(){
         password:Yup.string().required("Este campo es obligatorio"),
         newPassword:Yup.string().required("Este campo es obligatorio"),
         confirmNewPassword:Yup.string().required("Este campo es obligatorio")
-        .oneOf(Yup.ref("newPassword"),"Las contraseñas deben coincidir"),
+        .oneOf([
+            Yup.ref("newPassord")],
+            "Las nuevas contraeñas tienen que ser iguales"
+            ),
     });
 }

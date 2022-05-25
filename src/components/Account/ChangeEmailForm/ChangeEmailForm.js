@@ -8,7 +8,7 @@ import {initialValues,validationSchema} from  "./ChangeEmailForm.data";
 import {useFormik} from 'formik';
 
 
-export  function ChangeEmailForm(props) {
+export function ChangeEmailForm(props) {
     const {onClose,OnReload}=props;
     const [showPassword,setShowPassword]=useState(false);
     const onShowPassword=()=>setShowPassword((prevState)=>!prevState);
@@ -23,8 +23,8 @@ export  function ChangeEmailForm(props) {
                 const credentials=EmailAuthProvider.credential(currentUser.email,formValue.password);
                 reauthenticateWithCredential(currentUser,credentials);
                 await updateEmail(currentUser,formValue.email);
-                OnReload();
-                onClose();
+               // OnReload();
+                //onClose();
             }catch(error){
                 console.log(error)
                 Toast.show({

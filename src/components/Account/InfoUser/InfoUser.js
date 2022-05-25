@@ -25,7 +25,7 @@ export  function InfoUser(props) {
    };
 
    const uploadImage= async (uri)=>{
-    //setLoadingText("Actualizando Avatar");
+   // setLoadingText("Actualizando Avatar");
     //setLoading(true);
 
      const response= await fetch(uri);
@@ -56,8 +56,9 @@ export  function InfoUser(props) {
       <Avatar size="large" 
       rounded 
       containerStyle={styles.avatar}
-      icon={{type:"material",name:"person"}}  
-      source={{uri:avatar}}>
+      icon={{type:"material",name:"person"}}
+      source={avatarUri(avatar)}
+      >
         <Avatar.Accessory size={24} onPress={changeAvatar}/>
       </Avatar>
      <View>
@@ -66,4 +67,10 @@ export  function InfoUser(props) {
       </View>
     </View>
   );
+}
+
+function avatarUri(avatar){
+    if(avatar!==null){
+      return uri={uri:avatar};
+    }
 }
