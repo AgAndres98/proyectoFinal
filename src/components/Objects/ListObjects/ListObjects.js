@@ -11,7 +11,7 @@ export function ListObjects(props) {
 
   const goToObject = (objeto) => {
     //navigation.navigate(screen.objects.objeto, { id: objeto.id });
-    navigation.navigate(screen.objects.objeto, { objeto: objeto });
+    navigation.navigate(screen.objects.objeto, { id: objeto.id });
   };
 
   return (
@@ -19,19 +19,16 @@ export function ListObjects(props) {
       <FlatList
         data={objects}
         renderItem={(doc) => {
-          const objeto = doc.item;
+          const objeto = doc.item.data();
           console.log(objeto);
           return (
             <TouchableOpacity onPress={() => goToObject(objeto)}>
               <View style={styles.objeto}>
-                <Image
-                  source={{ uri: objeto.images[0] }}
-                  style={styles.image}
-                />
-                <View>
-                  <Text style={styles.name}>{objeto.name}</Text>
-                  <Text style={styles.info}>{objeto.city}</Text>
-                  <Text style={styles.info}>{objeto.description}</Text>
+                <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
+
+                <View style={styles.informacion}>
+                  <Text style={styles.name}>{objeto.titulo}</Text>
+                  <Text style={styles.info}>{objeto.descripcion}</Text>
                 </View>
               </View>
             </TouchableOpacity>
@@ -41,3 +38,28 @@ export function ListObjects(props) {
     </View>
   );
 }
+/*
+    <FlatList
+      data={objects}
+      renderItem={(doc) => {
+        const objeto = doc.item; //.data();
+        console.log(objeto);
+        return (
+          <TouchableOpacity onPress={() => goToObject(objeto)}>
+            <View style={styles.objeto}>
+              {
+                {
+                  <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
+                }
+              }
+              <View>
+                <Text style={styles.name}>{objeto.titulo}</Text>
+                <Text style={styles.info}>{objeto.titulo}</Text>
+                <Text style={styles.info}>{objeto.descripcion}</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        );
+      }}
+    />
+  );*/

@@ -3,9 +3,9 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   content: {
     backgroundColor: "#fff",
-    marginVertical: 10,
-    marginHorizontal: 15,
-    borderWidth: 2,
+    marginVertical: 5,
+    marginHorizontal: 5,
+    borderWidth: 1,
     borderColor: "#8073BD",
     borderRadius: 10,
   },
