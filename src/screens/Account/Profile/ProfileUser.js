@@ -16,6 +16,10 @@ export function ProfileUser() {
         await signOut(auth);
     }
 
+    const irFormulario = async () => {
+        navigation.navigate(screen.account.informationPersonal);
+    }
+
     return (
         <View>
             <Text>Esta logeado</Text>
@@ -23,7 +27,10 @@ export function ProfileUser() {
                 title="Cerrar sesion"
                 onPress={cerrarSesion}
             />
-
+            <Button
+                title="Formulario"
+                onPress={irFormulario}
+            />
         </View>
     );
 }
