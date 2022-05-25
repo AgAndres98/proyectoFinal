@@ -11,7 +11,7 @@ const firebaseConfig = {
   projectId: "ayudar-1fb1a",
   storageBucket: "ayudar-1fb1a.appspot.com",
   messagingSenderId: "284011345493",
-  appId: "1:284011345493:web:f3d04f78165a726a4d86dc"
+  appId: "1:284011345493:web:f3d04f78165a726a4d86dc",
 };
 
 // Initialize Firebase

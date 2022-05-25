@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
   },
   id: {
     color: "#828282",
+    fontSize: 10,
   },
   description: {
     marginTop: 5,
