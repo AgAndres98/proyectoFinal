@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { View} from 'react-native';
+import { View } from 'react-native';
 import {Input,Button} from "react-native-elements";
 import { useFormik } from 'formik';
 import { initialValues,validationSchema } from './ChangePasswordForm.data';
