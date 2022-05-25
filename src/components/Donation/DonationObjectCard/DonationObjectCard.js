@@ -33,14 +33,17 @@ export function DonationObjectCard(props) {
             />
             <Text style={styles.textoSelect} >Elegir objeto a publicar</Text>
             <Picker
-                selectedValue={selectObjecto}
+                selectedValue={formik.values.tipo}
                 style={styles.selectDeObjeto}
                 onValueChange={(itemValue, itemIndex) =>
                     formik.setFieldValue("tipo", itemValue)
                 }>
-                <Picker.Item label="Ropa" value="1" />
-                <Picker.Item label="Electrodomesticos" value="2" />
-                <Picker.Item label="Utiles escolares" value="3" />
+                <Picker.Item label="Ropa" value="ropa" />
+                <Picker.Item label="Electrodomesticos" value="electrodomesticos" />
+                <Picker.Item label="Utiles escolares" value="utiles escolares" />
+                <Picker.Item label="Objetos" value="objetos" />
+                <Picker.Item label="Alimentos" value="alimentos" />
+                <Picker.Item label="Otros" value="otros" />
             </Picker>
         </View>
       <MapForm show={showMap} close={onOpenCloseMap} formik={formik} />
