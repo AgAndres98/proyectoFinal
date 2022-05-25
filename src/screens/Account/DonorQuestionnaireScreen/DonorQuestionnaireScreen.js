@@ -2,17 +2,17 @@ import React from "react";
 import { ScrollView, View, Text } from "react-native";
 import { Button } from "react-native-elements";
 import { useFormik } from "formik"
-import { styles } from "./InformationPersonalScreen.styles";
-import { InformationPersonalForm } from "../../../components/Auth/InformationPersonalForm"
+import { styles } from "./DonorQuestionnaireScreen.styles";
+import { DonorQuestionnaireForm } from "../../../components/Account/DonorQuestionnaireForm"
 import {useNavigation} from "@react-navigation/native"
 import {doc, setDoc} from "firebase/firestore"
 import {db, screen} from "../../../utils"
 import {getAuth} from "firebase/auth";
 import { v4 as uuid} from "uuid"
 
-import { initialValues, validationSchem } from "./InformationPersonalScreen.data"
+import { initialValues, validationSchem } from "./DonorQuestionnaireScreen.data"
 
-export function InformationPersonalScreen() {
+export function DonorQuestionnaireScreen() {
     const navigation = useNavigation();
 
     const uid = getAuth().currentUser;
@@ -29,9 +29,9 @@ export function InformationPersonalScreen() {
 
               console.log(nuevaData);
     
-              await setDoc(doc(db, "datosPersonales", nuevaData.id), nuevaData);
+              await setDoc(doc(db, "cuestionarioDonador", nuevaData.id), nuevaData);
 
-              navigation.navigate(screen.account.donador);
+              navigation.navigate(screen.account.account);
     
             } catch (error) {
               console.log(error);
@@ -42,9 +42,9 @@ export function InformationPersonalScreen() {
     return(
         <ScrollView style={styles.content}>
 
-            <InformationPersonalForm formik={formik} />
+            <DonorQuestionnaireForm formik={formik} />
 
-            <Button title="Añadir datos" 
+            <Button title="Registrarme" 
                     containerStyle={styles.btnContainer}
                     buttonStyle={styles.btn}
                     onPress={formik.handleSubmit}

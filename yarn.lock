@@ -1834,7 +1834,6 @@
     sudo-prompt "^9.0.0"
     wcwidth "^1.0.1"
 
-<<<<<<< HEAD
 "@react-native-community/datetimepicker@^6.1.3":
   version "6.1.3"
   resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-6.1.3.tgz#f0645c335dca25894b99d857ed354616d4c4e600"
@@ -1846,12 +1845,6 @@
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.1.tgz#92feb7e0672d739624517dae04bf4de1452dfcdc"
   integrity sha512-1XWy3IQgwr7MWd30KdY1iUh2gQZD+JiotN1ifj/ptFUYKon/0UFwngKQaWCO/CP/FdLl20/huSSLwKedYrdMMA==
-=======
-"@react-native-picker/picker@2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.2.1.tgz#32b9f540d8e88a73d8856f73cca88251cecb9614"
-  integrity sha512-EC7yv22QLHlTfnbC1ez9IUdXTOh1W31x96Oir0PfskSGFFJMWWdLTg4VrcE2DsGLzbfjjkBk123c173vf2a5MQ==
->>>>>>> prepro
 
 "@react-native/assets@1.0.0":
   version "1.0.0"
