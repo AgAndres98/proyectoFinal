@@ -1,6 +1,6 @@
 import React from "react";
-import { ProfileUser } from "../screens/Account/Profile/ProfileUser";
+import { UserLoggedScreen } from "../screens/Account/UserLoggedScreen/UserLoggedScreen";
 
 export function AccountScreen() {
-  return <ProfileUser />;
+  return <UserLoggedScreen />;
 }
