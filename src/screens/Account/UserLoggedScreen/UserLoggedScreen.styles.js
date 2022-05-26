@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import { BottomSheet } from "react-native-elements";
 
 export const styles=StyleSheet.create({
     btnStyles:{
@@ -13,6 +14,8 @@ export const styles=StyleSheet.create({
   },
   btnTextStyle:{
       color:"#FFFFFF",
+      alignItems:"flex-end",
+      
   }
 
 });

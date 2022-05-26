@@ -25,6 +25,7 @@ export function ChangePasswordForm(props){
       validationSchema:validationSchema(),
       validateOnChange:false,
       onSubmit: async (formValue)=>{
+        
         try{
             const currentUser=getAuth().currentUser;
 
@@ -33,11 +34,12 @@ export function ChangePasswordForm(props){
               formValue.password
             );
             reauthenticateWithCredential(currentUser,credentials);
-
+              
             await updatePassword(currentUser,formValue.newPassword);
-
-          onClose();
+              Toast.show({position:"bottom",text1:"Contraseña cambiada"});
+            onClose();
         }catch(error){
+         // console.log(error)
           Toast.show({
             type:"error",
             position:"bottom",
