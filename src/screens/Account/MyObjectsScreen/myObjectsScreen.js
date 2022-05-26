@@ -23,7 +23,7 @@ export function myObjectsScreen() {
     useEffect(() => {
         const q = query(
             collection(db, "objetos"),
-            where("idUser", "==", auth.currentUser.uid)
+            where("idUsuario", "==", auth.currentUser.uid)
         );
 
         onSnapshot(q, async (snapshot) => {
@@ -31,7 +31,7 @@ export function myObjectsScreen() {
 
             for await (const item of snapshot.docs) {
                 const data = item.data();
-                const docRef = doc(db, "objetos", data.idObjeto);
+                const docRef = doc(db, "objetos", data.id);
                 const docSnap = await getDoc(docRef);
                 const newData = docSnap.data();
                 newData.idFavorite = data.id;

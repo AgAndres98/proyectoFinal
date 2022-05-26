@@ -4,7 +4,7 @@ import { Image, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db, screen } from "../../../utils";
-import { styles } from "./ObjectFavorites.styles";
+import { styles } from "./MyObjects.styles";
 
 export function MyObjects(props) {
     const { objeto } = props;
