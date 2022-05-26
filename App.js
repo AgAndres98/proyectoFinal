@@ -4,7 +4,7 @@ import Toast from "react-native-toast-message";
 import { AppNavigation } from "./src/navigation/AppNavigation";
 import { initFirebase } from "./src/utils";
 
-//import "react-native-get-random-values";
+import "react-native-get-random-values";
 
 LogBox.ignoreAllLogs();
 

@@ -22,6 +22,8 @@ const donationStack = {
 const accountStack = {
   tab: "AccountTab",
   account: "Account",
+  informationPersonal: "InformationPersonal",
+  donador: "Donador",
 };
 
 const authStack = {
