@@ -3,6 +3,8 @@ import { screen } from "../utils";
 import { AccountScreen } from "../screens/AccountScreen";
 import { InformationPersonalScreen } from "../screens/Auth/InformationPersonalScreen/InformationPersonalScreen";
 import { DonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireScreen/DonorQuestionnaireScreen";
+import { BeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQuestionnaireScreen/BeneficiaryQuestionnaireScreen";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +25,11 @@ export function AccountStack() {
         name={screen.account.donador}
         component={DonorQuestionnaireScreen}
         options={{ title: "Cuestionario donador" }}
+      />
+      <Stack.Screen
+        name={screen.account.beneficiary}
+        component={BeneficiaryQuestionnaireScreen}
+        options={{ title: "Cuestionario beneficiario" }}
       />
     </Stack.Navigator>
   );

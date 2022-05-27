@@ -10,6 +10,7 @@ export function initialValues() {
         mayoresDeEdad: "nada",
         cercania: "nada",
         sexo: "nada",
+        idUsuario: "",
     };
 }
 

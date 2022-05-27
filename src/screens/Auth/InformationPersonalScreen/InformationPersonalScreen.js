@@ -17,6 +17,20 @@ export function InformationPersonalScreen() {
 
     const uid = getAuth().currentUser;
 
+    const cuestionarioDonante = () => {
+
+      formik.handleSubmit();
+      navigation.navigate(screen.account.donador);
+
+    }
+
+    const cuestionarioBeneficiario = () => {
+
+      formik.handleSubmit();
+      navigation.navigate(screen.account.beneficiary);
+
+    }
+
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: validationSchem(),
@@ -31,7 +45,6 @@ export function InformationPersonalScreen() {
     
               await setDoc(doc(db, "datosPersonales", nuevaData.id), nuevaData);
 
-              navigation.navigate(screen.account.donador);
     
             } catch (error) {
               console.log(error);
@@ -43,13 +56,20 @@ export function InformationPersonalScreen() {
         <ScrollView style={styles.content}>
 
             <InformationPersonalForm formik={formik} />
-
-            <Button title="Añadir datos" 
-                    containerStyle={styles.btnContainer}
-                    buttonStyle={styles.btn}
-                    onPress={formik.handleSubmit}
-                    loading={formik.isSubmitting}
-            />
+            <View style={{flex: 1, flexDirection: "row"}}>
+              <Button title="Cuestionario donante" 
+                      containerStyle={styles.btnContainer}
+                      buttonStyle={styles.btn}
+                      onPress={cuestionarioDonante}
+                      loading={formik.isSubmitting}
+              />
+              <Button title="Cuestionario beneficiario" 
+                      containerStyle={styles.btnContainer}
+                      buttonStyle={styles.btn}
+                      onPress={cuestionarioBeneficiario}
+                      loading={formik.isSubmitting}
+              />
+            </View>
         </ScrollView>
     )
 }
