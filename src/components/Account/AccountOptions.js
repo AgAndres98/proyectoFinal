@@ -5,10 +5,13 @@ import { map } from "lodash";
 import { Modal } from "../../components/Shared";
 import { ChangeEmailForm } from "./ChangeEmailForm";
 import { ChangePasswordForm } from "./ChangePasswordForm";
-import { MyObjects } from "./MyObjects/MyObjects"
+import { MyObjects } from "./MyObjects/MyObjects";
+import { useNavigation } from "@react-navigation/native";
+import { db, screen } from "./../../utils";
 
 export function AccountOptions(props) {
     const { onReload } = props;
+    const navigation = useNavigation();
 
     const [showModal, setShowModal] = useState(false);
     const [renderComponent, setRenderComponent] = useState(null);
@@ -25,7 +28,8 @@ export function AccountOptions(props) {
         }
 
         if (key === "myObjects") {
-            setRenderComponent(<MyObjects onClose={onCloseOpenModal} />);
+            navigation.navigate(screen.account.myObjects);
+
         }
 
         onCloseOpenModal();

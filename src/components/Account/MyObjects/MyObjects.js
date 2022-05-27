@@ -1,45 +1,101 @@
-import React from "react";
-import { View, TouchableOpacity } from "react-native";
-import { Image, Icon, Text } from "react-native-elements";
+import React, { useState } from 'react';
+import { View, FlatList, TouchableOpacity, Switch } from "react-native";
+import { Image, Text, Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { doc, deleteDoc } from "firebase/firestore";
 import { db, screen } from "../../../utils";
 import { styles } from "./MyObjects.styles";
+import { doc, deleteDoc } from "firebase/firestore";
+
+
 
 export function MyObjects(props) {
-    const { objeto } = props;
+
+
+
+    const { objects } = props;
     const navigation = useNavigation();
 
-    const goToObject = () => {
-        navigation.navigate(screen.objects.tab, {
-            screen: screen.objects.objeto,
-            params: {
-                id: objeto.id,
-            },
-        });
+
+    const [isEnabled, setIsEnabled] = useState(true);
+    const toggleSwitch = () =>
+        setIsEnabled(previousState => !previousState);
+
+    ;
+
+    const goToDetail = () => {
     };
 
-    const onRemoveObject = async () => {
-        try {
-            await deleteDoc(doc(db, "objetos", objeto.id));
-        } catch (error) { }
-    };
+
+
     return (
-        <TouchableOpacity onPress={goToObject}>
-            <View style={styles.content}>
-                <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
-                <View style={styles.infoContent}>
-                    <Text style={styles.name}>{objeto.titulo}</Text>
-                    <Icon
-                        type="material-community"
-                        name="heart"
-                        color="#F02B2F"
-                        size={35}
-                        containerStyle={styles.iconContainer}
-                        onPress={onRemoveObject}
-                    />
-                </View>
-            </View>
-        </TouchableOpacity>
+        <View>
+            <FlatList
+                data={objects}
+                renderItem={(doc) => {
+                    const objeto = doc.item.data();
+                    console.log(objeto);
+                    return (
+                        <TouchableOpacity onPress={() => goToDetail(objeto)}>
+
+                            <View style={styles.container}>
+                                <View style={styles.objeto}>
+
+                                    <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
+
+
+                                    <View style={styles.informacion}>
+                                        <Text style={styles.active}>{isEnabled ? "Activo" : "Inactivo"}</Text>
+                                        <Text style={styles.name}>{objeto.titulo}</Text>
+                                        <Text style={styles.info}>{objeto.descripcion}</Text>
+
+                                        <Switch
+                                            trackColor={{ false: '#767577', true: '#00a680' }}
+                                            thumbColor={isEnabled ? '#00a680' : '#f4f3f4'}
+                                            ios_backgroundColor="#3e3e3e"
+                                            onValueChange={toggleSwitch}
+                                            value={isEnabled}
+                                            style={styles.switch}
+                                        />
+
+                                        <Icon
+                                            type="material-community"
+                                            name="pencil-box-outline"
+                                            size={35}
+                                            containerStyle={styles.iconContainer}
+                                            onPress={console.log("editar")}
+                                        />
+
+                                        <Icon
+                                            type="material-community"
+                                            name="delete-outline"
+                                            size={35}
+                                            containerStyle={styles.delete}
+                                            onPress={console.log("delete")}
+                                        />
+
+                                        <Icon
+                                            type="material-community"
+                                            name="account-eye-outline"
+                                            size={35}
+                                            containerStyle={styles.eye}
+                                            onPress={console.log("delete")}
+                                        />
+
+
+                                    </View>
+
+
+
+
+
+                                </View>
+
+
+                            </View>
+                        </TouchableOpacity>
+                    );
+                }}
+            />
+        </View>
     );
 }
