@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { ProfileUser } from "../screens/Account/Profile/ProfileUser";
+import { UserLoggedScreen } from "../screens/Account/UserLoggedScreen/UserLoggedScreen";
 import { InformationPersonalScreen } from "./Auth/InformationPersonalScreen/InformationPersonalScreen"
 import { getAuth } from "firebase/auth";
 import {
@@ -48,5 +48,5 @@ export function AccountScreen() {
 
   }, []);
 
-  return datosPersonales ? <ProfileUser /> : <InformationPersonalScreen />;
+  return datosPersonales ? <UserLoggedScreen /> : <InformationPersonalScreen />;
 }

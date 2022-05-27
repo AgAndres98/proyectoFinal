@@ -26,7 +26,7 @@ export function ProfileUser() {
 
     return (
         <View>
-            <Text>Esta logeado</Text>
+            <Text>Esta logueado</Text>
             <Button
                 title="Cerrar sesion"
                 onPress={cerrarSesion}
