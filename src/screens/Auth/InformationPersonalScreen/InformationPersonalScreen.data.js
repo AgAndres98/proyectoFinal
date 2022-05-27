@@ -9,6 +9,7 @@ export function initialValues() {
         dni: "",
         fechaNacimiento: "",
         celular: "",
+        idUsuario: "",
     };
 }
 
