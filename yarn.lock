@@ -1054,7 +1054,6 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-<<<<<<< HEAD
 "@callstack/react-theme-provider@^3.0.7":
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/@callstack/react-theme-provider/-/react-theme-provider-3.0.7.tgz#b7ce1a53d63ad5e83574b831ae0af6b7c6cc40e7"
@@ -1063,16 +1062,10 @@
     deepmerge "^3.2.0"
     hoist-non-react-statics "^3.3.0"
 
-"@cnakazawa/watch@^1.0.3":
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/@cnakazawa/watch/-/watch-1.0.4.tgz"
-  integrity sha512-v9kIhKwjeZThiWrLmj0y17CWoyddASLj9O2yvbZkbvw/N3rWOYy9zkV66ursAoVr0mV15bL8g0c4QZUE6cdDoQ==
-=======
 "@expo/bunyan@4.0.0", "@expo/bunyan@^4.0.0":
   version "4.0.0"
   resolved "https://registry.npmjs.org/@expo/bunyan/-/bunyan-4.0.0.tgz"
   integrity sha512-Ydf4LidRB/EBI+YrB+cVLqIseiRfjUI/AeHBgjGMtq3GroraDu81OV7zqophRgupngoL3iS3JUMDMnxO7g39qA==
->>>>>>> prepro
   dependencies:
     uuid "^8.0.0"
   optionalDependencies:
@@ -3567,22 +3560,15 @@ expo-asset@~8.5.0:
     path-browserify "^1.0.0"
     url-parse "^1.5.9"
 
-<<<<<<< HEAD
 expo-checkbox@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/expo-checkbox/-/expo-checkbox-2.1.0.tgz#e97dbdf3f4b0e664e3151c5e4fa9e29aaf9f1bac"
   integrity sha512-5zsw45ZTp91fiVVDV5+ZZ8zWRGnHSZGh4RBy5LZo0y6ezf2zAvO3Dp0dZN4m5bWDilk6t8eHzICz3eo4U1AG+A==
 
-expo-constants@~13.0.2:
-  version "13.0.2"
-  resolved "https://registry.npmjs.org/expo-constants/-/expo-constants-13.0.2.tgz"
-  integrity sha512-vGs/kI65vplPFvG8z4W1ariGEtVHHp9Avl28G0zJprt2v/q1E/BnXjwvFSBPc1GB+Zb/7crWSHWRwjaFULBjsg==
-=======
 expo-constants@~13.1.1:
   version "13.1.1"
   resolved "https://registry.npmjs.org/expo-constants/-/expo-constants-13.1.1.tgz"
   integrity sha512-QRVHrrMCLenBzWZ8M+EvCXM+jjdQzFMW27YQHRac3SGGoND1hWr81scOmGwlFo2wLZrYXm8HcYt1E6ry3IIwrA==
->>>>>>> prepro
   dependencies:
     "@expo/config" "^6.0.14"
     uuid "^3.3.2"
@@ -6249,7 +6235,7 @@ react-is@^17.0.1:
 
 react-native-calendario@^3.1.0:
   version "3.1.0"
-  resolved "https://registry.npmjs.org/react-native-calendario/-/react-native-calendario-3.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-native-calendario/-/react-native-calendario-3.1.0.tgz#08578b3d2ec244efb3351dbb3f8c692f074096dc"
   integrity sha512-YqhqfEI2mIDSlDfHgyVD8B7N95ceQXLBpxHlNEreSwBttpNT+RsqqB7b3pWfSLsB6Jj2vzQXtcEBIF5Kl8C35w==
   dependencies:
     moment "2.29.1"
@@ -6287,16 +6273,12 @@ react-native-get-random-values@~1.8.0:
   dependencies:
     fast-base64-decode "^1.0.0"
 
-<<<<<<< HEAD
-react-native-iphone-x-helper@^1.0.3, react-native-iphone-x-helper@^1.3.1:
-=======
 react-native-gradle-plugin@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.0.6.tgz"
   integrity sha512-eIlgtsmDp1jLC24dRn43hB3kEcZVqx6DUQbR0N1ABXGnMEafm9I3V3dUUeD1vh+Dy5WqijSoEwLNUPLgu5zDMg==
 
-react-native-iphone-x-helper@^1.0.3:
->>>>>>> prepro
+react-native-iphone-x-helper@^1.0.3, react-native-iphone-x-helper@^1.3.1:
   version "1.3.1"
   resolved "https://registry.npmjs.org/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz"
   integrity sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg==

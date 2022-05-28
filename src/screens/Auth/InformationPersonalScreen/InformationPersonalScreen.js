@@ -4,6 +4,7 @@ import { Button } from "react-native-elements";
 import { useFormik } from "formik"
 import { styles } from "./InformationPersonalScreen.styles";
 import { InformationPersonalForm } from "../../../components/Auth/InformationPersonalForm"
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import {useNavigation} from "@react-navigation/native"
 import {doc, setDoc} from "firebase/firestore"
 import {db, screen} from "../../../utils"
@@ -40,8 +41,6 @@ export function InformationPersonalScreen() {
               const nuevaData = formValues;
               nuevaData.idUsuario = uid.uid;
               nuevaData.id = uuid();
-
-              console.log(nuevaData);
     
               await setDoc(doc(db, "datosPersonales", nuevaData.id), nuevaData);
 
@@ -53,7 +52,7 @@ export function InformationPersonalScreen() {
       });
 
     return(
-        <ScrollView style={styles.content}>
+        <KeyboardAwareScrollView style={styles.content}>
 
             <InformationPersonalForm formik={formik} />
             <View style={{flex: 1, flexDirection: "row"}}>
@@ -70,6 +69,6 @@ export function InformationPersonalScreen() {
                       loading={formik.isSubmitting}
               />
             </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
     )
 }
