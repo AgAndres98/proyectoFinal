@@ -20,9 +20,13 @@ export function ProfileUser() {
         navigation.navigate(screen.account.informationPersonal);
     }
 
+    const ircuestio = async () => {
+        navigation.navigate(screen.account.beneficiary);
+    }
+
     return (
         <View>
-            <Text>Esta logeado</Text>
+            <Text>Esta logueado</Text>
             <Button
                 title="Cerrar sesion"
                 onPress={cerrarSesion}
@@ -30,6 +34,10 @@ export function ProfileUser() {
             <Button
                 title="Formulario"
                 onPress={irFormulario}
+            />
+            <Button
+                title="beneficiario"
+                onPress={ircuestio}
             />
         </View>
     );
