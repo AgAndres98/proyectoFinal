@@ -22,7 +22,7 @@ export function ObjectFavorites(props) {
   const onRemoveFavorite = async () => {
     try {
       await deleteDoc(doc(db, "favorites", objeto.idFavorite));
-    } catch (error) {}
+    } catch (error) { }
   };
   return (
     <TouchableOpacity onPress={goToObject}>
