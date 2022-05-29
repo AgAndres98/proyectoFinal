@@ -16,7 +16,13 @@ export function AccountStack() {
       <Stack.Screen
         name={screen.account.account}
         component={AccountScreen}
-        options={{ title: "Tu cuenta" }}
+        options={{
+          title: "Tu cuenta",
+          headerStyle: {
+            backgroundColor: "#62bd60",
+          },
+          headerTintColor: "#fff",
+        }}
       />
       <Stack.Screen
         name={screen.account.informationPersonal}
@@ -32,7 +38,13 @@ export function AccountStack() {
       <Stack.Screen
         name={screen.account.myObjects}
         component={MyObjectsScreen}
-        options={{ title: "Mis objetos" }}
+        options={{
+          title: "Mis objetos",
+          headerStyle: {
+            backgroundColor: "#62bd60",
+          },
+          headerTintColor: "#fff",
+        }}
       />
     </Stack.Navigator>
   );
