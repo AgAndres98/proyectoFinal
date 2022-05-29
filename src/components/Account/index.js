@@ -5,3 +5,5 @@ export * from "./ChangePasswordForm";
 export * from "./DonorQuestionnaireForm"
 export * from "./BeneficiaryQuestionnaireForm"
 
+export * from "./DonorQuestionnaireForm";
+export * from "./MyObjects";
