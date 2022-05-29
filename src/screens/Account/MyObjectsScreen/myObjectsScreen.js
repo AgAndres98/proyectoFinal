@@ -13,7 +13,7 @@ import {
 } from "firebase/firestore";
 import { size, map } from "lodash";
 import { db } from "../../../utils"
-import { Loading } from "../../../components/Shared";
+import { LoadingModal } from "../../../components/Shared/LoadingModal";
 import { MyObjects } from "../../../components/Account/MyObjects/MyObjects";
 import { styles } from "../../../components/Account/MyObjects/MyObjects.styles";
 
@@ -34,16 +34,14 @@ export function myObjectsScreen(props) {
     }, []);
 
 
-    if (!objects) return <Loading show text="Cargando" />;
+    if (!objects) return <LoadingModal show text="Cargando" />;
 
 
     return (
         <View style={styles.content}>
-            {!objects ? (
-                <LoadingModal show text="Cargando" />
-            ) : (
+        
                 <MyObjects objects={objects} />
-            )}
+            
         </View>
     );
 }

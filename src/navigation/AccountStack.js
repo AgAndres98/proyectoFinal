@@ -4,6 +4,8 @@ import { AccountScreen } from "../screens/AccountScreen";
 import { InformationPersonalScreen } from "../screens/Auth/InformationPersonalScreen/InformationPersonalScreen";
 import { DonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireScreen/DonorQuestionnaireScreen";
 import { MyObjects, myObjectsScreen } from "../screens/Account/MyObjectsScreen/myObjectsScreen";
+import { UserRequestsScreen } from "../screens/UserRequestsScreen/UserRequestsScreen";
+//import { UserRequests,UserRequestsScreen } from "../screens/Account/UserRequestsScreen/UserRequestsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +33,13 @@ export function AccountStack() {
         component={myObjectsScreen}
         options={{ title: "Mis Objetos" }}
       />
+      
+      <Stack.Screen
+        name={screen.account.userRequests}
+        component={UserRequestsScreen}
+        options={{ title: "Solicitudes de usuario" }}
+      />
+
     </Stack.Navigator>
   );
 }

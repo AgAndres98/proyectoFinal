@@ -23,8 +23,9 @@ export function ChangeEmailForm(props) {
                 const credentials=EmailAuthProvider.credential(currentUser.email,formValue.password);
                 reauthenticateWithCredential(currentUser,credentials);
                 await updateEmail(currentUser,formValue.email);
+             
                // OnReload();
-                //onClose();
+              //  onClose();
             }catch(error){
                 console.log(error)
                 Toast.show({
@@ -34,6 +35,7 @@ export function ChangeEmailForm(props) {
                 })
             }
         },
+        
     });
 
   return (

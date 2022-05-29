@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { View, FlatList, TouchableOpacity, Switch } from "react-native";
-import { Image, Text, Icon } from "react-native-elements";
+import { Image, Text, Icon, Avatar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../utils";
-import { styles } from "./MyObjects.styles";
+import { styles } from "./UserRequests.styles";
 import { doc, deleteDoc } from "firebase/firestore";
-import {UserRequest} from "../UserRequests/UserRequests";
+import {getAuth} from 'firebase/auth';
+import { object } from 'yup';
 
 
 
-export function MyObjects(props) {
+export function UserRequests(props) {
 
 
-
-    const { objects } = props;
+    const{photoURL}=getAuth().currentUser;
+    const { request } = props;
     const navigation = useNavigation();
-
 
     const [isEnabled, setIsEnabled] = useState(true);
     const toggleSwitch = () =>
@@ -23,64 +23,55 @@ export function MyObjects(props) {
 
     ;
 
-    const goToRequest = (objeto) => {
-        navigation.navigate(screen.account.userRequests)
+    const goToDetail = () => {
     };
-
-
+    
+   // console.log(objects.id);
 
     return (
         <View>
             <FlatList
-                data={objects}
+                data={request}
                 renderItem={(doc) => {
                     const objeto = doc.item.data();
-                    console.log(objeto);
+                    console.log(request);
                     return (
-                        <TouchableOpacity onPress={console.log("borrar")}>
+                        <TouchableOpacity onPress={() => goToDetail}>
 
                             <View style={styles.container}>
                                 <View style={styles.objeto}>
 
-                                    <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
+                                    <Avatar size="large" source={avatarUri(photoURL)} icon={{type:"material",name:"person"}} containerStyle={styles.image} />
 
 
                                     <View style={styles.informacion}>
-                                        <Text style={styles.active}>{isEnabled ? "Activo" : "Inactivo"}</Text>
-                                        <Text style={styles.name}>{objeto.titulo}</Text>
-                                        <Text style={styles.info}>{objeto.descripcion}</Text>
+                                      
+                                        <Text style={styles.name}>{objeto.apellido}</Text>
+                                      
 
-                                        <Switch
-                                            trackColor={{ false: '#767577', true: '#00a680' }}
-                                            thumbColor={isEnabled ? '#00a680' : '#f4f3f4'}
-                                            ios_backgroundColor="#3e3e3e"
-                                            onValueChange={toggleSwitch}
-                                            value={isEnabled}
-                                            style={styles.switch}
-                                        />
-
+                                        
                                         <Icon
                                             type="material-community"
-                                            name="pencil-box-outline"
+                                            name="account-check-outline"
                                             size={35}
                                             containerStyle={styles.iconContainer}
-                                            onPress={console.log("borrar")}
+                                            onPress={console.log("editar")}
                                         />
 
                                         <Icon
                                             type="material-community"
-                                            name="delete-outline"
+                                            name="account-remove-outline"
                                             size={35}
                                             containerStyle={styles.delete}
-                                            onPress={console.log("borrar")}
+                                            onPress={console.log("delete")}
                                         />
 
                                         <Icon
                                             type="material-community"
-                                            name="account-eye-outline"
+                                            name="account-search-outline"
                                             size={35}
                                             containerStyle={styles.eye}
-                                            onPress={goToRequest}
+                                            onPress={console.log("delete")}
                                         />
 
 
@@ -100,4 +91,11 @@ export function MyObjects(props) {
             />
         </View>
     );
+
+
+    function avatarUri(avatar){
+        if(avatar!==null){
+          return {uri:avatar};
+        }
+    }
 }

@@ -25,6 +25,7 @@ const accountStack = {
   informationPersonal: "InformationPersonal",
   donador: "Donador",
   myObjects: "MisObjetos",
+  userRequests:"Solicitudes de usuarios",
 };
 
 const authStack = {
