@@ -14,11 +14,14 @@ export function LoginScreen() {
     navigation.navigate(screen.auth.register);
   };
   return (
-    <KeyboardAwareScrollView>
-      <Image
-        source={require("../../../../assets/iconv2.png")}
-        style={styles.image}
-      />
+    <KeyboardAwareScrollView style={styles.screen}>
+      <View style={styles.imageContainer}>
+        <Image
+          source={require("../../../../assets/iconv2.png")}
+          style={styles.image}
+        />
+      </View>
+
       <View style={styles.content}>
         <LoginForm />
         <Text style={styles.textRegister}>

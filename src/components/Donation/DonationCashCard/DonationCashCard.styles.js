@@ -5,8 +5,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginVertical: 10,
     marginHorizontal: 15,
-    borderWidth: 1,
-    borderColor: "#8073BD",
     borderRadius: 10,
   },
   contentAdentro: {
@@ -24,7 +22,7 @@ export const styles = StyleSheet.create({
   },
   separador: {
     borderBottomColor: "#C0CCDA",
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     marginRight: 5,
   },
   titleText: {

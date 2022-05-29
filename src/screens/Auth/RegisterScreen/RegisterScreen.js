@@ -7,11 +7,14 @@ import { styles } from "./RegisterScreen.styles";
 
 export function RegisterScreen() {
   return (
-    <KeyboardAwareScrollView>
-      <Image
-        source={require("../../../../assets/iconv2.png")}
-        style={styles.image}
-      />
+    <KeyboardAwareScrollView style={styles.content}>
+      <View style={styles.imageContainer}>
+        <Image
+          source={require("../../../../assets/iconv2.png")}
+          style={styles.image}
+        />
+      </View>
+
       <View style={styles.content}>
         <RegisterForm />
       </View>

@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  screen: {
+    backgroundColor: "#F4F4FC",
+  },
   titulo: {
     marginVertical: 5,
     marginHorizontal: 15,
@@ -11,14 +14,12 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginVertical: 10,
     marginHorizontal: 15,
-    borderWidth: 1,
-    borderColor: "#8073BD",
     borderRadius: 10,
   },
   btnContainer: {
     marginTop: 20,
-    width: "60%",
-    marginHorizontal: "20%",
+    width: "94%",
+    marginHorizontal: "3%",
     borderRadius: 5,
     marginBottom: 10,
   },

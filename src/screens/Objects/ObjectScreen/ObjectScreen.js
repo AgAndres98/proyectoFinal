@@ -34,10 +34,14 @@ export function ObjectScreen(props) {
 
   return (
     <ScrollView style={styles.content}>
-      <Carousel arrayImages={objeto.fotos} height={250} width={width} />
+      <Carousel arrayImages={objeto.fotos} height={330} width={width} />
       <Header objeto={objeto} />
       <BtnFavorite idObjeto={route.params.id} />
-      <BtnRequest idObjeto={route.params.id} idUsuario={objeto.idUsuario} />
+      <BtnRequest
+        idObjeto={route.params.id}
+        idUsuario={objeto.idUsuario}
+        style={styles.container}
+      />
       {/*
        Object
       <Info objeto={route.params.objeto} />

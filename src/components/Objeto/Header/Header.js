@@ -9,7 +9,7 @@ export function Header(props) {
     <View style={styles.content}>
       <View style={styles.titleView}>
         <Text style={styles.name}>{objeto.titulo}</Text>
-        <Text style={styles.id}>#{objeto.id}</Text>
+        <Text style={styles.id}>#{objeto.tipo}</Text>
       </View>
       <Text style={styles.description}>{objeto.descripcion}</Text>
     </View>

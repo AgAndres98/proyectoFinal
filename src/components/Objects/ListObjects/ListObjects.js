@@ -20,7 +20,6 @@ export function ListObjects(props) {
         data={objects}
         renderItem={(doc) => {
           const objeto = doc.item.data();
-          console.log(objeto);
           return (
             <TouchableOpacity onPress={() => goToObject(objeto)}>
               <View style={styles.objeto}>
@@ -28,6 +27,7 @@ export function ListObjects(props) {
 
                 <View style={styles.informacion}>
                   <Text style={styles.name}>{objeto.titulo}</Text>
+                  <Text style={styles.info}>{objeto.tipo}</Text>
                   <Text style={styles.info}>{objeto.descripcion}</Text>
                 </View>
               </View>

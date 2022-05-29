@@ -13,6 +13,7 @@ import {
 import { size, map } from "lodash";
 import { Loading } from "../components/Shared";
 import { db } from "../utils";
+import { styles } from "./Screens.styles";
 
 export function FavoritesScreen() {
   const auth = getAuth();
@@ -45,7 +46,7 @@ export function FavoritesScreen() {
   if (size(objects) === 0) return <NotFoundObjects />;
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.screen}>
       {map(objects, (objeto) => (
         <ObjectFavorites key={objeto.id} objeto={objeto} />
       ))}

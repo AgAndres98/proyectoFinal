@@ -3,15 +3,14 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   content: {
     backgroundColor: "#fff",
-    marginVertical: 5,
+    marginVertical: 10,
     marginHorizontal: 5,
-    borderWidth: 1,
-    borderColor: "#8073BD",
     borderRadius: 10,
   },
   image: {
+    margin: 5,
     width: "100%",
-    height: 150,
+    height: 200,
     borderRadius: 10,
   },
   infoContent: {
