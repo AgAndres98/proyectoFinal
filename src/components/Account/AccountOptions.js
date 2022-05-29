@@ -29,7 +29,10 @@ export function AccountOptions(props) {
 
         if (key === "myObjects") {
             navigation.navigate(screen.account.myObjects);
+        }
 
+        if (key === "beneficiary") {
+            navigation.navigate(screen.account.beneficiary);
         }
 
         onCloseOpenModal();
@@ -83,7 +86,7 @@ function getMenuOptions(selectedComponent) {
         iconType: "material-community",
         iconNameRight: "arrow-right",
         iconColorRight: "#ccc",
-        onPress: () => console.log("cambiar contra"),
+        onPress: () => selectedComponent("beneficiary"),
     },
     {
         title: "Editar formulario donante",

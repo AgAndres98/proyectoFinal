@@ -3,6 +3,7 @@ import { ScrollView, View } from "react-native";
 import { Button, Text } from "react-native-elements";
 import { useFormik } from "formik";
 import { BeneficiaryQuestionnaireForm} from "../../../components/Account/BeneficiaryQuestionnaireForm"
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { styles } from "./BeneficiaryQuestionnaireScreen.styles";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
@@ -37,7 +38,7 @@ export function BeneficiaryQuestionnaireScreen() {
   });
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <KeyboardAwareScrollView>
       <View style={styles.content}>
         <BeneficiaryQuestionnaireForm formik={formik} />
 
@@ -49,6 +50,6 @@ export function BeneficiaryQuestionnaireScreen() {
           loading={formik.isSubmitting}
         />
       </View>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 }
