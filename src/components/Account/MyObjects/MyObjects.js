@@ -33,7 +33,6 @@ export function MyObjects(props) {
                   <View style={styles.informacion}>
                     <View>
                       <Text style={styles.name}>{objeto.titulo}</Text>
-                      <Text style={styles.info}>{objeto.descripcion}</Text>
                     </View>
 
                     <View style={styles.switchView}>
@@ -49,6 +48,10 @@ export function MyObjects(props) {
                         style={styles.switch}
                       />
                     </View>
+                  </View>
+
+                  <View>
+                    <Text style={styles.info}>{objeto.descripcion}</Text>
                   </View>
 
                   <View style={styles.iconosContainer}>

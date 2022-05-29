@@ -20,16 +20,16 @@ export const styles = StyleSheet.create({
   },
   informacion: {
     flexDirection: "row",
-    //backgroundColor: "#12bd20",
-    paddingRight: 80,
+    //backgroundColor: "#21bd20",
   },
   switchView: {
-    width: 200,
+    width: 180,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-start",
-    marginTop: -35,
-    paddingLeft: 5,
+    justifyContent: "flex-end",
+    marginTop: -15,
+    //paddingLeft: 140,
+    //backgroundColor: "#62bd20",
   },
   image: {
     width: 100,

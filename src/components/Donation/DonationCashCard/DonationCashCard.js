@@ -9,8 +9,10 @@ export function DonationCashCard() {
         <Text style={styles.title}>Pesos</Text>
         <Text style={styles.subtitle}>Cuenta Virtual Mercado Libre SRL</Text>
         <Text style={styles.subtitle}>ayuDAR</Text>
-        <Text style={styles.titleText}>
-          CVU: <Text style={styles.text}>0000003100014206549863</Text>
+        <View style={styles.viewContainer}>
+          <Text style={styles.titleText}>
+            CVU: <Text style={styles.text}>0000003100014206549863</Text>
+          </Text>
           <Icon
             type="material-community"
             name="content-copy"
@@ -18,10 +20,15 @@ export function DonationCashCard() {
             size={20}
             color="#62bd60"
           />
-        </Text>
+        </View>
+
         <View style={styles.separador} />
-        <Text style={styles.titleText}>
-          Alias: <Text style={styles.text}>ahuma.alfil.ataja.mp</Text>
+
+        <View style={styles.viewContainer}>
+          <Text style={styles.titleText}>
+            Alias: <Text style={styles.text}>ahuma.alfil.ataja.mp</Text>
+          </Text>
+
           <Icon
             type="material-community"
             name="content-copy"
@@ -29,7 +36,8 @@ export function DonationCashCard() {
             size={20}
             color="#62bd60"
           />
-        </Text>
+        </View>
+
         <View style={styles.separador} />
 
         <Button
