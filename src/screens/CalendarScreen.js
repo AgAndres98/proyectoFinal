@@ -14,6 +14,7 @@ import {
 import { db, screen } from "../utils";
 import { size, forEach } from "lodash";
 import { async } from "@firebase/util";
+import { styles } from "./Screens.styles";
 
 export function CalendarScreen() {
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
@@ -148,7 +149,7 @@ export function CalendarScreen() {
 
 
   return (
-    <View>
+    <View style={styles.screen}>
       <Text>Screen de calendarios</Text>
     </View>
   );

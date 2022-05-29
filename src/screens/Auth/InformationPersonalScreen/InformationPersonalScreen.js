@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollView, View, Text } from "react-native";
 import { Button } from "react-native-elements";
-import { useFormik } from "formik"
+import { useFormik } from "formik";
 import { styles } from "./InformationPersonalScreen.styles";
 import { InformationPersonalForm } from "../../../components/Auth/InformationPersonalForm"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -10,65 +10,72 @@ import {doc, setDoc} from "firebase/firestore"
 import {db, screen} from "../../../utils"
 import {getAuth} from "firebase/auth";
 import { v4 as uuid} from "uuid"
+import { InformationPersonalForm } from "../../../components/Auth/InformationPersonalForm";
+import { useNavigation } from "@react-navigation/native";
+import { doc, setDoc } from "firebase/firestore";
+import { db, screen } from "../../../utils";
+import { getAuth } from "firebase/auth";
+import { v4 as uuid } from "uuid";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import { initialValues, validationSchem } from "./InformationPersonalScreen.data"
+import {
+  initialValues,
+  validationSchem,
+} from "./InformationPersonalScreen.data";
 
 export function InformationPersonalScreen() {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
-    const uid = getAuth().currentUser;
+  const uid = getAuth().currentUser;
 
-    const cuestionarioDonante = () => {
+  const cuestionarioDonante = () => {
+    formik.handleSubmit();
+    navigation.navigate(screen.account.donador);
+  };
 
-      formik.handleSubmit();
-      navigation.navigate(screen.account.donador);
+  const cuestionarioBeneficiario = () => {
+    formik.handleSubmit();
+    navigation.navigate(screen.account.beneficiary);
+  };
 
-    }
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: validationSchem(),
+    validateOnChange: false,
+    onSubmit: async (formValues) => {
+      try {
+        const nuevaData = formValues;
+        nuevaData.idUsuario = uid.uid;
+        nuevaData.id = uuid();
 
-    const cuestionarioBeneficiario = () => {
+        console.log(nuevaData);
 
-      formik.handleSubmit();
-      navigation.navigate(screen.account.beneficiary);
+        await setDoc(doc(db, "datosPersonales", nuevaData.id), nuevaData);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
 
-    }
-
-    const formik = useFormik({
-        initialValues: initialValues(),
-        validationSchema: validationSchem(),
-        validateOnChange: false,
-        onSubmit: async (formValues) => {
-            try {
-              const nuevaData = formValues;
-              nuevaData.idUsuario = uid.uid;
-              nuevaData.id = uuid();
-    
-              await setDoc(doc(db, "datosPersonales", nuevaData.id), nuevaData);
-
-    
-            } catch (error) {
-              console.log(error);
-            }
-        }
-      });
-
-    return(
-        <KeyboardAwareScrollView style={styles.content}>
-
-            <InformationPersonalForm formik={formik} />
-            <View style={{flex: 1, flexDirection: "row"}}>
-              <Button title="Cuestionario donante" 
-                      containerStyle={styles.btnContainer}
-                      buttonStyle={styles.btn}
-                      onPress={cuestionarioDonante}
-                      loading={formik.isSubmitting}
-              />
-              <Button title="Cuestionario beneficiario" 
-                      containerStyle={styles.btnContainer}
-                      buttonStyle={styles.btn}
-                      onPress={cuestionarioBeneficiario}
-                      loading={formik.isSubmitting}
-              />
-            </View>
-        </KeyboardAwareScrollView>
-    )
+  return (
+    <KeyboardAwareScrollView style={styles.content}>
+      <InformationPersonalForm formik={formik} />
+      <View style={{ flex: 1, flexDirection: "row" }}>
+        <Button
+          title="Cuestionario donante"
+          containerStyle={styles.btnContainer}
+          buttonStyle={styles.btn}
+          onPress={cuestionarioDonante}
+          loading={formik.isSubmitting}
+        />
+        <Button
+          title="Cuestionario beneficiario"
+          containerStyle={styles.btnContainer}
+          buttonStyle={styles.btn}
+          onPress={cuestionarioBeneficiario}
+          loading={formik.isSubmitting}
+        />
+      </View>
+    </KeyboardAwareScrollView>
+  );
 }

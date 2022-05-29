@@ -1,10 +1,8 @@
 import React from "react";
-import { Calendar } from 'react-native-calendar';
-
+import { Calendar } from "react-native-calendar";
 
 export function CalendarScreen() {
   return (
-
     <Calendar
       locale={"es"}
       onChange={(range) => console.log(range)}
@@ -15,20 +13,20 @@ export function CalendarScreen() {
       theme={{
         activeDayColor: {},
         monthTitleTextStyle: {
-          color: '#6d95da',
-          fontWeight: '300',
+          color: "#6d95da",
+          fontWeight: "300",
           fontSize: 16,
         },
         emptyMonthContainerStyle: {},
         emptyMonthTextStyle: {
-          fontWeight: '200',
+          fontWeight: "200",
         },
         weekColumnsContainerStyle: {},
         weekColumnStyle: {
           paddingVertical: 10,
         },
         weekColumnTextStyle: {
-          color: '#b6c1cd',
+          color: "#b6c1cd",
           fontSize: 13,
         },
         nonTouchableDayContainerStyle: {},
@@ -37,25 +35,24 @@ export function CalendarScreen() {
         endDateContainerStyle: {},
         dayContainerStyle: {},
         dayTextStyle: {
-          color: '#2d4150',
-          fontWeight: '200',
+          color: "#2d4150",
+          fontWeight: "200",
           fontSize: 15,
         },
         dayOutOfRangeContainerStyle: {},
         dayOutOfRangeTextStyle: {},
         todayContainerStyle: {},
         todayTextStyle: {
-          color: '#6d95da',
+          color: "#6d95da",
         },
         activeDayContainerStyle: {
-          backgroundColor: '#6d95da',
+          backgroundColor: "#6d95da",
         },
         activeDayTextStyle: {
-          color: 'white',
+          color: "white",
         },
         nonTouchableLastMonthDayTextStyle: {},
       }}
     />
-
   );
 }

@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { UserLoggedScreen } from "../screens/Account/UserLoggedScreen/UserLoggedScreen";
-import { InformationPersonalScreen } from "./Auth/InformationPersonalScreen/InformationPersonalScreen"
+import { InformationPersonalScreen } from "./Auth/InformationPersonalScreen/InformationPersonalScreen";
 import { getAuth } from "firebase/auth";
 import {
   doc,
@@ -12,11 +12,10 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { db, screen } from "../utils";
-
+import { styles } from "./Screens.styles";
 
 export function AccountScreen() {
-
-  const [datosPersonales, setDatosPersonales] = useState(false);
+  const [datosPersonales, setDatosPersonales] = useState(true);
 
   useEffect(() => {
     const auth = getAuth();
@@ -40,13 +39,15 @@ export function AccountScreen() {
 
       const cantidad = objectArray.length;
 
-      if(cantidad > 0){
-        setDatosPersonales(true);
+      if (cantidad == 0) {
+        setDatosPersonales(false);
       }
     });
-
-
   }, []);
 
-  return datosPersonales ? <UserLoggedScreen /> : <InformationPersonalScreen />;
+  return datosPersonales ? (
+    <UserLoggedScreen />
+  ) : (
+    <InformationPersonalScreen style={styles.screen} />
+  );
 }
