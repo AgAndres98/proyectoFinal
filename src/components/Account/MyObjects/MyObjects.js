@@ -15,6 +15,9 @@ export function MyObjects(props) {
 
   const goToDetail = () => {};
 
+  const onRemoveFavorite = () => {
+    console.log("en funcion");
+  };
   return (
     <View style={styles.screen}>
       <FlatList
@@ -54,7 +57,7 @@ export function MyObjects(props) {
                       name="pencil-outline"
                       size={35}
                       containerStyle={styles.edit}
-                      onPress={console.log("editar")}
+                      onPress={console.log("editar1")}
                     />
 
                     <Icon
@@ -62,7 +65,7 @@ export function MyObjects(props) {
                       name="trash-can-outline"
                       size={35}
                       containerStyle={styles.delete}
-                      onPress={console.log("delete")}
+                      onPress={console.log("delete1")}
                     />
 
                     <Icon
@@ -70,7 +73,7 @@ export function MyObjects(props) {
                       name="account-eye-outline"
                       size={35}
                       containerStyle={styles.eye}
-                      onPress={console.log("delete")}
+                      onPress={onRemoveFavorite}
                     />
                   </View>
                 </View>
