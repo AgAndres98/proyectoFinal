@@ -4,6 +4,8 @@ import { Button } from "react-native-elements";
 import { useFormik } from "formik"
 import { styles } from "./DonorQuestionnaireScreen.styles";
 import { DonorQuestionnaireForm } from "../../../components/Account/DonorQuestionnaireForm"
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
 import {useNavigation} from "@react-navigation/native"
 import {doc, setDoc} from "firebase/firestore"
 import {db, screen} from "../../../utils"
@@ -26,8 +28,6 @@ export function DonorQuestionnaireScreen() {
               const nuevaData = formValues;
               nuevaData.idUsuario = uid.uid;
               nuevaData.id = uuid();
-
-              console.log(nuevaData);
     
               await setDoc(doc(db, "cuestionarioDonador", nuevaData.id), nuevaData);
 
@@ -40,7 +40,7 @@ export function DonorQuestionnaireScreen() {
       });
 
     return(
-        <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+        <KeyboardAwareScrollView style={styles.content}>
 
             <DonorQuestionnaireForm formik={formik} />
 
@@ -50,6 +50,6 @@ export function DonorQuestionnaireScreen() {
                     onPress={formik.handleSubmit}
                     loading={formik.isSubmitting}
             />
-        </ScrollView>
+        </KeyboardAwareScrollView>
     )
 }
