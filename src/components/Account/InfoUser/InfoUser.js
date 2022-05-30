@@ -16,6 +16,8 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../utils";
 
+import { Loading } from "../../../components/Shared";
+
 
 
 
@@ -85,6 +87,8 @@ export function InfoUser(props) {
     setAvatar(imageUrl);
     setLoading(false);
   };
+
+  if (!datos) return <Loading show text="Cargando" />;
 
   return (
     <View style={styles.content}>
