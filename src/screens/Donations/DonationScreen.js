@@ -41,7 +41,7 @@ export function DonationScreen() {
   });
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.screen}>
       <Text style={styles.titulo}>¡Doná dinero!</Text>
       <DonationCashCard />
       <Text style={styles.titulo}>¡Doná un objeto!</Text>

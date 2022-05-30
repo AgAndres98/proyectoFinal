@@ -3,9 +3,11 @@ import { screen } from "../utils";
 import { AccountScreen } from "../screens/AccountScreen";
 import { InformationPersonalScreen } from "../screens/Auth/InformationPersonalScreen/InformationPersonalScreen";
 import { DonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireScreen/DonorQuestionnaireScreen";
-import { MyObjects, myObjectsScreen } from "../screens/Account/MyObjectsScreen/myObjectsScreen";
-import { UserRequestsScreen } from "../screens/UserRequestsScreen/UserRequestsScreen";
-//import { UserRequests,UserRequestsScreen } from "../screens/Account/UserRequestsScreen/UserRequestsScreen";
+import { BeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQuestionnaireScreen/BeneficiaryQuestionnaireScreen";
+import {
+  MyObjects,
+  MyObjectsScreen
+} from "../screens/Account/MyObjectsScreen/MyObjectsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +17,9 @@ export function AccountStack() {
       <Stack.Screen
         name={screen.account.account}
         component={AccountScreen}
-        options={{ title: "Tu cuenta" }}
+        options={{
+          title: "Tu cuenta",
+        }}
       />
       <Stack.Screen
         name={screen.account.informationPersonal}
@@ -29,9 +33,17 @@ export function AccountStack() {
       />
 
       <Stack.Screen
+        name={screen.account.beneficiary}
+        component={BeneficiaryQuestionnaireScreen}
+        options={{ title: "Cuestionario beneficiario" }}
+      />
+
+      <Stack.Screen
         name={screen.account.myObjects}
-        component={myObjectsScreen}
-        options={{ title: "Mis Objetos" }}
+        component={MyObjectsScreen}
+        options={{
+          title: "Mis objetos",
+        }}
       />
       
       <Stack.Screen

@@ -20,7 +20,7 @@ export function ObjectsScreen(props) {
   }, []);
 
   return (
-    <View style={styles.content}>
+    <View style={styles.screen}>
       {!objects ? (
         <LoadingModal show text="Cargando" />
       ) : (
