@@ -50,7 +50,7 @@ export function MyObjects(props) {
                     </View>
                   </View>
 
-                  <View>
+                  <View style={styles.descripcionContainer}>
                     <Text style={styles.info}>{objeto.descripcion}</Text>
                   </View>
 
