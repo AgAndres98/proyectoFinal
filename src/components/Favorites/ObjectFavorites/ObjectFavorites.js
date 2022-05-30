@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db, screen } from "../../../utils";
 import { styles } from "./ObjectFavorites.styles";
+import { BtnRequestFavorites } from "../BtnRequestFavorites";
 
 export function ObjectFavorites(props) {
   const { objeto } = props;
@@ -22,7 +23,7 @@ export function ObjectFavorites(props) {
   const onRemoveFavorite = async () => {
     try {
       await deleteDoc(doc(db, "favorites", objeto.idFavorite));
-    } catch (error) { }
+    } catch (error) {}
   };
   return (
     <TouchableOpacity onPress={goToObject}>
@@ -39,6 +40,12 @@ export function ObjectFavorites(props) {
             onPress={onRemoveFavorite}
           />
         </View>
+
+        <BtnRequestFavorites
+          idObjeto={objeto.id}
+          idUsuario={objeto.idUsuario}
+          style={styles.container}
+        />
       </View>
     </TouchableOpacity>
   );

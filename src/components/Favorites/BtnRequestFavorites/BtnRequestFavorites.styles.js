@@ -3,16 +3,18 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   content: {
     alignItems: "center",
-    paddingVertical: 10,
-  },
-  input: {
-    marginBottom: 20,
+    justifyContent: "flex-end",
   },
   btnContainer: {
-    width: "95%",
+    marginTop: 5,
+    width: "100%",
+    marginBottom: 5,
+    justifyContent: "flex-end",
   },
-  btn: {
+  btnReq: {
     backgroundColor: "#62bd60",
-    borderRadius: 10,
+  },
+  btnCancel: {
+    backgroundColor: "#F02B2F",
   },
 });

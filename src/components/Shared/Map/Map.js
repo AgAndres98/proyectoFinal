@@ -23,7 +23,7 @@ export function Map(props) {
     openMap({
       latitude: ubicacion.latitude,
       longitude: ubicacion.longitude,
-      zoom: 19,
+      zoom: 25,
       query: titulo,
     });
   };
