@@ -16,6 +16,11 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../utils";
 
+import { Loading } from "../../../components/Shared";
+
+
+
+
 export function InfoUser(props) {
   const { setLoading, setLoadingText } = props;
   const auth = getAuth();
@@ -80,6 +85,8 @@ export function InfoUser(props) {
     setLoading(false);
   };
 
+  if (!datos) return <Loading show text="Cargando" />;
+
   return (
     <View style={styles.content}>
       <Avatar
@@ -92,11 +99,11 @@ export function InfoUser(props) {
         <Avatar.Accessory size={24} onPress={changeAvatar} />
       </Avatar>
       <View>
-        {datos !== null && (
-          <Text style={styles.displayName}>
-            {datos.nombre} {datos.apellido}
-          </Text>
-        )}
+
+        <Text style={styles.displayName}>
+          {datos.nombre} {datos.apellido}
+        </Text>
+
         <Text>{email}</Text>
       </View>
     </View>
