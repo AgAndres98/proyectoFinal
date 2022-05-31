@@ -9,8 +9,7 @@ import {useNavigation} from "@react-navigation/native"
 import {doc, setDoc} from "firebase/firestore"
 import {db, screen} from "../../../utils"
 import {getAuth} from "firebase/auth";
-import { v4 as uuid} from "uuid"
-
+import { v4 as uuid } from "uuid";
 
 import {
   initialValues,

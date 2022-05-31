@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     //alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
   },
   objeto: {
     flexDirection: "row",
@@ -20,16 +20,16 @@ export const styles = StyleSheet.create({
   },
   informacion: {
     flexDirection: "row",
-    //backgroundColor: "#12bd20",
-    paddingRight: 80,
+    //backgroundColor: "#21bd20",
   },
   switchView: {
-    width: 200,
+    width: 180,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-start",
-    marginTop: -35,
-    paddingLeft: 5,
+    justifyContent: "flex-end",
+    marginTop: -15,
+    //paddingLeft: 140,
+    //backgroundColor: "#62bd20",
   },
   image: {
     width: 100,
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginRight: 15,
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     marginBottom: 10,
     //backgroundColor: "#92bd60",
   },
@@ -51,6 +51,7 @@ export const styles = StyleSheet.create({
   },
   info: {
     color: "#828282",
+    marginBottom: 30,
   },
   delete: {
     borderWidth: 1,

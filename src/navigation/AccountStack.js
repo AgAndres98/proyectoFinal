@@ -8,7 +8,7 @@ import { BeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQu
 import {
   MyObjects,
   MyObjectsScreen,
-} from "../screens/Account/MyObjectsScreen/myObjectsScreen";
+} from "../screens/Account/MyObjectsScreen/MyObjectsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +18,9 @@ export function AccountStack() {
       <Stack.Screen
         name={screen.account.account}
         component={AccountScreen}
-        options={{ title: "Tu cuenta" }}
+        options={{
+          title: "Tu cuenta",
+        }}
       />
       <Stack.Screen
         name={screen.account.informationPersonal}
@@ -40,7 +42,9 @@ export function AccountStack() {
       <Stack.Screen
         name={screen.account.myObjects}
         component={MyObjectsScreen}
-        options={{ title: "Mis objetos" }}
+        options={{
+          title: "Mis objetos",
+        }}
       />
     </Stack.Navigator>
   );

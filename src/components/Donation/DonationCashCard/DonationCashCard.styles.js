@@ -44,7 +44,14 @@ export const styles = StyleSheet.create({
   btn: {
     backgroundColor: "#62bd60",
   },
+
+  viewContainer: {
+    width: "95%",
+    flexDirection: "row",
+    alignItems: "space-between",
+    justifyContent: "space-between",
+  },
   icon: {
-    marginLeft: 40,
+    alignSelf: "flex-end",
   },
 });

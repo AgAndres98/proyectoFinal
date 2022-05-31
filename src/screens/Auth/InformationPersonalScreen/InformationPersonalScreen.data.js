@@ -10,6 +10,7 @@ export function initialValues() {
         fechaNacimiento: "",
         celular: "",
         idUsuario: "",
+        cuestionarioBeneficiario: [],
     };
 }
 
