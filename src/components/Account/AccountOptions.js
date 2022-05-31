@@ -23,17 +23,17 @@ export function AccountOptions(props) {
       setRenderComponent(
         <ChangeEmailForm onClose={onCloseOpenModal} onReload={onReload} />
       );
+      onCloseOpenModal();
     }
 
     if (key === "password") {
       setRenderComponent(<ChangePasswordForm onClose={onCloseOpenModal} />);
+      onCloseOpenModal();
     }
 
     if (key === "myObjects") {
       navigation.navigate(screen.account.myObjects);
     }
-
-    onCloseOpenModal();
   };
 
   const menuOptions = getMenuOptions(selectedComponent);
