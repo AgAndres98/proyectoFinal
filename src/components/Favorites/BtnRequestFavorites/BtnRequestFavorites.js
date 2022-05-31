@@ -6,19 +6,19 @@ import {
   doc,
   setDoc,
   getDocs,
-  getDoc,
   query,
   where,
   collection,
   deleteDoc,
   onSnapshot,
+  getDoc,
 } from "firebase/firestore";
 import { db } from "../../../utils";
 import { v4 as uuid } from "uuid";
 import { size, forEach } from "lodash";
-import { styles } from "./BtnRequest.styles";
+import { styles } from "./BtnRequestFavorites.styles";
 
-export function BtnRequest(props) {
+export function BtnRequestFavorites(props) {
   const { idObjeto, idUsuario } = props;
   const auth = getAuth();
   const [isRequested, setIsRequested] = useState(undefined);
@@ -58,38 +58,6 @@ export function BtnRequest(props) {
     }
   };
 
-  const cargarRequest = async (dato) => {
-    const idRequest = uuid();
-    onReload();
-    const data = {
-      id: idRequest,
-      idObjeto,
-      idUsuario,
-      idUserReq: auth.currentUser.uid,
-      datosPersonales: dato,
-    };
-    await setDoc(doc(db, "requests", idRequest), data);
-  }
-
-  const queryDatosPersonales = async () => {
-    const q = query(
-      collection(db, "datosPersonales"),
-      where("idUsuario", "==", auth.currentUser.uid)
-    );
-
-    onSnapshot(q, async (snapshots) => {
-        
-      for await (const item of snapshots.docs) {
-        const data = item.data();
-        const docRef = doc(db, "datosPersonales", data.id);
-        const docSnap = await getDoc(docRef);
-        const newData = docSnap.data();
-        newData.id = data.id;
-        await cargarRequest(newData);
-     };
-    });
-  }
-
   const cancelRequest = async () => {
     try {
       const response = await getRequested();
@@ -102,6 +70,38 @@ export function BtnRequest(props) {
       console.log(error);
     }
   };
+
+  const queryDatosPersonales = async () => {
+    const q = query(
+      collection(db, "datosPersonales"),
+      where("idUsuario", "==", auth.currentUser.uid)
+    );
+
+    onSnapshot(q, async (snapshots) => {
+      for await (const item of snapshots.docs) {
+        const data = item.data();
+        const docRef = doc(db, "datosPersonales", data.id);
+        const docSnap = await getDoc(docRef);
+        const newData = docSnap.data();
+        newData.id = data.id;
+        await cargarRequest(newData);
+      }
+    });
+  };
+
+  const cargarRequest = async (dato) => {
+    const idRequest = uuid();
+    onReload();
+    const data = {
+      id: idRequest,
+      idObjeto,
+      idUsuario,
+      idUserReq: auth.currentUser.uid,
+      datosPersonales: dato,
+    };
+    await setDoc(doc(db, "requests", idRequest), data);
+  };
+
   return (
     <View style={styles.content}>
       {isRequested !== undefined && auth.currentUser.uid !== idUsuario && (

@@ -7,8 +7,8 @@ export  function UserDataModal(props) {
   const {show,close,children}=props
   
     return (
-    <View>
-      <Text>UserDataModal</Text>
-    </View>
+    <Overlay isVisible={show} overlayStyle={styles.overlay} onBackdropPress={close}>
+       {children}
+    </Overlay>
   )
 }

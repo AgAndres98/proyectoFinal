@@ -43,8 +43,11 @@ export function CalendarScreen() {
     const auth = getAuth();
     
     getSolicitudes();
+<<<<<<< HEAD
   
    // console.log(listaSolicitudes);
+=======
+>>>>>>> 599ea24a56986265327e7b1d7108c5936d89adcd
 
     forEach(listaSolicitudes, async (item) => {
       const q = query(
@@ -60,15 +63,16 @@ export function CalendarScreen() {
           const docSnap = await getDoc(docRef);
           const newData = docSnap.data();
           newData.id = data.id;
-          listaDatosPersonales.find(element => element.idUsuario != newData.idUsuario) == undefined ? setListaDatosPersonales(listaDatosPersonales =>[...listaDatosPersonales, newData]) : "";
+          setListaDatosPersonales(listaDatosPersonales =>[...listaDatosPersonales, newData]);
        };
       });
     }); 
 
-    //("Listrado de datos sin repetir");
+
     arrayDatos = eliminarRepetidos(listaDatosPersonales, it => it.idUsuario);
-    //console.log(arrayDatos);    
-    if(arrayDatos.length == listaSolicitudes.length){
+
+    
+
       forEach(listaSolicitudes, async (item) => {
         const q = query(
           collection(db, "custionarioBeneficiario"),
@@ -77,14 +81,14 @@ export function CalendarScreen() {
         datoBeneficiario(q);
       });
       arrayDatosCuestionario = eliminarRepetidos(listaCuestionarioBeneficiario, it => it.idUsuario); 
-    }
 
     ordenamientoPorMacheo();
-
 
     //aca pongo el array ordenado por macheo, primer array todo verde, segundo no tiene macheo, tercero no tiene cuestionario
     arrayOrdenadoPorMacheo.push(eliminarRepetidos(listaSolicitudesOrdenadas, it => it.idUsuario), eliminarRepetidos(arrayQueNoCumplen, it => it.idUsuario), eliminarRepetidos(arrayNoTienenCuestionario.filter(val => !listaSolicitudesOrdenadas.includes(val) && !arrayQueNoCumplen.includes(val)), it => it.idUsuario));
 
+
+    console.log(arrayOrdenadoPorMacheo);
   }, [listaSolicitudes, listaDatosPersonales, listaCuestionarioBeneficiario]);
 
    const eliminarRepetidos = (a, key) => {
@@ -97,7 +101,7 @@ export function CalendarScreen() {
 
     const ordenamientoPorMacheo = () => {
       forEach(arrayDatos, async (item) => {
-          if(arrayDatosCuestionario.find(element => element.idUsuario === item.idUsuario) == undefined){
+          if(arrayDatosCuestionario.find(element => element.idUsuario == item.idUsuario) == undefined){
             setArrayNoTienenCuestionario(arrayNoTienenCuestionario =>[...arrayNoTienenCuestionario, item]);
           }else{
             forEach(arrayDatosCuestionario, async (datos) =>{

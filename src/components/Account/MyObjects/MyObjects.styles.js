@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     //alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
   },
   objeto: {
     flexDirection: "row",
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginRight: 15,
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     marginBottom: 10,
     //backgroundColor: "#92bd60",
   },
@@ -51,6 +51,7 @@ export const styles = StyleSheet.create({
   },
   info: {
     color: "#828282",
+    marginBottom: 30,
   },
   delete: {
     borderWidth: 1,

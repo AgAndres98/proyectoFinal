@@ -97,6 +97,9 @@ export function UserRequests(props) {
             <Modal show={userModal} >
                 <Text>Información sobre el usuario</Text>
                 <Avatar size="large"  icon={{type:"material",name:"person"}} containerStyle={styles.image} />
+                <Text>Email</Text>
+                <Text>Telefono</Text>
+                <Text>Descripcion</Text>
             </Modal>
         </View>
     );
