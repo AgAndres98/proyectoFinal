@@ -10,13 +10,7 @@ import {doc, setDoc} from "firebase/firestore"
 import {db, screen} from "../../../utils"
 import {getAuth} from "firebase/auth";
 import { v4 as uuid} from "uuid"
-import { InformationPersonalForm } from "../../../components/Auth/InformationPersonalForm";
-import { useNavigation } from "@react-navigation/native";
-import { doc, setDoc } from "firebase/firestore";
-import { db, screen } from "../../../utils";
-import { getAuth } from "firebase/auth";
-import { v4 as uuid } from "uuid";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
 
 import {
   initialValues,
@@ -46,7 +40,7 @@ export function InformationPersonalScreen() {
       try {
         const nuevaData = formValues;
         nuevaData.idUsuario = uid.uid;
-        nuevaData.id = uuid();
+        nuevaData.id = uid.uid;
 
         console.log(nuevaData);
 

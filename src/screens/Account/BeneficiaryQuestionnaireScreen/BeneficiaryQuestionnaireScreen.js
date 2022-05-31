@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import { BeneficiaryQuestionnaireForm} from "../../../components/Account/BeneficiaryQuestionnaireForm"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { styles } from "./BeneficiaryQuestionnaireScreen.styles";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc, query, collection, onSnapshot, where, getDoc } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../utils";
 import { getAuth } from "firebase/auth";
@@ -29,6 +29,7 @@ export function BeneficiaryQuestionnaireScreen() {
         nuevaData.id = uuid();
 
         await setDoc(doc(db, "custionarioBeneficiario", nuevaData.id), nuevaData);
+        await updateDoc(doc(db, "datosPersonales", uid.uid), { "cuestionarioBeneficiario": nuevaData });
 
         navigation.navigate(screen.objects.tab);
       } catch (error) {

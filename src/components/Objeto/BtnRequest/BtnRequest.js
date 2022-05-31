@@ -6,10 +6,12 @@ import {
   doc,
   setDoc,
   getDocs,
+  getDoc,
   query,
   where,
   collection,
   deleteDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { db } from "../../../utils";
 import { v4 as uuid } from "uuid";
@@ -49,20 +51,44 @@ export function BtnRequest(props) {
 
   const addRequest = async () => {
     try {
-      const idRequest = uuid();
-      onReload();
-      const data = {
-        id: idRequest,
-        idObjeto,
-        idUsuario,
-        idUserReq: auth.currentUser.uid,
-      };
-      await setDoc(doc(db, "requests", idRequest), data);
+      await queryDatosPersonales();
     } catch (error) {
       onReload();
       console.log(error);
     }
   };
+
+  const cargarRequest = async (dato) => {
+    const idRequest = uuid();
+    onReload();
+    const data = {
+      id: idRequest,
+      idObjeto,
+      idUsuario,
+      idUserReq: auth.currentUser.uid,
+      datosPersonales: dato,
+    };
+    await setDoc(doc(db, "requests", idRequest), data);
+  }
+
+  const queryDatosPersonales = async () => {
+    const q = query(
+      collection(db, "datosPersonales"),
+      where("idUsuario", "==", auth.currentUser.uid)
+    );
+
+    onSnapshot(q, async (snapshots) => {
+        
+      for await (const item of snapshots.docs) {
+        const data = item.data();
+        const docRef = doc(db, "datosPersonales", data.id);
+        const docSnap = await getDoc(docRef);
+        const newData = docSnap.data();
+        newData.id = data.id;
+        await cargarRequest(newData);
+     };
+    });
+  }
 
   const cancelRequest = async () => {
     try {
