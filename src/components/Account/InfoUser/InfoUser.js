@@ -18,9 +18,6 @@ import { db } from "../../../utils";
 
 import { Loading } from "../../../components/Shared";
 
-
-
-
 export function InfoUser(props) {
   const { setLoading, setLoadingText } = props;
   const auth = getAuth();
@@ -46,9 +43,6 @@ export function InfoUser(props) {
       }
     });
   }, []);
-
-  console.log("DATOS INFOUSER");
-  console.log(datos);
 
   const changeAvatar = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -99,7 +93,6 @@ export function InfoUser(props) {
         <Avatar.Accessory size={24} onPress={changeAvatar} />
       </Avatar>
       <View>
-
         <Text style={styles.displayName}>
           {datos.nombre} {datos.apellido}
         </Text>

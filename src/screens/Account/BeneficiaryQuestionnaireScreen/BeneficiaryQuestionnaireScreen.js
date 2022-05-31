@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Button, Text } from "react-native-elements";
 import { useFormik } from "formik";
 import { BeneficiaryQuestionnaireForm } from "../../../components/Account/BeneficiaryQuestionnaireForm";
+import { UserLoggedScreen } from "../../../screens/Account/UserLoggedScreen/UserLoggedScreen";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { styles } from "./BeneficiaryQuestionnaireScreen.styles";
 import {
@@ -26,9 +27,21 @@ import {
 } from "./BeneficiaryQuestionnaireScreen.data";
 
 export function BeneficiaryQuestionnaireScreen() {
+  const [datosBeneficiario, setDatosBeneficiario] = useState(false);
   const navigation = useNavigation();
 
   const uid = getAuth().currentUser;
+
+  useEffect(() => {
+    onSnapshot(doc(db, "datosPersonales", uid.uid), (doc) => {
+      console.log(doc.data());
+      let datosPersonales = doc.data();
+      if (datosPersonales.cuestionarioBeneficiario.length > 0) {
+        setDatosBeneficiario(true);
+        navigation.navigate(screen.account.account);
+      }
+    });
+  }, []);
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -48,26 +61,31 @@ export function BeneficiaryQuestionnaireScreen() {
           cuestionarioBeneficiario: nuevaData,
         });
 
-        navigation.navigate(screen.objects.tab);
+        setDatosBeneficiario(true);
+        navigation.navigate(screen.account.account);
       } catch (error) {
         console.log(error);
       }
     },
   });
 
-  return (
-    <KeyboardAwareScrollView>
-      <View style={styles.content}>
-        <BeneficiaryQuestionnaireForm formik={formik} />
+  return datosBeneficiario ? (
+    <UserLoggedScreen />
+  ) : (
+    <View style={styles.screen}>
+      <KeyboardAwareScrollView>
+        <View style={styles.content}>
+          <BeneficiaryQuestionnaireForm formik={formik} />
 
-        <Button
-          title="Registrarme"
-          containerStyle={styles.btnContainer}
-          buttonStyle={styles.btn}
-          onPress={formik.handleSubmit}
-          loading={formik.isSubmitting}
-        />
-      </View>
-    </KeyboardAwareScrollView>
+          <Button
+            title="Registrarme"
+            containerStyle={styles.btnContainer}
+            buttonStyle={styles.btn}
+            onPress={formik.handleSubmit}
+            loading={formik.isSubmitting}
+          />
+        </View>
+      </KeyboardAwareScrollView>
+    </View>
   );
 }

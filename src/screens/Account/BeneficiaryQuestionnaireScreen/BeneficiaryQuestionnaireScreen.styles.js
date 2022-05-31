@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  screen: {
+    backgroundColor: "#F4F4FC",
+  },
   content: {
     backgroundColor: "#fff",
     marginVertical: 10,
     marginHorizontal: 15,
-    borderWidth: 1,
-    borderColor: "#8073BD",
     borderRadius: 10,
   },
   btnContainer: {

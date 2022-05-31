@@ -14,7 +14,7 @@ import {
 import { size, map } from "lodash";
 import { db } from "../../../utils";
 import { Loading } from "../../../components/Shared";
-import { MyObjects } from "../../../components/Account/MyObjects/MyObjects";
+import { MyObjects, NotFoundObjects } from "../../../components/Account";
 //import { styles } from "../../../components/Account/MyObjects/MyObjects.styles";
 import { styles } from "./MyObjectsScreen.styles";
 
@@ -34,6 +34,8 @@ export function MyObjectsScreen(props) {
   }, []);
 
   if (!objects) return <Loading show text="Cargando" />;
+
+  if (size(objects) === 0) return <NotFoundObjects />;
 
   return (
     <View style={styles.screen}>
