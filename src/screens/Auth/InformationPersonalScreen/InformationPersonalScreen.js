@@ -3,12 +3,12 @@ import { ScrollView, View, Text } from "react-native";
 import { Button } from "react-native-elements";
 import { useFormik } from "formik";
 import { styles } from "./InformationPersonalScreen.styles";
-import { InformationPersonalForm } from "../../../components/Auth/InformationPersonalForm";
+import { InformationPersonalForm } from "../../../components/Auth/InformationPersonalForm"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { useNavigation } from "@react-navigation/native";
-import { doc, setDoc } from "firebase/firestore";
-import { db, screen } from "../../../utils";
-import { getAuth } from "firebase/auth";
+import {useNavigation} from "@react-navigation/native"
+import {doc, setDoc} from "firebase/firestore"
+import {db, screen} from "../../../utils"
+import {getAuth} from "firebase/auth";
 import { v4 as uuid } from "uuid";
 
 import {
@@ -39,7 +39,7 @@ export function InformationPersonalScreen() {
       try {
         const nuevaData = formValues;
         nuevaData.idUsuario = uid.uid;
-        nuevaData.id = uuid();
+        nuevaData.id = uid.uid;
 
         console.log(nuevaData);
 

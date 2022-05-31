@@ -16,7 +16,7 @@ import { db } from "../../../utils";
 import { Loading } from "../../../components/Shared";
 import { MyObjects } from "../../../components/Account/MyObjects/MyObjects";
 //import { styles } from "../../../components/Account/MyObjects/MyObjects.styles";
-import { styles } from "./MyObjectsScreen.styles";
+import { styles } from "./myObjectsScreen.styles";
 
 export function MyObjectsScreen(props) {
   const auth = getAuth();
