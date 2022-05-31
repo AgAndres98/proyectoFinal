@@ -41,7 +41,7 @@ export function InformationPersonalScreen() {
         nuevaData.idUsuario = uid.uid;
         nuevaData.id = uuid();
 
-        console.log(nuevaData);
+       // console.log(nuevaData);
 
         await setDoc(doc(db, "datosPersonales", nuevaData.id), nuevaData);
       } catch (error) {

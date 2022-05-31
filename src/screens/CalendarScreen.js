@@ -44,7 +44,7 @@ export function CalendarScreen() {
     
     getSolicitudes();
   
-    console.log(listaSolicitudes);
+   // console.log(listaSolicitudes);
 
     forEach(listaSolicitudes, async (item) => {
       const q = query(
@@ -65,9 +65,9 @@ export function CalendarScreen() {
       });
     }); 
 
-    console.log("Listrado de datos sin repetir");
+    //("Listrado de datos sin repetir");
     arrayDatos = eliminarRepetidos(listaDatosPersonales, it => it.idUsuario);
-    console.log(arrayDatos);    
+    //console.log(arrayDatos);    
     if(arrayDatos.length == listaSolicitudes.length){
       forEach(listaSolicitudes, async (item) => {
         const q = query(

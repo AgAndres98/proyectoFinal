@@ -16,8 +16,8 @@ export function MyObjects(props) {
 
   const goToDetail = () => {};
 
-  const onRemoveFavorite = () => {
-    console.log("en funcion");
+  const gotToRequest = () => {
+    navigation.navigate(screen.account.userRequests);
   };
   return (
     <View style={styles.screen}>
@@ -77,7 +77,7 @@ export function MyObjects(props) {
                       name="account-eye-outline"
                       size={35}
                       containerStyle={styles.eye}
-                      onPress={onRemoveFavorite}
+                      onPress={gotToRequest}
                     />
                   </View>
                 </View>

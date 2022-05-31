@@ -7,16 +7,20 @@ import { styles } from "./UserRequests.styles";
 import { doc, deleteDoc } from "firebase/firestore";
 import {getAuth} from 'firebase/auth';
 import { object } from 'yup';
+import {Modal, UserDataModal} from '../../Shared';
 
 
 
 export function UserRequests(props) {
-
+    const[userModal,setUserModal]=useState(false);
 
     const{photoURL}=getAuth().currentUser;
     const { request } = props;
+    console.log("que trae");
+    console.log(request);
+    console.log("listo");
     const navigation = useNavigation();
-
+    console.log("Ver si funciona");
     const [isEnabled, setIsEnabled] = useState(true);
     const toggleSwitch = () =>
         setIsEnabled(previousState => !previousState);
@@ -25,7 +29,7 @@ export function UserRequests(props) {
 
     const goToDetail = () => {
     };
-    
+  const  selectComponent=()=>{}
    // console.log(objects.id);
 
     return (
@@ -33,8 +37,9 @@ export function UserRequests(props) {
             <FlatList
                 data={request}
                 renderItem={(doc) => {
-                    const objeto = doc.item.data();
-                    console.log(request);
+                    const peticion = doc.item.data();
+                    console.log("que trae");
+                   // console.log(request);
                     return (
                         <TouchableOpacity onPress={() => goToDetail}>
 
@@ -46,7 +51,7 @@ export function UserRequests(props) {
 
                                     <View style={styles.informacion}>
                                       
-                                        <Text style={styles.name}>{objeto.apellido}</Text>
+                                        <Text style={styles.name}>{peticion.nombre+" "+ peticion.apellido}</Text>
                                       
 
                                         
@@ -71,7 +76,7 @@ export function UserRequests(props) {
                                             name="account-search-outline"
                                             size={35}
                                             containerStyle={styles.eye}
-                                            onPress={console.log("delete")}
+                                            onPress={console.log(selectComponent)}
                                         />
 
 
@@ -89,6 +94,10 @@ export function UserRequests(props) {
                     );
                 }}
             />
+            <Modal show={userModal} >
+                <Text>Información sobre el usuario</Text>
+                <Avatar size="large"  icon={{type:"material",name:"person"}} containerStyle={styles.image} />
+            </Modal>
         </View>
     );
 
