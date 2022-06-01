@@ -8,7 +8,7 @@ import { BeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQu
 import {
   MyObjects,
   MyObjectsScreen,
-} from "../screens/Account/MyObjectsScreen/MyObjectsScreen";
+} from "../screens/Account/MyObjectsScreen/myObjectsScreen";
 
 const Stack = createNativeStackNavigator();
 
