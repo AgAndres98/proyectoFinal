@@ -18,10 +18,6 @@ import { styles } from "./Screens.styles";
 
 export function CalendarScreen() {
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
-
-  const [listaDatosPersonales, setListaDatosPersonales] = useState([]);
-
-  const [listaCuestionarioBeneficiario, setListaCuestionarioBeneficiario] = useState([]);
   
   const [listaSolicitudesOrdenadas, setListaSolicitudesOrdenadas] = useState([]);
 
@@ -33,9 +29,6 @@ export function CalendarScreen() {
 
   const idObjeto = "45846826-504b-47ba-a92b-76009dc24fa0";
 
-  let arrayDatos = [];
-
-  let arrayDatosCuestionario = [];
 
   let arrayOrdenadoPorMacheo = [];
 
@@ -44,39 +37,6 @@ export function CalendarScreen() {
     
     getSolicitudes();
 
-    forEach(listaSolicitudes, async (item) => {
-      const q = query(
-        collection(db, "datosPersonales"),
-        where("idUsuario", "==", item.idUserReq)
-      );
-      
-      onSnapshot(q, async (snapshots) => {
-        
-        for await (const item of snapshots.docs) {
-          const data = item.data();
-          const docRef = doc(db, "datosPersonales", data.id);
-          const docSnap = await getDoc(docRef);
-          const newData = docSnap.data();
-          newData.id = data.id;
-          setListaDatosPersonales(listaDatosPersonales =>[...listaDatosPersonales, newData]);
-       };
-      });
-    }); 
-
-
-    arrayDatos = eliminarRepetidos(listaDatosPersonales, it => it.idUsuario);
-
-    
-
-      forEach(listaSolicitudes, async (item) => {
-        const q = query(
-          collection(db, "custionarioBeneficiario"),
-          where("idUsuario", "==", item.idUserReq)
-        );
-        datoBeneficiario(q);
-      });
-      arrayDatosCuestionario = eliminarRepetidos(listaCuestionarioBeneficiario, it => it.idUsuario); 
-
     ordenamientoPorMacheo();
 
     //aca pongo el array ordenado por macheo, primer array todo verde, segundo no tiene macheo, tercero no tiene cuestionario
@@ -84,7 +44,7 @@ export function CalendarScreen() {
 
 
     console.log(arrayOrdenadoPorMacheo);
-  }, [listaSolicitudes, listaDatosPersonales, listaCuestionarioBeneficiario]);
+  }, [listaSolicitudes]);
 
    const eliminarRepetidos = (a, key) => {
       let seen = new Set();

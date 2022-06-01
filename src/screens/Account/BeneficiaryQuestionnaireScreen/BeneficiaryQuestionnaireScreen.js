@@ -28,7 +28,7 @@ export function BeneficiaryQuestionnaireScreen() {
         nuevaData.idUsuario = uid.uid;
         nuevaData.id = uuid();
 
-        await setDoc(doc(db, "custionarioBeneficiario", nuevaData.id), nuevaData);
+        await setDoc(doc(db, "cuestionarioBeneficiario", nuevaData.id), nuevaData);
         await updateDoc(doc(db, "datosPersonales", uid.uid), { "cuestionarioBeneficiario": nuevaData });
 
         navigation.navigate(screen.objects.tab);
