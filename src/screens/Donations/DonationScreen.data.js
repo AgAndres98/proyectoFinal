@@ -7,7 +7,7 @@ export function initialValues() {
         titulo: "",
         descripcion: "",
         ubicacion: null,
-        tipo: "",
+        tipo: "Ropa",
         fotos: [],
         activa: true,
         idUsuario: "",

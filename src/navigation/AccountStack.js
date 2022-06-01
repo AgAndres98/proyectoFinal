@@ -6,9 +6,14 @@ import { DonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireS
 import { BeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQuestionnaireScreen/BeneficiaryQuestionnaireScreen";
 import {
   MyObjects,
+<<<<<<< HEAD
   MyObjectsScreen
 } from "../screens/Account/MyObjectsScreen/MyObjectsScreen";
 import {UserRequestsScreen} from "./../screens/UserRequestsScreen";
+=======
+  MyObjectsScreen,
+} from "../screens/Account/MyObjectsScreen/myObjectsScreen";
+>>>>>>> 685abd56a4ba3593cf373c556b04d67cc1c2453c
 
 const Stack = createNativeStackNavigator();
 

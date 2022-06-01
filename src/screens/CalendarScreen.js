@@ -19,72 +19,32 @@ import { styles } from "./Screens.styles";
 export function CalendarScreen() {
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
 
-  const [listaDatosPersonales, setListaDatosPersonales] = useState([]);
+  const [listaSolicitudesValidacion, setListaSolicitudesValidacion] = useState([]);
 
-  const [listaCuestionarioBeneficiario, setListaCuestionarioBeneficiario] = useState([]);
-  
-  const [listaSolicitudesOrdenadas, setListaSolicitudesOrdenadas] = useState([]);
+  const listaSolicitudesOrdenadas = []
 
-  const [arrayQueNoCumplen, setArrayQueNoCumplen] = useState([]);
+  const arrayQueNoCumplen = []
 
-  const [arrayNoTienenCuestionario, setArrayNoTienenCuestionario] = useState([]);
+  const arrayNoTienenCuestionario = [];
 
-  const tipo = "ropa";
 
-  const idObjeto = "45846826-504b-47ba-a92b-76009dc24fa0";
+  const tipo = "Ropa";
 
-  let arrayDatos = [];
+  const idObjeto = "51a3fe77-cacd-46aa-b9b9-a1eb27b62fff";
 
-  let arrayDatosCuestionario = [];
-
-  let arrayOrdenadoPorMacheo = [];
+  let arrayOrdenado = [];
 
   useEffect(() => {
     const auth = getAuth();
     
     getSolicitudes();
 
-    forEach(listaSolicitudes, async (item) => {
-      const q = query(
-        collection(db, "datosPersonales"),
-        where("idUsuario", "==", item.idUserReq)
-      );
-      
-      onSnapshot(q, async (snapshots) => {
-        
-        for await (const item of snapshots.docs) {
-          const data = item.data();
-          const docRef = doc(db, "datosPersonales", data.id);
-          const docSnap = await getDoc(docRef);
-          const newData = docSnap.data();
-          newData.id = data.id;
-          setListaDatosPersonales(listaDatosPersonales =>[...listaDatosPersonales, newData]);
-       };
-      });
-    }); 
-
-
-    arrayDatos = eliminarRepetidos(listaDatosPersonales, it => it.idUsuario);
-
-    
-
-      forEach(listaSolicitudes, async (item) => {
-        const q = query(
-          collection(db, "custionarioBeneficiario"),
-          where("idUsuario", "==", item.idUserReq)
-        );
-        datoBeneficiario(q);
-      });
-      arrayDatosCuestionario = eliminarRepetidos(listaCuestionarioBeneficiario, it => it.idUsuario); 
-
     ordenamientoPorMacheo();
 
-    //aca pongo el array ordenado por macheo, primer array todo verde, segundo no tiene macheo, tercero no tiene cuestionario
-    arrayOrdenadoPorMacheo.push(eliminarRepetidos(listaSolicitudesOrdenadas, it => it.idUsuario), eliminarRepetidos(arrayQueNoCumplen, it => it.idUsuario), eliminarRepetidos(arrayNoTienenCuestionario.filter(val => !listaSolicitudesOrdenadas.includes(val) && !arrayQueNoCumplen.includes(val)), it => it.idUsuario));
+    arrayOrdenado = listaSolicitudesOrdenadas.concat(arrayQueNoCumplen, arrayNoTienenCuestionario);
 
 
-    console.log(arrayOrdenadoPorMacheo);
-  }, [listaSolicitudes, listaDatosPersonales, listaCuestionarioBeneficiario]);
+  }, [listaSolicitudes]);
 
    const eliminarRepetidos = (a, key) => {
       let seen = new Set();
@@ -95,19 +55,15 @@ export function CalendarScreen() {
     }
 
     const ordenamientoPorMacheo = () => {
-      forEach(arrayDatos, async (item) => {
-          if(arrayDatosCuestionario.find(element => element.idUsuario == item.idUsuario) == undefined){
-            setArrayNoTienenCuestionario(arrayNoTienenCuestionario =>[...arrayNoTienenCuestionario, item]);
+      forEach(listaSolicitudes, async (item) => {
+          if(item.datosPersonales.cuestionarioBeneficiario.length == 0){
+            arrayNoTienenCuestionario.push(item);
           }else{
-            forEach(arrayDatosCuestionario, async (datos) =>{
-              if(datos.idUsuario == item.idUsuario){
-                if(tipo == "ropa" && datos.ropa == true){
-                  setListaSolicitudesOrdenadas(listaSolicitudesOrdenadas => [...listaSolicitudesOrdenadas, item]);
+                if(tipo == "Ropa" && item.datosPersonales.cuestionarioBeneficiario.ropa == true){
+                  listaSolicitudesOrdenadas.push(item);
                 }else{
-                  setArrayQueNoCumplen(arrayQueNoCumplen => [...arrayQueNoCumplen, item]);
+                  arrayQueNoCumplen.push(item);
                 }
-              }
-            });
           }
       });
     }
@@ -130,21 +86,6 @@ export function CalendarScreen() {
       }
     });
   };
-
-  const datoBeneficiario = (q) => {
-    onSnapshot(q, async (snapshots) => {
-      for await (const item of snapshots.docs) {
-        const data = item.data();
-        const docRef = doc(db, "custionarioBeneficiario", data.id);
-        const docSnap = await getDoc(docRef);
-        const newData = docSnap.data();
-        newData.id = data.id;
-        listaCuestionarioBeneficiario.find(element => element.idUsuario == newData.idUsuario) == undefined ? setListaCuestionarioBeneficiario(listaCuestionarioBeneficiario => [...listaCuestionarioBeneficiario,newData]) : "";
-      }
-  
-    });
-
-  }
 
 
   return (
