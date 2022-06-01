@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     //alignItems: "center",
     justifyContent: "space-evenly",
+    color:"#F4F4FC",
   },
   objeto: {
     flexDirection: "row",

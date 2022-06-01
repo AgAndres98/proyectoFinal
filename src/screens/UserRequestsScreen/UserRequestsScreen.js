@@ -20,24 +20,40 @@ import { size, forEach } from "lodash";
 
 
 export function UserRequestsScreen(props) {
-    // const auth = getAuth();
+     const auth = getAuth();
     
-    // //const [request, setRequest] = useState(null);
+    const [request, setRequest] = useState(null);
  
-    // useEffect(() => {
-    //     const q = query(
-    //         collection(db, "datosPersonales"),
-    //         where("idUsuario", "==", auth.currentUser.uid)
-    //     );
+     useEffect(() => {
+         const q = query(
+             collection(db, "datosPersonales"),
+             where("idUsuario", "==", auth.currentUser.uid)
+         );
 
-    //     onSnapshot(q, (snapshot) => {
-    //         setRequest(snapshot.docs);
-    //     });
-    // }, []);
+         onSnapshot(q, (snapshot) => {
+             setRequest(snapshot.docs);
+         });
+     }, []);
 
-   //collection(db, "objetos"),
-   //where("idObjeto", "==", objectId)
-   /* const q = query(
+     
+    if (!request) return <LoadingModal show text="Cargando" />;
+   
+
+    return (
+        <View style={styles.content}>
+            {!request ? (
+                <LoadingModal show text="Cargando" />
+            ) : (
+                <UserRequests request={request} />
+            )}
+        </View>
+    );    
+
+   }  
+/*
+   collection(db, "objetos"),
+   where("idObjeto", "==", objectId)
+    const q = query(
         collection(db, "request"),
         where("idObjeto", "==", objectId)
     );
@@ -46,8 +62,8 @@ export function UserRequestsScreen(props) {
     onSnapshot(q, (snapshot) => {
         setObjects(snapshot.docs);
     });
-}, []);
-*/
+},[]);*/
+/*
 const [listaSolicitudes, setListaSolicitudes] = useState([]);
 
   const [listaDatosPersonales, setListaDatosPersonales] = useState([]);
@@ -193,5 +209,5 @@ const [listaSolicitudes, setListaSolicitudes] = useState([]);
                 <UserRequests request={arrayOrdenadoPorMacheo} />
             )}
         </View>
-    );
-}
+    );    
+}  */

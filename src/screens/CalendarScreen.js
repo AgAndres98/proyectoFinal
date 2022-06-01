@@ -43,11 +43,6 @@ export function CalendarScreen() {
     const auth = getAuth();
     
     getSolicitudes();
-<<<<<<< HEAD
-  
-   // console.log(listaSolicitudes);
-=======
->>>>>>> 599ea24a56986265327e7b1d7108c5936d89adcd
 
     forEach(listaSolicitudes, async (item) => {
       const q = query(

@@ -20,8 +20,10 @@ export const styles = StyleSheet.create({
         width: 180,
         height: 140,
         margin: 15,
+        paddingRight:10,
         borderRadius: 10,
-        paddingLeft: 50,
+        paddingLeft: 40,
+        right:30,
     },
     informacion: {
         marginHorizontal: 5,
@@ -29,12 +31,14 @@ export const styles = StyleSheet.create({
     },
     name: {
         fontWeight: "bold",
-
+        right:40,
+        textDecorationLine:'underline',
     },
     info: {
         color: "#828282",
         paddingRight: 100,
         marginTop: 3,
+        
     },
     switch: {
         marginTop: -80,
@@ -62,5 +66,10 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
        
     },
+
+    containerIcons:{
+        right:45,
+    }
+
 
 });
