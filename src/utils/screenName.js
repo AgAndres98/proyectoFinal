@@ -26,6 +26,7 @@ const accountStack = {
   donador: "Donador",
   beneficiary: "Beneficiary",
   myObjects: "MisObjetos",
+  userRequests:"Solicitudes de usuarios",
 };
 
 const authStack = {

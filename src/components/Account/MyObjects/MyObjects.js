@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../utils";
 import { styles } from "./MyObjects.styles";
 import { doc, deleteDoc } from "firebase/firestore";
+import {UserRequest} from "../UserRequests/UserRequests";
 
 export function MyObjects(props) {
   const { objects } = props;
@@ -15,8 +16,8 @@ export function MyObjects(props) {
 
   const goToDetail = () => {};
 
-  const onRemoveFavorite = () => {
-    console.log("en funcion");
+  const gotToRequest = () => {
+    navigation.navigate(screen.account.userRequests);
   };
   return (
     <View style={styles.screen}>
@@ -76,7 +77,7 @@ export function MyObjects(props) {
                       name="account-eye-outline"
                       size={35}
                       containerStyle={styles.eye}
-                      onPress={onRemoveFavorite}
+                      onPress={gotToRequest}
                     />
                   </View>
                 </View>

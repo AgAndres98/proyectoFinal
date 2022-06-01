@@ -6323,7 +6323,11 @@ react-native-month@1.1.0:
 
 react-native-open-maps@^0.4.0:
   version "0.4.0"
+<<<<<<< HEAD
+  resolved "https://registry.npmjs.org/react-native-open-maps/-/react-native-open-maps-0.4.0.tgz"
+=======
   resolved "https://registry.yarnpkg.com/react-native-open-maps/-/react-native-open-maps-0.4.0.tgz#487425474e83ae7ad4f52d8e15970ea234420639"
+>>>>>>> 685abd56a4ba3593cf373c556b04d67cc1c2453c
   integrity sha512-8YkRZRSN/p7W5qiBd5Ucie4I/BmYwCQQ6fYTH3C7+mgZxOY8CkNl1czpt8v8GltEluJT6wmdfQsC4xImnRyVVA==
   dependencies:
     query-string "^6.1.0"
