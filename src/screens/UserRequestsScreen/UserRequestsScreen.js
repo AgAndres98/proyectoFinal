@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
-import { Icon,Text } from "react-native-elements";
+import { Text,Image } from "react-native-elements";
 import { getAuth } from "firebase/auth";
 import {
   doc,
+  setDoc,
   getDoc,
+  getDocs,
   query,
   where,
   collection,
@@ -15,12 +17,12 @@ import { db } from "../../utils";
 import { LoadingModal } from "../../components/Shared/LoadingModal";
 import { UserRequests} from "../../components/Account/UserRequests";
 import { styles } from "./UserRequestsScreen.styles";
-
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { size, forEach } from "lodash";
 
 
 export function UserRequestsScreen(props) {
-     const auth = getAuth();
+    /* const auth = getAuth();
     
     const [request, setRequest] = useState(null);
  
@@ -50,92 +52,38 @@ export function UserRequestsScreen(props) {
     );    
 
    }  
-/*
-   collection(db, "objetos"),
-   where("idObjeto", "==", objectId)
-    const q = query(
-        collection(db, "request"),
-        where("idObjeto", "==", objectId)
-    );
+*/
 
-
-    onSnapshot(q, (snapshot) => {
-        setObjects(snapshot.docs);
-    });
-},[]);*/
-/*
+   
 const [listaSolicitudes, setListaSolicitudes] = useState([]);
 
-  const [listaDatosPersonales, setListaDatosPersonales] = useState([]);
+  const [listaSolicitudesValidacion, setListaSolicitudesValidacion] = useState([]);
 
-  const [listaCuestionarioBeneficiario, setListaCuestionarioBeneficiario] = useState([]);
-  
-  const [listaSolicitudesOrdenadas, setListaSolicitudesOrdenadas] = useState([]);
+  const listaSolicitudesOrdenadas = []
 
-  const [arrayQueNoCumplen, setArrayQueNoCumplen] = useState([]);
+  const arrayQueNoCumplen = []
 
-  const [arrayNoTienenCuestionario, setArrayNoTienenCuestionario] = useState([]);
+  const arrayNoTienenCuestionario = [];
 
-  const tipo = "ropa";
+  const [dato, setDato] = useState();
+  const tipo = "Ropa";
 
-  const idObjeto = "45846826-504b-47ba-a92b-76009dc24fa0";
+  const idObjeto = "51a3fe77-cacd-46aa-b9b9-a1eb27b62fff";
 
-  let arrayDatos = [];
-
-  let arrayDatosCuestionario = [];
-
-  let arrayOrdenadoPorMacheo = [];
+  let arrayOrdenado = [];
 
   useEffect(() => {
     const auth = getAuth();
     
     getSolicitudes();
-  
-    //console.log(listaSolicitudes);
-
-    forEach(listaSolicitudes, async (item) => {
-      const q = query(
-        collection(db, "datosPersonales"),
-        where("idUsuario", "==", item.idUserReq)
-      );
-      
-      onSnapshot(q, async (snapshots) => {
-        
-        for await (const item of snapshots.docs) {
-          const data = item.data();
-          const docRef = doc(db, "datosPersonales", data.id);
-          const docSnap = await getDoc(docRef);
-          const newData = docSnap.data();
-          newData.id = data.id;
-          listaDatosPersonales.find(element => element.idUsuario != newData.idUsuario) == undefined ? setListaDatosPersonales(listaDatosPersonales =>[...listaDatosPersonales, newData]) : "";
-       };
-      });
-    }); 
-
-    //console.log("Listrado de datos sin repetir");
-    arrayDatos = eliminarRepetidos(listaDatosPersonales, it => it.idUsuario);
-    //console.log(arrayOrdenadoPorMacheo);    
-    if(arrayDatos.length == listaSolicitudes.length){
-      forEach(listaSolicitudes, async (item) => {
-        const q = query(
-          collection(db, "custionarioBeneficiario"),
-          where("idUsuario", "==", item.idUserReq)
-        );
-        datoBeneficiario(q);
-      });
-      arrayDatosCuestionario = eliminarRepetidos(listaCuestionarioBeneficiario, it => it.idUsuario); 
-    }
 
     ordenamientoPorMacheo();
 
-
-    //aca pongo el array ordenado por macheo, primer array todo verde, segundo no tiene macheo, tercero no tiene cuestionario
-    arrayOrdenadoPorMacheo.push(eliminarRepetidos(listaSolicitudesOrdenadas, it => it.idUsuario), eliminarRepetidos(arrayQueNoCumplen, it => it.idUsuario), eliminarRepetidos(arrayNoTienenCuestionario.filter(val => !listaSolicitudesOrdenadas.includes(val) && !arrayQueNoCumplen.includes(val)), it => it.idUsuario));
-    //console.log("Vamos a ver");
- 
-    //console.log(arrayOrdenadoPorMacheo); 
-  }, [listaSolicitudes, listaDatosPersonales, listaCuestionarioBeneficiario]);
-
+    arrayOrdenado = listaSolicitudesOrdenadas.concat(arrayQueNoCumplen, arrayNoTienenCuestionario);
+    setDato(arrayOrdenado);
+   console.log("mira el dato"); console.log(dato);
+  }, [listaSolicitudes]);
+  
    const eliminarRepetidos = (a, key) => {
       let seen = new Set();
       return a.filter(item => {
@@ -145,19 +93,15 @@ const [listaSolicitudes, setListaSolicitudes] = useState([]);
     }
 
     const ordenamientoPorMacheo = () => {
-      forEach(arrayDatos, async (item) => {
-          if(arrayDatosCuestionario.find(element => element.idUsuario === item.idUsuario) == undefined){
-            setArrayNoTienenCuestionario(arrayNoTienenCuestionario =>[...arrayNoTienenCuestionario, item]);
+      forEach(listaSolicitudes, async (item) => {
+          if(item.datosPersonales.cuestionarioBeneficiario.length == 0){
+            arrayNoTienenCuestionario.push(item);
           }else{
-            forEach(arrayDatosCuestionario, async (datos) =>{
-              if(datos.idUsuario == item.idUsuario){
-                if(tipo == "ropa" && datos.ropa == true){
-                  setListaSolicitudesOrdenadas(listaSolicitudesOrdenadas => [...listaSolicitudesOrdenadas, item]);
+                if(tipo == "Ropa" && item.datosPersonales.cuestionarioBeneficiario.ropa == true){
+                  listaSolicitudesOrdenadas.push(item);
                 }else{
-                  setArrayQueNoCumplen(arrayQueNoCumplen => [...arrayQueNoCumplen, item]);
+                  arrayQueNoCumplen.push(item);
                 }
-              }
-            });
           }
       });
     }
@@ -176,38 +120,61 @@ const [listaSolicitudes, setListaSolicitudes] = useState([]);
           const docSnap = await getDoc(docRef);
           const newData = docSnap.data();
           newData.id = data.id;
+
+         const storage = getStorage();
+         const starsRef = ref(storage, `avatar/${data.idUserReq}`);
+         const imagen="url";
+        
+          getDownloadURL(starsRef)
+            .then((url) => {
+              newData.foto=url;
+         
+            })
+            .catch((error) => {
+              // A full list of error codes is available at
+              // https://firebase.google.com/docs/storage/web/handle-errors
+              switch (error.code) {
+                case 'storage/object-not-found':
+                  // File doesn't exist
+                  break;
+                case 'storage/unauthorized':
+                  // User doesn't have permission to access the object
+                  break;
+                case 'storage/canceled':
+                  // User canceled the upload
+                  break;
+          
+                // ...
+          
+                case 'storage/unknown':
+                  // Unknown error occurred, inspect the server response
+                  break;
+              }
+            });
+
+      
           listaSolicitudes.find(element => element.idUsuario == newData.idUsuario) == undefined ? setListaSolicitudes(listaSolicitudes =>[...listaSolicitudes, newData]) : "";
       }
     });
+    console.log(arrayOrdenado);
+    setDato(arrayOrdenado)
   };
 
-  const datoBeneficiario = (q) => {
-    onSnapshot(q, async (snapshots) => {
-      for await (const item of snapshots.docs) {
-        const data = item.data();
-        const docRef = doc(db, "custionarioBeneficiario", data.id);
-        const docSnap = await getDoc(docRef);
-        const newData = docSnap.data();
-        newData.id = data.id;
-        listaCuestionarioBeneficiario.find(element => element.idUsuario == newData.idUsuario) == undefined ? setListaCuestionarioBeneficiario(listaCuestionarioBeneficiario => [...listaCuestionarioBeneficiario,newData]) : "";
-      }
-  
-    });
-     
-  }
-    //console.log("que rico")
-    //console.log(arrayOrdenadoPorMacheo)
+ 
+ // console.log("A PROBAR"); console.log(arrayOrdenado );
 
-    if (!arrayOrdenadoPorMacheo) return <LoadingModal show text="Cargando" />;
+  if (!dato ) return <LoadingModal show text="Cargando" />;
    
 
-    return (
-        <View style={styles.content}>
-            {!arrayOrdenadoPorMacheo ? (
-                <LoadingModal show text="Cargando" />
-            ) : (
-                <UserRequests request={arrayOrdenadoPorMacheo} />
-            )}
-        </View>
-    );    
-}  */
+  return (
+      <View style={styles.content}>
+          {!dato  ? (
+              <LoadingModal show text="Cargando" />
+          ) : (
+              <UserRequests dato={dato} />
+          )}
+      </View>
+  );    
+
+
+}  
