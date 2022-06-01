@@ -1,18 +1,16 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  content: {
+  contenido: {
+    width: "100%",
+    height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "row",
-    paddingVertical: 30,
+    backgroundColor: "#F4F4FC",
   },
-  avatar: {
-    marginRight: 0,
-    backgroundColor: "#62bd60",
-  },
-  displayName: {
+  text: {
+    fontSize: 20,
     fontWeight: "bold",
-    paddingBottom: 5,
+    marginTop: 20,
   },
 });

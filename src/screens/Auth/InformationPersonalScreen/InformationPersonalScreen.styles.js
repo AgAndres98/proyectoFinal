@@ -3,10 +3,11 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   screen: {
     backgroundColor: "#F4F4FC",
+    height: "100%",
   },
   content: {
     backgroundColor: "#FFF",
-    marginVertical: 100,
+    marginVertical: 50,
     marginHorizontal: 15,
     borderRadius: 10,
   },
