@@ -21,10 +21,10 @@ export const styles = StyleSheet.create({
   },
   informacion: {
     flexDirection: "row",
+    justifyContent: "space-between",
     //backgroundColor: "#21bd20",
   },
   switchView: {
-    width: 180,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-end",
@@ -33,11 +33,10 @@ export const styles = StyleSheet.create({
     //backgroundColor: "#62bd20",
   },
   image: {
-    width: 100,
+    width: 140,
     height: 140,
     margin: 15,
     borderRadius: 10,
-    paddingLeft: 30,
   },
   iconosContainer: {
     flexDirection: "row",
@@ -56,18 +55,21 @@ export const styles = StyleSheet.create({
   },
   delete: {
     borderWidth: 1,
-    borderColor: "#F02B2F",
+    borderColor: "#BD2225",
     borderRadius: 10,
+    padding: 5,
   },
   eye: {
     borderWidth: 1,
-    borderColor: "#62BD60",
+    borderColor: "#8073BD",
     borderRadius: 10,
+    padding: 5,
   },
   edit: {
     borderWidth: 1,
-    borderColor: "#8073BD",
+    borderColor: "#62BD60",
     borderRadius: 10,
+    padding: 5,
   } /*,
   switch: {
     marginTop: -80,

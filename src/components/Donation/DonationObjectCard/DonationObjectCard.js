@@ -52,11 +52,12 @@ export function DonationObjectCard(props) {
             formik.setFieldValue("tipo", itemValue)
           }
         >
-          <Picker.Item label="Ropa" value="Ropa" />
-          <Picker.Item label="Electrodoméstico" value="Electrodoméstico" />
-          <Picker.Item label="Utiles escolares" value="Utiles escolares" />
-          <Picker.Item label="Objeto" value="Objeto" />
           <Picker.Item label="Alimento" value="Alimento" />
+          <Picker.Item label="Electrodoméstico" value="Electrodoméstico" />
+          <Picker.Item label="Objeto" value="Objeto" />
+          <Picker.Item label="Ropa" value="Ropa" />
+          <Picker.Item label="Servicio" value="Servicio" />
+          <Picker.Item label="Utiles escolares" value="Utiles escolares" />
           <Picker.Item label="Otro" value="Otro" />
         </Picker>
       </View>

@@ -38,9 +38,9 @@ export function MyObjects(props) {
                       {isEnabled ? "Activa" : "Inactiva"}
                     </Text>
                     <Switch
-                      trackColor={{ false: "#767577", true: "#00a680" }}
-                      thumbColor={isEnabled ? "#00a680" : "#f4f3f4"}
-                      ios_backgroundColor="#3e3e3e"
+                      trackColor={{ false: "#767577", true: "#767577" }}
+                      thumbColor={isEnabled ? "#62bd60" : "#f4f3f4"}
+                      ios_backgroundColor="#62bd60"
                       onValueChange={toggleSwitch}
                       value={isEnabled}
                       style={styles.switch}
@@ -63,7 +63,7 @@ export function MyObjects(props) {
 
                   <Icon
                     type="material-community"
-                    name="trash-can-outline"
+                    name="delete-outline"
                     size={35}
                     containerStyle={styles.delete}
                     onPress={console.log("delete1")}

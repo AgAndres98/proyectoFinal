@@ -49,7 +49,8 @@ export function UserRequests(props) {
                 size="large"
                 icon={{ type: "material", name: "person" }}
                 source={avatarUri(item.foto)}
-                containerStyle={styles.image}
+                containerStyle={styles.imageContainer}
+                avatarStyle={styles.image}
               />
 
               <View style={styles.container}>

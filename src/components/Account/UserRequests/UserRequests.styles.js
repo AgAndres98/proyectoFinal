@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     //alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
   },
   objeto: {
     flexDirection: "row",
@@ -18,27 +18,19 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 10,
   },
-  image: {
-    /*
-    width: 180,
+  imageContainer: {
+    width: 140,
     height: 140,
-    margin: 15,
-    paddingRight: 10,
+    marginVertical: 10,
+    marginHorizontal: 5,
+    borderRadius: 100,
+  },
+  image: {
     borderRadius: 10,
-    paddingLeft: 40,
-    right: 30,
-    */
-    width: 180,
-    height: 160,
-    //margin: 5,
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-
-    borderRadius: 10,
-    paddingLeft: 30,
   },
   informacion: {
     flexDirection: "row",
+    marginVertical: 10,
   },
   name: {
     fontWeight: "bold",
@@ -61,7 +53,7 @@ export const styles = StyleSheet.create({
   },
   delete: {
     borderWidth: 1,
-    borderColor: "#F02B2F",
+    borderColor: "#BD2225",
     borderRadius: 10,
     padding: 5,
   },

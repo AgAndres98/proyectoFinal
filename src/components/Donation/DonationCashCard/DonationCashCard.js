@@ -1,8 +1,17 @@
-import { View, Text } from "react-native";
+import { View, Text, Clipboard } from "react-native";
 import { Icon, Button } from "react-native-elements";
 import { styles } from "./DonationCashCard.styles";
+import { ToastAndroid } from "react-native";
 
 export function DonationCashCard() {
+  const copyToClipboardCBU = () => {
+    Clipboard.setString("0000003100014206549863");
+    ToastAndroid.show("CVU copiado correctamente", ToastAndroid.SHORT);
+  };
+  const copyToClipboardAlias = () => {
+    Clipboard.setString("ahuma.alfil.ataja.mp");
+    ToastAndroid.show("Alias copiado correctamente", ToastAndroid.SHORT);
+  };
   return (
     <View style={styles.content}>
       <View style={styles.contentAdentro}>
@@ -19,6 +28,7 @@ export function DonationCashCard() {
             style={styles.icon}
             size={20}
             color="#62bd60"
+            onPress={copyToClipboardCBU}
           />
         </View>
 
@@ -35,6 +45,7 @@ export function DonationCashCard() {
             style={styles.icon}
             size={20}
             color="#62bd60"
+            onPress={copyToClipboardAlias}
           />
         </View>
 

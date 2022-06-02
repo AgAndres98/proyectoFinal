@@ -13,9 +13,9 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 
-import { db } from "../../utils";
-import { LoadingModal } from "../../components/Shared/LoadingModal";
-import { UserRequests } from "../../components/Account/UserRequests";
+import { db } from "../../../utils";
+import { LoadingModal } from "../../../components/Shared/LoadingModal";
+import { UserRequests } from "../../../components/Account/UserRequests";
 import { styles } from "./UserRequestsScreen.styles";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { size, forEach } from "lodash";

@@ -8,7 +8,7 @@ import {
   MyObjects,
   MyObjectsScreen,
 } from "../screens/Account/MyObjectsScreen/MyObjectsScreen";
-import { UserRequestsScreen } from "./../screens/UserRequestsScreen";
+import { UserRequestsScreen } from "./../screens/Account/UserRequestsScreen/UserRequestsScreen";
 
 const Stack = createNativeStackNavigator();
 
