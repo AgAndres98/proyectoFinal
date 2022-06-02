@@ -10,6 +10,7 @@ import { CalendarStack } from "./CalendarStack";
 import { AccountStack } from "./AccountStack";
 import { ObjectsStack } from "./ObjectsStack";
 import { AuthStack } from "./AuthStack";
+import { AddEventStack } from "./AddEventStack";
 
 import { screen } from "../utils";
 
@@ -19,51 +20,85 @@ const Tab = createBottomTabNavigator();
 
 export function AppNavigation() {
   const [logeado, setLogeado] = useState(null);
+  const auth = getAuth();
 
   useEffect(() => {
-    const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       setLogeado(user ? true : false);
     });
   }, []);
 
   if (logeado) {
-    return (
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          headerShown: false,
-          tabBarActiveTintColor: "#62bd60",
-          tabBarInactiveTintColor: "#646464",
-          tabBarIcon: ({ color, size }) => screenOptions(route, color, size),
-        })}
-      >
-        <Tab.Screen
-          name={screen.favorites.tab}
-          component={FavoritesStack}
-          options={{ title: "Favoritos" }}
-        />
-        <Tab.Screen
-          name={screen.objects.tab}
-          component={ObjectsStack}
-          options={{ title: "Objetos" }}
-        />
-        <Tab.Screen
-          name={screen.donation.tab}
-          component={DonationStack}
-          options={{ title: "Donar" }}
-        />
-        <Tab.Screen
-          name={screen.calendar.tab}
-          component={CalendarStack}
-          options={{ title: "Eventos" }}
-        />
-        <Tab.Screen
-          name={screen.account.tab}
-          component={AccountStack}
-          options={{ title: "Cuenta" }}
-        />
-      </Tab.Navigator>
-    );
+    if (auth.currentUser.email == "exporeact.ayudar@gmail.com") {
+      return (
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            headerShown: false,
+            tabBarActiveTintColor: "#62bd60",
+            tabBarInactiveTintColor: "#646464",
+            tabBarIcon: ({ color, size }) => screenOptions(route, color, size),
+          })}
+        >
+          <Tab.Screen
+            name={screen.objects.tab}
+            component={ObjectsStack}
+            options={{ title: "Objetos" }}
+          />
+          <Tab.Screen
+            name={screen.addEvent.tab}
+            component={AddEventStack}
+            options={{ title: "Añadir evento" }}
+          />
+          <Tab.Screen
+            name={screen.calendar.tab}
+            component={CalendarStack}
+            options={{ title: "Eventos" }}
+          />
+          <Tab.Screen
+            name={screen.account.tab}
+            component={AccountStack}
+            options={{ title: "Cuenta" }}
+          />
+        </Tab.Navigator>
+      );
+    } else {
+      return (
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            headerShown: false,
+            tabBarActiveTintColor: "#62bd60",
+            tabBarInactiveTintColor: "#646464",
+            tabBarIcon: ({ color, size }) => screenOptions(route, color, size),
+          })}
+        >
+          <Tab.Screen
+            name={screen.favorites.tab}
+            component={FavoritesStack}
+            options={{ title: "Favoritos" }}
+          />
+          <Tab.Screen
+            name={screen.objects.tab}
+            component={ObjectsStack}
+            options={{ title: "Objetos" }}
+          />
+          <Tab.Screen
+            name={screen.donation.tab}
+            component={DonationStack}
+            options={{ title: "Donar" }}
+          />
+          <Tab.Screen
+            name={screen.calendar.tab}
+            component={CalendarStack}
+            options={{ title: "Eventos" }}
+          />
+          <Tab.Screen
+            name={screen.account.tab}
+            component={AccountStack}
+            options={{ title: "Cuenta" }}
+          />
+        </Tab.Navigator>
+      );
+    }
   } else {
     return (
       <Tab.Navigator
@@ -97,7 +132,10 @@ function screenOptions(route, color, size) {
     iconName = "archive-outline";
   }
 
-  if (route.name === screen.donation.tab) {
+  if (
+    route.name === screen.donation.tab ||
+    route.name === screen.addEvent.tab
+  ) {
     iconName = "plus";
   }
 

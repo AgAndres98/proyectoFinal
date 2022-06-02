@@ -9,6 +9,10 @@ const favoritesStack = {
   favorites: "Favorites",
 };
 
+const addEventStack = {
+  tab: "AddEventTab",
+  addEvent: "AddEvent",
+};
 const calendarStack = {
   tab: "CalendarTab",
   calendar: "Calendar",
@@ -26,7 +30,7 @@ const accountStack = {
   donador: "Donador",
   beneficiary: "Beneficiary",
   myObjects: "MisObjetos",
-  userRequests:"Solicitudes de usuarios",
+  userRequests: "Solicitudes de usuarios",
 };
 
 const authStack = {
@@ -42,4 +46,5 @@ export const screen = {
   donation: donationStack,
   account: accountStack,
   auth: authStack,
+  addEvent: addEventStack,
 };
