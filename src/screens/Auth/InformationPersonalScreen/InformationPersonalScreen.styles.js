@@ -11,6 +11,9 @@ export const styles = StyleSheet.create({
     marginHorizontal: 15,
     borderRadius: 10,
   },
+  texto: {
+    marginHorizontal: 15,
+  },
   btnContainer: {
     marginTop: 20,
     width: "40%",

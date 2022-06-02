@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   objeto: {
     flexDirection: "row",
-    marginVertical: 8,
-    marginHorizontal: 5,
+    marginVertical: 10,
+    marginHorizontal: 20,
     backgroundColor: "#fff",
     borderRadius: 10,
   },

@@ -30,8 +30,13 @@ export function ChangeEmailForm(props) {
         );
         reauthenticateWithCredential(currentUser, credentials);
         await updateEmail(currentUser, formValue.email);
-        // OnReload();
-        //onClose();
+        Toast.show({
+          type: "success",
+          position: "bottom",
+          text1: "Cambio de mail exitoso",
+        });
+        //OnReload();
+        onClose();
       } catch (error) {
         //console.log(error);
         Toast.show({

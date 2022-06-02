@@ -46,6 +46,6 @@ export const styles = StyleSheet.create({
     borderTopColor: "#e3e3e3",
     borderBottomWidth: 1,
     borderBottomColor: "#e3e3e3",
-    backgroundColor: "#F02B2F",
+    backgroundColor: "#BD2225",
   },
 });

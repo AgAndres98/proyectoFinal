@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   content: {
     backgroundColor: "#fff",
     marginVertical: 10,
-    marginHorizontal: 5,
+    marginHorizontal: 20,
     borderRadius: 10,
   },
   image: {

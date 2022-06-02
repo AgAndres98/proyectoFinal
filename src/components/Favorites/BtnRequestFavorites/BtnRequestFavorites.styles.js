@@ -15,6 +15,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "#62bd60",
   },
   btnCancel: {
-    backgroundColor: "#F02B2F",
+    backgroundColor: "#BD2225",
   },
 });

@@ -64,7 +64,6 @@ export function UserRequests(props) {
                 <View style={styles.iconContainer}>
                   <Icon
                     solid="true"
-                    color={"green"}
                     type="material-community"
                     name="account-check-outline"
                     size={35}
@@ -73,7 +72,6 @@ export function UserRequests(props) {
                   />
 
                   <Icon
-                    color={"red"}
                     type="material-community"
                     name="account-remove-outline"
                     size={35}
@@ -82,7 +80,6 @@ export function UserRequests(props) {
                   />
 
                   <Icon
-                    color={"#8073BD"}
                     type="material-community"
                     name="account-search-outline"
                     size={35}

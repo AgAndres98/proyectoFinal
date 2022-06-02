@@ -88,22 +88,27 @@ export function InformationPersonalScreen() {
     <View style={styles.screen}>
       <KeyboardAwareScrollView style={styles.content}>
         <InformationPersonalForm formik={formik} />
+
         <View style={{ flex: 1, flexDirection: "row" }}>
           <Button
-            title="Cuestionario donante"
+            title="Donante"
             containerStyle={styles.btnContainer}
             buttonStyle={styles.btn}
             onPress={cuestionarioDonante}
             loading={formik.isSubmitting}
           />
           <Button
-            title="Cuestionario beneficiario"
+            title="Beneficiario"
             containerStyle={styles.btnContainer}
             buttonStyle={styles.btn}
             onPress={cuestionarioBeneficiario}
             loading={formik.isSubmitting}
           />
         </View>
+        <Text style={styles.texto}>
+          ¡No te preocupes! Sin importar el formulario que elijas podras tanto
+          donar o solicitar objetos
+        </Text>
       </KeyboardAwareScrollView>
     </View>
   );

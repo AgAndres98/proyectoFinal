@@ -13,8 +13,8 @@ export const styles = StyleSheet.create({
   },
   objeto: {
     flexDirection: "row",
-    marginVertical: 5,
-    marginHorizontal: 10,
+    marginVertical: 10,
+    marginHorizontal: 20,
     backgroundColor: "#fff",
     borderRadius: 10,
   },
