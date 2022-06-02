@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native";
-import { ObjectFavorites, NotFoundObjects } from "../components/Favorites";
+import { ObjectFavorites } from "../components/Favorites";
+import { NotFound } from "../components/Shared";
+
 import { getAuth } from "firebase/auth";
 import {
   doc,
@@ -43,7 +45,8 @@ export function FavoritesScreen() {
 
   if (!objects) return <Loading show text="Cargando" />;
 
-  if (size(objects) === 0) return <NotFoundObjects />;
+  if (size(objects) === 0)
+    return <NotFound texto={"No tienes objetos en favoritos"} />;
 
   return (
     <ScrollView style={styles.screen}>

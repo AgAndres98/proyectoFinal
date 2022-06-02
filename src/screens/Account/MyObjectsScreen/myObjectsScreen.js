@@ -14,7 +14,9 @@ import {
 import { size, map } from "lodash";
 import { db } from "../../../utils";
 import { Loading } from "../../../components/Shared";
-import { MyObjects, NotFoundObjects } from "../../../components/Account";
+import { MyObjects } from "../../../components/Account";
+import { NotFound } from "../../../components/Shared";
+
 //import { styles } from "../../../components/Account/MyObjects/MyObjects.styles";
 import { styles } from "./MyObjectsScreen.styles";
 
@@ -35,7 +37,8 @@ export function MyObjectsScreen(props) {
 
   if (!objects) return <Loading show text="Cargando" />;
 
-  if (size(objects) === 0) return <NotFoundObjects />;
+  if (size(objects) === 0)
+    return <NotFound texto={"No tienes ninguna publicación"} />;
 
   return (
     <View style={styles.screen}>

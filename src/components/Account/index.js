@@ -6,5 +6,4 @@ export * from "./DonorQuestionnaireForm";
 export * from "./BeneficiaryQuestionnaireForm";
 export * from "./DonorQuestionnaireForm";
 export * from "./MyObjects";
-export * from "./NotFoundObjects";
 export * from "./UserRequests";
