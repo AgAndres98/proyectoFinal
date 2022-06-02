@@ -19,7 +19,6 @@ import {
 
 export function DonorQuestionnaireScreen() {
   const navigation = useNavigation();
-
   const uid = getAuth().currentUser;
 
   const formik = useFormik({
@@ -30,7 +29,7 @@ export function DonorQuestionnaireScreen() {
       try {
         const nuevaData = formValues;
         nuevaData.idUsuario = uid.uid;
-        nuevaData.id = uuid();
+        nuevaData.id = uid.uid;
 
         await setDoc(doc(db, "cuestionarioDonador", nuevaData.id), nuevaData);
 
