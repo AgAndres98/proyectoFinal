@@ -1,7 +1,7 @@
 import { View, Text, Clipboard } from "react-native";
 import { Icon, Button } from "react-native-elements";
 import { styles } from "./DonationCashCard.styles";
-import { ToastAndroid } from "react-native";
+import { ToastAndroid, Linking } from "react-native";
 
 export function DonationCashCard() {
   const copyToClipboardCBU = () => {
@@ -12,6 +12,17 @@ export function DonationCashCard() {
     Clipboard.setString("ahuma.alfil.ataja.mp");
     ToastAndroid.show("Alias copiado correctamente", ToastAndroid.SHORT);
   };
+
+  const toMercadoPago = () => {
+    /*const whatsappNo = "5491133843639";
+    Linking.openURL(
+      `whatsapp://send?phone=${whatsappNo}&text=${"whatsappMsg"}`
+    );*/
+    Linking.openURL(`http://mpago.li/2ZmcNgi`);
+
+    //console.log("hola");
+  };
+
   return (
     <View style={styles.content}>
       <View style={styles.contentAdentro}>
@@ -55,6 +66,7 @@ export function DonationCashCard() {
           title="¡Doná a través de Mercado Pago!"
           containerStyle={styles.btnContainer}
           buttonStyle={styles.btn}
+          onPress={toMercadoPago}
         />
       </View>
     </View>
