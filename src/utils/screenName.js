@@ -26,6 +26,7 @@ const accountStack = {
   donador: "Donador",
   beneficiary: "Beneficiary",
   myObjects: "MisObjetos",
+  editObject: "Editar objeto",
   userRequests:"Solicitudes de usuarios",
 };
 
