@@ -73,17 +73,6 @@ export function DonorQuestionnaireForm(props) {
                 <Picker.Item label="Entre 2 km y 5 km" value="2y5" />
                 <Picker.Item label="Mas de 5 km" value="+5" />
             </Picker>
-            <Text style={styles.textoSelect} >¿A que sexo te gustaría ayudar?</Text>
-            <Picker
-                selectedValue={formik.values.sexo}
-                style={styles.selectDeObjeto}
-                onValueChange={(itemValue, itemIndex) =>
-                    formik.setFieldValue("sexo", itemValue)
-                }>
-                <Picker.Item label="Me es indiferente" value="nada" />
-                <Picker.Item label="Femenino" value="F" />
-                <Picker.Item label="Masculino" value="M" />
-            </Picker>
         </View>
     );
 }
