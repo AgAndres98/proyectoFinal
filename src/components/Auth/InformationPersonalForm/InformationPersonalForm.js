@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import { View, Text, Button } from "react-native";
 import { Input } from "react-native-elements";
@@ -9,14 +9,25 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 export function InformationPersonalForm(props) {
     const { formik } = props;
 
+    const [timeActual, setTimeActual] = useState();
     const [isPickerShow, setIsPickerShow] = useState(false);
-  const [date, setDate] = useState(new Date(Date.now()));
+  const [date, setDate] = useState(new Date());
+
+  useEffect(() => {
+    //console.log(timeActual);
+    var date = new Date();
+    date.setFullYear(date.getFullYear() - 18);
+    setTimeActual(date);
+    setDate(date);
+  }, []);
 
   const showPicker = () => {
     setIsPickerShow(true);
+    console.log(isPickerShow);
   };
 
   const onChange = (event, value) => {
+    setIsPickerShow(false);
     setDate(value);
     formik.setFieldValue("fechaNacimiento", value.toLocaleDateString('en-GB'))
     if (Platform.OS === 'android') {
@@ -43,6 +54,7 @@ export function InformationPersonalForm(props) {
                 <DateTimePicker
                 value={date}
                 mode={'date'}
+                maximumDate={timeActual}
                 display={Platform.OS === 'ios' ? 'spinner' : 'default'}
                 onChange={onChange}
                 style={styles.datePicker}

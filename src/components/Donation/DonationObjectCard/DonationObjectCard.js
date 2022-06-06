@@ -20,12 +20,14 @@ export function DonationObjectCard(props) {
       <View style={styles.contentAdentro}>
         <Input
           style={styles.input}
+          value={formik.values.titulo}
           placeholder="Titulo"
           onChangeText={(text) => formik.setFieldValue("titulo", text)}
           errorMessage={formik.errors.titulo}
         />
         <Input
           placeholder="Descripción"
+          value={formik.values.descripcion}
           multiline={true}
           onChangeText={(text) => formik.setFieldValue("descripcion", text)}
           errorMessage={formik.errors.descripcion}

@@ -31,6 +31,8 @@ const accountStack = {
   beneficiary: "Beneficiary",
   myObjects: "MisObjetos",
   userRequests: "Solicitudes de usuarios",
+  editObject: "Editar objeto",
+  userRequests:"Solicitudes de usuarios",
 };
 
 const authStack = {
