@@ -2,8 +2,8 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { Button, Text } from "react-native-elements";
 import { useFormik } from "formik";
-import { DonationObjectCard } from "../../../components/Donation/DonationObjectCard/DonationObjectCard";
-import { UploadImageForm } from "../../../components/Donation/UploadImage/UploadImageForm";
+import { CreateEventCard } from "../../../components/Admin/";
+import { UploadImageForm } from "../../../components/Donation";
 import { ImageObject } from "../../../components/Donation/ImageObject/ImageObject";
 import { styles } from "./AddEventScreen.styles";
 import { doc, setDoc } from "firebase/firestore";
@@ -30,9 +30,9 @@ export function AddEventScreen() {
         nuevaData.id = uuid();
         nuevaData.createdAt = new Date();
 
-        await setDoc(doc(db, "objetos", nuevaData.id), nuevaData);
+        await setDoc(doc(db, "eventos", nuevaData.id), nuevaData);
 
-        navigation.navigate(screen.objects.tab);
+        navigation.navigate(screen.calendario.tab);
       } catch (error) {
         console.log(error);
       }
@@ -44,7 +44,7 @@ export function AddEventScreen() {
       <Text style={styles.titulo}>¡Crea un evento!</Text>
       <View style={styles.content}>
         <ImageObject formik={formik} />
-        <DonationObjectCard formik={formik} />
+        <CreateEventCard formik={formik} />
         <UploadImageForm formik={formik} />
 
         <Button
