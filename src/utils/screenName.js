@@ -32,6 +32,7 @@ const accountStack = {
   myObjects: "MisObjetos",
   userRequests: "Solicitudes de usuarios",
   editObject: "Editar objeto",
+  editDonnor: "Editar cuestionario donador",
   userRequests:"Solicitudes de usuarios",
 };
 

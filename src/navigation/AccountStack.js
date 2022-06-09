@@ -5,6 +5,7 @@ import { InformationPersonalScreen } from "../screens/Auth/InformationPersonalSc
 import { DonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireScreen/DonorQuestionnaireScreen";
 import { BeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQuestionnaireScreen/BeneficiaryQuestionnaireScreen";
 import { EditObjectScreen } from "../screens/Account/MyObjectsScreen/EditObjectScreen/EditObjectScreen";
+import { EditDonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireScreen/EditDonorQuestionnaireScreen/EditDonorQuestionnaireScreen"
 import {
   MyObjects,
   MyObjectsScreen,
@@ -58,6 +59,12 @@ export function AccountStack() {
         name={screen.account.editObject}
         component={EditObjectScreen}
         options={{ title: "Editar objeto" }}
+      />
+
+      <Stack.Screen
+        name={screen.account.editDonnor}
+        component={EditDonorQuestionnaireScreen}
+        options={{ title: "Editar cuestionario donante" }}
       />
     </Stack.Navigator>
   );

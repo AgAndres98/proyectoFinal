@@ -43,7 +43,7 @@ export function EditObjectScreen() {
       }
     });
 
-  }, [objeto]);
+  }, []);
 
   const navigation = useNavigation();
 
