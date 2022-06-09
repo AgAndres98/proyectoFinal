@@ -51,9 +51,9 @@ export function BeneficiaryQuestionnaireScreen() {
       try {
         const nuevaData = formValues;
         nuevaData.idUsuario = uid.uid;
-        nuevaData.id = uuid();
+        nuevaData.id = uid.uid;
 
-        //await setDoc(doc(db, "cuestionarioBeneficiario", nuevaData.id), nuevaData);
+        await setDoc(doc(db, "cuestionarioBeneficiario", nuevaData.id), nuevaData);
         await updateDoc(doc(db, "datosPersonales", uid.uid), {
           cuestionarioBeneficiario: nuevaData,
         });

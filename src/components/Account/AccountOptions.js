@@ -18,28 +18,32 @@ export function AccountOptions(props) {
 
   const onCloseOpenModal = () => setShowModal((prevState) => !prevState);
 
-    const selectedComponent = (key) => {
-        if (key === "email") {
-            setRenderComponent(<ChangeEmailForm onClose={onCloseOpenModal} onReload={onReload} />);
-            onCloseOpenModal();
-        }
+  const selectedComponent = (key) => {
+    if (key === "email") {
+      setRenderComponent(
+        <ChangeEmailForm onClose={onCloseOpenModal} onReload={onReload} />
+      );
+      onCloseOpenModal();
+    }
 
-        if (key === "password") {
-            setRenderComponent(<ChangePasswordForm onClose={onCloseOpenModal} />);
-            onCloseOpenModal();
-        }
+    if (key === "password") {
+      setRenderComponent(<ChangePasswordForm onClose={onCloseOpenModal} />);
+      onCloseOpenModal();
+    }
 
-        if (key === "myObjects") {
-            navigation.navigate(screen.account.myObjects);
-        }
+    if (key === "myObjects") {
+      navigation.navigate(screen.account.myObjects);
+    }
 
-        if (key === "editDonnor") {
-          navigation.navigate(screen.account.editDonnor);
-      }
+    if (key === "editDonnor") {
+      navigation.navigate(screen.account.editDonnor);
+    }
 
-        
-    };
-    const menuOptions = getMenuOptions(selectedComponent);
+    if (key === "editBeneficiary") {
+      navigation.navigate(screen.account.editBeneficiary);
+    }
+  };
+  const menuOptions = getMenuOptions(selectedComponent);
   return (
     <View>
       {map(menuOptions, (menu, index) => (
@@ -55,13 +59,11 @@ export function AccountOptions(props) {
         </ListItem>
       ))}
 
-            <Modal show={showModal} close={onCloseOpenModal}>
-                {renderComponent}
-            </Modal>
-        </View>
-
-      
-  )
+      <Modal show={showModal} close={onCloseOpenModal}>
+        {renderComponent}
+      </Modal>
+    </View>
+  );
 }
 
 function getMenuOptions(selectedComponent) {
@@ -92,7 +94,7 @@ function getMenuOptions(selectedComponent) {
       iconType: "material-community",
       iconNameRight: "arrow-right",
       iconColorRight: "#62bd60",
-      onPress: () => console.log("cambiar contra"),
+      onPress: () => selectedComponent("editBeneficiary"),
     },
     {
       title: "Editar formulario donante",
