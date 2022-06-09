@@ -5,13 +5,14 @@ export const styles = StyleSheet.create({
     backgroundColor: "#F4F4FC",
   },
   imageContainer: {
-    paddingHorizontal: 25,
-    paddingTop: 10,
+    paddingTop: 40,
+    justifyContent: "center",
+    alignItems: "center",
   },
   image: {
     resizeMode: "contain",
-    width: "100%",
-    height: 250,
+    height: 150,
+    width: 150,
     borderRadius: 10,
   },
   content: {
