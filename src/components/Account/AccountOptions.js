@@ -33,6 +33,10 @@ export function AccountOptions(props) {
             navigation.navigate(screen.account.myObjects);
         }
 
+        if (key === "editDonnor") {
+          navigation.navigate(screen.account.editDonnor);
+      }
+
         
     };
     const menuOptions = getMenuOptions(selectedComponent);
@@ -95,7 +99,7 @@ function getMenuOptions(selectedComponent) {
       iconType: "material-community",
       iconNameRight: "arrow-right",
       iconColorRight: "#62bd60",
-      onPress: () => console.log("cambiar contra"),
+      onPress: () => selectedComponent("editDonnor"),
     },
   ];
 }
