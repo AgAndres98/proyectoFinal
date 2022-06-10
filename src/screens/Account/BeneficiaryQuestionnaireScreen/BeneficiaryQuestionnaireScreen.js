@@ -34,7 +34,6 @@ export function BeneficiaryQuestionnaireScreen() {
 
   useEffect(() => {
     onSnapshot(doc(db, "datosPersonales", uid.uid), (doc) => {
-      console.log(doc.data());
       let datosPersonales = doc.data();
       if (datosPersonales.cuestionarioBeneficiario.length > 0) {
         setDatosBeneficiario(true);

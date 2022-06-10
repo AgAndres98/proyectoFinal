@@ -8,32 +8,28 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
   },
   image: {
-    margin: 5,
     width: "100%",
     height: 200,
     borderRadius: 10,
   },
   infoContent: {
     paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingTop: 25,
+    paddingBottom: 5,
   },
   name: {
     fontSize: 25,
     fontWeight: "bold",
   },
   fecha: {
-    /*
-
-    textAlign: "right",
-*/
     fontSize: 18,
     fontWeight: "light",
     color: "#828282",
     position: "absolute",
-    backgroundColor: "#F4F4FC",
+    backgroundColor: "#fff",
     borderRadius: 50,
     padding: 15,
-    top: -40,
+    top: -30,
     left: 25,
   },
   direccion: {

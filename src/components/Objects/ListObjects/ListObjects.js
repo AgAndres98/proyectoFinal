@@ -10,7 +10,6 @@ export function ListObjects(props) {
   const navigation = useNavigation();
 
   const goToObject = (objeto) => {
-    //navigation.navigate(screen.objects.objeto, { id: objeto.id });
     navigation.navigate(screen.objects.objeto, { id: objeto.id });
   };
 
@@ -38,28 +37,3 @@ export function ListObjects(props) {
     </View>
   );
 }
-/*
-    <FlatList
-      data={objects}
-      renderItem={(doc) => {
-        const objeto = doc.item; //.data();
-        console.log(objeto);
-        return (
-          <TouchableOpacity onPress={() => goToObject(objeto)}>
-            <View style={styles.objeto}>
-              {
-                {
-                  <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
-                }
-              }
-              <View>
-                <Text style={styles.name}>{objeto.titulo}</Text>
-                <Text style={styles.info}>{objeto.titulo}</Text>
-                <Text style={styles.info}>{objeto.descripcion}</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        );
-      }}
-    />
-  );*/

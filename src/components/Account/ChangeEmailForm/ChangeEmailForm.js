@@ -7,6 +7,7 @@ import {
   updateEmail,
   EmailAuthProvider,
   reauthenticateWithCredential,
+  signOut,
 } from "firebase/auth";
 import Toast from "react-native-toast-message";
 import { initialValues, validationSchema } from "./ChangeEmailForm.data";
@@ -34,11 +35,13 @@ export function ChangeEmailForm(props) {
           type: "success",
           position: "bottom",
           text1: "Cambio de mail exitoso",
+          text2: "Vuelva a iniciar sesión para continuar",
         });
         //OnReload();
         onClose();
+        const auth = getAuth();
+        await signOut(auth);
       } catch (error) {
-        //console.log(error);
         Toast.show({
           type: "error",
           position: "bottom",

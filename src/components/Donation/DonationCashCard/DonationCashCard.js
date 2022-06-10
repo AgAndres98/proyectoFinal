@@ -19,8 +19,6 @@ export function DonationCashCard() {
       `whatsapp://send?phone=${whatsappNo}&text=${"whatsappMsg"}`
     );*/
     Linking.openURL(`http://mpago.li/2ZmcNgi`);
-
-    //console.log("hola");
   };
 
   return (

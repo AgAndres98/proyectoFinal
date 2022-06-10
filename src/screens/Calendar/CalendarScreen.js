@@ -26,7 +26,6 @@ export function CalendarScreen() {
 
     onSnapshot(q, (snapshot) => {
       setEvents(snapshot.docs);
-      console.log(snapshot.docs);
     });
   }, []);
 

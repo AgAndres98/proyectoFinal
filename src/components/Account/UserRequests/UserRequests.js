@@ -23,10 +23,7 @@ export function UserRequests(props) {
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  console.log("PROBANDO2");
-  console.log(dato);
   const selectComponent = () => {};
-  // console.log(objects.id);
 
   // Create a reference to the file we want to download
 
@@ -108,7 +105,6 @@ export function UserRequests(props) {
   );
 
   function avatarUri(item) {
-    console.log(item);
     if (item !== undefined) {
       return (uri = { uri: item });
     } else {
