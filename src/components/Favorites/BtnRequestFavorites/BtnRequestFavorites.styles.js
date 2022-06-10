@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
   btnContainer: {
     marginTop: 5,
     width: "100%",
-    marginBottom: 5,
     justifyContent: "flex-end",
   },
   btnReq: {

@@ -74,7 +74,6 @@ export function UserRequestsScreen(props) {
 
   useEffect(() => {
     const auth = getAuth();
-    console.log("adentro use efect usrreq");
     getSolicitudes();
 
     ordenamientoPorMacheo();
@@ -84,8 +83,6 @@ export function UserRequestsScreen(props) {
       arrayNoTienenCuestionario
     );
     setDato(arrayOrdenado);
-    console.log("mira el dato");
-    console.log(dato);
   }, [listaSolicitudes]);
 
   const eliminarRepetidos = (a, key) => {
@@ -168,11 +165,8 @@ export function UserRequestsScreen(props) {
           : "";
       }
     });
-    console.log(arrayOrdenado);
     setDato(arrayOrdenado);
   };
-
-  // console.log("A PROBAR"); console.log(arrayOrdenado );
 
   if (!dato) return <LoadingModal show text="Cargando" />;
 

@@ -6,45 +6,34 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  container: {
-    flex: 1,
-    //alignItems: "center",
-    justifyContent: "space-evenly",
-    color: "#F4F4FC",
+  objetoContainer: {
+    flexDirection: "column",
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderRadius: 10,
+    backgroundColor: "#fff",
   },
   objeto: {
     flexDirection: "row",
-    marginVertical: 8,
-    marginHorizontal: 16,
-    backgroundColor: "#fff",
-    borderRadius: 10,
   },
-  informacion: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    //backgroundColor: "#21bd20",
+  container: {
+    marginTop: 15,
+    width: "50%",
   },
   switchView: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-end",
-    marginTop: -15,
-    //paddingLeft: 140,
-    //backgroundColor: "#62bd20",
   },
   image: {
     width: 140,
-    height: 140,
+    height: 160,
     margin: 15,
     borderRadius: 10,
   },
+  descripcionContainer: {},
   iconosContainer: {
     flexDirection: "row",
-    alignItems: "center",
-    marginRight: 15,
-    justifyContent: "space-between",
-    marginBottom: 10,
-    //backgroundColor: "#92bd60",
+    justifyContent: "space-around",
   },
   name: {
     fontWeight: "bold",
@@ -67,25 +56,23 @@ export const styles = StyleSheet.create({
   },
   edit: {
     borderWidth: 1,
-    borderColor: "#62BD60",
+    borderColor: "#8073BD",
     borderRadius: 10,
     padding: 5,
-  } /*,
-  switch: {
-    marginTop: -80,
   },
-  iconContainer: {
-    marginRight: 0,
-    marginTop: 70,
+  content: {
+    alignItems: "center",
   },
-
-  delete: {
-    marginRight: -90,
-    marginTop: -37,
+  btnContainer: {
+    width: "100%",
+    marginTop: 5,
   },
-  eye: {
-    marginRight: -180,
-    marginTop: -35,
+  btnSolicitudes: {
+    borderRadius: 10,
+    borderTopWidth: 1,
+    borderTopColor: "#e3e3e3",
+    borderBottomWidth: 1,
+    borderBottomColor: "#e3e3e3",
+    backgroundColor: "#62BD60",
   },
-  */,
 });
