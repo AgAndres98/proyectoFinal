@@ -34,7 +34,6 @@ export function BeneficiaryQuestionnaireScreen() {
 
   useEffect(() => {
     onSnapshot(doc(db, "datosPersonales", uid.uid), (doc) => {
-      console.log(doc.data());
       let datosPersonales = doc.data();
       if (datosPersonales.cuestionarioBeneficiario.length > 0) {
         setDatosBeneficiario(true);
@@ -51,9 +50,9 @@ export function BeneficiaryQuestionnaireScreen() {
       try {
         const nuevaData = formValues;
         nuevaData.idUsuario = uid.uid;
-        nuevaData.id = uuid();
+        nuevaData.id = uid.uid;
 
-        //await setDoc(doc(db, "cuestionarioBeneficiario", nuevaData.id), nuevaData);
+        await setDoc(doc(db, "cuestionarioBeneficiario", nuevaData.id), nuevaData);
         await updateDoc(doc(db, "datosPersonales", uid.uid), {
           cuestionarioBeneficiario: nuevaData,
         });

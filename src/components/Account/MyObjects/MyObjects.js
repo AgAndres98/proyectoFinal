@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, FlatList, TouchableOpacity, Switch } from "react-native";
-import { Image, Text, Icon } from "react-native-elements";
+import { Image, Text, Icon, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../utils";
 import { styles } from "./MyObjects.styles";
@@ -59,14 +59,12 @@ export function MyObjects(props) {
         renderItem={(doc) => {
           const objeto = doc.item.data();
           return (
-            <View style={styles.objeto}>
-              <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
+            <View style={styles.objetoContainer}>
+              <View style={styles.objeto}>
+                <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
 
-              <View style={styles.container}>
-                <View style={styles.informacion}>
-                  <View>
-                    <Text style={styles.name}>{objeto.titulo}</Text>
-                  </View>
+                <View style={styles.container}>
+                  <Text style={styles.name}>{objeto.titulo}</Text>
 
                   <View style={styles.switchView}>
                     <Text style={styles.active}>
@@ -81,20 +79,10 @@ export function MyObjects(props) {
                       style={styles.switch}
                     />
                   </View>
-                </View>
 
-                <View style={styles.descripcionContainer}>
-                  <Text style={styles.info}>{objeto.descripcion}</Text>
-                </View>
-
-                <View style={styles.iconosContainer}>
-                  <Icon
-                    type="material-community"
-                    name="pencil-outline"
-                    size={35}
-                    containerStyle={styles.edit}
-                    onPress={console.log("editar1")}
-                  />
+                  <View style={styles.descripcionContainer}>
+                    <Text style={styles.info}>{objeto.descripcion}</Text>
+                  </View>
 
                   <Icon
                     type="material-community"
@@ -113,6 +101,15 @@ export function MyObjects(props) {
                   />
                 </View>
               </View>
+
+              <View style={styles.content}>
+                <Button
+                  title={"Ver solicitudes"}
+                  containerStyle={styles.btnContainer}
+                  buttonStyle={styles.btnSolicitudes}
+                  onPress={goToRequest}
+                />
+              </View>
             </View>
           );
         }}
@@ -120,4 +117,3 @@ export function MyObjects(props) {
     </View>
   );
 }
-

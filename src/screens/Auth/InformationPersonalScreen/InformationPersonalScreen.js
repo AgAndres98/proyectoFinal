@@ -20,11 +20,14 @@ import {
 import { db, screen } from "../../../utils";
 import { getAuth } from "firebase/auth";
 import { v4 as uuid } from "uuid";
+import Toast from "react-native-toast-message";
 
 import {
   initialValues,
   validationSchem,
 } from "./InformationPersonalScreen.data";
+
+let datosPer = [];
 
 export function InformationPersonalScreen() {
   const [datosPersonales, setDatosPersonales] = useState(false);
@@ -32,22 +35,53 @@ export function InformationPersonalScreen() {
 
   const uid = getAuth().currentUser;
 
+  useEffect(() => {
+    const q = query(collection(db, "datosPersonales"));
+
+    onSnapshot(q, async (snapshot) => {
+      for await (const item of snapshot.docs) {
+        const data = item.data();
+        const docRef = doc(db, "datosPersonales", data.id);
+        const docSnap = await getDoc(docRef);
+
+        const dato = docSnap.data();
+
+        datosPer.push(dato.dni);
+      }
+    });
+  }, [datosPer]);
+
   const cuestionarioDonante = () => {
-    formik.handleSubmit();
-    navigation.navigate(screen.account.donador);
-    setDatosPersonales(true);
+    if (datosPer.find((elemento) => elemento === formik.values.dni) == undefined) {
+      formik.handleSubmit();
+      navigation.navigate(screen.account.donador);
+      setDatosPersonales(true);
+    } else {
+      Toast.show({
+        type: "error",
+        position: "bottom",
+        text1: "El DNI ya esta registrado",
+      });
+    }
   };
 
   const cuestionarioBeneficiario = () => {
-    formik.handleSubmit();
-    navigation.navigate(screen.account.beneficiary);
-    setDatosPersonales(true);
+    if (datosPer.find((elemento) => elemento === formik.values.dni) == undefined) {
+      formik.handleSubmit();
+      navigation.navigate(screen.account.beneficiary);
+      setDatosPersonales(true);
+    } else {
+      Toast.show({
+        type: "error",
+        position: "bottom",
+        text1: "El DNI ya esta registrado",
+      });
+    }
   };
 
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: validationSchem(),
-    validateOnChange: false,
     onSubmit: async (formValues) => {
       try {
         const nuevaData = formValues;

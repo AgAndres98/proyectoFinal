@@ -2,14 +2,14 @@ import * as Yup from "yup";
 
 export function initialValues() {
     return {
-        incendios: "",
-        inundaciones: "",
-        tsunamis: "",
-        gente: "",
-        grupoFamiliar: "nada",
-        mayoresDeEdad: "nada",
-        cercania: "nada",
-        idUsuario: "",
+        incendios: null,
+        inundaciones: null,
+        tsunamis: null,
+        gente: null,
+        grupoFamiliar: null,
+        mayoresDeEdad: null,
+        cercania: null,
+        idUsuario: null,
     };
 }
 

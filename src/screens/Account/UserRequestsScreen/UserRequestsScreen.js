@@ -78,7 +78,6 @@ export function UserRequestsScreen(props) {
 
   useEffect(() => {
     const auth = getAuth();
-
     getSolicitudes();
 
     ordenamientoPorMacheo();
@@ -88,7 +87,6 @@ export function UserRequestsScreen(props) {
       arrayNoTienenCuestionario
     );
     setDato(arrayOrdenado);
-
   }, [listaSolicitudes]);
 
   const eliminarRepetidos = (a, key) => {

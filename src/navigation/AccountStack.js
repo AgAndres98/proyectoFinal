@@ -4,6 +4,9 @@ import { AccountScreen } from "../screens/AccountScreen";
 import { InformationPersonalScreen } from "../screens/Auth/InformationPersonalScreen/InformationPersonalScreen";
 import { DonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireScreen/DonorQuestionnaireScreen";
 import { BeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQuestionnaireScreen/BeneficiaryQuestionnaireScreen";
+import { EditObjectScreen } from "../screens/Account/MyObjectsScreen/EditObjectScreen/EditObjectScreen";
+import { EditDonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireScreen/EditDonorQuestionnaireScreen/EditDonorQuestionnaireScreen";
+import { EditBeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQuestionnaireScreen/EditBeneficiaryQuestionnaireScreen/EditBeneficiaryQuestionnaireScreen";
 import {
   MyObjects,
   MyObjectsScreen,
@@ -51,6 +54,24 @@ export function AccountStack() {
         name={screen.account.userRequests}
         component={UserRequestsScreen}
         options={{ title: "Solicitudes de usuario" }}
+      />
+
+      <Stack.Screen
+        name={screen.account.editObject}
+        component={EditObjectScreen}
+        options={{ title: "Editar objeto" }}
+      />
+
+      <Stack.Screen
+        name={screen.account.editDonnor}
+        component={EditDonorQuestionnaireScreen}
+        options={{ title: "Editar cuestionario donante" }}
+      />
+
+      <Stack.Screen
+        name={screen.account.editBeneficiary}
+        component={EditBeneficiaryQuestionnaireScreen}
+        options={{ title: "Editar cuestionario beneficiario" }}
       />
     </Stack.Navigator>
   );
