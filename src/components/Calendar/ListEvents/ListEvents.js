@@ -10,14 +10,8 @@ export function ListEvents(props) {
   const { events } = props;
   const navigation = useNavigation();
 
-  const goToEvent = () => {
-    /*
-    navigation.navigate(screen.objects.tab, {
-      screen: screen.calendar.event,
-      params: {
-        id: event.id,
-      },
-    });*/
+  const goToEvent = (id) => {
+    navigation.navigate(screen.calendar.eventsDetail, { id: id });
   };
 
   return (
@@ -27,7 +21,11 @@ export function ListEvents(props) {
         renderItem={(doc) => {
           const event = doc.item.data();
           return (
-            <TouchableOpacity onPress={goToEvent}>
+            <TouchableOpacity
+              onPress={() => {
+                goToEvent(event.id);
+              }}
+            >
               <View style={styles.content}>
                 <Image source={{ uri: event.fotos[0] }} style={styles.image} />
                 <View style={styles.infoContent}>
