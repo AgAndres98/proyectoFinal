@@ -16,6 +16,7 @@ const addEventStack = {
 const calendarStack = {
   tab: "CalendarTab",
   calendar: "Calendar",
+  eventsDetail: "Eventos",
 };
 
 const donationStack = {

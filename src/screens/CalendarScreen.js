@@ -1,5 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Icon } from "react-native-elements";
 import { getAuth } from "firebase/auth";
 import {
   doc,
@@ -17,6 +19,10 @@ import { async } from "@firebase/util";
 import { styles } from "./Screens.styles";
 
 export function CalendarScreen() {
+
+  const navigation = useNavigation();
+  const id = 'e31ca67d-b4bf-4c08-8285-e7fbd81f2996';
+
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
 
   const [listaSolicitudesValidacion, setListaSolicitudesValidacion] = useState([]);
@@ -32,65 +38,25 @@ export function CalendarScreen() {
 
   const idObjeto = "51a3fe77-cacd-46aa-b9b9-a1eb27b62fff";
 
-  let arrayOrdenado = [];
+  const goToRequest = (idEvento) => {
+    navigation.navigate(screen.calendar.eventsDetail, { id: id });
 
-  useEffect(() => {
-    const auth = getAuth();
-    
-    getSolicitudes();
+  }
 
-    ordenamientoPorMacheo();
-
-    arrayOrdenado = listaSolicitudesOrdenadas.concat(arrayQueNoCumplen, arrayNoTienenCuestionario);
-
-
-  }, [listaSolicitudes]);
-
-   const eliminarRepetidos = (a, key) => {
-      let seen = new Set();
-      return a.filter(item => {
-          let k = key(item);
-          return seen.has(k) ? false : seen.add(k);
-      });
-    }
-
-    const ordenamientoPorMacheo = () => {
-      forEach(listaSolicitudes, async (item) => {
-          if(item.datosPersonales.cuestionarioBeneficiario.length == 0){
-            arrayNoTienenCuestionario.push(item);
-          }else{
-                if(tipo == "Ropa" && item.datosPersonales.cuestionarioBeneficiario.ropa == true){
-                  listaSolicitudesOrdenadas.push(item);
-                }else{
-                  arrayQueNoCumplen.push(item);
-                }
-          }
-      });
-    }
-
-  //este metodo funcionaaaa
-  const getSolicitudes = () => {
-    const r = query(
-      collection(db, "requests"),
-      where("idObjeto", "==", idObjeto)
-    );
-
-    onSnapshot(r, async (snapshot) => {
-      for await (const item of snapshot.docs) {
-        const data = item.data();
-        const docRef = doc(db, "requests", data.id);
-          const docSnap = await getDoc(docRef);
-          const newData = docSnap.data();
-          newData.id = data.id;
-          listaSolicitudes.find(element => element.idUsuario == newData.idUsuario) == undefined ? setListaSolicitudes(listaSolicitudes =>[...listaSolicitudes, newData]) : "";
-      }
-    });
-  };
 
 
   return (
     <View style={styles.screen}>
       <Text>Screen de calendarios</Text>
+
+      <Icon
+        type="material-community"
+        name="account-eye-outline"
+        size={35}
+        containerStyle={styles.eye}
+        onPress={() => { goToRequest(id) }}
+      />
+
     </View>
   );
 }
