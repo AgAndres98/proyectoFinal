@@ -18,8 +18,6 @@ import { size, forEach } from "lodash";
 import { async } from "@firebase/util";
 import { Button } from "react-native-elements";
 import { styles } from "./Screens.styles";
-import { screen } from "../utils";
-import { useNavigation } from "@react-navigation/native";
 
 export function CalendarScreen() {
 

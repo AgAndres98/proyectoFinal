@@ -33,7 +33,7 @@ export function MyObjects(props) {
     }
   };
 
-  const gotToRequest = (idObjeto, tipoObjeto) => {
+  const goToRequest = (idObjeto, tipoObjeto) => {
 
     console.log(idObjeto);
     navigation.navigate(screen.account.userRequests, { idObjeto: idObjeto, tipoObjeto: tipoObjeto });
@@ -84,21 +84,23 @@ export function MyObjects(props) {
                     <Text style={styles.info}>{objeto.descripcion}</Text>
                   </View>
 
-                  <Icon
-                    type="material-community"
-                    name="delete-outline"
-                    size={35}
-                    containerStyle={styles.delete}
-                    onPress={() => { onRemoveObject(objeto.id) }}
-                  />
+                  <View style={styles.iconosContainer}>
+                    <Icon
+                      type="material-community"
+                      name="pencil-outline"
+                      size={35}
+                      containerStyle={styles.edit}
+                      onPress={console.log("editar1")}
+                    />
 
-                  <Icon
-                    type="material-community"
-                    name="account-eye-outline"
-                    size={35}
-                    containerStyle={styles.eye}
-                    onPress={() => { gotToRequest(objeto.id, objeto.tipo) }}
-                  />
+                    <Icon
+                      type="material-community"
+                      name="delete-outline"
+                      size={35}
+                      containerStyle={styles.delete}
+                      onPress={console.log("delete1")}
+                    />
+                  </View>
                 </View>
               </View>
 
@@ -107,7 +109,7 @@ export function MyObjects(props) {
                   title={"Ver solicitudes"}
                   containerStyle={styles.btnContainer}
                   buttonStyle={styles.btnSolicitudes}
-                  onPress={goToRequest}
+                  onPress={() => { goToRequest(objeto.id, objeto.tipo) }}
                 />
               </View>
             </View>
@@ -117,3 +119,7 @@ export function MyObjects(props) {
     </View>
   );
 }
+
+
+
+
