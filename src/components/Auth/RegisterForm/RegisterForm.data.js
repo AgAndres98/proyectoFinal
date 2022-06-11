@@ -18,7 +18,7 @@ export function validationSchema() {
       .min(8, "Como minimo ingresar 8 digitos")
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/,
-        "Debe contener un caracter en mayúscula, uno en minúscula, un número y un carácter de caso especial"
+        "Debe contener un carácter en mayúscula, uno en minúscula, un número y un carácter de caso especial"
       ),
     repeatPassword: Yup.string()
       .required("La contraseña es obligatoria")

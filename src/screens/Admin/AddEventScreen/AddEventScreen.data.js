@@ -17,14 +17,22 @@ export function initialValues() {
 
 export function validationSchem() {
   return Yup.object({
-    titulo: Yup.string().required("Campo obligatorio"),
-    organizador: Yup.string().required("Campo obligatorio"),
-    descripcion: Yup.string().required("Campo obligatorio"),
+    titulo: Yup.string()
+      .required("Campo obligatorio")
+      .max(30, "Tiene más de 30 caracteres"),
+    organizador: Yup.string()
+      .required("Campo obligatorio")
+      .max(30, "Tiene más de 30 caracteres"),
+    descripcion: Yup.string()
+      .required("Campo obligatorio")
+      .max(140, "Tiene más de 140 caracteres"),
     telefono: Yup.string().required("Campo obligatorio"),
     email: Yup.string()
       .email("El email no es válido")
       .required("El email es obligatorio"),
-    direccion: Yup.string().required("Campo obligatorio"),
+    direccion: Yup.string()
+      .required("Campo obligatorio")
+      .max(140, "Tiene más de 140 caracteres"),
     ubicacion: Yup.object().required("La localización es obligatoria"),
     fecha: Yup.object().required("La fecha es obligatoria"),
     fotos: Yup.array()
