@@ -23,7 +23,6 @@ export const styles = StyleSheet.create({
   },
   fecha: {
     fontSize: 18,
-    fontWeight: "light",
     color: "#828282",
     position: "absolute",
     backgroundColor: "#fff",
@@ -34,12 +33,10 @@ export const styles = StyleSheet.create({
   },
   direccion: {
     fontSize: 18,
-    fontWeight: "light",
     color: "#828282",
   },
   descripcion: {
     fontSize: 18,
-    fontWeight: "light",
   },
   direccionContainer: {
     marginVertical: 10,

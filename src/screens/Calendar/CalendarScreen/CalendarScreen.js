@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
-import { ListEvents } from "../../components/Calendar";
-import { NotFound } from "../../components/Shared";
+import { ListEvents } from "../../../components/Calendar";
+import { NotFound } from "../../../components/Shared";
 import { getAuth } from "firebase/auth";
 import {
   collection,
@@ -10,8 +10,8 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { size } from "lodash";
-import { Loading } from "../../components/Shared";
-import { db } from "../../utils";
+import { Loading } from "../../../components/Shared";
+import { db } from "../../../utils";
 import { styles } from "./CalendarScreen.styles";
 
 export function CalendarScreen() {
