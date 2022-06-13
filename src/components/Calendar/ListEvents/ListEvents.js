@@ -3,6 +3,7 @@ import { View, FlatList, TouchableOpacity } from "react-native";
 import { Image, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./ListEvents.styles";
+import { screen } from "./../../../utils";
 
 export function ListEvents(props) {
   const { events } = props;
