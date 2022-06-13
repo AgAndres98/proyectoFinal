@@ -11,6 +11,7 @@ import {
   MyObjectsScreen,
 } from "../screens/Account/MyObjectsScreen/MyObjectsScreen";
 import { UserRequestsScreen } from "./../screens/Account/UserRequestsScreen/UserRequestsScreen";
+import { EditEventScreen } from "./../screens/Admin/AddEventScreen/EditEventScreen/EditEventScreen"
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +57,12 @@ export function AccountStack() {
       />
 
       <Stack.Screen
+        name={screen.account.editEvent}
+        component={EditEventScreen}
+        options={{ title: "Editar evento" }}
+      />
+
+      <Stack.Screen
         name={screen.account.editObject}
         component={EditObjectScreen}
         options={{ title: "Editar objeto" }}
@@ -72,6 +79,7 @@ export function AccountStack() {
         component={EditBeneficiaryQuestionnaireScreen}
         options={{ title: "Editar cuestionario beneficiario" }}
       />
+
     </Stack.Navigator>
   );
 }
