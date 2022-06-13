@@ -4,14 +4,13 @@ import { InformationPersonalScreen } from "./Auth/InformationPersonalScreen/Info
 import { getAuth } from "firebase/auth";
 import {
   doc,
-  setDoc,
   getDoc,
   query,
   where,
   collection,
   onSnapshot,
 } from "firebase/firestore";
-import { db, screen } from "../utils";
+import { db } from "../utils";
 import { styles } from "./Screens.styles";
 
 export function AccountScreen() {

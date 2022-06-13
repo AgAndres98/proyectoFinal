@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-
-import { View, Text } from "react-native";
-import { Input, Icon, Button } from "react-native-elements";
+import { View } from "react-native";
+import { Input } from "react-native-elements";
 import { styles } from "./CreateEventCard.styles";
 import { MapForm } from "../../Donation";
-import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 export function CreateEventCard(props) {

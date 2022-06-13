@@ -1,67 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
-import { Text, Image } from "react-native-elements";
 import { getAuth } from "firebase/auth";
 import {
   doc,
-  setDoc,
   getDoc,
-  getDocs,
   query,
   where,
   collection,
   onSnapshot,
 } from "firebase/firestore";
-
 import { db } from "../../../utils";
 import { LoadingModal } from "../../../components/Shared/LoadingModal";
 import { UserRequests } from "../../../components/Account/UserRequests";
 import { styles } from "./UserRequestsScreen.styles";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { size, forEach } from "lodash";
+import { forEach } from "lodash";
 
 export function UserRequestsScreen(props) {
 
   const { route } = props;
 
   console.log(route.params);
-  /* const auth = getAuth();
-    
-    const [request, setRequest] = useState(null);
- 
-     useEffect(() => {
-         const q = query(
-             collection(db, "datosPersonales"),
-             where("idUsuario", "==", auth.currentUser.uid)
-         );
 
-         onSnapshot(q, (snapshot) => {
-             setRequest(snapshot.docs);
-         });
-     }, []);
-
-     
-    if (!request) return <LoadingModal show text="Cargando" />;
-   
-
-    return (
-        <View style={styles.content}>
-            {!request ? (
-                <LoadingModal show text="Cargando" />
-            ) : (
-                <UserRequests request={request} />
-            )}
-        </View>
-    );    
-
-   }  
-*/
 
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
 
-  const [listaSolicitudesValidacion, setListaSolicitudesValidacion] = useState(
-    []
-  );
 
   const listaSolicitudesOrdenadas = [];
 

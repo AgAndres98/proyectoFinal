@@ -8,7 +8,6 @@ import { EditObjectScreen } from "../screens/Account/MyObjectsScreen/EditObjectS
 import { EditDonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireScreen/EditDonorQuestionnaireScreen/EditDonorQuestionnaireScreen";
 import { EditBeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQuestionnaireScreen/EditBeneficiaryQuestionnaireScreen/EditBeneficiaryQuestionnaireScreen";
 import {
-  MyObjects,
   MyObjectsScreen,
 } from "../screens/Account/MyObjectsScreen/MyObjectsScreen";
 import { UserRequestsScreen } from "./../screens/Account/UserRequestsScreen/UserRequestsScreen";

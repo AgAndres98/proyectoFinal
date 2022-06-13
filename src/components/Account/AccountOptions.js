@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { ListItem, Icon, Text } from "react-native-elements";
+import { ListItem, Icon } from "react-native-elements";
 import { map } from "lodash";
 import { Modal } from "../../components/Shared";
 import { ChangeEmailForm } from "./ChangeEmailForm";
 import { ChangePasswordForm } from "./ChangePasswordForm";
-import { MyObjects } from "./MyObjects/MyObjects";
 import { useNavigation } from "@react-navigation/native";
-import { db, screen } from "./../../utils";
+import { screen } from "./../../utils";
 
 export function AccountOptions(props) {
   const { onReload } = props;

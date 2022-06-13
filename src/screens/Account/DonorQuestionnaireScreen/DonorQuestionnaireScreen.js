@@ -1,17 +1,14 @@
 import React from "react";
-import { ScrollView, View, Text } from "react-native";
+import { View } from "react-native";
 import { Button } from "react-native-elements";
 import { useFormik } from "formik";
 import { styles } from "./DonorQuestionnaireScreen.styles";
 import { DonorQuestionnaireForm } from "../../../components/Account/DonorQuestionnaireForm";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
 import { useNavigation } from "@react-navigation/native";
 import { doc, setDoc } from "firebase/firestore";
 import { db, screen } from "../../../utils";
 import { getAuth } from "firebase/auth";
-import { v4 as uuid } from "uuid";
-
 import {
   initialValues,
   validationSchem,

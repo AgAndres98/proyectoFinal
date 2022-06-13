@@ -1,14 +1,14 @@
-import React, {useState } from "react";
-import { View, ScrollView, Alert } from "react-native"
-import { Icon, Avatar, Text} from "react-native-elements"
-import {styles} from "./UploadImageForm.styles"
+import React, { useState } from "react";
+import { ScrollView, Alert } from "react-native"
+import { Icon, Avatar, Text } from "react-native-elements"
+import { styles } from "./UploadImageForm.styles"
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
-import { v4 as uuid} from "uuid"
+import { v4 as uuid } from "uuid"
 import { map, filter } from "lodash"
-import * as ImagePicker from "expo-image-picker" 
+import * as ImagePicker from "expo-image-picker"
 
 export function UploadImageForm(props) {
-    const {formik} = props;
+    const { formik } = props;
     const [isLoading, setIsLoading] = useState(false);
 
     const abrirGaleria = async () => {
@@ -19,7 +19,7 @@ export function UploadImageForm(props) {
             quality: 1,
         });
 
-        if(!result.cancelled) {
+        if (!result.cancelled) {
             guardarImagen(result.uri);
         }
     }
@@ -66,15 +66,15 @@ export function UploadImageForm(props) {
         );
     }
 
-    return(
+    return (
         <>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.viewImage} >
                 <Icon type="material-community" name="camera" color="#62bd60" containerStyle={styles.containerIcon} onPress={abrirGaleria} />
 
                 {map(formik.values.fotos, (image) => (
-                    <Avatar 
+                    <Avatar
                         key={image}
-                        source={{uri: image}}
+                        source={{ uri: image }}
                         containerStyle={styles.imagenStyle}
                         onPress={() => eliminarImagen(image)}
                     />

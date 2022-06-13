@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-
 import { View, Text } from "react-native";
-import { Input, Icon, Button } from "react-native-elements";
+import { Input } from "react-native-elements";
 import { styles } from "./DonationObjectCard.styles";
 import { MapForm } from "../MapForm";
 import { Picker } from "@react-native-picker/picker";

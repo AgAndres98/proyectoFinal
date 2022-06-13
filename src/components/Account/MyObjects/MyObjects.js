@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { View, FlatList, TouchableOpacity, Switch } from "react-native";
+import { View, FlatList, Switch } from "react-native";
 import { Image, Text, Icon, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../utils";
 import { styles } from "./MyObjects.styles";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
-import { useFormik } from "formik";
-//import {UserRequest} from "../UserRequests/UserRequests";
+
 
 export function MyObjects(props) {
   const { objects } = props;

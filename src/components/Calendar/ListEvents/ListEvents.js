@@ -2,8 +2,6 @@ import React from "react";
 import { View, FlatList, TouchableOpacity } from "react-native";
 import { Image, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { doc, deleteDoc } from "firebase/firestore";
-import { db, screen } from "../../../utils";
 import { styles } from "./ListEvents.styles";
 
 export function ListEvents(props) {

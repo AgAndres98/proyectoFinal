@@ -4,15 +4,12 @@ import { ListEvents } from "../../components/Calendar";
 import { NotFound } from "../../components/Shared";
 import { getAuth } from "firebase/auth";
 import {
-  doc,
-  getDoc,
   collection,
   query,
-  where,
   onSnapshot,
   orderBy,
 } from "firebase/firestore";
-import { size, map } from "lodash";
+import { size } from "lodash";
 import { Loading } from "../../components/Shared";
 import { db } from "../../utils";
 import { styles } from "./CalendarScreen.styles";

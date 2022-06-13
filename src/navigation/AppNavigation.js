@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-elements";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
 import { DonationStack } from "./DonationStack";
 import { FavoritesStack } from "./FavoritesStack";
 import { CalendarStack } from "./CalendarStack";
@@ -11,10 +9,8 @@ import { AccountStack } from "./AccountStack";
 import { ObjectsStack } from "./ObjectsStack";
 import { AuthStack } from "./AuthStack";
 import { AddEventStack } from "./AddEventStack";
-
 import { screen } from "../utils";
 
-//import { Tab } from "react-native-elements";
 
 const Tab = createBottomTabNavigator();
 

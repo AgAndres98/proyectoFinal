@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { Button } from "react-native-elements";
 import { getAuth } from "firebase/auth";
 import {
@@ -78,7 +78,7 @@ export function BtnRequest(props) {
     );
 
     onSnapshot(q, async (snapshots) => {
-        
+
       for await (const item of snapshots.docs) {
         const data = item.data();
         const docRef = doc(db, "datosPersonales", data.id);
@@ -86,7 +86,7 @@ export function BtnRequest(props) {
         const newData = docSnap.data();
         newData.id = data.id;
         await cargarRequest(newData);
-     };
+      };
     });
   }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, View } from "react-native";
-import { Button, Text } from "react-native-elements";
+import { View } from "react-native";
+import { Button } from "react-native-elements";
 import { useFormik } from "formik";
 import { BeneficiaryQuestionnaireForm } from "../../../components/Account/BeneficiaryQuestionnaireForm";
 import { UserLoggedScreen } from "../../../screens/Account/UserLoggedScreen/UserLoggedScreen";
@@ -10,16 +10,11 @@ import {
   doc,
   setDoc,
   updateDoc,
-  query,
-  collection,
   onSnapshot,
-  where,
-  getDoc,
 } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../utils";
 import { getAuth } from "firebase/auth";
-import { v4 as uuid } from "uuid";
 
 import {
   initialValues,

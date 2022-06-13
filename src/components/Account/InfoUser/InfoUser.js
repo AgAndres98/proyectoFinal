@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { DatePickerIOSBase, View } from "react-native";
+import { View } from "react-native";
 import { Avatar, Text } from "react-native-elements";
 import * as ImagePicker from "expo-image-picker";
 import { getAuth, updateProfile } from "firebase/auth";
@@ -12,7 +12,6 @@ import {
   query,
   where,
   onSnapshot,
-  Firestore,
 } from "firebase/firestore";
 import { db } from "../../../utils";
 
