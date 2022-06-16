@@ -34,6 +34,10 @@ export function AccountOptions(props) {
       navigation.navigate(screen.account.myObjects);
     }
 
+    if (key === "myEvents") {
+      navigation.navigate(screen.account.myEvents);
+    }
+
     if (key === "editDonnor") {
       navigation.navigate(screen.account.editDonnor);
     }
@@ -102,5 +106,12 @@ function getMenuOptions(selectedComponent) {
       iconColorRight: "#62bd60",
       onPress: () => selectedComponent("editDonnor"),
     },
+    /*{
+      title: "Mis eventos",
+      iconType: "material-community",
+      iconNameRight: "arrow-right",
+      iconColorRight: "#62bd60",
+      onPress: () => selectedComponent("myEvents"),
+    },*/
   ];
 }

@@ -37,6 +37,7 @@ const accountStack = {
   editDonnor: "Editar cuestionario donador",
   editBeneficiary: "Editar cuestionario beneficiario",
   userRequests: "Solicitudes de usuarios",
+  myEvents: "Mis eventos",
 };
 
 const authStack = {

@@ -7,11 +7,10 @@ import { BeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQu
 import { EditObjectScreen } from "../screens/Account/MyObjectsScreen/EditObjectScreen/EditObjectScreen";
 import { EditDonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireScreen/EditDonorQuestionnaireScreen/EditDonorQuestionnaireScreen";
 import { EditBeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQuestionnaireScreen/EditBeneficiaryQuestionnaireScreen/EditBeneficiaryQuestionnaireScreen";
-import {
-  MyObjectsScreen,
-} from "../screens/Account/MyObjectsScreen/MyObjectsScreen";
+import { MyObjectsScreen } from "../screens/Account/MyObjectsScreen/MyObjectsScreen";
 import { UserRequestsScreen } from "./../screens/Account/UserRequestsScreen/UserRequestsScreen";
 import { EditEventScreen } from "./../screens/Admin/AddEventScreen/EditEventScreen/EditEventScreen"
+import { MyEventsScreen } from "./../screens/Admin/MyEventsScreen/MyEventsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -80,6 +79,13 @@ export function AccountStack() {
         options={{ title: "Editar cuestionario beneficiario" }}
       />
 
+      <Stack.Screen
+        name={screen.account.myEvents}
+        component={MyEventsScreen}
+        options={{
+          title: "Mis eventos",
+        }}
+      />
     </Stack.Navigator>
   );
 }
