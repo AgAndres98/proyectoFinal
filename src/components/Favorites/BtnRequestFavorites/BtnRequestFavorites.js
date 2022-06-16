@@ -98,6 +98,7 @@ export function BtnRequestFavorites(props) {
       idUsuario,
       idUserReq: auth.currentUser.uid,
       datosPersonales: dato,
+      status: "Pendiente",
     };
     await setDoc(doc(db, "requests", idRequest), data);
   };

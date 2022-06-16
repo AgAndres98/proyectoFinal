@@ -67,9 +67,10 @@ export function BtnRequest(props) {
       idUsuario,
       idUserReq: auth.currentUser.uid,
       datosPersonales: dato,
+      status: "Pendiente",
     };
     await setDoc(doc(db, "requests", idRequest), data);
-  }
+  };
 
   const queryDatosPersonales = async () => {
     const q = query(
@@ -78,7 +79,6 @@ export function BtnRequest(props) {
     );
 
     onSnapshot(q, async (snapshots) => {
-
       for await (const item of snapshots.docs) {
         const data = item.data();
         const docRef = doc(db, "datosPersonales", data.id);
@@ -86,9 +86,9 @@ export function BtnRequest(props) {
         const newData = docSnap.data();
         newData.id = data.id;
         await cargarRequest(newData);
-      };
+      }
     });
-  }
+  };
 
   const cancelRequest = async () => {
     try {

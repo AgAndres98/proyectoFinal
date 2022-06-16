@@ -9,7 +9,7 @@ import { EditDonorQuestionnaireScreen } from "../screens/Account/DonorQuestionna
 import { EditBeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQuestionnaireScreen/EditBeneficiaryQuestionnaireScreen/EditBeneficiaryQuestionnaireScreen";
 import { MyObjectsScreen } from "../screens/Account/MyObjectsScreen/MyObjectsScreen";
 import { UserRequestsScreen } from "./../screens/Account/UserRequestsScreen/UserRequestsScreen";
-import { EditEventScreen } from "./../screens/Admin/AddEventScreen/EditEventScreen/EditEventScreen"
+import { EditEventScreen } from "./../screens/Admin/AddEventScreen/EditEventScreen/EditEventScreen";
 import { MyEventsScreen } from "./../screens/Admin/MyEventsScreen/MyEventsScreen";
 
 const Stack = createNativeStackNavigator();
@@ -52,7 +52,7 @@ export function AccountStack() {
       <Stack.Screen
         name={screen.account.userRequests}
         component={UserRequestsScreen}
-        options={{ title: "Solicitudes de usuario" }}
+        options={{ title: "Solicitudes de usuarios" }}
       />
 
       <Stack.Screen

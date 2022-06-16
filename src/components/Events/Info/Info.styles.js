@@ -22,11 +22,15 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 50,
     padding: 15,
-    top: -150,
-    left: 400,
+    top: -140,
+    right: 30,
   },
   description: {
     color: "#828282",
     fontSize: 15,
+  },
+  mapa: {
+    marginVertical: 200,
+    margin: 100,
   },
 });

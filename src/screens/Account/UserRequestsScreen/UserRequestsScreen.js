@@ -17,14 +17,11 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { forEach } from "lodash";
 
 export function UserRequestsScreen(props) {
-
-  const { route } = props;
+  const { idObjeto, tipo, route } = props;
 
   console.log(route.params);
 
-
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
-
 
   const listaSolicitudesOrdenadas = [];
 
@@ -33,9 +30,9 @@ export function UserRequestsScreen(props) {
   const arrayNoTienenCuestionario = [];
 
   const [dato, setDato] = useState();
-  const tipo = "Ropa";
+  const tipo2 = "Ropa";
 
-  const idObjeto = "51a3fe77-cacd-46aa-b9b9-a1eb27b62fff";
+  const idObjeto2 = "51a3fe77-cacd-46aa-b9b9-a1eb27b62fff";
 
   let arrayOrdenado = [];
 
@@ -66,7 +63,7 @@ export function UserRequestsScreen(props) {
         arrayNoTienenCuestionario.push(item);
       } else {
         if (
-          tipo == "Ropa" &&
+          tipo2 == "Ropa" &&
           item.datosPersonales.cuestionarioBeneficiario.ropa == true
         ) {
           listaSolicitudesOrdenadas.push(item);
@@ -81,7 +78,7 @@ export function UserRequestsScreen(props) {
   const getSolicitudes = () => {
     const r = query(
       collection(db, "requests"),
-      where("idObjeto", "==", idObjeto)
+      where("idObjeto", "==", idObjeto2)
     );
 
     onSnapshot(r, async (snapshot) => {
@@ -126,17 +123,15 @@ export function UserRequestsScreen(props) {
           (element) => element.idUsuario == newData.idUsuario
         ) == undefined
           ? setListaSolicitudes((listaSolicitudes) => [
-            ...listaSolicitudes,
-            newData,
-          ])
+              ...listaSolicitudes,
+              newData,
+            ])
           : "";
       }
     });
 
     setDato(arrayOrdenado);
   };
-
-
 
   if (!dato) return <LoadingModal show text="Cargando" />;
 

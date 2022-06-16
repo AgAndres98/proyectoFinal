@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Input } from "react-native-elements";
 import { styles } from "./EditEventCard.styles";
 import { MapForm } from "../../Donation/MapForm";
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
-
 
 export function EditEventCard(props) {
   const { formik } = props;
@@ -27,8 +26,6 @@ export function EditEventCard(props) {
       setIsPickerShow(false);
     }
   };
-
-
 
   const onOpenCloseMap = () => setShowMap((prevState) => !prevState);
 
@@ -57,6 +54,7 @@ export function EditEventCard(props) {
           errorMessage={formik.errors.organizador}
         />
 
+<<<<<<< HEAD
         <Input
           placeholder="Email"
           value={formik.values.email}
@@ -85,13 +83,29 @@ export function EditEventCard(props) {
           }}
           errorMessage={formik.errors.fecha}
         />
+=======
+        <TouchableOpacity onPress={showPicker}>
+          <Input
+            placeholder="Fecha"
+            value={date.toLocaleDateString("en-GB")}
+            disabled={true}
+            rightIcon={{
+              type: "material-community",
+              name: "calendar",
+              color: "#62bd60",
+              onPress: showPicker,
+            }}
+            errorMessage={formik.errors.fecha}
+          />
+        </TouchableOpacity>
+>>>>>>> prepro
 
         {/* The date picker */}
         {isPickerShow && (
           <DateTimePicker
             value={date}
             mode={"date"}
-            minimumDate={date}
+            minimumDate={new Date()}
             display={Platform.OS === "ios" ? "spinner" : "default"}
             onChange={onChange}
             style={styles.datePicker}
