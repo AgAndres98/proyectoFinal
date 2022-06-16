@@ -11,10 +11,13 @@ import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../../utils";
 import { initialValues, validationSchem } from "./EditEventScreen.data";
 
+
+
+
 const id = "e31ca67d-b4bf-4c08-8285-e7fbd81f2996";
 
 
-export function EditEventScreen() {
+export function EditEventScreen(props) {
     useEffect(() => {
         const q = query(
             collection(db, "eventos"),
@@ -32,6 +35,7 @@ export function EditEventScreen() {
                 formik.setFieldValue("organizador", dato.organizador);
                 formik.setFieldValue("titulo", dato.titulo);
                 formik.setFieldValue("descripcion", dato.descripcion);
+                formik.setFieldValue("organizador", dato.organizador);
                 formik.setFieldValue("ubicacion", dato.ubicacion);
                 formik.setFieldValue("fotos", dato.fotos);
                 formik.setFieldValue("id", dato.id);
@@ -41,6 +45,7 @@ export function EditEventScreen() {
     }, []);
 
     const navigation = useNavigation();
+
 
     const formik = useFormik({
         initialValues: initialValues(),

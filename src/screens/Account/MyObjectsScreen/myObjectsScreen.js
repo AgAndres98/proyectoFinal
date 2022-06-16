@@ -30,8 +30,6 @@ export function MyObjectsScreen(props) {
     });
   }, []);
 
-  if (!objects) return <Loading show text="Cargando" />;
-
   if (size(objects) === 0)
     return <NotFound texto={"No tienes ninguna publicación"} />;
 

@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, FlatList, Switch } from "react-native";
 import { Image, Text, Icon, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../utils";
 import { styles } from "./MyObjects.styles";
-import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  collection,
+  query,
+  where,
+  onSnapshot,
+  deleteDoc
+} from "firebase/firestore";
+import { forEach } from "lodash";
+import { async } from "@firebase/util";
 
 
 export function MyObjects(props) {
   const { objects } = props;
   const navigation = useNavigation();
-
+  const [favorites, setFavorites] = useState(null);
+  const [request, setRequest] = useState(null);
   const [isEnabled, setIsEnabled] = useState(true);
   // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
@@ -38,12 +49,54 @@ export function MyObjects(props) {
     navigation.navigate(screen.account.userRequests, { idObjeto: idObjeto, tipoObjeto: tipoObjeto });
   }
 
+
+
+
+
+
   const onRemoveObject = async (id) => {
+
+    console.log(id);
+
     try {
-      const idObjeto = id;
+
+      const q = query(
+        collection(db, "favorites"),
+        where("idObjeto", "==", id)
+      );
+
+      const length = favorites.length;
+      console.log(length);
+
+      onSnapshot(q, (snapshot) => {
+        setFavorites(snapshot.docs);
+        forEach(favorites, async (item) => {
+          console.log("BORRAR FAVORITO");
+          console.log(item.id);
+          await deleteDoc(doc(db, "favorites", item.id));
+          favorites.splice(favorites[item])
+        });
+      });
+
+
+      const q2 = query(
+        collection(db, "requests"),
+        where("idObjeto", "==", id)
+      );
+      onSnapshot(q2, (snapshot) => {
+        setRequest(snapshot.docs);
+
+
+        forEach(request, async (item) => {
+          console.log("BORRAR REQUEST");
+          console.log(item.id);
+          await deleteDoc(doc(db, "requests", item.id));
+        });
+      });
+
+
       await deleteDoc(doc(db, "objetos", id));
-      // await deleteDoc(doc(db, "favorites", idObjeto));
-      // await deleteDoc(doc(db, "request", idObjeto));
+
     } catch (error) {
       console.log("error");
     }
@@ -89,7 +142,7 @@ export function MyObjects(props) {
                       name="pencil-outline"
                       size={35}
                       containerStyle={styles.edit}
-                      onPress={console.log("editar1")}
+                    // onPress={console.log("editar1")}
                     />
 
                     <Icon
@@ -97,7 +150,7 @@ export function MyObjects(props) {
                       name="delete-outline"
                       size={35}
                       containerStyle={styles.delete}
-                      onPress={console.log("delete1")}
+                      onPress={() => { onRemoveObject(objeto.id) }}
                     />
                   </View>
                 </View>

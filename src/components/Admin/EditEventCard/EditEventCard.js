@@ -4,13 +4,31 @@ import { Input } from "react-native-elements";
 import { styles } from "./EditEventCard.styles";
 import { MapForm } from "../../Donation/MapForm";
 import { Picker } from "@react-native-picker/picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
+
 
 export function EditEventCard(props) {
   const { formik } = props;
 
   const [showMap, setShowMap] = useState(false);
-
+  const [date, setDate] = useState(new Date(Date.now()));
+  const [isPickerShow, setIsPickerShow] = useState(false);
   const [selectObjecto, setSelectObjecto] = useState();
+
+  const showPicker = () => {
+    setIsPickerShow(true);
+  };
+
+  const onChange = (event, value) => {
+    setIsPickerShow(false);
+    setDate(value);
+    formik.setFieldValue("fecha", value.toLocaleDateString("en-GB"));
+    if (Platform.OS === "android") {
+      setIsPickerShow(false);
+    }
+  };
+
+
 
   const onOpenCloseMap = () => setShowMap((prevState) => !prevState);
 
@@ -31,6 +49,40 @@ export function EditEventCard(props) {
           onChangeText={(text) => formik.setFieldValue("descripcion", text)}
           errorMessage={formik.errors.descripcion}
         />
+        <Input
+          placeholder="Organizador"
+          value={formik.values.organizador}
+          multiline={true}
+          onChangeText={(text) => formik.setFieldValue("organizador", text)}
+          errorMessage={formik.errors.organizador}
+        />
+
+
+        <Input
+          placeholder="Fecha"
+          value={date.toLocaleDateString("en-GB")}
+          disabled={true}
+          rightIcon={{
+            type: "material-community",
+            name: "calendar",
+            color: "#62bd60",
+            onPress: showPicker,
+          }}
+          errorMessage={formik.errors.fecha}
+        />
+
+        {/* The date picker */}
+        {isPickerShow && (
+          <DateTimePicker
+            value={date}
+            mode={"date"}
+            minimumDate={date}
+            display={Platform.OS === "ios" ? "spinner" : "default"}
+            onChange={onChange}
+            style={styles.datePicker}
+          />
+        )}
+
         <Input
           placeholder={
             formik.values.ubicacion
