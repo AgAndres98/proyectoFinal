@@ -20,8 +20,6 @@ export function CreateEventCard(props) {
   };
 
   const onChange = (event, value) => {
-    let fecha = new Date(nuevaData.fecha);
-    console.log(value.format());
     setIsPickerShow(false);
     setDate(value);
     formik.setFieldValue("fecha", value.toLocaleDateString("en-GB"));

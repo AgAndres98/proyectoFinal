@@ -35,11 +35,13 @@ export function AddEventScreen() {
         await setDoc(doc(db, "eventos", nuevaData.id), nuevaData);
 
         resetForm(initialValues);
+
         Toast.show({
           type: "success",
           position: "bottom",
           text1: "Evento añadido",
         });
+
         navigation.navigate(screen.calendar.tab);
       } catch (error) {
         console.log(error);
