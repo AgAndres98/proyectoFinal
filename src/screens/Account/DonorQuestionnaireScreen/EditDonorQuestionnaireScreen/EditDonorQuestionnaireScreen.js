@@ -27,9 +27,12 @@ import {
 } from "./EditDonorQuestionnaireScreen.data";
 
 export function EditDonorQuestionnaireScreen() {
-    const uid = getAuth().currentUser;
+  const uid = getAuth().currentUser;
   useEffect(() => {
-    const q = query(collection(db, "cuestionarioDonador"), where("id", "==", uid.uid));
+    const q = query(
+      collection(db, "cuestionarioDonador"),
+      where("id", "==", uid.uid)
+    );
 
     onSnapshot(q, async (snapshot) => {
       for await (const item of snapshot.docs) {
@@ -74,14 +77,15 @@ export function EditDonorQuestionnaireScreen() {
     <View style={styles.screen}>
       <KeyboardAwareScrollView style={styles.content}>
         <DonorQuestionnaireForm formik={formik} />
-
-        <Button
-          title="Modificar"
-          containerStyle={styles.btnContainer}
-          buttonStyle={styles.btn}
-          onPress={formik.handleSubmit}
-          loading={formik.isSubmitting}
-        />
+        <View style={styles.contentBtn}>
+          <Button
+            title="Modificar"
+            containerStyle={styles.btnContainer}
+            buttonStyle={styles.btn}
+            onPress={formik.handleSubmit}
+            loading={formik.isSubmitting}
+          />
+        </View>
       </KeyboardAwareScrollView>
     </View>
   );

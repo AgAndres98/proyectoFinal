@@ -55,8 +55,14 @@ export function DonationObjectCard(props) {
         >
           <Picker.Item label="Alimento" value="Alimento" />
           <Picker.Item label="Electrodoméstico" value="Electrodoméstico" />
-          <Picker.Item label="Objeto" value="Objeto" />
+          <Picker.Item label="Herramientas" value="Herramientas" />
+          <Picker.Item label="Juguetes" value="Juguetes" />
+          <Picker.Item label="Libros" value="Libros" />
+          <Picker.Item label="Materiales" value="Materiales" />
+          <Picker.Item label="Muebles" value="Muebles" />
+          <Picker.Item label="Objetos" value="Objetos" />
           <Picker.Item label="Ropa" value="Ropa" />
+          <Picker.Item label="Salud" value="Salud" />
           <Picker.Item label="Servicio" value="Servicio" />
           <Picker.Item label="Utiles escolares" value="Utiles escolares" />
           <Picker.Item label="Otro" value="Otro" />

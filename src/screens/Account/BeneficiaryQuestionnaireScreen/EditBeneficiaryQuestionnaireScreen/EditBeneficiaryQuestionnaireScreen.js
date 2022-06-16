@@ -17,7 +17,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../../utils";
 import { getAuth } from "firebase/auth";
-
+import Toast from "react-native-toast-message";
 
 import {
   initialValues,
@@ -30,7 +30,10 @@ export function EditBeneficiaryQuestionnaireScreen() {
   const uid = getAuth().currentUser;
 
   useEffect(() => {
-    const q = query(collection(db, "cuestionarioBeneficiario"), where("id", "==", uid.uid));
+    const q = query(
+      collection(db, "cuestionarioBeneficiario"),
+      where("id", "==", uid.uid)
+    );
 
     onSnapshot(q, async (snapshot) => {
       for await (const item of snapshot.docs) {
@@ -66,12 +69,19 @@ export function EditBeneficiaryQuestionnaireScreen() {
         const nuevaData = formValues;
 
         //await setDoc(doc(db, "cuestionarioBeneficiario", nuevaData.id), nuevaData);
-        await updateDoc(doc(db, "cuestionarioBeneficiario", uid.uid), nuevaData);
+        await updateDoc(
+          doc(db, "cuestionarioBeneficiario", uid.uid),
+          nuevaData
+        );
         await updateDoc(doc(db, "datosPersonales", uid.uid), {
           cuestionarioBeneficiario: nuevaData,
         });
-
-        navigation.navigate(screen.account.account);
+        Toast.show({
+          type: "success",
+          position: "bottom",
+          text1: "Cambio de formulario exitoso",
+        });
+        navigation.navigate(screen.account.tab);
       } catch (error) {
         console.log(error);
       }
@@ -83,14 +93,15 @@ export function EditBeneficiaryQuestionnaireScreen() {
       <KeyboardAwareScrollView>
         <View style={styles.content}>
           <BeneficiaryQuestionnaireForm formik={formik} />
-
-          <Button
-            title="Modificar"
-            containerStyle={styles.btnContainer}
-            buttonStyle={styles.btn}
-            onPress={formik.handleSubmit}
-            loading={formik.isSubmitting}
-          />
+          <View style={styles.contentBtn}>
+            <Button
+              title="Modificar"
+              containerStyle={styles.btnContainer}
+              buttonStyle={styles.btn}
+              onPress={formik.handleSubmit}
+              loading={formik.isSubmitting}
+            />
+          </View>
         </View>
       </KeyboardAwareScrollView>
     </View>
