@@ -29,7 +29,6 @@ export function MyObjectsScreen(props) {
       setObjects(snapshot.docs);
     });
   }, []);
-
   if (size(objects) === 0)
     return <NotFound texto={"No tienes ninguna publicación"} />;
 
