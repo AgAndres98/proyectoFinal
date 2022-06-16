@@ -30,6 +30,7 @@ export function AddEventScreen() {
         nuevaData.idUsuario = uid.uid;
         nuevaData.id = uuid();
         nuevaData.createdAt = new Date();
+        nuevaData.fechaDate = new Date(nuevaData.fecha + " 23:59:59");
 
         await setDoc(doc(db, "eventos", nuevaData.id), nuevaData);
 
@@ -39,7 +40,7 @@ export function AddEventScreen() {
           position: "bottom",
           text1: "Evento añadido",
         });
-        navigation.navigate(screen.calendario.tab);
+        navigation.navigate(screen.calendar.tab);
       } catch (error) {
         console.log(error);
       }

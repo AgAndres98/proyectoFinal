@@ -74,7 +74,7 @@ export function EditEventCard(props) {
           <DateTimePicker
             value={date}
             mode={"date"}
-            minimumDate={date}
+            minimumDate={new Date()}
             display={Platform.OS === "ios" ? "spinner" : "default"}
             onChange={onChange}
             style={styles.datePicker}

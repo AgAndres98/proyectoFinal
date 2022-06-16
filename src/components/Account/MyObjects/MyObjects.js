@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, FlatList, Switch } from "react-native";
+import { View, FlatList } from "react-native";
 import { Image, Text, Icon, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../utils";
 import { styles } from "./MyObjects.styles";
 import {
   doc,
-  updateDoc,
   collection,
   query,
   where,
@@ -14,31 +13,11 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { forEach } from "lodash";
-import { async } from "@firebase/util";
+import { SwitchBtn } from "../SwitchBtn";
 
 export function MyObjects(props) {
   const { objects } = props;
   const navigation = useNavigation();
-  const [favorites, setFavorites] = useState(null);
-  const [request, setRequest] = useState(null);
-  const [isEnabled, setIsEnabled] = useState(true);
-  // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-
-  const toggleSwitch = (idObjeto, activa) => {
-    try {
-      if (activa == true) {
-        setIsEnabled(false);
-      }
-      if (activa == false) {
-        setIsEnabled(true);
-      }
-      updateDoc(doc(db, "objetos", idObjeto), {
-        activa: isEnabled ? true : false,
-      });
-    } catch (error) {
-      console.log("error");
-    }
-  };
 
   const goToRequest = (idObjeto, tipoObjeto) => {
     navigation.navigate(screen.account.userRequests, {
@@ -102,21 +81,7 @@ export function MyObjects(props) {
                 <View style={styles.container}>
                   <Text style={styles.name}>{objeto.titulo}</Text>
 
-                  <View style={styles.switchView}>
-                    <Text style={styles.active}>
-                      {objeto.activa ? "Activa" : "Inactiva"}
-                    </Text>
-                    <Switch
-                      trackColor={{ false: "#767577", true: "#767577" }}
-                      thumbColor={objeto.activa ? "#62bd60" : "#f4f3f4"}
-                      ios_backgroundColor="#62bd60"
-                      onValueChange={() => {
-                        toggleSwitch(objeto.id, objeto.activa);
-                      }}
-                      value={objeto.activa}
-                      style={styles.switch}
-                    />
-                  </View>
+                  <SwitchBtn activa={objeto.activa} idObjeto={objeto.id} />
 
                   <View style={styles.descripcionContainer}>
                     <Text style={styles.info}>{objeto.descripcion}</Text>

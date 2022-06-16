@@ -20,6 +20,8 @@ export function CreateEventCard(props) {
   };
 
   const onChange = (event, value) => {
+    let fecha = new Date(nuevaData.fecha);
+    console.log(value.format());
     setIsPickerShow(false);
     setDate(value);
     formik.setFieldValue("fecha", value.toLocaleDateString("en-GB"));
@@ -106,7 +108,7 @@ export function CreateEventCard(props) {
           <DateTimePicker
             value={date}
             mode={"date"}
-            minimumDate={date}
+            minimumDate={new Date()}
             display={Platform.OS === "ios" ? "spinner" : "default"}
             onChange={onChange}
             style={styles.datePicker}
