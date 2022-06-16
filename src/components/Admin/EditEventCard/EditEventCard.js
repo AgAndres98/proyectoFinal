@@ -57,6 +57,21 @@ export function EditEventCard(props) {
           errorMessage={formik.errors.organizador}
         />
 
+        <Input
+          placeholder="Email"
+          value={formik.values.email}
+          multiline={true}
+          onChangeText={(text) => formik.setFieldValue("email", text)}
+          errorMessage={formik.errors.email}
+        />
+
+        <Input
+          placeholder="Número de celular"
+          keyboardType="number-pad"
+          onChangeText={(text) => formik.setFieldValue("telefono", text)}
+          errorMessage={formik.errors.telefono}
+        />
+
 
         <Input
           placeholder="Fecha"

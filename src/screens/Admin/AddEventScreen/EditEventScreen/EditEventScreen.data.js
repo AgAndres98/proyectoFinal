@@ -2,12 +2,16 @@ import * as Yup from "yup";
 
 export function initialValues(dato) {
     return {
-        titulo: null,
-        descripcion: null,
+        titulo: "",
+        organizador: "",
+        descripcion: "",
+        telefono: "",
+        email: "",
+        direccion: "",
         ubicacion: null,
+        fecha: "",
         fotos: [],
-        activa: null,
-        idUsuario: null,
+        idUsuario: "",
     };
 }
 
@@ -16,10 +20,21 @@ export function validationSchem() {
         titulo: Yup.string()
             .required("Campo obligatorio")
             .max(30, "Tiene más de 30 caracteres"),
+        organizador: Yup.string()
+            .required("Campo obligatorio")
+            .max(30, "Tiene más de 30 caracteres"),
         descripcion: Yup.string()
             .required("Campo obligatorio")
             .max(140, "Tiene más de 140 caracteres"),
+        telefono: Yup.string().required("Campo obligatorio"),
+        email: Yup.string()
+            .email("El email no es válido")
+            .required("El email es obligatorio"),
+        direccion: Yup.string()
+            .required("Campo obligatorio")
+            .max(140, "Tiene más de 140 caracteres"),
         ubicacion: Yup.object().required("La localización es obligatoria"),
+        fecha: Yup.object().required("La fecha es obligatoria"),
         fotos: Yup.array()
             .min(1, "Se requiere una foto como minimo")
             .required("La foto es requerida"),

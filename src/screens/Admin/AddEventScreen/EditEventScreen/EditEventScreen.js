@@ -32,10 +32,12 @@ export function EditEventScreen(props) {
 
                 const dato = docSnap.data();
 
-                formik.setFieldValue("organizador", dato.organizador);
+
                 formik.setFieldValue("titulo", dato.titulo);
                 formik.setFieldValue("descripcion", dato.descripcion);
                 formik.setFieldValue("organizador", dato.organizador);
+                formik.setFieldValue("email", dato.email);
+                formik.setFieldValue("telefono", dato.telefono);
                 formik.setFieldValue("ubicacion", dato.ubicacion);
                 formik.setFieldValue("fotos", dato.fotos);
                 formik.setFieldValue("id", dato.id);
@@ -57,7 +59,7 @@ export function EditEventScreen(props) {
 
                 await updateDoc(doc(db, "eventos", id), nuevaData);
 
-                navigation.navigate(screen.objects.tab);
+                navigation.navigate(screen.calendar.tab);
             } catch (error) {
                 console.log(error);
             }
