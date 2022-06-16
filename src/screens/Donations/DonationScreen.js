@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../utils";
 import { getAuth } from "firebase/auth";
 import { v4 as uuid } from "uuid";
+import Toast from "react-native-toast-message";
 
 import { initialValues, validationSchem } from "./DonationScreen.data";
 
@@ -32,7 +33,13 @@ export function DonationScreen() {
         nuevaData.createdAt = new Date();
 
         await setDoc(doc(db, "objetos", nuevaData.id), nuevaData);
-
+        resetForm(initialValues);
+        Toast.show({
+          type: "success",
+          position: "bottom",
+          text1: "Objeto añadido",
+          text2: "¡Muchas gracias por donar!",
+        });
         navigation.navigate(screen.objects.tab);
       } catch (error) {
         console.log(error);
@@ -40,6 +47,11 @@ export function DonationScreen() {
     },
   });
 
+  const resetForm = (initialValues) => {
+    try {
+      formik.resetForm(initialValues);
+    } catch (error) {}
+  };
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.screen}>
       <Text style={styles.titulo}>¡Doná dinero!</Text>

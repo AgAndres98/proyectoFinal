@@ -29,4 +29,8 @@ export const styles = StyleSheet.create({
     color: "#828282",
     fontSize: 15,
   },
+  mapa: {
+    marginVertical: 200,
+    margin: 100,
+  },
 });

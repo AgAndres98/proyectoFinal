@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Input } from "react-native-elements";
 import { styles } from "./DonationObjectCard.styles";
 import { MapForm } from "../MapForm";
@@ -31,20 +31,24 @@ export function DonationObjectCard(props) {
           onChangeText={(text) => formik.setFieldValue("descripcion", text)}
           errorMessage={formik.errors.descripcion}
         />
-        <Input
-          placeholder={
-            formik.values.ubicacion
-              ? "Ubicación registrada"
-              : "Ingrese ubicación"
-          }
-          editable={false}
-          rightIcon={{
-            type: "material-community",
-            name: "map-marker-radius",
-            color: getColorIconoMapa(formik),
-            onPress: onOpenCloseMap,
-          }}
-        />
+        <TouchableOpacity onPress={onOpenCloseMap}>
+          <Input
+            placeholder={
+              formik.values.ubicacion
+                ? "Ubicación registrada"
+                : "Ingrese ubicación"
+            }
+            onPress={onOpenCloseMap}
+            editable={false}
+            rightIcon={{
+              type: "material-community",
+              name: "map-marker-radius",
+              color: getColorIconoMapa(formik),
+              onPress: onOpenCloseMap,
+            }}
+          />
+        </TouchableOpacity>
+
         <Text style={styles.textoSelect}>Elegir tipo de objeto a publicar</Text>
         <Picker
           selectedValue={formik.values.tipo}

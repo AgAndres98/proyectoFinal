@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     borderRadius: 50,
     padding: 15,
     top: -30,
-    left: 25,
+    right: 25,
   },
   direccion: {
     fontSize: 18,
