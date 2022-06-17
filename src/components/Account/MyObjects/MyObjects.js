@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, Alert } from "react-native";
 import { Image, Text, Icon, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../utils";
@@ -18,6 +18,25 @@ import { SwitchBtn } from "../SwitchBtn";
 export function MyObjects(props) {
   const { objects } = props;
   const navigation = useNavigation();
+
+  const buttonDelete = (idObjeto) =>
+    Alert.alert(
+      "Eliminar Objeto",
+      "Esta seguro que desea eliminar este objeto",
+      [
+        {
+          text: "Si",
+          onPress: () => onRemoveObject(idObjeto),
+          style: "destructive"
+        },
+        {
+          text: "No",
+          onPress: () => console.log("Cancelar"),
+          style: "cancel"
+        }
+      ],
+      { cancelable: true }
+    );
 
   const goToRequest = (idObjeto, tipoObjeto) => {
     navigation.navigate(screen.account.userRequests, {
@@ -93,7 +112,7 @@ export function MyObjects(props) {
                       name="pencil-outline"
                       size={35}
                       containerStyle={styles.edit}
-                      // onPress={console.log("editar1")}
+                    // onPress={console.log("editar1")}
                     />
 
                     <Icon
@@ -102,7 +121,7 @@ export function MyObjects(props) {
                       size={35}
                       containerStyle={styles.delete}
                       onPress={() => {
-                        onRemoveObject(objeto.id);
+                        buttonDelete(objeto.id);
                       }}
                     />
                   </View>
