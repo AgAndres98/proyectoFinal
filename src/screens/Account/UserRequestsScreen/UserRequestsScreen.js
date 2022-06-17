@@ -21,16 +21,9 @@ export function UserRequestsScreen(props) {
 
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
 
-  const listaSolicitudesOrdenadas = [];
-
-  const arrayQueNoCumplen = [];
-
-  const arrayNoTienenCuestionario = [];
+  const [formularioDonante, setFormularioDonante] = useState();
 
   const [dato, setDato] = useState();
-  const tipo2 = "Ropa";
-
-  const idObjeto2 = "51a3fe77-cacd-46aa-b9b9-a1eb27b62fff";
 
   let arrayOrdenado = [];
 
@@ -39,14 +32,22 @@ export function UserRequestsScreen(props) {
   useEffect(() => {
     const auth = getAuth();
     getSolicitudes();
+    getFormularioDonante(auth);
+
     ordenamientoPorMacheo();
 
-    arrayOrdenado = listaSolicitudesOrdenadas.concat(
-      arrayQueNoCumplen,
-      arrayNoTienenCuestionario
-    );
-
+    arrayOrdenado.sort(function (a, b) {
+      if (a.puntuacion < b.puntuacion) {
+        return 1;
+      }
+      if (a.puntuacion > b.puntuacion) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
     setDato(arrayOrdenado);
+    console.log(arrayOrdenado);
   }, [listaSolicitudes]);
 
   const eliminarRepetidos = (a, key) => {
@@ -59,17 +60,120 @@ export function UserRequestsScreen(props) {
 
   const ordenamientoPorMacheo = () => {
     forEach(listaSolicitudes, async (item) => {
+      item.puntuacion = 0;
       if (item.datosPersonales.cuestionarioBeneficiario.length == 0) {
-        arrayNoTienenCuestionario.push(item);
+        arrayOrdenado.push(item);
       } else {
-        if (
-          route.params.tipoObjeto == "Ropa" &&
-          item.datosPersonales.cuestionarioBeneficiario.ropa == true
-        ) {
-          listaSolicitudesOrdenadas.push(item);
-        } else {
-          arrayQueNoCumplen.push(item);
+        switch (route.params.tipoObjeto) {
+          case "Alimento":
+            item.datosPersonales.cuestionarioBeneficiario.alimentos == true
+              ? (item.puntuacion += 20)
+              : "";
+            break;
+          case "Electrodoméstico":
+            item.datosPersonales.cuestionarioBeneficiario.electrodomesticos ==
+            true
+              ? (item.puntuacion += 20)
+              : "";
+            break;
+          case "Herramientas":
+            item.datosPersonales.cuestionarioBeneficiario.herramientas == true
+              ? (item.puntuacion += 20)
+              : "";
+            break;
+          case "Juguetes":
+            item.datosPersonales.cuestionarioBeneficiario.juguetes == true
+              ? (item.puntuacion += 20)
+              : "";
+            break;
+          case "Libros":
+            item.datosPersonales.cuestionarioBeneficiario.libros == true
+              ? (item.puntuacion += 20)
+              : "";
+            break;
+          case "Materiales":
+            item.datosPersonales.cuestionarioBeneficiario.materiales == true
+              ? (item.puntuacion += 20)
+              : "";
+            break;
+          case "Muebles":
+            item.datosPersonales.cuestionarioBeneficiario.muebles == true
+              ? (item.puntuacion += 20)
+              : "";
+            break;
+          case "Objetos":
+            item.datosPersonales.cuestionarioBeneficiario.objetos == true
+              ? (item.puntuacion += 20)
+              : "";
+            break;
+          case "Ropa":
+            item.datosPersonales.cuestionarioBeneficiario.ropa == true
+              ? (item.puntuacion += 20)
+              : "";
+            break;
+          case "Salud":
+            item.datosPersonales.cuestionarioBeneficiario.salud == true
+              ? (item.puntuacion += 20)
+              : "";
+            break;
+          case "Servicio":
+            item.datosPersonales.cuestionarioBeneficiario.servicio == true
+              ? (item.puntuacion += 20)
+              : "";
+            break;
+          case "Utiles escolares":
+            item.datosPersonales.cuestionarioBeneficiario.utiles == true
+              ? (item.puntuacion += 20)
+              : "";
+            break;
+          case "Otro":
+            item.datosPersonales.cuestionarioBeneficiario.otros == true
+              ? (item.puntuacion += 20)
+              : "";
+            break;
         }
+        if (formularioDonante != null) {
+          switch (item.datosPersonales.cuestionarioBeneficiario.motivo) {
+            case "incendio":
+              formularioDonante.incendios != "0" || formularioDonante.incendios != "" ? item.puntuacion += (formularioDonante.incendios*3) : "";
+              break;
+            case "tsunami":
+              formularioDonante.tsunami != "0" || formularioDonante.tsunami != "" ? item.puntuacion += (formularioDonante.tsunami*3) : "";
+              break;
+            case "inundacion":
+              formularioDonante.inundaciones != "0" || formularioDonante.inundaciones != "" ? item.puntuacion += (formularioDonante.inundaciones*3) : "";
+              break;
+            case "gente":
+              formularioDonante.gente != "0" || formularioDonante.gente != "" ? item.puntuacion += (formularioDonante.gente*3) : "";
+              break;
+          }
+          if(item.datosPersonales.cuestionarioBeneficiario.ayuda == "familia"){
+            formularioDonante.grupoFamiliar == "nada" || formularioDonante.grupoFamiliar == "familia" ? item.puntuacion += 5 : "";
+          }
+          if(item.datosPersonales.cuestionarioBeneficiario.ayuda == "yo"){
+            formularioDonante.grupoFamiliar == "nada" || formularioDonante.grupoFamiliar == "una" ? item.puntuacion += 5 : "";
+          }
+        }
+        arrayOrdenado.push(item);
+      }
+    });
+  };
+
+  //este metodo funcionaaaa
+  const getFormularioDonante = (auth) => {
+    const r = query(
+      collection(db, "cuestionarioDonador"),
+      where("id", "==", auth.currentUser.uid)
+    );
+
+    onSnapshot(r, async (snapshot) => {
+      for await (const item of snapshot.docs) {
+        const data = item.data();
+        const docRef = doc(db, "cuestionarioDonador", data.id);
+        const docSnap = await getDoc(docRef);
+        const newData = docSnap.data();
+        newData.id = data.id;
+        setFormularioDonante(newData);
       }
     });
   };
@@ -129,8 +233,6 @@ export function UserRequestsScreen(props) {
           : "";
       }
     });
-
-    setDato(arrayOrdenado);
   };
 
   return (
