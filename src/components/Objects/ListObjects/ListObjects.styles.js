@@ -1,6 +1,16 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  buscar: {
+    width: "90%",
+    height: 30,
+    borderWidth: 1,
+    borderColor: "#62bd60",
+    borderRadius: 10,
+    backgroundColor: "white",
+    marginHorizontal: 20,
+    marginVertical: 10,
+  },
   objeto: {
     flexDirection: "row",
     marginVertical: 10,

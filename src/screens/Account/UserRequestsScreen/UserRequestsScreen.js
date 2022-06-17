@@ -19,8 +19,6 @@ import { forEach } from "lodash";
 export function UserRequestsScreen(props) {
   const { idObjeto, tipo, route } = props;
 
-  console.log(route.params);
-
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
 
   const listaSolicitudesOrdenadas = [];
@@ -36,16 +34,18 @@ export function UserRequestsScreen(props) {
 
   let arrayOrdenado = [];
 
+  const [iguales, setIguales] = useState(false);
+
   useEffect(() => {
     const auth = getAuth();
     getSolicitudes();
-
     ordenamientoPorMacheo();
 
     arrayOrdenado = listaSolicitudesOrdenadas.concat(
       arrayQueNoCumplen,
       arrayNoTienenCuestionario
     );
+
     setDato(arrayOrdenado);
   }, [listaSolicitudes]);
 
@@ -63,7 +63,7 @@ export function UserRequestsScreen(props) {
         arrayNoTienenCuestionario.push(item);
       } else {
         if (
-          tipo2 == "Ropa" &&
+          route.params.tipoObjeto == "Ropa" &&
           item.datosPersonales.cuestionarioBeneficiario.ropa == true
         ) {
           listaSolicitudesOrdenadas.push(item);
@@ -78,7 +78,7 @@ export function UserRequestsScreen(props) {
   const getSolicitudes = () => {
     const r = query(
       collection(db, "requests"),
-      where("idObjeto", "==", idObjeto2)
+      where("idObjeto", "==", route.params.idObjeto)
     );
 
     onSnapshot(r, async (snapshot) => {
@@ -133,11 +133,9 @@ export function UserRequestsScreen(props) {
     setDato(arrayOrdenado);
   };
 
-  if (!dato) return <LoadingModal show text="Cargando" />;
-
   return (
     <View style={styles.content}>
-      {!dato ? (
+      {dato == undefined ? (
         <LoadingModal show text="Cargando" />
       ) : (
         <UserRequests dato={dato} />
