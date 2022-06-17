@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  FlatList,
-  TouchableOpacity,
-  TextInput,
-  Icon,
-} from "react-native";
-import { Text, Image } from "react-native-elements";
+import { View, FlatList, TouchableOpacity, TextInput } from "react-native";
+import { Text, Image, Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./ListObjects.styles";
 import { screen } from "../../../utils/";
@@ -51,13 +45,23 @@ export function ListObjects(props) {
 
   return (
     <View>
-      <TextInput
-        style={styles.buscar}
-        onChangeText={(text) => searchFilterFunction(text)}
-        value={search}
-        underlineColorAndroid="transparent"
-        placeholder="Buscar objeto"
-      />
+      <View style={styles.buscar}>
+        <Icon
+          type="material-community"
+          name="magnify"
+          color="#c2c2c2"
+          size={30}
+          style={styles.searchIcon}
+        />
+        <TextInput
+          style={styles.inputStyle}
+          onChangeText={(text) => searchFilterFunction(text)}
+          value={search}
+          underlineColorAndroid="transparent"
+          placeholder="Buscar objeto"
+        />
+      </View>
+
       <FlatList
         data={objetosCompletos}
         keyExtractor={(item, index) => index.toString()}
