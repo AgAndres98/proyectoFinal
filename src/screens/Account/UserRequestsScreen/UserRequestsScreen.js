@@ -21,37 +21,6 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { size, forEach } from "lodash";
 
 export function UserRequestsScreen(props) {
-  /* const auth = getAuth();
-    
-    const [request, setRequest] = useState(null);
- 
-     useEffect(() => {
-         const q = query(
-             collection(db, "datosPersonales"),
-             where("idUsuario", "==", auth.currentUser.uid)
-         );
-
-         onSnapshot(q, (snapshot) => {
-             setRequest(snapshot.docs);
-         });
-     }, []);
-
-     
-    if (!request) return <LoadingModal show text="Cargando" />;
-   
-
-    return (
-        <View style={styles.content}>
-            {!request ? (
-                <LoadingModal show text="Cargando" />
-            ) : (
-                <UserRequests request={request} />
-            )}
-        </View>
-    );    
-
-   }  
-*/
 
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
 
@@ -65,17 +34,17 @@ export function UserRequestsScreen(props) {
 
   const arrayNoTienenCuestionario = [];
 
-  const [dato, setDato] = useState();
+  const [dato, setDato] = useState([]);
   const tipo = "Ropa";
 
-  const idObjeto = "51a3fe77-cacd-46aa-b9b9-a1eb27b62fff";
+  const idObjeto = "a48ebf00-ea9c-429e-b3e0-990a385642d4";
 
   let arrayOrdenado = [];
 
   useEffect(() => {
+
     const auth = getAuth();
     getSolicitudes();
-
     ordenamientoPorMacheo();
 
     arrayOrdenado = listaSolicitudesOrdenadas.concat(
@@ -83,7 +52,9 @@ export function UserRequestsScreen(props) {
       arrayNoTienenCuestionario
     );
     setDato(arrayOrdenado);
-  }, [listaSolicitudes]);
+}, [listaSolicitudes]);
+
+
 
   const eliminarRepetidos = (a, key) => {
     let seen = new Set();
@@ -95,6 +66,7 @@ export function UserRequestsScreen(props) {
 
   const ordenamientoPorMacheo = () => {
     forEach(listaSolicitudes, async (item) => {
+      console.log(item.datosPersonales.apellido);
       if (item.datosPersonales.cuestionarioBeneficiario.length == 0) {
         arrayNoTienenCuestionario.push(item);
       } else {
@@ -168,11 +140,9 @@ export function UserRequestsScreen(props) {
     setDato(arrayOrdenado);
   };
 
-  if (!dato) return <LoadingModal show text="Cargando" />;
-
   return (
     <View style={styles.content}>
-      {!dato ? (
+      {dato.length !== listaSolicitudes.length ? (
         <LoadingModal show text="Cargando" />
       ) : (
         <UserRequests dato={dato} />

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import { Icon } from "react-native-elements";
 import { Button } from "react-native-elements";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query, doc, getDoc } from "firebase/firestore";
 import { LoadingModal } from "../../../components/Shared";
 import { screen, db } from "../../../utils";
 import { styles } from "./ObjectsScreen.styles";
