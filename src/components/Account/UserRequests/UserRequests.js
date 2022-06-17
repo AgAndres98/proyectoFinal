@@ -5,8 +5,20 @@ import { useNavigation } from "@react-navigation/native";
 import { styles } from "./UserRequests.styles";
 import { getAuth } from "firebase/auth";
 import { Modal } from "../../Shared";
+import { db } from "../../../utils";
+import { size, forEach } from "lodash";
 
-
+import {
+  doc,
+  setDoc,
+  getDocs,
+  getDoc,
+  query,
+  where,
+  collection,
+  deleteDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 export function UserRequests(props) {
   const [userModal, setUserModal] = useState(false);
@@ -20,7 +32,7 @@ export function UserRequests(props) {
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  const selectComponent = () => { };
+  const selectComponent = () => {};
 
   // Create a reference to the file we want to download
 
@@ -30,11 +42,51 @@ export function UserRequests(props) {
   //     })</View>
   //     );
 
+  const acceptReq = async (dato) => {
+    try {
+      const response = await getRequest(dato);
+      forEach(response, async (item) => {
+        await updateDoc(doc(db, "requests", item.id), {
+          status: "Aceptado",
+        });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const declineReq = async (dato) => {
+    try {
+      const response = await getRequest(dato);
+      forEach(response, async (item) => {
+        await updateDoc(doc(db, "requests", item.id), {
+          status: "Rechazado",
+        });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getRequest = async (dato) => {
+    const q = query(
+      collection(db, "requests"),
+      where("idObjeto", "==", dato.idObjeto),
+      where("idUserReq", "==", dato.idUserReq)
+    );
+
+    const result = await getDocs(q);
+    return result.docs;
+  };
+
   return (
     <View style={styles.screen}>
       <FlatList
         data={dato}
         renderItem={({ item }) => {
+          console.log("idobjet " + item.idObjeto);
+          console.log("id userreq " + item.idUserReq);
+
           // const peticion = doc.item.data();
           //  require("../../../../assets/icon.png")
           return (
@@ -63,7 +115,9 @@ export function UserRequests(props) {
                     name="account-check-outline"
                     size={35}
                     containerStyle={styles.accept}
-                    onPress={console.log("editar")}
+                    onPress={() => {
+                      acceptReq(item);
+                    }}
                   />
 
                   <Icon
@@ -71,7 +125,9 @@ export function UserRequests(props) {
                     name="account-remove-outline"
                     size={35}
                     containerStyle={styles.delete}
-                    onPress={console.log("delete")}
+                    onPress={() => {
+                      declineReq(item);
+                    }}
                   />
 
                   <Icon

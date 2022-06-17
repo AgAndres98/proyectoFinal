@@ -35,8 +35,9 @@ export const styles = StyleSheet.create({
   name: {
     fontWeight: "bold",
     //right: 40,
-    textDecorationLine: "underline",
+    fontSize: 18,
   },
+
   iconContainer: {
     flexDirection: "row",
     alignItems: "center",

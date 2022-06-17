@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, FlatList, TouchableOpacity, TextInput } from "react-native";
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  TextInput,
+  ScrollView,
+} from "react-native";
 import { Text, Image, Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./ListObjects.styles";
@@ -44,7 +50,7 @@ export function ListObjects(props) {
   };
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View style={styles.buscar}>
         <Icon
           type="material-community"
