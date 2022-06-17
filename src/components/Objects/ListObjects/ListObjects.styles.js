@@ -59,4 +59,11 @@ export const styles = StyleSheet.create({
   searchIcon: {
     paddingLeft: 10,
   },
+  deleteContainer: {
+    paddingRight: 15,
+  },
+  deleteIcon: {
+    paddingRight: 35,
+    marginright: 30,
+  },
 });

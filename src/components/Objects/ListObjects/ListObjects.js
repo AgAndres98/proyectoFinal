@@ -60,6 +60,20 @@ export function ListObjects(props) {
           underlineColorAndroid="transparent"
           placeholder="Buscar objeto"
         />
+        {search != "" && (
+          <Icon
+            type="material-community"
+            name="close"
+            color="black"
+            size={20}
+            containerStyle={styles.deleteContainer}
+            style={styles.deleteIcon}
+            onPress={() => {
+              setObjetosCompletos(masterObjetosCompletos);
+              setSearch("");
+            }}
+          />
+        )}
       </View>
 
       <FlatList
