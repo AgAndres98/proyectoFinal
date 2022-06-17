@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 50,
     padding: 15,
-    top: -140,
+    top: -120,
     right: 30,
   },
   description: {
