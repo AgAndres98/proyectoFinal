@@ -12,7 +12,7 @@ export function UserRequests(props) {
   const [userModal, setUserModal] = useState(false);
 
   const { dato } = props;
-  const { idUsuario } = dato;
+  // const { idUsuario } = dato;
   const { photoURL } = getAuth();
 
   const navigation = useNavigation();

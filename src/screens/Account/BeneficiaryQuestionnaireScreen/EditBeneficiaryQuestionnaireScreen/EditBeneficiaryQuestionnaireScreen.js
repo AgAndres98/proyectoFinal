@@ -17,7 +17,6 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../../utils";
 import { getAuth } from "firebase/auth";
-import Toast from "react-native-toast-message";
 
 import {
   initialValues,
@@ -76,12 +75,8 @@ export function EditBeneficiaryQuestionnaireScreen() {
         await updateDoc(doc(db, "datosPersonales", uid.uid), {
           cuestionarioBeneficiario: nuevaData,
         });
-        Toast.show({
-          type: "success",
-          position: "bottom",
-          text1: "Cambio de formulario exitoso",
-        });
-        navigation.navigate(screen.account.tab);
+
+        navigation.navigate(screen.account.account);
       } catch (error) {
         console.log(error);
       }
@@ -93,15 +88,14 @@ export function EditBeneficiaryQuestionnaireScreen() {
       <KeyboardAwareScrollView>
         <View style={styles.content}>
           <BeneficiaryQuestionnaireForm formik={formik} />
-          <View style={styles.contentBtn}>
-            <Button
-              title="Modificar"
-              containerStyle={styles.btnContainer}
-              buttonStyle={styles.btn}
-              onPress={formik.handleSubmit}
-              loading={formik.isSubmitting}
-            />
-          </View>
+
+          <Button
+            title="Modificar"
+            containerStyle={styles.btnContainer}
+            buttonStyle={styles.btn}
+            onPress={formik.handleSubmit}
+            loading={formik.isSubmitting}
+          />
         </View>
       </KeyboardAwareScrollView>
     </View>
