@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, View, Text } from "react-native";
+import { View, Text } from "react-native";
 import { Button } from "react-native-elements";
 import { useFormik } from "formik";
 import { styles } from "./InformationPersonalScreen.styles";
@@ -10,7 +10,6 @@ import { useNavigation } from "@react-navigation/native";
 import {
   doc,
   setDoc,
-  updateDoc,
   query,
   collection,
   onSnapshot,
@@ -19,7 +18,6 @@ import {
 } from "firebase/firestore";
 import { db, screen } from "../../../utils";
 import { getAuth } from "firebase/auth";
-import { v4 as uuid } from "uuid";
 import Toast from "react-native-toast-message";
 
 import {

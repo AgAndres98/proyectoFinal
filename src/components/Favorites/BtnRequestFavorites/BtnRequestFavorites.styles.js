@@ -11,9 +11,11 @@ export const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   btnReq: {
+    borderRadius: 10,
     backgroundColor: "#62bd60",
   },
   btnCancel: {
+    borderRadius: 10,
     backgroundColor: "#BD2225",
   },
 });

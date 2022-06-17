@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, Dimensions, Text, View } from "react-native";
+import { ScrollView, Dimensions } from "react-native";
 import {
   doc,
   onSnapshot,
-  collection,
-  query,
-  orderBy,
 } from "firebase/firestore";
 import { styles } from "./ObjectScreen.styles";
 import { Carousel, Loading } from "../../../components/Shared";

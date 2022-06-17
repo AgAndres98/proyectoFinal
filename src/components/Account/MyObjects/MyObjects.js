@@ -1,22 +1,72 @@
-import React, { useState } from "react";
-import { View, FlatList, TouchableOpacity, Switch } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, FlatList } from "react-native";
 import { Image, Text, Icon, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../utils";
 import { styles } from "./MyObjects.styles";
-import { doc, deleteDoc } from "firebase/firestore";
-//import {UserRequest} from "../UserRequests/UserRequests";
+import {
+  doc,
+  collection,
+  query,
+  where,
+  getDocs,
+  deleteDoc,
+} from "firebase/firestore";
+import { forEach } from "lodash";
+import { SwitchBtn } from "../SwitchBtn";
 
 export function MyObjects(props) {
   const { objects } = props;
   const navigation = useNavigation();
 
-  const [isEnabled, setIsEnabled] = useState(true);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-
-  const goToRequest = () => {
-    navigation.navigate(screen.account.userRequests);
+  const goToRequest = (idObjeto, tipoObjeto) => {
+    navigation.navigate(screen.account.userRequests, {
+      idObjeto: idObjeto,
+      tipoObjeto: tipoObjeto,
+    });
   };
+
+  const getFavorites = async (idObjeto) => {
+    const q = query(
+      collection(db, "favorites"),
+      where("idObjeto", "==", idObjeto)
+    );
+
+    const result = await getDocs(q);
+    return result.docs;
+  };
+
+  const getRequested = async (idObjeto) => {
+    const q = query(
+      collection(db, "requests"),
+      where("idObjeto", "==", idObjeto)
+    );
+
+    const result = await getDocs(q);
+    return result.docs;
+  };
+
+  const onRemoveObject = async (id) => {
+    console.log(id);
+    try {
+      const favoritesCollection = await getFavorites(id);
+
+      forEach(favoritesCollection, async (item) => {
+        await deleteDoc(doc(db, "favorites", item.id));
+      });
+
+      const requestsCollection = await getRequested(id);
+
+      forEach(requestsCollection, async (item) => {
+        await deleteDoc(doc(db, "requests", item.id));
+      });
+
+      await deleteDoc(doc(db, "objetos", id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={styles.screen}>
       <FlatList
@@ -31,19 +81,7 @@ export function MyObjects(props) {
                 <View style={styles.container}>
                   <Text style={styles.name}>{objeto.titulo}</Text>
 
-                  <View style={styles.switchView}>
-                    <Text style={styles.active}>
-                      {isEnabled ? "Activa" : "Inactiva"}
-                    </Text>
-                    <Switch
-                      trackColor={{ false: "#767577", true: "#767577" }}
-                      thumbColor={isEnabled ? "#62bd60" : "#f4f3f4"}
-                      ios_backgroundColor="#62bd60"
-                      onValueChange={toggleSwitch}
-                      value={isEnabled}
-                      style={styles.switch}
-                    />
-                  </View>
+                  <SwitchBtn activa={objeto.activa} idObjeto={objeto.id} />
 
                   <View style={styles.descripcionContainer}>
                     <Text style={styles.info}>{objeto.descripcion}</Text>
@@ -55,7 +93,7 @@ export function MyObjects(props) {
                       name="pencil-outline"
                       size={35}
                       containerStyle={styles.edit}
-                      onPress={console.log("editar1")}
+                      // onPress={console.log("editar1")}
                     />
 
                     <Icon
@@ -63,7 +101,9 @@ export function MyObjects(props) {
                       name="delete-outline"
                       size={35}
                       containerStyle={styles.delete}
-                      onPress={console.log("delete1")}
+                      onPress={() => {
+                        onRemoveObject(objeto.id);
+                      }}
                     />
                   </View>
                 </View>
@@ -74,7 +114,9 @@ export function MyObjects(props) {
                   title={"Ver solicitudes"}
                   containerStyle={styles.btnContainer}
                   buttonStyle={styles.btnSolicitudes}
-                  onPress={goToRequest}
+                  onPress={() => {
+                    goToRequest(objeto.id, objeto.tipo);
+                  }}
                 />
               </View>
             </View>
@@ -84,17 +126,3 @@ export function MyObjects(props) {
     </View>
   );
 }
-/*         
- <Button
-                title={"Ver solicitudes"}
-                containerStyle={styles.btnContainer}
-                buttonStyle={styles.btnSolicitudes}
-                onPress={goToRequest}
-              />
-<Icon
-                  type="material-community"
-                  name="account-eye-outline"
-                  size={35}
-                  containerStyle={styles.eye}
-                  onPress={goToRequest}
-                /> */

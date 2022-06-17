@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { ScrollView, View } from "react-native";
 import { Button, Text } from "react-native-elements";
 import { useFormik } from "formik";
@@ -6,11 +6,9 @@ import { DonationObjectCard } from "../../../../components/Donation/DonationObje
 import { UploadImageForm } from "../../../../components/Donation/UploadImage/UploadImageForm";
 import { ImageObject } from "../../../../components/Donation/ImageObject/ImageObject";
 import { styles } from "./EditObjectScreen.styles";
-import { doc, setDoc, query, collection, where, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
+import { doc, query, collection, where, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../../utils";
-import { getAuth } from "firebase/auth";
-
 import { initialValues, validationSchem } from "./EditObjectScreen.data";
 
 const idObjeto = "8d0c77c6-0db9-4b05-9243-6286eb44af08";

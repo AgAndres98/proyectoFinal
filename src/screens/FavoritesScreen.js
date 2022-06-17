@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native";
 import { ObjectFavorites } from "../components/Favorites";
 import { NotFound } from "../components/Shared";
-
 import { getAuth } from "firebase/auth";
 import {
   doc,

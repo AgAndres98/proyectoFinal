@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-import { View, Text, Button } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Input } from "react-native-elements";
 import { styles } from "./InformationPersonalForm.styles";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -56,18 +55,21 @@ export function InformationPersonalForm(props) {
         onChangeText={(text) => formik.setFieldValue("dni", text)}
         errorMessage={formik.errors.dni}
       />
-      <Input
-        placeholder="Fecha de nacimiento"
-        value={date.toLocaleDateString("en-GB")}
-        disabled={true}
-        rightIcon={{
-          type: "material-community",
-          name: "calendar",
-          color: "#62bd60",
-          onPress: showPicker,
-        }}
-        errorMessage={formik.errors.fechaNacimiento}
-      />
+      <TouchableOpacity onPress={showPicker}>
+        <Input
+          placeholder="Fecha de nacimiento"
+          value={date.toLocaleDateString("en-GB")}
+          disabled={true}
+          rightIcon={{
+            type: "material-community",
+            name: "calendar",
+            color: "#62bd60",
+            onPress: showPicker,
+          }}
+          errorMessage={formik.errors.fechaNacimiento}
+        />
+      </TouchableOpacity>
+
       <Input
         placeholder="Número de celular"
         keyboardType="number-pad"

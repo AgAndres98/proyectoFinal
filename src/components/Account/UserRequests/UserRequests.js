@@ -1,21 +1,18 @@
 import React, { useState } from "react";
-import { View, FlatList, TouchableOpacity } from "react-native";
+import { View, FlatList } from "react-native";
 import { Text, Icon, Avatar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { db, screen } from "../../../utils";
 import { styles } from "./UserRequests.styles";
-import { doc, deleteDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { object } from "yup";
-import { Modal, UserDataModal } from "../../Shared";
-import { map } from "lodash";
+import { Modal } from "../../Shared";
+
 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 export function UserRequests(props) {
   const [userModal, setUserModal] = useState(false);
 
   const { dato } = props;
-  const { idUsuario } = dato;
+  // const { idUsuario } = dato;
   const { photoURL } = getAuth();
 
   const navigation = useNavigation();
@@ -23,7 +20,7 @@ export function UserRequests(props) {
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  const selectComponent = () => {};
+  const selectComponent = () => { };
 
   // Create a reference to the file we want to download
 

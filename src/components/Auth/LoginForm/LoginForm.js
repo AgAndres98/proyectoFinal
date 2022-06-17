@@ -28,7 +28,7 @@ export function LoginForm() {
           formValue.email,
           formValue.password
         );
-        navigation.navigate(screen.account.tab); // en un futuro llevar a
+        navigation.navigate(screen.objects.tab);
       } catch (error) {
         Toast.show({
           type: "error",

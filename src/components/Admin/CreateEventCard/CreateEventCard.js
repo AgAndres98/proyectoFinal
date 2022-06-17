@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-
-import { View, Text } from "react-native";
-import { Input, Icon, Button } from "react-native-elements";
+import { View, TouchableOpacity } from "react-native";
+import { Input } from "react-native-elements";
 import { styles } from "./CreateEventCard.styles";
 import { MapForm } from "../../Donation";
-import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 export function CreateEventCard(props) {
@@ -71,39 +69,44 @@ export function CreateEventCard(props) {
           onChangeText={(text) => formik.setFieldValue("direccion", text)}
           errorMessage={formik.errors.direccion}
         />
-        <Input
-          placeholder={
-            formik.values.ubicacion
-              ? "Ubicación registrada"
-              : "Ingrese ubicación"
-          }
-          editable={false}
-          rightIcon={{
-            type: "material-community",
-            name: "map-marker-radius",
-            color: getColorIconoMapa(formik),
-            onPress: onOpenCloseMap,
-          }}
-        />
+        <TouchableOpacity onPress={onOpenCloseMap}>
+          <Input
+            placeholder={
+              formik.values.ubicacion
+                ? "Ubicación registrada"
+                : "Ingrese ubicación"
+            }
+            editable={false}
+            rightIcon={{
+              type: "material-community",
+              name: "map-marker-radius",
+              color: getColorIconoMapa(formik),
+              onPress: onOpenCloseMap,
+            }}
+          />
+        </TouchableOpacity>
 
-        <Input
-          placeholder="Fecha"
-          value={date.toLocaleDateString("en-GB")}
-          disabled={true}
-          rightIcon={{
-            type: "material-community",
-            name: "calendar",
-            color: "#62bd60",
-            onPress: showPicker,
-          }}
-          errorMessage={formik.errors.fecha}
-        />
+        <TouchableOpacity onPress={showPicker}>
+          <Input
+            placeholder="Fecha"
+            value={date.toLocaleDateString("en-GB")}
+            disabled={true}
+            rightIcon={{
+              type: "material-community",
+              name: "calendar",
+              color: "#62bd60",
+              onPress: showPicker,
+            }}
+            errorMessage={formik.errors.fecha}
+          />
+        </TouchableOpacity>
 
         {/* The date picker */}
         {isPickerShow && (
           <DateTimePicker
             value={date}
             mode={"date"}
+            minimumDate={new Date()}
             display={Platform.OS === "ios" ? "spinner" : "default"}
             onChange={onChange}
             style={styles.datePicker}

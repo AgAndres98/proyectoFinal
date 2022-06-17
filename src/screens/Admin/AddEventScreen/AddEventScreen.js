@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../utils";
 import { getAuth } from "firebase/auth";
 import { v4 as uuid } from "uuid";
+import Toast from "react-native-toast-message";
 
 import { initialValues, validationSchem } from "./AddEventScreen.data";
 
@@ -29,15 +30,30 @@ export function AddEventScreen() {
         nuevaData.idUsuario = uid.uid;
         nuevaData.id = uuid();
         nuevaData.createdAt = new Date();
+        nuevaData.fechaDate = new Date(nuevaData.fecha + " 23:59:59");
 
         await setDoc(doc(db, "eventos", nuevaData.id), nuevaData);
 
-        navigation.navigate(screen.calendario.tab);
+        resetForm(initialValues);
+
+        Toast.show({
+          type: "success",
+          position: "bottom",
+          text1: "Evento añadido",
+        });
+
+        navigation.navigate(screen.calendar.tab);
       } catch (error) {
         console.log(error);
       }
     },
   });
+
+  const resetForm = (initialValues) => {
+    try {
+      formik.resetForm(initialValues);
+    } catch (error) {}
+  };
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.screen}>

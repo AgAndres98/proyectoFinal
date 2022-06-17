@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { Button } from "react-native-elements";
 import { getAuth } from "firebase/auth";
 import {
@@ -98,6 +98,7 @@ export function BtnRequestFavorites(props) {
       idUsuario,
       idUserReq: auth.currentUser.uid,
       datosPersonales: dato,
+      status: "Pendiente",
     };
     await setDoc(doc(db, "requests", idRequest), data);
   };

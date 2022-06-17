@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native"
+import { View } from "react-native"
 import { Image } from "react-native-elements"
 import { styles } from "./ImageObject.styles"
 
@@ -12,7 +12,7 @@ export function ImageObject(props) {
     return (
         <View style={styles.content} >
             <Image
-                source={primeraImagen ? {uri: primeraImagen} : require("../../../../assets/no-hay-imagen.png")}
+                source={primeraImagen ? { uri: primeraImagen } : require("../../../../assets/no-hay-imagen.png")}
                 style={styles.image}
             />
         </View>

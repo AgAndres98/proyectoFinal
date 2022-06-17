@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { ListItem, Icon, Text } from "react-native-elements";
+import { ListItem, Icon } from "react-native-elements";
 import { map } from "lodash";
 import { Modal } from "../../components/Shared";
 import { ChangeEmailForm } from "./ChangeEmailForm";
 import { ChangePasswordForm } from "./ChangePasswordForm";
-import { MyObjects } from "./MyObjects/MyObjects";
 import { useNavigation } from "@react-navigation/native";
-import { db, screen } from "./../../utils";
+import { screen } from "./../../utils";
+import { getAuth } from "firebase/auth";
 
 export function AccountOptions(props) {
   const { onReload } = props;
@@ -15,6 +15,8 @@ export function AccountOptions(props) {
 
   const [showModal, setShowModal] = useState(false);
   const [renderComponent, setRenderComponent] = useState(null);
+
+  const auth = getAuth();
 
   const onCloseOpenModal = () => setShowModal((prevState) => !prevState);
 
@@ -35,6 +37,10 @@ export function AccountOptions(props) {
       navigation.navigate(screen.account.myObjects);
     }
 
+    if (key === "myEvents") {
+      navigation.navigate(screen.account.myEvents);
+    }
+
     if (key === "editDonnor") {
       navigation.navigate(screen.account.editDonnor);
     }
@@ -43,7 +49,12 @@ export function AccountOptions(props) {
       navigation.navigate(screen.account.editBeneficiary);
     }
   };
-  const menuOptions = getMenuOptions(selectedComponent);
+
+  let menuOptions = getMenuOptions(selectedComponent);
+
+  if (auth.currentUser.email == "exporeact.ayudar@gmail.com") {
+    menuOptions = getMenuOptionsAdmin(selectedComponent);
+  }
   return (
     <View>
       {map(menuOptions, (menu, index) => (
@@ -102,6 +113,39 @@ function getMenuOptions(selectedComponent) {
       iconNameRight: "arrow-right",
       iconColorRight: "#62bd60",
       onPress: () => selectedComponent("editDonnor"),
+    },
+    /*{
+      title: "Mis eventos",
+      iconType: "material-community",
+      iconNameRight: "arrow-right",
+      iconColorRight: "#62bd60",
+      onPress: () => selectedComponent("myEvents"),
+    },*/
+  ];
+}
+//auth.currentUser.email == "exporeact.ayudar@gmail.com"
+function getMenuOptionsAdmin(selectedComponent) {
+  return [
+    {
+      title: "Cambiar email",
+      iconType: "material-community",
+      iconNameRight: "arrow-right",
+      iconColorRight: "#62bd60",
+      onPress: () => selectedComponent("email"),
+    },
+    {
+      title: "Cambiar contraseña",
+      iconType: "material-community",
+      iconNameRight: "arrow-right",
+      iconColorRight: "#62bd60",
+      onPress: () => selectedComponent("password"),
+    },
+    {
+      title: "Mis eventos",
+      iconType: "material-community",
+      iconNameRight: "arrow-right",
+      iconColorRight: "#62bd60",
+      onPress: () => selectedComponent("myEvents"),
     },
   ];
 }

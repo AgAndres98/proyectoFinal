@@ -1,32 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
-import { Text, Image } from "react-native-elements";
 import { getAuth } from "firebase/auth";
 import {
   doc,
-  setDoc,
   getDoc,
-  getDocs,
   query,
   where,
   collection,
   onSnapshot,
 } from "firebase/firestore";
-
 import { db } from "../../../utils";
 import { LoadingModal } from "../../../components/Shared/LoadingModal";
 import { UserRequests } from "../../../components/Account/UserRequests";
 import { styles } from "./UserRequestsScreen.styles";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { size, forEach } from "lodash";
+import { forEach } from "lodash";
 
 export function UserRequestsScreen(props) {
+  const { idObjeto, tipo, route } = props;
 
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
-
-  const [listaSolicitudesValidacion, setListaSolicitudesValidacion] = useState(
-    []
-  );
 
   const listaSolicitudesOrdenadas = [];
 
@@ -34,15 +27,16 @@ export function UserRequestsScreen(props) {
 
   const arrayNoTienenCuestionario = [];
 
-  const [dato, setDato] = useState([]);
-  const tipo = "Ropa";
+  const [dato, setDato] = useState();
+  const tipo2 = "Ropa";
 
-  const idObjeto = "a48ebf00-ea9c-429e-b3e0-990a385642d4";
+  const idObjeto2 = "51a3fe77-cacd-46aa-b9b9-a1eb27b62fff";
 
   let arrayOrdenado = [];
 
-  useEffect(() => {
+  const [iguales, setIguales] = useState(false);
 
+  useEffect(() => {
     const auth = getAuth();
     getSolicitudes();
     ordenamientoPorMacheo();
@@ -51,10 +45,9 @@ export function UserRequestsScreen(props) {
       arrayQueNoCumplen,
       arrayNoTienenCuestionario
     );
+
     setDato(arrayOrdenado);
-}, [listaSolicitudes]);
-
-
+  }, [listaSolicitudes]);
 
   const eliminarRepetidos = (a, key) => {
     let seen = new Set();
@@ -66,12 +59,11 @@ export function UserRequestsScreen(props) {
 
   const ordenamientoPorMacheo = () => {
     forEach(listaSolicitudes, async (item) => {
-      console.log(item.datosPersonales.apellido);
       if (item.datosPersonales.cuestionarioBeneficiario.length == 0) {
         arrayNoTienenCuestionario.push(item);
       } else {
         if (
-          tipo == "Ropa" &&
+          route.params.tipoObjeto == "Ropa" &&
           item.datosPersonales.cuestionarioBeneficiario.ropa == true
         ) {
           listaSolicitudesOrdenadas.push(item);
@@ -86,7 +78,7 @@ export function UserRequestsScreen(props) {
   const getSolicitudes = () => {
     const r = query(
       collection(db, "requests"),
-      where("idObjeto", "==", idObjeto)
+      where("idObjeto", "==", route.params.idObjeto)
     );
 
     onSnapshot(r, async (snapshot) => {
@@ -137,12 +129,13 @@ export function UserRequestsScreen(props) {
           : "";
       }
     });
+
     setDato(arrayOrdenado);
   };
 
   return (
     <View style={styles.content}>
-      {dato.length !== listaSolicitudes.length ? (
+      {dato == undefined ? (
         <LoadingModal show text="Cargando" />
       ) : (
         <UserRequests dato={dato} />

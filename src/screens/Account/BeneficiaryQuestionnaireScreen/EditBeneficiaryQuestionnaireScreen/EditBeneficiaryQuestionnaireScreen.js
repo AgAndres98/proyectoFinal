@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { ScrollView, View } from "react-native";
+import React, { useEffect } from "react";
+import { View } from "react-native";
 import { Button, Text } from "react-native-elements";
 import { useFormik } from "formik";
 import { BeneficiaryQuestionnaireForm } from "../../../../components/Account/BeneficiaryQuestionnaireForm";
@@ -7,7 +7,6 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { styles } from "./EditBeneficiaryQuestionnaireScreen.styles";
 import {
   doc,
-  setDoc,
   updateDoc,
   query,
   collection,
@@ -18,7 +17,6 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../../utils";
 import { getAuth } from "firebase/auth";
-import { v4 as uuid } from "uuid";
 
 import {
   initialValues,
@@ -31,7 +29,10 @@ export function EditBeneficiaryQuestionnaireScreen() {
   const uid = getAuth().currentUser;
 
   useEffect(() => {
-    const q = query(collection(db, "cuestionarioBeneficiario"), where("id", "==", uid.uid));
+    const q = query(
+      collection(db, "cuestionarioBeneficiario"),
+      where("id", "==", uid.uid)
+    );
 
     onSnapshot(q, async (snapshot) => {
       for await (const item of snapshot.docs) {
@@ -67,7 +68,10 @@ export function EditBeneficiaryQuestionnaireScreen() {
         const nuevaData = formValues;
 
         //await setDoc(doc(db, "cuestionarioBeneficiario", nuevaData.id), nuevaData);
-        await updateDoc(doc(db, "cuestionarioBeneficiario", uid.uid), nuevaData);
+        await updateDoc(
+          doc(db, "cuestionarioBeneficiario", uid.uid),
+          nuevaData
+        );
         await updateDoc(doc(db, "datosPersonales", uid.uid), {
           cuestionarioBeneficiario: nuevaData,
         });

@@ -16,6 +16,7 @@ const addEventStack = {
 const calendarStack = {
   tab: "CalendarTab",
   calendar: "Calendar",
+  eventsDetail: "Eventos",
 };
 
 const donationStack = {
@@ -31,10 +32,12 @@ const accountStack = {
   beneficiary: "Beneficiary",
   myObjects: "MisObjetos",
   userRequests: "Solicitudes de usuarios",
+  editEvent: "Editar Evento",
   editObject: "Editar objeto",
   editDonnor: "Editar cuestionario donador",
   editBeneficiary: "Editar cuestionario beneficiario",
-  userRequests:"Solicitudes de usuarios",
+  userRequests: "Solicitudes de usuarios",
+  myEvents: "Mis eventos",
 };
 
 const authStack = {
