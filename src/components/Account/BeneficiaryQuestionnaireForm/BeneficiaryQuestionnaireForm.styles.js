@@ -16,7 +16,27 @@ export const styles = StyleSheet.create({
       sectionObjetos: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginLeft: 75
+      },
+      sectionSalud: {
+        flexDirection: 'row',
+        alignItems: 'center',
         marginLeft: 100
+      },
+      sectionUtiles: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: 79
+      },
+      sectionJuguetes:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: 37
+      },
+      sectionMateriales:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: 92
       },
       sectionElectrodomesticos: {
         flexDirection: 'row',

@@ -25,6 +25,13 @@ export function BeneficiaryQuestionnaireForm(props) {
     useState(false);
   const [isCheckedUtiles, setCheckedUtiles] = useState(false);
   const [isCheckedOtros, setCheckedOtros] = useState(false);
+  const [isCheckedHerramientas, setCheckedHerramientas] = useState(false);
+  const [isCheckedJuguetes, setCheckedJuguetes] = useState(false);
+  const [isCheckedLibros, setCheckedLibros] = useState(false);
+  const [isCheckedMateriales, setCheckedMateriales] = useState(false);
+  const [isCheckedMuebles, setCheckedMuebles] = useState(false);
+  const [isCheckedSalud, setCheckedSalud] = useState(false);
+  const [isCheckedServicio, setCheckedServicio] = useState(false);
 
   const onOpenCloseMap = () => setShowMap((prevState) => !prevState);
 
@@ -58,6 +65,43 @@ export function BeneficiaryQuestionnaireForm(props) {
   const changeOtros = () => {
     setCheckedOtros((isCheckedOtros) => !isCheckedOtros);
     formik.setFieldValue("otros", !isCheckedOtros);
+  };
+
+  const changeHerramientas = () => {
+    setCheckedHerramientas((isCheckedHerramientas) => !isCheckedHerramientas);
+    formik.setFieldValue("herramientas", !isCheckedHerramientas);
+  };
+
+  const changeJuguetes = () => {
+    setCheckedJuguetes((isCheckedJuguetes) => !isCheckedJuguetes);
+    formik.setFieldValue("juguetes", !isCheckedJuguetes);
+  };
+
+  const changeLibros = () => {
+    setCheckedLibros((isCheckedLibros) => !isCheckedLibros);
+    formik.setFieldValue("libros", !isCheckedLibros);
+  };
+
+  const changeMateriales = () => {
+    setCheckedMateriales(
+      (isCheckedMateriales) => !isCheckedMateriales
+    );
+    formik.setFieldValue("materiales", !isCheckedMateriales);
+  };
+
+  const changeMuebles = () => {
+    setCheckedMuebles((isCheckedMuebles) => !isCheckedMuebles);
+    formik.setFieldValue("muebles", !isCheckedMuebles);
+  };
+
+  const changeSalud = () => {
+    setCheckedSalud((isCheckedSalud) => !isCheckedSalud);
+    formik.setFieldValue("salud", !isCheckedSalud);
+  };
+
+  const changeServicio = () => {
+    setCheckedServicio((isCheckedServicio) => !isCheckedServicio);
+    formik.setFieldValue("servicio", !isCheckedServicio);
   };
 
   const abrirGaleria = async () => {
@@ -152,26 +196,6 @@ export function BeneficiaryQuestionnaireForm(props) {
           <View style={styles.section}>
             <Checkbox
               style={styles.checkbox}
-              value={formik.values.ropa}
-              onValueChange={changeRopa}
-              color={isCheckedRopa ? "#62bd60" : undefined}
-            />
-            <Text style={styles.paragraph}>Ropa</Text>
-          </View>
-          <View style={styles.sectionObjetos}>
-            <Checkbox
-              style={styles.checkbox}
-              value={formik.values.objetos}
-              onValueChange={changeObjetos}
-              color={isCheckedObjetos ? "#62bd60" : undefined}
-            />
-            <Text style={styles.paragraph}>Objetos</Text>
-          </View>
-        </View>
-        <View style={{ flex: 1, flexDirection: "row" }}>
-          <View style={styles.section}>
-            <Checkbox
-              style={styles.checkbox}
               value={formik.values.alimentos}
               onValueChange={changeAlimentos}
               color={isCheckedAlimentos ? "#62bd60" : undefined}
@@ -192,13 +216,104 @@ export function BeneficiaryQuestionnaireForm(props) {
           <View style={styles.section}>
             <Checkbox
               style={styles.checkbox}
+              value={formik.values.herramientas}
+              onValueChange={changeHerramientas}
+              color={isCheckedHerramientas ? "#62bd60" : undefined}
+            />
+            <Text style={styles.paragraph}>Herramientas</Text>
+          </View>
+          <View style={styles.sectionJuguetes}>
+            <Checkbox
+              style={styles.checkbox}
+              value={formik.values.juguetes}
+              onValueChange={changeJuguetes}
+              color={isCheckedJuguetes ? "#62bd60" : undefined}
+            />
+            <Text style={styles.paragraph}>Juguetes</Text>
+          </View>
+        </View>
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <View style={styles.section}>
+            <Checkbox
+              style={styles.checkbox}
+              value={formik.values.libros}
+              onValueChange={changeLibros}
+              color={isCheckedLibros ? "#62bd60" : undefined}
+            />
+            <Text style={styles.paragraph}>Libros</Text>
+          </View>
+          <View style={styles.sectionMateriales}>
+            <Checkbox
+              style={styles.checkbox}
+              value={formik.values.materiales}
+              onValueChange={changeMateriales}
+              color={isCheckedMateriales ? "#62bd60" : undefined}
+            />
+            <Text style={styles.paragraph}>Materiales</Text>
+          </View>
+        </View>
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <View style={styles.section}>
+            <Checkbox
+              style={styles.checkbox}
+              value={formik.values.muebles}
+              onValueChange={changeMuebles}
+              color={isCheckedMuebles ? "#62bd60" : undefined}
+            />
+            <Text style={styles.paragraph}>Muebles</Text>
+          </View>
+          <View style={styles.sectionObjetos}>
+            <Checkbox
+              style={styles.checkbox}
+              value={formik.values.objetos}
+              onValueChange={changeObjetos}
+              color={isCheckedObjetos ? "#62bd60" : undefined}
+            />
+            <Text style={styles.paragraph}>Objetos</Text>
+          </View>
+        </View>
+        <View style={{ flex: 1, flexDirection: "row"}}>
+          <View style={styles.section}>
+            <Checkbox
+              style={styles.checkbox}
+              value={formik.values.ropa}
+              onValueChange={changeRopa}
+              color={isCheckedRopa ? "#62bd60" : undefined}
+            />
+            <Text style={styles.paragraph}>Ropa</Text>
+          </View>
+          <View style={styles.sectionSalud}>
+            <Checkbox
+              style={styles.checkbox}
+              value={formik.values.salud}
+              onValueChange={changeSalud}
+              color={isCheckedSalud ? "#62bd60" : undefined}
+            />
+            <Text style={styles.paragraph}>Salud</Text>
+          </View>
+        </View>
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <View style={styles.section}>
+            <Checkbox
+              style={styles.checkbox}
+              value={formik.values.servicio}
+              onValueChange={changeServicio}
+              color={isCheckedServicio ? "#62bd60" : undefined}
+            />
+            <Text style={styles.paragraph}>Servicio</Text>
+          </View>
+          <View style={styles.sectionUtiles}>
+            <Checkbox
+              style={styles.checkbox}
               value={formik.values.utiles}
               onValueChange={changeUtiles}
               color={isCheckedUtiles ? "#62bd60" : undefined}
             />
             <Text style={styles.paragraph}>Utiles escolares</Text>
           </View>
-          <View style={styles.sectionOtros}>
+        </View>
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <View style={styles.section}>
             <Checkbox
               style={styles.checkbox}
               value={formik.values.otros}
