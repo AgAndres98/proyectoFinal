@@ -17,7 +17,7 @@ export function ListObjects(props) {
   let objetos = [];
 
   const [objetosCompletos, setObjetosCompletos] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [masterObjetosCompletos, setMasterObjetosCompletos] = useState([]);
 
   useEffect(() => {
@@ -35,10 +35,10 @@ export function ListObjects(props) {
   const searchFilterFunction = (text) => {
     if (text) {
       const newData = masterObjetosCompletos.filter(function (item) {
-        const itemData = item.titulo
-          ? item.titulo
-          : '';
-        const textData = text;
+        const itemData = item.titulo.toLowerCase()
+          ? item.titulo.toLowerCase()
+          : "";
+        const textData = text.toLowerCase();
         return itemData.indexOf(textData) > -1;
       });
       setObjetosCompletos(newData);
