@@ -25,15 +25,15 @@ export function MyObjects(props) {
       "Esta seguro que desea eliminar este objeto",
       [
         {
-          text: "Si",
-          onPress: () => onRemoveObject(idObjeto),
-          style: "destructive"
+          text: "Cancelar",
+          onPress: () => console.log("Cancelar"),
+          style: "cancel",
         },
         {
-          text: "No",
-          onPress: () => console.log("Cancelar"),
-          style: "cancel"
-        }
+          text: "Si",
+          onPress: () => onRemoveObject(idObjeto),
+          style: "destructive",
+        },
       ],
       { cancelable: true }
     );
@@ -112,7 +112,7 @@ export function MyObjects(props) {
                       name="pencil-outline"
                       size={35}
                       containerStyle={styles.edit}
-                    // onPress={console.log("editar1")}
+                      // onPress={console.log("editar1")}
                     />
 
                     <Icon

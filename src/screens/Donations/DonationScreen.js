@@ -31,6 +31,7 @@ export function DonationScreen() {
         nuevaData.idUsuario = uid.uid;
         nuevaData.id = uuid();
         nuevaData.createdAt = new Date();
+        nuevaData.solicitudes = 0;
 
         await setDoc(doc(db, "objetos", nuevaData.id), nuevaData);
         resetForm(initialValues);

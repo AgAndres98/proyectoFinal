@@ -12,6 +12,7 @@ import {
   collection,
   deleteDoc,
   onSnapshot,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../../../utils";
 import { v4 as uuid } from "uuid";
@@ -52,6 +53,8 @@ export function BtnRequest(props) {
   const addRequest = async () => {
     try {
       await queryDatosPersonales();
+      //const response = await getObject();
+      //await updateSolicitudes("add", response.solicitudes);
     } catch (error) {
       onReload();
       console.log(error);
@@ -97,11 +100,42 @@ export function BtnRequest(props) {
       forEach(response, async (item) => {
         await deleteDoc(doc(db, "requests", item.id));
       });
+
+      //const objeto = await getObject();
+      //await updateSolicitudes("cancel", objeto.solicitudes);
+
       onReload();
     } catch (error) {
       console.log(error);
     }
   };
+
+  const getObject = async () => {
+    console.log(idObjeto);
+    const docRef = doc(db, "objetos", idObjeto);
+    const docSnap = await getDoc(docRef);
+    //const q = query(collection(db, "objetos"), where("id", "==", idObjeto));
+    //db, "objetos", idObjeto
+    //const result = await getDocs(q);
+    return docSnap;
+  };
+
+  const updateSolicitudes = async (tipo, value) => {
+    console.log(tipo + "-" + value.solicitudes);
+    if (tipo == "cancel") {
+      let cant = value.solicitudes - 1;
+      await updateDoc(doc(db, "objetos", idObjeto), {
+        solicitudes: cant,
+      });
+    } else {
+      console.log(value);
+      let cant = value.solicitudes + 1;
+      await updateDoc(doc(db, "objetos", idObjeto), {
+        solicitudes: cant,
+      });
+    }
+  };
+
   return (
     <View style={styles.content}>
       {isRequested !== undefined && auth.currentUser.uid !== idUsuario && (
