@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "proyectoFinal",
-    "slug": "proyectoFinal",
+    "name": "ayuDAR",
+    "slug": "ayuDAR",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,7 +22,13 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "permissions": ["android.permission.RECORD_AUDIO"],
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION",
+        "CAMERA"
+      ],
       "package": "com.materiaFinal.ayuDAR",
       "config": {
         "googleMaps": { "apiKey": "AIzaSyA14Pl-zX94bFBQPRbTjRGE9BEu4SKkmx4" }

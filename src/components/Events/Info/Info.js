@@ -9,21 +9,22 @@ import { List } from "react-native-paper";
 export function Info(props) {
   const { evento } = props;
 
-  const listInfo = [{
-    text: evento.telefono,
-    iconType: "material-community",
-    iconName: "phone",
-  },
-  {
-    text: evento.email,
-    iconType: "material-community",
-    iconName: "at",
-  },
-  {
-    text: evento.direccion,
-    iconType: "material-community",
-    iconName: "map-marker",
-  },
+  const listInfo = [
+    {
+      text: evento.telefono,
+      iconType: "material-community",
+      iconName: "phone",
+    },
+    {
+      text: evento.email,
+      iconType: "material-community",
+      iconName: "at",
+    },
+    {
+      text: evento.direccion,
+      iconType: "material-community",
+      iconName: "map-marker",
+    },
   ];
 
   return (
@@ -32,16 +33,18 @@ export function Info(props) {
       <Text style={styles.fecha}>{evento.fecha}</Text>
       {map(listInfo, (item, index) => (
         <ListItem style={styles.listInfo} key={index} bottomDivider>
-          <Icon
-            type={item.iconType}
-            name={item.iconName}
-            color="#00a680" />
+          <Icon type={item.iconType} name={item.iconName} color="#62bd60" />
           <ListItem.Content>
             <ListItem.Title>{item.text}</ListItem.Title>
           </ListItem.Content>
-        </ListItem>))}
+        </ListItem>
+      ))}
 
-      <Map style={styles.mapa} ubicacion={evento.ubicacion} titulo={evento.titulo} />
+      <Map
+        style={styles.mapa}
+        ubicacion={evento.ubicacion}
+        titulo={evento.titulo}
+      />
     </View>
   );
 }

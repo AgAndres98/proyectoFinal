@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  FlatList,
-  TouchableOpacity,
-  TextInput,
-  Icon,
-} from "react-native";
-import { Text, Image } from "react-native-elements";
+import { View, FlatList, TouchableOpacity, TextInput } from "react-native";
+import { Text, Image, Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./ListObjects.styles";
 import { screen } from "../../../utils/";
@@ -17,7 +11,7 @@ export function ListObjects(props) {
   let objetos = [];
 
   const [objetosCompletos, setObjetosCompletos] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [masterObjetosCompletos, setMasterObjetosCompletos] = useState([]);
 
   useEffect(() => {
@@ -35,10 +29,10 @@ export function ListObjects(props) {
   const searchFilterFunction = (text) => {
     if (text) {
       const newData = masterObjetosCompletos.filter(function (item) {
-        const itemData = item.titulo
-          ? item.titulo
-          : '';
-        const textData = text;
+        const itemData = item.titulo.toLowerCase()
+          ? item.titulo.toLowerCase()
+          : "";
+        const textData = text.toLowerCase();
         return itemData.indexOf(textData) > -1;
       });
       setObjetosCompletos(newData);
@@ -51,13 +45,37 @@ export function ListObjects(props) {
 
   return (
     <View>
-      <TextInput
-        style={styles.buscar}
-        onChangeText={(text) => searchFilterFunction(text)}
-        value={search}
-        underlineColorAndroid="transparent"
-        placeholder="Buscar objeto"
-      />
+      <View style={styles.buscar}>
+        <Icon
+          type="material-community"
+          name="magnify"
+          color="#c2c2c2"
+          size={30}
+          style={styles.searchIcon}
+        />
+        <TextInput
+          style={styles.inputStyle}
+          onChangeText={(text) => searchFilterFunction(text)}
+          value={search}
+          underlineColorAndroid="transparent"
+          placeholder="Buscar objeto"
+        />
+        {search != "" && (
+          <Icon
+            type="material-community"
+            name="close"
+            color="black"
+            size={20}
+            containerStyle={styles.deleteContainer}
+            style={styles.deleteIcon}
+            onPress={() => {
+              setObjetosCompletos(masterObjetosCompletos);
+              setSearch("");
+            }}
+          />
+        )}
+      </View>
+
       <FlatList
         data={objetosCompletos}
         keyExtractor={(item, index) => index.toString()}
