@@ -8,6 +8,7 @@ import {
   query,
   onSnapshot,
   orderBy,
+  where,
 } from "firebase/firestore";
 import { size } from "lodash";
 import { Loading } from "../../../components/Shared";
@@ -15,11 +16,14 @@ import { db } from "../../../utils";
 import { styles } from "./CalendarScreen.styles";
 
 export function CalendarScreen() {
-  const auth = getAuth();
   const [events, setEvents] = useState(null);
 
   useEffect(() => {
-    const q = query(collection(db, "eventos"), orderBy("fecha", "desc"));
+    const q = query(
+      collection(db, "eventos"),
+      where("fechaDate", ">=", new Date()),
+      orderBy("fechaDate", "asc")
+    );
 
     onSnapshot(q, (snapshot) => {
       setEvents(snapshot.docs);
