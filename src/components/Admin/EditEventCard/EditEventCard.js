@@ -54,7 +54,6 @@ export function EditEventCard(props) {
           errorMessage={formik.errors.organizador}
         />
 
-<<<<<<< HEAD
         <Input
           placeholder="Email"
           value={formik.values.email}
@@ -83,22 +82,6 @@ export function EditEventCard(props) {
           }}
           errorMessage={formik.errors.fecha}
         />
-=======
-        <TouchableOpacity onPress={showPicker}>
-          <Input
-            placeholder="Fecha"
-            value={date.toLocaleDateString("en-GB")}
-            disabled={true}
-            rightIcon={{
-              type: "material-community",
-              name: "calendar",
-              color: "#62bd60",
-              onPress: showPicker,
-            }}
-            errorMessage={formik.errors.fecha}
-          />
-        </TouchableOpacity>
->>>>>>> prepro
 
         {/* The date picker */}
         {isPickerShow && (
