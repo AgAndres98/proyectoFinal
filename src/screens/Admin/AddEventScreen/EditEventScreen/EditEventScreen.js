@@ -14,7 +14,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../../utils";
 import { initialValues, validationSchem } from "./EditEventScreen.data";
-import { EditEventCard } from "../../../../components/Admin/EditEventCard/EditEventCard";
+import { EditEventCard } from "../../../../components/Admin";
 import { UploadImageForm, ImageObject } from "../../../../components/Donation";
 import { styles } from "./EditEventScreen.style";
 
