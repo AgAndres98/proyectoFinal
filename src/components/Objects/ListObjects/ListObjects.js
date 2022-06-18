@@ -1,9 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { View, FlatList, TouchableOpacity, TextInput } from "react-native";
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  TextInput,
+  ScrollView,
+  RefreshControl,
+} from "react-native";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  doc,
+  getDoc,
+} from "firebase/firestore";
 import { Text, Image, Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./ListObjects.styles";
-import { screen } from "../../../utils/";
+import { screen, db } from "../../../utils/";
+import { LoadingModal } from "../../../components/Shared";
+
+
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 export function ListObjects(props) {
   const { objects } = props;
@@ -13,6 +34,9 @@ export function ListObjects(props) {
   const [objetosCompletos, setObjetosCompletos] = useState([]);
   const [search, setSearch] = useState("");
   const [masterObjetosCompletos, setMasterObjetosCompletos] = useState([]);
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  let objetosRefresh= [];
 
   useEffect(() => {
     objects.map(function (doc) {
@@ -42,6 +66,26 @@ export function ListObjects(props) {
       setSearch(text);
     }
   };
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    const q = query(collection(db, "objetos"), orderBy("createdAt", "desc"));
+
+    onSnapshot(q, async (snapshot) => {
+      for await (const item of snapshot.docs) {
+        const data = item.data();
+        const docRef = doc(db, "objetos", data.id);
+        const docSnap = await getDoc(docRef);
+
+        const dato = docSnap.data();
+
+        objetosRefresh.push(dato);
+      }
+    });
+    setObjetosCompletos(objetosRefresh);
+    setMasterObjetosCompletos(objetosRefresh);
+    wait(10000).then(() => setRefreshing(false));
+  }, [objetosRefresh]);
 
   return (
     <View>
@@ -75,27 +119,41 @@ export function ListObjects(props) {
           />
         )}
       </View>
+      {refreshing ? (
+        <LoadingModal show text="Cargando" />
+      ) : (
+        <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <FlatList
+          data={objetosCompletos}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={(doc) => {
+            const objeto = doc.item;
+            return (
+              <TouchableOpacity onPress={() => goToObject(objeto)}>
+                <View style={styles.objeto}>
+                  <Image
+                    source={{ uri: objeto.fotos[0] }}
+                    style={styles.image}
+                  />
 
-      <FlatList
-        data={objetosCompletos}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={(doc) => {
-          const objeto = doc.item;
-          return (
-            <TouchableOpacity onPress={() => goToObject(objeto)}>
-              <View style={styles.objeto}>
-                <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
-
-                <View style={styles.informacion}>
-                  <Text style={styles.name}>{objeto.titulo}</Text>
-                  <Text style={styles.info}>{objeto.tipo}</Text>
-                  <Text style={styles.info}>{objeto.descripcion}</Text>
+                  <View style={styles.informacion}>
+                    <Text style={styles.name}>{objeto.titulo}</Text>
+                    <Text style={styles.info}>{objeto.tipo}</Text>
+                    <Text style={styles.info}>{objeto.descripcion}</Text>
+                  </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          );
-        }}
-      />
+              </TouchableOpacity>
+            );
+          }}
+          extraData={objetosCompletos}
+        />
+      </ScrollView>
+      )}
+      
     </View>
   );
 }

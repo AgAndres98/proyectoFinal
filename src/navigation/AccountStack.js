@@ -7,7 +7,7 @@ import { BeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQu
 import { EditObjectScreen } from "../screens/Account/MyObjectsScreen/EditObjectScreen/EditObjectScreen";
 import { EditDonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireScreen/EditDonorQuestionnaireScreen/EditDonorQuestionnaireScreen";
 import { EditBeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQuestionnaireScreen/EditBeneficiaryQuestionnaireScreen/EditBeneficiaryQuestionnaireScreen";
-import { MyObjectsScreen } from "../screens/Account/MyObjectsScreen/MyObjectsScreen";
+import { MyObjectsScreen } from "../screens/Account/MyObjectsScreen/myObjectsScreen";
 import { UserRequestsScreen } from "./../screens/Account/UserRequestsScreen/UserRequestsScreen";
 import { EditEventScreen } from "./../screens/Admin/AddEventScreen/EditEventScreen/EditEventScreen";
 import { MyEventsScreen } from "./../screens/Admin/MyEventsScreen/MyEventsScreen";

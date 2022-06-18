@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView, RefreshControl } from "react-native";
 import { Icon } from "react-native-elements";
 import { Button } from "react-native-elements";
-import { collection, onSnapshot, orderBy, query, doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  doc,
+  getDoc,
+} from "firebase/firestore";
 import { LoadingModal } from "../../../components/Shared";
-import { db } from "../../../utils";
+import { useNavigation } from "@react-navigation/native";
+import { db, screen } from "../../../utils";
 import { styles } from "./ObjectsScreen.styles";
 import { ListObjects } from "../../../components/Objects";
 
 export function ObjectsScreen(props) {
   const [objects, setObjects] = useState(null);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const q = query(collection(db, "objetos"), orderBy("createdAt", "desc"));
@@ -24,7 +33,7 @@ export function ObjectsScreen(props) {
       {!objects ? (
         <LoadingModal show text="Cargando" />
       ) : (
-        <ListObjects objects={objects} />
+          <ListObjects objects={objects} />
       )}
     </View>
   );
