@@ -16,8 +16,6 @@ import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../utils";
 import { styles } from "./ObjectsScreen.styles";
 import { ListObjects } from "../../../components/Objects";
-import { LoadingModal } from "../../../components/Shared";
-import { styles } from "./ObjectsScreen.styles";
 
 export function ObjectsScreen(props) {
   const [objects, setObjects] = useState(null);
