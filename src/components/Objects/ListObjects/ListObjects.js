@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, FlatList, TouchableOpacity, TextInput } from "react-native";
 import { Text, Image, Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { styles } from "./ListObjects.styles";
 import { screen } from "../../../utils/";
+import { styles } from "./ListObjects.styles";
 
 export function ListObjects(props) {
   const { objects } = props;

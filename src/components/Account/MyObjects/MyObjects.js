@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { View, FlatList, Alert } from "react-native";
 import { Image, Text, Icon, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { db, screen } from "../../../utils";
-import { styles } from "./MyObjects.styles";
 import {
   doc,
   collection,
@@ -13,7 +11,9 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { forEach } from "lodash";
+import { db, screen } from "../../../utils";
 import { SwitchBtn } from "../SwitchBtn";
+import { styles } from "./MyObjects.styles";
 
 export function MyObjects(props) {
   const { objects } = props;

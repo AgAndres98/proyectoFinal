@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Input, Button } from "react-native-elements";
-import { styles } from "./ChangeEmailForm.styles";
 import {
   getAuth,
   updateEmail,
@@ -10,8 +9,9 @@ import {
   signOut,
 } from "firebase/auth";
 import Toast from "react-native-toast-message";
-import { initialValues, validationSchema } from "./ChangeEmailForm.data";
 import { useFormik } from "formik";
+import { initialValues, validationSchema } from "./ChangeEmailForm.data";
+import { styles } from "./ChangeEmailForm.styles";
 
 export function ChangeEmailForm(props) {
   const { onClose, OnReload } = props;

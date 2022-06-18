@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Input } from "react-native-elements";
-import { styles } from "./CreateEventCard.styles";
 import { MapForm } from "../../Donation";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { styles } from "./CreateEventCard.styles";
 
 export function CreateEventCard(props) {
   const { formik } = props;

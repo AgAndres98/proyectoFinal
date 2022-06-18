@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { Input } from "react-native-elements";
-import { styles } from "./DonorQuestionnaireForm.styles";
 import { Picker } from "@react-native-picker/picker";
+import { styles } from "./DonorQuestionnaireForm.styles";
 
 export function DonorQuestionnaireForm(props) {
   const { formik } = props;

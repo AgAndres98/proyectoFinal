@@ -1,9 +1,8 @@
 import React from "react";
 import { View } from "react-native";
 import { Text } from "react-native-elements";
-import { styles } from "./Info.styles";
-import { map } from "lodash";
 import { Map } from "../../Shared";
+import { styles } from "./Info.styles";
 
 export function Info(props) {
   const { objeto } = props;

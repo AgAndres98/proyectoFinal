@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { Input } from "react-native-elements";
-import { styles } from "./EditEventCard.styles";
 import { MapForm } from "../../Donation/MapForm";
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { styles } from "./EditEventCard.styles";
 
 export function EditEventCard(props) {
   const { formik } = props;
@@ -68,7 +68,6 @@ export function EditEventCard(props) {
           onChangeText={(text) => formik.setFieldValue("telefono", text)}
           errorMessage={formik.errors.telefono}
         />
-
 
         <Input
           placeholder="Fecha"

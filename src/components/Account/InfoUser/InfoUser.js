@@ -4,7 +4,6 @@ import { Avatar, Text } from "react-native-elements";
 import * as ImagePicker from "expo-image-picker";
 import { getAuth, updateProfile } from "firebase/auth";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { styles } from "./InfoUser.styles";
 import {
   doc,
   getDoc,
@@ -14,8 +13,8 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { db } from "../../../utils";
-
 import { Loading } from "../../../components/Shared";
+import { styles } from "./InfoUser.styles";
 
 export function InfoUser(props) {
   const { setLoading, setLoadingText } = props;
