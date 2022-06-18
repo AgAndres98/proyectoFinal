@@ -11,21 +11,24 @@ import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../../utils";
 import { initialValues, validationSchem } from "./EditObjectScreen.data";
 
-const idObjeto = "8d0c77c6-0db9-4b05-9243-6286eb44af08";
+//const idObjeto = "8d0c77c6-0db9-4b05-9243-6286eb44af08";
 
 let objeto = [];
 
-export function EditObjectScreen() {
+export function EditObjectScreen(props) {
+
+  const {route} = props;
+
   useEffect(() => {
     const q = query(
       collection(db, "objetos"),
-      where("id", "==", idObjeto)
+      where("id", "==", route.params.idObjeto)
     );
 
     onSnapshot(q, async (snapshot) => {
       for await (const item of snapshot.docs) {
         const data = item.data();
-        const docRef = doc(db, "objetos", idObjeto);
+        const docRef = doc(db, "objetos", route.params.idObjeto);
         const docSnap = await getDoc(docRef);
 
         const dato = docSnap.data();

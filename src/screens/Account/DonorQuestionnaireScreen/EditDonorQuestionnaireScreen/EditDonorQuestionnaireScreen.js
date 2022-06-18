@@ -23,6 +23,8 @@ import {
   validationSchem,
 } from "./EditDonorQuestionnaireScreen.data";
 
+
+
 export function EditDonorQuestionnaireScreen() {
   const uid = getAuth().currentUser;
   useEffect(() => {
@@ -60,6 +62,7 @@ export function EditDonorQuestionnaireScreen() {
     onSubmit: async (formValues) => {
       try {
         const nuevaData = formValues;
+
 
         await updateDoc(doc(db, "cuestionarioDonador", uid.uid), nuevaData);
 
