@@ -9,15 +9,15 @@ import {
   collection,
   onSnapshot,
 } from "firebase/firestore";
-import { db } from "../../../utils";
-import { LoadingModal } from "../../../components/Shared/LoadingModal";
-import { UserRequests } from "../../../components/Account/UserRequests";
-import { styles } from "./UserRequestsScreen.styles";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { forEach } from "lodash";
+import { db } from "../../../utils";
+import { LoadingModal } from "../../../components/Shared";
+import { UserRequests } from "../../../components/Account";
+import { styles } from "./UserRequestsScreen.styles";
 
 export function UserRequestsScreen(props) {
-  const { idObjeto, tipo, route } = props;
+  const { route } = props;
 
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
 

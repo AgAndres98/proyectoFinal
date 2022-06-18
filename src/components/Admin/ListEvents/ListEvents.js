@@ -1,5 +1,5 @@
 import React from "react";
-import { View, FlatList, TouchableOpacity } from "react-native";
+import { View, FlatList } from "react-native";
 import { Image, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./ListEvents.styles";
@@ -9,8 +9,8 @@ export function ListEvents(props) {
   const { events } = props;
   const navigation = useNavigation();
 
-  const goToEvent = (id) => {
-    navigation.navigate(screen.calendar.eventsDetail, { id: id });
+  const goEditEvent = (idEvento) => {
+    navigation.navigate(screen.account.editEvent, { idEvento: idEvento });
   };
 
   return (
@@ -34,7 +34,9 @@ export function ListEvents(props) {
                     name="pencil-outline"
                     size={35}
                     containerStyle={styles.edit}
-                    onPress={console.log("editar1")}
+                    onPress={() => {
+                      goEditEvent(event.id);
+                    }}
                   />
 
                   <Icon

@@ -2,24 +2,20 @@ import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Button } from "react-native-elements";
 import { useFormik } from "formik";
-import { BeneficiaryQuestionnaireForm } from "../../../components/Account/BeneficiaryQuestionnaireForm";
-import { UserLoggedScreen } from "../../../screens/Account/UserLoggedScreen/UserLoggedScreen";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { styles } from "./BeneficiaryQuestionnaireScreen.styles";
-import {
-  doc,
-  setDoc,
-  updateDoc,
-  onSnapshot,
-} from "firebase/firestore";
+import { doc, setDoc, updateDoc, onSnapshot } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
-import { db, screen } from "../../../utils";
 import { getAuth } from "firebase/auth";
-
+import { db, screen } from "../../../utils";
+import {
+  BeneficiaryQuestionnaireForm,
+  UserLoggedScreen,
+} from "../../../components/Account";
 import {
   initialValues,
   validationSchem,
 } from "./BeneficiaryQuestionnaireScreen.data";
+import { styles } from "./BeneficiaryQuestionnaireScreen.styles";
 
 export function BeneficiaryQuestionnaireScreen() {
   const [datosBeneficiario, setDatosBeneficiario] = useState(false);
@@ -47,7 +43,10 @@ export function BeneficiaryQuestionnaireScreen() {
         nuevaData.idUsuario = uid.uid;
         nuevaData.id = uid.uid;
 
-        await setDoc(doc(db, "cuestionarioBeneficiario", nuevaData.id), nuevaData);
+        await setDoc(
+          doc(db, "cuestionarioBeneficiario", nuevaData.id),
+          nuevaData
+        );
         await updateDoc(doc(db, "datosPersonales", uid.uid), {
           cuestionarioBeneficiario: nuevaData,
         });

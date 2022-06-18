@@ -2,15 +2,16 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { screen } from "../utils";
 import { AccountScreen } from "../screens/AccountScreen";
 import { InformationPersonalScreen } from "../screens/Auth/InformationPersonalScreen/InformationPersonalScreen";
-import { DonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireScreen/DonorQuestionnaireScreen";
-import { BeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQuestionnaireScreen/BeneficiaryQuestionnaireScreen";
-import { EditObjectScreen } from "../screens/Account/MyObjectsScreen/EditObjectScreen/EditObjectScreen";
-import { EditDonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireScreen/EditDonorQuestionnaireScreen/EditDonorQuestionnaireScreen";
-import { EditBeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQuestionnaireScreen/EditBeneficiaryQuestionnaireScreen/EditBeneficiaryQuestionnaireScreen";
-import { MyObjectsScreen } from "../screens/Account/MyObjectsScreen/MyObjectsScreen";
-import { UserRequestsScreen } from "./../screens/Account/UserRequestsScreen/UserRequestsScreen";
-import { EditEventScreen } from "./../screens/Admin/AddEventScreen/EditEventScreen/EditEventScreen";
-import { MyEventsScreen } from "./../screens/Admin/MyEventsScreen/MyEventsScreen";
+import {
+  DonorQuestionnaireScreen,
+  EditObjectScreen,
+  BeneficiaryQuestionnaireScreen,
+  EditDonorQuestionnaireScreen,
+  EditBeneficiaryQuestionnaireScreen,
+  MyObjectsScreen,
+  UserRequestsScreen,
+} from "../screens/Account";
+import { EditEventScreen, MyEventsScreen } from "./../screens/Admin";
 
 const Stack = createNativeStackNavigator();
 

@@ -114,16 +114,8 @@ function getMenuOptions(selectedComponent) {
       iconColorRight: "#62bd60",
       onPress: () => selectedComponent("editDonnor"),
     },
-    /*{
-      title: "Mis eventos",
-      iconType: "material-community",
-      iconNameRight: "arrow-right",
-      iconColorRight: "#62bd60",
-      onPress: () => selectedComponent("myEvents"),
-    },*/
   ];
 }
-//auth.currentUser.email == "exporeact.ayudar@gmail.com"
 function getMenuOptionsAdmin(selectedComponent) {
   return [
     {

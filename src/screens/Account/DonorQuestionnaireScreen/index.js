@@ -1,1 +1,2 @@
-export * from "./DonorQuestionnaireScreen"
+export * from "./DonorQuestionnaireScreen";
+export * from "./EditDonorQuestionnaireScreen";

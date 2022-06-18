@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { screen } from "../utils";
-import { AddEventScreen } from "../screens/Admin/AddEventScreen/AddEventScreen";
+import { AddEventScreen } from "../screens/Admin";
 
 const Stack = createNativeStackNavigator();
 

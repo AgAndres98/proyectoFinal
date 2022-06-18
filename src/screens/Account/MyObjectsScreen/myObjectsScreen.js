@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { getAuth } from "firebase/auth";
-import {
-  collection,
-  query,
-  where,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { size } from "lodash";
 import { db } from "../../../utils";
-import { Loading } from "../../../components/Shared";
 import { MyObjects } from "../../../components/Account";
-import { NotFound } from "../../../components/Shared";
-
+import { NotFound, LoadingModal } from "../../../components/Shared";
 import { styles } from "./MyObjectsScreen.styles";
 
 export function MyObjectsScreen(props) {
@@ -29,8 +22,9 @@ export function MyObjectsScreen(props) {
       setObjects(snapshot.docs);
     });
   }, []);
-  if (size(objects) === 0)
+  if (size(objects) === 0) {
     return <NotFound texto={"No tienes ninguna publicación"} />;
+  }
 
   return (
     <View style={styles.screen}>

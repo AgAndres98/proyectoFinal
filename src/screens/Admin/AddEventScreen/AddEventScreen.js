@@ -2,16 +2,15 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { Button, Text } from "react-native-elements";
 import { useFormik } from "formik";
-import { CreateEventCard } from "../../../components/Admin/";
-import { UploadImageForm } from "../../../components/Donation";
-import { ImageObject } from "../../../components/Donation/ImageObject/ImageObject";
-import { styles } from "./AddEventScreen.styles";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
-import { db, screen } from "../../../utils";
 import { getAuth } from "firebase/auth";
 import { v4 as uuid } from "uuid";
 import Toast from "react-native-toast-message";
+import { db, screen } from "../../../utils";
+import { CreateEventCard } from "../../../components/Admin/";
+import { UploadImageForm, ImageObject } from "../../../components/Donation";
+import { styles } from "./AddEventScreen.styles";
 
 import { initialValues, validationSchem } from "./AddEventScreen.data";
 
