@@ -14,12 +14,16 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../../utils";
 import { initialValues, validationSchem } from "./EditEventScreen.data";
-import { EditEventCard } from "../../../../components/Admin";
+import { EditEventCard } from "../../../../components/Admin/EditEventCard/EditEventCard";
 import { UploadImageForm, ImageObject } from "../../../../components/Donation";
 import { styles } from "./EditEventScreen.style";
 
 export function EditEventScreen(props) {
-  const { idEvento } = props;
+  const { route } = props;
+
+  const idEvento = route.params.idEvento;
+  console.log(route.params.idEvento);
+
   useEffect(() => {
     const q = query(collection(db, "eventos"), where("id", "==", idEvento));
 
