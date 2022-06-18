@@ -21,6 +21,8 @@ export function UserRequestsScreen(props) {
 
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
 
+  let solicitud = [];
+
   const [formularioDonante, setFormularioDonante] = useState();
 
   const [dato, setDato] = useState();
@@ -29,7 +31,15 @@ export function UserRequestsScreen(props) {
 
   const [iguales, setIguales] = useState(false);
 
+  const [refreshing, setRefreshing] = useState(false);
+
+
+  const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+
   useEffect(() => {
+    setRefreshing(true);
     const auth = getAuth();
     getSolicitudes();
     getFormularioDonante(auth);
@@ -47,7 +57,7 @@ export function UserRequestsScreen(props) {
       return 0;
     });
     setDato(arrayOrdenado);
-    console.log(arrayOrdenado);
+    wait(5000).then(() => setRefreshing(false));
   }, [listaSolicitudes]);
 
   const eliminarRepetidos = (a, key) => {
@@ -258,7 +268,7 @@ export function UserRequestsScreen(props) {
 
   return (
     <View style={styles.content}>
-      {dato == undefined ? (
+      {refreshing ? (
         <LoadingModal show text="Cargando" />
       ) : (
         <UserRequests dato={dato} />
