@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, FlatList } from "react-native";
-import { Text, Icon, Avatar } from "react-native-elements";
+import { Text, Icon, Avatar, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./UserRequests.styles";
 import { getAuth } from "firebase/auth";
@@ -108,36 +108,67 @@ export function UserRequests(props) {
                   </Text>
                 </View>
 
-                <View style={styles.iconContainer}>
-                  <Icon
-                    solid="true"
-                    type="material-community"
-                    name="account-check-outline"
-                    size={35}
-                    containerStyle={styles.accept}
-                    onPress={() => {
-                      acceptReq(item);
-                    }}
-                  />
+                {item.status == "Aceptado" ? (
+                  <View style={styles.iconContainer}>
+                    <Button
+                      title={"Confirmar entrega"}
+                      containerStyle={styles.btnContainer}
+                      buttonStyle={styles.btnSolicitudes}
+                      onPress={() => {
+                        console.log("Confirmar");
+                      }}
+                    />
 
-                  <Icon
-                    type="material-community"
-                    name="account-remove-outline"
-                    size={35}
-                    containerStyle={styles.delete}
-                    onPress={() => {
-                      declineReq(item);
-                    }}
-                  />
+                    <Icon
+                      type="material-community"
+                      name="account-remove-outline"
+                      size={35}
+                      containerStyle={styles.delete}
+                      onPress={() => {
+                        declineReq(item);
+                      }}
+                    />
 
-                  <Icon
-                    type="material-community"
-                    name="account-search-outline"
-                    size={35}
-                    containerStyle={styles.eye}
-                    onPress={console.log(selectComponent)}
-                  />
-                </View>
+                    <Icon
+                      type="material-community"
+                      name="account-search-outline"
+                      size={35}
+                      containerStyle={styles.eye}
+                      onPress={console.log(selectComponent)}
+                    />
+                  </View>
+                ) : (
+                  <View style={styles.iconContainer}>
+                    <Icon
+                      solid="true"
+                      type="material-community"
+                      name="account-check-outline"
+                      size={35}
+                      containerStyle={styles.accept}
+                      onPress={() => {
+                        acceptReq(item);
+                      }}
+                    />
+
+                    <Icon
+                      type="material-community"
+                      name="account-remove-outline"
+                      size={35}
+                      containerStyle={styles.delete}
+                      onPress={() => {
+                        declineReq(item);
+                      }}
+                    />
+
+                    <Icon
+                      type="material-community"
+                      name="account-search-outline"
+                      size={35}
+                      containerStyle={styles.eye}
+                      onPress={console.log(selectComponent)}
+                    />
+                  </View>
+                )}
               </View>
             </View>
           );
