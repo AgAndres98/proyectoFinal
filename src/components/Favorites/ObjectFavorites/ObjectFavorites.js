@@ -4,8 +4,8 @@ import { Image, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db, screen } from "../../../utils";
-import { styles } from "./ObjectFavorites.styles";
 import { BtnRequestFavorites } from "../BtnRequestFavorites";
+import { styles } from "./ObjectFavorites.styles";
 
 export function ObjectFavorites(props) {
   const { objeto } = props;

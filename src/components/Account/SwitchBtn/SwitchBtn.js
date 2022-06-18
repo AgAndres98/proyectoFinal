@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Switch } from "react-native";
-import { styles } from "./SwitchBtn.styles";
-import { db } from "../../../utils";
 import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../utils";
+import { styles } from "./SwitchBtn.styles";
 
 export function SwitchBtn(props) {
   const { idObjeto, activa } = props;

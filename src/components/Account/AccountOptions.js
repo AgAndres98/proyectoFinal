@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { ListItem, Icon } from "react-native-elements";
 import { map } from "lodash";
+import { useNavigation } from "@react-navigation/native";
+import { getAuth } from "firebase/auth";
+import { screen } from "./../../utils";
 import { Modal } from "../../components/Shared";
 import { ChangeEmailForm } from "./ChangeEmailForm";
 import { ChangePasswordForm } from "./ChangePasswordForm";
-import { useNavigation } from "@react-navigation/native";
-import { screen } from "./../../utils";
-import { getAuth } from "firebase/auth";
 
 export function AccountOptions(props) {
   const { onReload } = props;
@@ -114,16 +114,8 @@ function getMenuOptions(selectedComponent) {
       iconColorRight: "#62bd60",
       onPress: () => selectedComponent("editDonnor"),
     },
-    /*{
-      title: "Mis eventos",
-      iconType: "material-community",
-      iconNameRight: "arrow-right",
-      iconColorRight: "#62bd60",
-      onPress: () => selectedComponent("myEvents"),
-    },*/
   ];
 }
-//auth.currentUser.email == "exporeact.ayudar@gmail.com"
 function getMenuOptionsAdmin(selectedComponent) {
   return [
     {

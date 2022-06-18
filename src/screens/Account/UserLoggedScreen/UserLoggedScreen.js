@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { Button } from "react-native-elements";
 import { getAuth, signOut } from "firebase/auth";
-import { LoadingModal } from "../../../components";
 import { InfoUser, AccountOptions } from "../../../components/Account";
+import { LoadingModal } from "../../../components";
 import { styles } from "./UserLoggedScreen.styles";
 
 export function UserLoggedScreen() {

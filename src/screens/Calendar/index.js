@@ -1,2 +1,2 @@
-export * from "./EventsDetailScreen";
+export * from "./EventDetailScreen";
 export * from "./CalendarScreen";

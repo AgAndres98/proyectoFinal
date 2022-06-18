@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Input } from "react-native-elements";
-import { styles } from "./InformationPersonalForm.styles";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { styles } from "./InformationPersonalForm.styles";
 
 export function InformationPersonalForm(props) {
   const { formik } = props;

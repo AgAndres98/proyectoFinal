@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native";
-import { ObjectFavorites } from "../components/Favorites";
-import { NotFound } from "../components/Shared";
 import { getAuth } from "firebase/auth";
 import {
   doc,
@@ -15,6 +13,8 @@ import { size, map } from "lodash";
 import { Loading } from "../components/Shared";
 import { db } from "../utils";
 import { styles } from "./Screens.styles";
+import { ObjectFavorites } from "../components/Favorites";
+import { NotFound } from "../components/Shared";
 
 export function FavoritesScreen() {
   const auth = getAuth();

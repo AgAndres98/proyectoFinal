@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-
 import { View, Text, ScrollView, Alert } from "react-native";
 import { Icon, Avatar } from "react-native-elements";
 import { Input } from "react-native-elements";
-import { styles } from "./BeneficiaryQuestionnaireForm.styles";
 import { Picker } from "@react-native-picker/picker";
 import { MapForm } from "../../Donation/MapForm";
 import Checkbox from "expo-checkbox";
@@ -12,6 +10,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuid } from "uuid";
 import { map, filter } from "lodash";
 import * as ImagePicker from "expo-image-picker";
+import { styles } from "./BeneficiaryQuestionnaireForm.styles";
 
 export function BeneficiaryQuestionnaireForm(props) {
   const { formik } = props;
@@ -83,9 +82,7 @@ export function BeneficiaryQuestionnaireForm(props) {
   };
 
   const changeMateriales = () => {
-    setCheckedMateriales(
-      (isCheckedMateriales) => !isCheckedMateriales
-    );
+    setCheckedMateriales((isCheckedMateriales) => !isCheckedMateriales);
     formik.setFieldValue("materiales", !isCheckedMateriales);
   };
 
@@ -272,7 +269,7 @@ export function BeneficiaryQuestionnaireForm(props) {
             <Text style={styles.paragraph}>Objetos</Text>
           </View>
         </View>
-        <View style={{ flex: 1, flexDirection: "row"}}>
+        <View style={{ flex: 1, flexDirection: "row" }}>
           <View style={styles.section}>
             <Checkbox
               style={styles.checkbox}

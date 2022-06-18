@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, Alert } from "react-native";
 import { Image, Text, Icon, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { db, screen } from "../../../utils";
-import { styles } from "./MyObjects.styles";
 import {
   doc,
   collection,
@@ -13,11 +11,32 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { forEach } from "lodash";
+import { db, screen } from "../../../utils";
 import { SwitchBtn } from "../SwitchBtn";
+import { styles } from "./MyObjects.styles";
 
 export function MyObjects(props) {
   const { objects } = props;
   const navigation = useNavigation();
+
+  const buttonDelete = (idObjeto) =>
+    Alert.alert(
+      "Eliminar Objeto",
+      "Esta seguro que desea eliminar este objeto",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancelar"),
+          style: "cancel",
+        },
+        {
+          text: "Si",
+          onPress: () => onRemoveObject(idObjeto),
+          style: "destructive",
+        },
+      ],
+      { cancelable: true }
+    );
 
   const goToRequest = (idObjeto, tipoObjeto) => {
     navigation.navigate(screen.account.userRequests, {
@@ -108,7 +127,7 @@ export function MyObjects(props) {
                       size={35}
                       containerStyle={styles.delete}
                       onPress={() => {
-                        onRemoveObject(objeto.id);
+                        buttonDelete(objeto.id);
                       }}
                     />
                   </View>

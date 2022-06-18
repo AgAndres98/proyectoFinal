@@ -1,7 +1,7 @@
 import { View, Text, Clipboard } from "react-native";
 import { Icon, Button } from "react-native-elements";
-import { styles } from "./DonationCashCard.styles";
 import { ToastAndroid, Linking } from "react-native";
+import { styles } from "./DonationCashCard.styles";
 
 export function DonationCashCard() {
   const copyToClipboardCBU = () => {

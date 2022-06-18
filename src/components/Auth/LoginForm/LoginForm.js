@@ -1,13 +1,13 @@
 import { View } from "react-native";
 import { Input, Icon, Button } from "react-native-elements";
-import { styles } from "./LoginForm.styles";
 import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
-import { screen } from "../../../utils";
-import { initialValues, validationSchema } from "./LoginForm.data";
 import { useFormik } from "formik";
+import { initialValues, validationSchema } from "./LoginForm.data";
+import { screen } from "../../../utils";
+import { styles } from "./LoginForm.styles";
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);

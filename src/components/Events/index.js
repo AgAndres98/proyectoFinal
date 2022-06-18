@@ -1,1 +1,2 @@
-export * from "./EventsDetail";
+export * from "./Info";
+export * from "./Header";

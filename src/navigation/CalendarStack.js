@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { screen } from "../utils";
-import { CalendarScreen } from "../screens/Calendar/CalendarScreen";
-import { EventsDetailScreen } from "../screens/Calendar/EventDetailScreen";
+import { CalendarScreen, EventDetailScreen } from "../screens/Calendar";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +14,7 @@ export function CalendarStack() {
       />
       <Stack.Screen
         name={screen.calendar.eventsDetail}
-        component={EventsDetailScreen}
+        component={EventDetailScreen}
         options={{ title: "Eventos" }}
       />
     </Stack.Navigator>

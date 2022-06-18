@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Input } from "react-native-elements";
-import { styles } from "./DonationObjectCard.styles";
 import { MapForm } from "../MapForm";
 import { Picker } from "@react-native-picker/picker";
+import { styles } from "./DonationObjectCard.styles";
 
 export function DonationObjectCard(props) {
   const { formik } = props;

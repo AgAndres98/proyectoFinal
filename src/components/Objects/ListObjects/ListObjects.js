@@ -17,6 +17,7 @@ import {
 } from "firebase/firestore";
 import { Text, Image, Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+<<<<<<< HEAD
 import { styles } from "./ListObjects.styles";
 import { screen, db } from "../../../utils/";
 import { LoadingModal } from "../../../components/Shared";
@@ -25,6 +26,10 @@ import { LoadingModal } from "../../../components/Shared";
 const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 }
+=======
+import { screen } from "../../../utils/";
+import { styles } from "./ListObjects.styles";
+>>>>>>> prepro
 
 export function ListObjects(props) {
   const { objects } = props;
@@ -88,7 +93,7 @@ export function ListObjects(props) {
   }, [objetosRefresh]);
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View style={styles.buscar}>
         <Icon
           type="material-community"

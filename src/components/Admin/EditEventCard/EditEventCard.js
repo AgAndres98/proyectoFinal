@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { Input } from "react-native-elements";
-import { styles } from "./EditEventCard.styles";
 import { MapForm } from "../../Donation/MapForm";
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { styles } from "./EditEventCard.styles";
 
 export function EditEventCard(props) {
   const { formik } = props;
@@ -54,20 +54,33 @@ export function EditEventCard(props) {
           errorMessage={formik.errors.organizador}
         />
 
-        <TouchableOpacity onPress={showPicker}>
-          <Input
-            placeholder="Fecha"
-            value={date.toLocaleDateString("en-GB")}
-            disabled={true}
-            rightIcon={{
-              type: "material-community",
-              name: "calendar",
-              color: "#62bd60",
-              onPress: showPicker,
-            }}
-            errorMessage={formik.errors.fecha}
-          />
-        </TouchableOpacity>
+        <Input
+          placeholder="Email"
+          value={formik.values.email}
+          multiline={true}
+          onChangeText={(text) => formik.setFieldValue("email", text)}
+          errorMessage={formik.errors.email}
+        />
+
+        <Input
+          placeholder="Número de celular"
+          keyboardType="number-pad"
+          onChangeText={(text) => formik.setFieldValue("telefono", text)}
+          errorMessage={formik.errors.telefono}
+        />
+
+        <Input
+          placeholder="Fecha"
+          value={date.toLocaleDateString("en-GB")}
+          disabled={true}
+          rightIcon={{
+            type: "material-community",
+            name: "calendar",
+            color: "#62bd60",
+            onPress: showPicker,
+          }}
+          errorMessage={formik.errors.fecha}
+        />
 
         {/* The date picker */}
         {isPickerShow && (

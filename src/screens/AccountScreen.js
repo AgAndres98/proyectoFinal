@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { UserLoggedScreen } from "../screens/Account/UserLoggedScreen/UserLoggedScreen";
-import { InformationPersonalScreen } from "./Auth/InformationPersonalScreen/InformationPersonalScreen";
 import { getAuth } from "firebase/auth";
 import {
   doc,
@@ -11,6 +9,8 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { db } from "../utils";
+import { UserLoggedScreen } from "../screens/Account";
+import { InformationPersonalScreen } from "./Auth";
 import { styles } from "./Screens.styles";
 
 export function AccountScreen() {

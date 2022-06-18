@@ -42,7 +42,6 @@ export const styles = StyleSheet.create({
     borderWidth: 0.5,
     marginTop: 15,
     marginBottom: 5,
-
     width: "90%",
     height: 50,
     borderColor: "#62bd60",
@@ -53,7 +52,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   inputStyle: {
-    flex: 1,
+    //flex: 1,
     paddingLeft: 10,
   },
   searchIcon: {

@@ -9,15 +9,15 @@ import {
   collection,
   onSnapshot,
 } from "firebase/firestore";
-import { db } from "../../../utils";
-import { LoadingModal } from "../../../components/Shared/LoadingModal";
-import { UserRequests } from "../../../components/Account/UserRequests";
-import { styles } from "./UserRequestsScreen.styles";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { forEach } from "lodash";
+import { db } from "../../../utils";
+import { LoadingModal } from "../../../components/Shared";
+import { UserRequests } from "../../../components/Account";
+import { styles } from "./UserRequestsScreen.styles";
 
 export function UserRequestsScreen(props) {
-  const { idObjeto, tipo, route } = props;
+  const { route } = props;
 
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
 
@@ -135,23 +135,42 @@ export function UserRequestsScreen(props) {
         if (formularioDonante != null) {
           switch (item.datosPersonales.cuestionarioBeneficiario.motivo) {
             case "incendio":
-              formularioDonante.incendios != "0" || formularioDonante.incendios != "" ? item.puntuacion += (formularioDonante.incendios*3) : "";
+              formularioDonante.incendios != "0" ||
+              formularioDonante.incendios != ""
+                ? (item.puntuacion += formularioDonante.incendios * 3)
+                : "";
               break;
             case "tsunami":
-              formularioDonante.tsunami != "0" || formularioDonante.tsunami != "" ? item.puntuacion += (formularioDonante.tsunami*3) : "";
+              formularioDonante.tsunami != "0" ||
+              formularioDonante.tsunami != ""
+                ? (item.puntuacion += formularioDonante.tsunami * 3)
+                : "";
               break;
             case "inundacion":
-              formularioDonante.inundaciones != "0" || formularioDonante.inundaciones != "" ? item.puntuacion += (formularioDonante.inundaciones*3) : "";
+              formularioDonante.inundaciones != "0" ||
+              formularioDonante.inundaciones != ""
+                ? (item.puntuacion += formularioDonante.inundaciones * 3)
+                : "";
               break;
             case "gente":
-              formularioDonante.gente != "0" || formularioDonante.gente != "" ? item.puntuacion += (formularioDonante.gente*3) : "";
+              formularioDonante.gente != "0" || formularioDonante.gente != ""
+                ? (item.puntuacion += formularioDonante.gente * 3)
+                : "";
               break;
           }
-          if(item.datosPersonales.cuestionarioBeneficiario.ayuda == "familia"){
-            formularioDonante.grupoFamiliar == "nada" || formularioDonante.grupoFamiliar == "familia" ? item.puntuacion += 5 : "";
+          if (
+            item.datosPersonales.cuestionarioBeneficiario.ayuda == "familia"
+          ) {
+            formularioDonante.grupoFamiliar == "nada" ||
+            formularioDonante.grupoFamiliar == "familia"
+              ? (item.puntuacion += 5)
+              : "";
           }
-          if(item.datosPersonales.cuestionarioBeneficiario.ayuda == "yo"){
-            formularioDonante.grupoFamiliar == "nada" || formularioDonante.grupoFamiliar == "una" ? item.puntuacion += 5 : "";
+          if (item.datosPersonales.cuestionarioBeneficiario.ayuda == "yo") {
+            formularioDonante.grupoFamiliar == "nada" ||
+            formularioDonante.grupoFamiliar == "una"
+              ? (item.puntuacion += 5)
+              : "";
           }
         }
         arrayOrdenado.push(item);
@@ -182,9 +201,11 @@ export function UserRequestsScreen(props) {
   const getSolicitudes = () => {
     const r = query(
       collection(db, "requests"),
-      where("idObjeto", "==", route.params.idObjeto)
+      where("idObjeto", "==", route.params.idObjeto),
+      where("status", "!=", "Rechazado")
     );
-
+    //1e65
+    //14caa ok pruebas
     onSnapshot(r, async (snapshot) => {
       for await (const item of snapshot.docs) {
         const data = item.data();

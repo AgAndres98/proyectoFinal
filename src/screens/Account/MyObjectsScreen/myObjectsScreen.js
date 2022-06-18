@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { getAuth } from "firebase/auth";
-import {
-  collection,
-  query,
-  where,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { size } from "lodash";
 import { db } from "../../../utils";
-import { Loading } from "../../../components/Shared";
 import { MyObjects } from "../../../components/Account";
-import { NotFound } from "../../../components/Shared";
-
+import { NotFound, Loading } from "../../../components/Shared";
 import { styles } from "./MyObjectsScreen.styles";
 
-export function MyObjectsScreen(props) {
+export function MyObjectsScreen() {
   const auth = getAuth();
   const [objects, setObjects] = useState(null);
 
@@ -29,16 +22,23 @@ export function MyObjectsScreen(props) {
       setObjects(snapshot.docs);
     });
   }, []);
-  if (size(objects) === 0)
+  if (!objects) return <Loading show text="Cargando" />;
+
+  if (size(objects) === 0) {
     return <NotFound texto={"No tienes ninguna publicación"} />;
+  }
 
   return (
     <View style={styles.screen}>
-      {!objects ? (
-        <LoadingModal show text="Cargando" />
-      ) : (
-        <MyObjects objects={objects} />
-      )}
+      <MyObjects objects={objects} />
     </View>
   );
 }
+
+/*
+     {!objects ? (
+        <Loading show text="Cargando" />
+      ) : (
+        <MyObjects objects={objects} />
+      )}
+*/

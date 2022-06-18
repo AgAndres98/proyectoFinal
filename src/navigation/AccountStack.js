@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { screen } from "../utils";
 import { AccountScreen } from "../screens/AccountScreen";
 import { InformationPersonalScreen } from "../screens/Auth/InformationPersonalScreen/InformationPersonalScreen";
+<<<<<<< HEAD
 import { DonorQuestionnaireScreen } from "../screens/Account/DonorQuestionnaireScreen/DonorQuestionnaireScreen";
 import { BeneficiaryQuestionnaireScreen } from "../screens/Account/BeneficiaryQuestionnaireScreen/BeneficiaryQuestionnaireScreen";
 import { EditObjectScreen } from "../screens/Account/MyObjectsScreen/EditObjectScreen/EditObjectScreen";
@@ -11,6 +12,18 @@ import { MyObjectsScreen } from "../screens/Account/MyObjectsScreen/myObjectsScr
 import { UserRequestsScreen } from "./../screens/Account/UserRequestsScreen/UserRequestsScreen";
 import { EditEventScreen } from "./../screens/Admin/AddEventScreen/EditEventScreen/EditEventScreen";
 import { MyEventsScreen } from "./../screens/Admin/MyEventsScreen/MyEventsScreen";
+=======
+import {
+  DonorQuestionnaireScreen,
+  EditObjectScreen,
+  BeneficiaryQuestionnaireScreen,
+  EditDonorQuestionnaireScreen,
+  EditBeneficiaryQuestionnaireScreen,
+  MyObjectsScreen,
+  UserRequestsScreen,
+} from "../screens/Account";
+import { EditEventScreen, MyEventsScreen } from "./../screens/Admin";
+>>>>>>> prepro
 
 const Stack = createNativeStackNavigator();
 

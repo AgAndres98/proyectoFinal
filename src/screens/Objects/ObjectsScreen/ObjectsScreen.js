@@ -8,6 +8,7 @@ import {
   orderBy,
   query,
   doc,
+  where,
   getDoc,
 } from "firebase/firestore";
 import { LoadingModal } from "../../../components/Shared";
@@ -15,13 +16,19 @@ import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../utils";
 import { styles } from "./ObjectsScreen.styles";
 import { ListObjects } from "../../../components/Objects";
+import { LoadingModal } from "../../../components/Shared";
+import { styles } from "./ObjectsScreen.styles";
 
 export function ObjectsScreen(props) {
   const [objects, setObjects] = useState(null);
   const navigation = useNavigation();
 
   useEffect(() => {
-    const q = query(collection(db, "objetos"), orderBy("createdAt", "desc"));
+    const q = query(
+      collection(db, "objetos"),
+      where("activa", "==", true),
+      orderBy("createdAt", "desc")
+    );
 
     onSnapshot(q, (snapshot) => {
       setObjects(snapshot.docs);

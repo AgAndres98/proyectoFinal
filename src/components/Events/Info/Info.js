@@ -1,10 +1,9 @@
 import React from "react";
 import { View } from "react-native";
 import { Text, Icon, ListItem } from "react-native-elements";
-import { styles } from "./Info.styles";
-import { Map } from "../../Shared";
 import { map } from "lodash";
-import { List } from "react-native-paper";
+import { Map } from "../../Shared";
+import { styles } from "./Info.styles";
 
 export function Info(props) {
   const { evento } = props;

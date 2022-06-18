@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, Dimensions } from "react-native";
-import {
-  doc,
-  onSnapshot,
-} from "firebase/firestore";
-import { styles } from "./ObjectScreen.styles";
+import { doc, onSnapshot } from "firebase/firestore";
 import { Carousel, Loading } from "../../../components/Shared";
 import { db } from "../../../utils";
 import {
@@ -13,6 +9,7 @@ import {
   BtnFavorite,
   BtnRequest,
 } from "../../../components/Objeto";
+import { styles } from "./ObjectScreen.styles";
 
 const { width } = Dimensions.get("window");
 

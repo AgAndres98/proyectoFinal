@@ -2,17 +2,17 @@ import React from "react";
 import { View } from "react-native";
 import { Button } from "react-native-elements";
 import { useFormik } from "formik";
-import { styles } from "./DonorQuestionnaireScreen.styles";
-import { DonorQuestionnaireForm } from "../../../components/Account/DonorQuestionnaireForm";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
 import { doc, setDoc } from "firebase/firestore";
-import { db, screen } from "../../../utils";
 import { getAuth } from "firebase/auth";
+import { db, screen } from "../../../utils";
 import {
   initialValues,
   validationSchem,
 } from "./DonorQuestionnaireScreen.data";
+import { DonorQuestionnaireForm } from "../../../components/Account";
+import { styles } from "./DonorQuestionnaireScreen.styles";
 
 export function DonorQuestionnaireScreen() {
   const navigation = useNavigation();

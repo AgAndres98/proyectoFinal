@@ -13,9 +13,9 @@ import {
   onSnapshot,
   getDoc,
 } from "firebase/firestore";
-import { db } from "../../../utils";
 import { v4 as uuid } from "uuid";
 import { size, forEach } from "lodash";
+import { db } from "../../../utils";
 import { styles } from "./BtnRequestFavorites.styles";
 
 export function BtnRequestFavorites(props) {
