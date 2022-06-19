@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { getAuth } from "firebase/auth";
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  orderBy,
+} from "firebase/firestore";
 import { size } from "lodash";
 import { db } from "../../../utils";
 import { MyObjects } from "../../../components/Account";
@@ -15,7 +21,8 @@ export function MyObjectsScreen() {
   useEffect(() => {
     const q = query(
       collection(db, "objetos"),
-      where("idUsuario", "==", auth.currentUser.uid)
+      where("idUsuario", "==", auth.currentUser.uid),
+      orderBy("status", "desc")
     );
 
     onSnapshot(q, (snapshot) => {
