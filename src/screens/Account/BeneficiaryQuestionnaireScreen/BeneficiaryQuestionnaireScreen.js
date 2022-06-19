@@ -8,9 +8,8 @@ import { useNavigation } from "@react-navigation/native";
 import { getAuth } from "firebase/auth";
 import { db, screen } from "../../../utils";
 import {
-  BeneficiaryQuestionnaireForm,
-  UserLoggedScreen,
-} from "../../../components/Account";
+  BeneficiaryQuestionnaireForm
+} from "../../../components/Account/BeneficiaryQuestionnaireForm";
 import {
   initialValues,
   validationSchem,
@@ -59,9 +58,7 @@ export function BeneficiaryQuestionnaireScreen() {
     },
   });
 
-  return datosBeneficiario ? (
-    <UserLoggedScreen />
-  ) : (
+  return (
     <View style={styles.screen}>
       <KeyboardAwareScrollView>
         <View style={styles.content}>

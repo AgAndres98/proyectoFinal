@@ -56,6 +56,13 @@ export function EditBeneficiaryQuestionnaireScreen() {
         formik.setFieldValue("electrodomesticos", dato.electrodomesticos);
         formik.setFieldValue("utiles", dato.utiles);
         formik.setFieldValue("otros", dato.otros);
+        formik.setFieldValue("herramientas", dato.herramientas);
+        formik.setFieldValue("juguetes", dato.juguetes);
+        formik.setFieldValue("libros", dato.libros);
+        formik.setFieldValue("materiales", dato.materiales);
+        formik.setFieldValue("muebles", dato.muebles);
+        formik.setFieldValue("salud", dato.salud);
+        formik.setFieldValue("servicio", dato.servicio);
         formik.setFieldValue("fotos", dato.fotos);
         formik.setFieldValue("ayuda", dato.ayuda);
         formik.setFieldValue("idUsuario", dato.idUsuario);
@@ -72,17 +79,19 @@ export function EditBeneficiaryQuestionnaireScreen() {
       try {
         const nuevaData = formValues;
 
-        if (cuestionario != null)
+        if (cuestionario != null) {
           await updateDoc(
             doc(db, "cuestionarioBeneficiario", uid.uid),
             nuevaData
           );
-        else
+        } else {
+          nuevaData.idUsuario = uid.uid;
+          nuevaData.id = uid.uid;
           await setDoc(
             doc(db, "cuestionarioBeneficiario", nuevaData.id),
             nuevaData
           );
-
+        }
         await updateDoc(doc(db, "datosPersonales", uid.uid), {
           cuestionarioBeneficiario: nuevaData,
         });

@@ -15,12 +15,14 @@ import {
 import { db } from "../../../utils";
 import { Loading } from "../../../components/Shared";
 import { styles } from "./InfoUser.styles";
+import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 
 export function InfoUser(props) {
   const { setLoading, setLoadingText } = props;
   const auth = getAuth();
   const { uid, photoURL, displayName, email } = getAuth().currentUser;
   const [datos, setDatos] = useState(null);
+  const [state, setState] = useState(null);
 
   const [avatar, setAvatar] = useState(photoURL);
 
@@ -40,6 +42,9 @@ export function InfoUser(props) {
         setDatos(newData);
       }
     });
+    return () => {
+      setState({});
+    }
   }, []);
 
   const changeAvatar = async () => {
