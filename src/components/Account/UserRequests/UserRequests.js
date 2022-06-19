@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, Alert } from "react-native";
 import { Text, Icon, Avatar, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./UserRequests.styles";
@@ -7,7 +7,7 @@ import { getAuth } from "firebase/auth";
 import { Modal } from "../../Shared";
 import { db } from "../../../utils";
 import { size, forEach } from "lodash";
-
+import Toast from "react-native-toast-message";
 import {
   doc,
   setDoc,
@@ -20,6 +20,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
 export function UserRequests(props) {
   const [userModal, setUserModal] = useState(false);
 
@@ -41,6 +42,24 @@ export function UserRequests(props) {
 
   //     })</View>
   //     );
+  const buttonPendingReq = (dato) =>
+    Alert.alert(
+      "Cambiar estado de solicitud",
+      "¿Esta seguro que desea cambiar la solicitud a estado pendiente? Descuida, podras tanto aceptarla como rechazarla luego.",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancelar"),
+          style: "cancel",
+        },
+        {
+          text: "Si",
+          onPress: () => pendingReq(dato),
+          style: "destructive",
+        },
+      ],
+      { cancelable: true }
+    );
 
   const pendingReq = async (dato) => {
     try {
@@ -50,10 +69,36 @@ export function UserRequests(props) {
           status: "Pendiente",
         });
       });
+
+      Toast.show({
+        type: "success",
+        position: "bottom",
+        text1: "Solicitud pendiente",
+        text2: "La solicitud se ha devuelto a estado pendiente",
+      });
     } catch (error) {
       console.log(error);
     }
   };
+
+  const buttonAcceptReq = (dato) =>
+    Alert.alert(
+      "Aceptar solicitud",
+      "¿Esta seguro que desea aceptar la solicitud? Descuida, podras modificarla luego. Al entregar el objeto confirme la entrega porfavor",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancelar"),
+          style: "cancel",
+        },
+        {
+          text: "Si",
+          onPress: () => acceptReq(dato),
+          style: "destructive",
+        },
+      ],
+      { cancelable: true }
+    );
 
   const acceptReq = async (dato) => {
     try {
@@ -63,13 +108,40 @@ export function UserRequests(props) {
           status: "Aceptado",
         });
       });
+
+      Toast.show({
+        type: "success",
+        position: "bottom",
+        text1: "Solicitud aceptada",
+        text2: "Al entregar el objeto confirme la entrega porfavor",
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
+  const buttonConfirmReq = (dato) =>
+    Alert.alert(
+      "Confirmar entrega",
+      "Si ha entregado el objeto presione si. Cuidado, esto no podrá ser modificado más tarde. ",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancelar"),
+          style: "cancel",
+        },
+        {
+          text: "Si",
+          onPress: () => confirmReq(dato),
+          style: "destructive",
+        },
+      ],
+      { cancelable: true }
+    );
+
   const confirmReq = async (dato) => {
     try {
+      /*
       const response = await getRequest(dato);
       forEach(response, async (item) => {
         await updateDoc(doc(db, "requests", item.id), {
@@ -78,6 +150,15 @@ export function UserRequests(props) {
       });
 
       await cancelAllReq(dato);
+
+
+      */
+      Toast.show({
+        type: "success",
+        position: "bottom",
+        text1: "Confirmación de entrega",
+        text2: "¡Muchas gracias por ayudar!",
+      });
     } catch (error) {
       console.log(error);
     }
@@ -167,7 +248,7 @@ export function UserRequests(props) {
                           size={35}
                           containerStyle={styles.delete}
                           onPress={() => {
-                            pendingReq(item);
+                            buttonPendingReq(item);
                           }}
                         />
 
@@ -186,7 +267,7 @@ export function UserRequests(props) {
                     containerStyle={styles.btnContainer}
                     buttonStyle={styles.btnSolicitudes}
                     onPress={() => {
-                      console.log("Confirmar");
+                      buttonConfirmReq(item);
                       //confirmReq(item)
                     }}
                   />
@@ -219,7 +300,7 @@ export function UserRequests(props) {
                           size={35}
                           containerStyle={styles.accept}
                           onPress={() => {
-                            acceptReq(item);
+                            buttonAcceptReq(item);
                           }}
                         />
 

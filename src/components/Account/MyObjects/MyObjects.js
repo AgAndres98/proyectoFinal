@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, FlatList, Alert } from "react-native";
 import { Image, Text, Icon, Button } from "react-native-elements";
+import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
 import {
   doc,
@@ -21,8 +22,8 @@ export function MyObjects(props) {
 
   const buttonDelete = (idObjeto) =>
     Alert.alert(
-      "Eliminar Objeto",
-      "Esta seguro que desea eliminar este objeto",
+      "Eliminar objeto",
+      "¿Esta seguro que desea eliminar este objeto?",
       [
         {
           text: "Cancelar",
@@ -87,6 +88,12 @@ export function MyObjects(props) {
       });
 
       await deleteDoc(doc(db, "objetos", id));
+
+      Toast.show({
+        type: "success",
+        position: "bottom",
+        text1: "Objeto eliminado",
+      });
     } catch (error) {
       console.log(error);
     }
@@ -118,7 +125,9 @@ export function MyObjects(props) {
                       name="pencil-outline"
                       size={35}
                       containerStyle={styles.edit}
-                      onPress={() => { goToEdit(objeto.id)}}
+                      onPress={() => {
+                        goToEdit(objeto.id);
+                      }}
                     />
 
                     <Icon

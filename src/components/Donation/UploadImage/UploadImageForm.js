@@ -5,6 +5,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuid } from "uuid";
 import { map, filter } from "lodash";
 import * as ImagePicker from "expo-image-picker";
+import { LoadingModal } from "../../Shared";
 import { styles } from "./UploadImageForm.styles";
 
 export function UploadImageForm(props) {
@@ -20,6 +21,7 @@ export function UploadImageForm(props) {
     });
 
     if (!result.cancelled) {
+      setIsLoading(true);
       guardarImagen(result.uri);
     }
   };
@@ -42,6 +44,7 @@ export function UploadImageForm(props) {
 
     const imageUrl = await getDownloadURL(imageRef);
     formik.setFieldValue("fotos", [...formik.values.fotos, imageUrl]);
+    setIsLoading(false);
   };
 
   const eliminarImagen = (img) => {
@@ -94,7 +97,7 @@ export function UploadImageForm(props) {
       </ScrollView>
       <Text style={styles.error}>{formik.errors.fotos}</Text>
 
-      {/* me falta el loading */}
+      <LoadingModal show={isLoading} text="Subiendo imagen" />
     </>
   );
 }

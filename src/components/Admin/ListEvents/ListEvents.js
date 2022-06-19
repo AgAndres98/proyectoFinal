@@ -1,8 +1,10 @@
 import React from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, Alert } from "react-native";
 import { Image, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { screen } from "./../../../utils";
+import Toast from "react-native-toast-message";
+import { db, screen } from "./../../../utils";
+import { doc, deleteDoc } from "firebase/firestore";
 import { styles } from "./ListEvents.styles";
 
 export function ListEvents(props) {
@@ -10,15 +12,45 @@ export function ListEvents(props) {
   const navigation = useNavigation();
 
   const goEditEvent = (idEvento) => {
-
     console.log(idEvento);
     console.log("dentro de navegacion");
     navigation.navigate(screen.account.editEvent, {
-      idEvento: idEvento
+      idEvento: idEvento,
     });
   };
 
+  const buttonDelete = (idEvent) =>
+    Alert.alert(
+      "Eliminar evento",
+      "¿Esta seguro que desea eliminar este evento?",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancelar"),
+          style: "cancel",
+        },
+        {
+          text: "Si",
+          onPress: () => onRemoveEvent(idEvent),
+          style: "destructive",
+        },
+      ],
+      { cancelable: true }
+    );
 
+  const onRemoveEvent = async (idEvent) => {
+    try {
+      await deleteDoc(doc(db, "eventos", idEvent));
+
+      Toast.show({
+        type: "success",
+        position: "bottom",
+        text1: "Evento eliminado",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View>
@@ -51,7 +83,9 @@ export function ListEvents(props) {
                     name="delete-outline"
                     size={35}
                     containerStyle={styles.delete}
-                    onPress={console.log("delete1")}
+                    onPress={() => {
+                      buttonDelete(event.id);
+                    }}
                   />
                 </View>
               </View>

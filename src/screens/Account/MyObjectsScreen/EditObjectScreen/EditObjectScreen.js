@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ScrollView, View } from "react-native";
 import { Button, Text } from "react-native-elements";
 import { useFormik } from "formik";
+import Toast from "react-native-toast-message";
 import { DonationObjectCard } from "../../../../components/Donation/DonationObjectCard/DonationObjectCard";
 import { UploadImageForm } from "../../../../components/Donation/UploadImage/UploadImageForm";
 import { ImageObject } from "../../../../components/Donation/ImageObject/ImageObject";
@@ -33,7 +34,6 @@ export function EditObjectScreen(props) {
       where("id", "==", route.params.idObjeto)
     );
 
-    console.log(route.params);
     onSnapshot(q, async (snapshot) => {
       for await (const item of snapshot.docs) {
         const data = item.data();
@@ -69,8 +69,12 @@ export function EditObjectScreen(props) {
         const nuevaData = formValues;
 
         await updateDoc(doc(db, "objetos", route.params.idObjeto), nuevaData);
-
-        navigation.navigate(screen.objects.tab);
+        Toast.show({
+          type: "success",
+          position: "bottom",
+          text1: "Objeto editado",
+        });
+        navigation.navigate(screen.account.account);
       } catch (error) {
         console.log(error);
       }

@@ -12,6 +12,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
 import { db, screen } from "../../../../utils";
 import { initialValues, validationSchem } from "./EditEventScreen.data";
 import { EditEventCard } from "../../../../components/Admin";
@@ -56,10 +57,16 @@ export function EditEventScreen(props) {
     onSubmit: async (formValues) => {
       try {
         const nuevaData = formValues;
-
+        //ARREGLAR ACA
         await updateDoc(doc(db, "eventos", idEvento), nuevaData);
 
-        navigation.navigate(screen.calendar.tab);
+        Toast.show({
+          type: "success",
+          position: "bottom",
+          text1: "Evento editado",
+        });
+
+        navigation.navigate(screen.account.account);
       } catch (error) {
         console.log(error);
       }
