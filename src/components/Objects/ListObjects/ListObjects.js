@@ -14,6 +14,7 @@ import {
   query,
   doc,
   getDoc,
+  where,
 } from "firebase/firestore";
 import { Text, Image, Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
@@ -21,10 +22,9 @@ import { styles } from "./ListObjects.styles";
 import { screen, db } from "../../../utils/";
 import { LoadingModal } from "../../../components/Shared";
 
-
 const wait = (timeout) => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-}
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};
 
 export function ListObjects(props) {
   const { objects } = props;
@@ -36,7 +36,7 @@ export function ListObjects(props) {
   const [masterObjetosCompletos, setMasterObjetosCompletos] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
 
-  let objetosRefresh= [];
+  let objetosRefresh = [];
 
   useEffect(() => {
     objects.map(function (doc) {
@@ -69,7 +69,11 @@ export function ListObjects(props) {
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    const q = query(collection(db, "objetos"), orderBy("createdAt", "desc"));
+    const q = query(
+      collection(db, "objetos"),
+      where("activa", "==", true),
+      orderBy("createdAt", "desc")
+    );
 
     onSnapshot(q, async (snapshot) => {
       for await (const item of snapshot.docs) {
@@ -84,76 +88,78 @@ export function ListObjects(props) {
     });
     setObjetosCompletos(objetosRefresh);
     setMasterObjetosCompletos(objetosRefresh);
-    wait(10000).then(() => setRefreshing(false));
+    wait(3500).then(() => setRefreshing(false));
   }, [objetosRefresh]);
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={styles.buscar}>
-        <Icon
-          type="material-community"
-          name="magnify"
-          color="#c2c2c2"
-          size={30}
-          style={styles.searchIcon}
-        />
-        <TextInput
-          style={styles.inputStyle}
-          onChangeText={(text) => searchFilterFunction(text)}
-          value={search}
-          underlineColorAndroid="transparent"
-          placeholder="Buscar objeto"
-        />
-        {search != "" && (
-          <Icon
-            type="material-community"
-            name="close"
-            color="black"
-            size={20}
-            containerStyle={styles.deleteContainer}
-            style={styles.deleteIcon}
-            onPress={() => {
-              setObjetosCompletos(masterObjetosCompletos);
-              setSearch("");
-            }}
-          />
-        )}
-      </View>
       {refreshing ? (
         <LoadingModal show text="Cargando" />
       ) : (
-        <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        <FlatList
-          data={objetosCompletos}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={(doc) => {
-            const objeto = doc.item;
-            return (
-              <TouchableOpacity onPress={() => goToObject(objeto)}>
-                <View style={styles.objeto}>
-                  <Image
-                    source={{ uri: objeto.fotos[0] }}
-                    style={styles.image}
-                  />
+        <View style={{ flex: 1 }}>
+          <ScrollView
+            style={{ height: "12%" }}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+          >
+            <View style={styles.buscar}>
+              <Icon
+                type="material-community"
+                name="magnify"
+                color="#c2c2c2"
+                size={30}
+                style={styles.searchIcon}
+              />
+              <TextInput
+                style={styles.inputStyle}
+                onChangeText={(text) => searchFilterFunction(text)}
+                value={search}
+                underlineColorAndroid="transparent"
+                placeholder="Buscar objeto"
+              />
+              {search != "" && (
+                <Icon
+                  type="material-community"
+                  name="close"
+                  color="black"
+                  size={20}
+                  containerStyle={styles.deleteContainer}
+                  style={styles.deleteIcon}
+                  onPress={() => {
+                    setObjetosCompletos(masterObjetosCompletos);
+                    setSearch("");
+                  }}
+                />
+              )}
+            </View>
+          </ScrollView>
+          <FlatList
+            data={objetosCompletos}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={(doc) => {
+              const objeto = doc.item;
+              return (
+                <TouchableOpacity onPress={() => goToObject(objeto)}>
+                  <View style={styles.objeto}>
+                    <Image
+                      source={{ uri: objeto.fotos[0] }}
+                      style={styles.image}
+                    />
 
-                  <View style={styles.informacion}>
-                    <Text style={styles.name}>{objeto.titulo}</Text>
-                    <Text style={styles.info}>{objeto.tipo}</Text>
-                    <Text style={styles.info}>{objeto.descripcion}</Text>
+                    <View style={styles.informacion}>
+                      <Text style={styles.name}>{objeto.titulo}</Text>
+                      <Text style={styles.info}>{objeto.tipo}</Text>
+                      <Text style={styles.info}>{objeto.descripcion}</Text>
+                    </View>
                   </View>
-                </View>
-              </TouchableOpacity>
-            );
-          }}
-          extraData={objetosCompletos}
-        />
-      </ScrollView>
+                </TouchableOpacity>
+              );
+            }}
+            extraData={objetosCompletos}
+          />
+        </View>
       )}
-      
     </View>
   );
 }

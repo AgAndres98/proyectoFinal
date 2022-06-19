@@ -1,2 +1,2 @@
-export * from "./myObjectsScreen";
+export * from "./MyObjectsScreen";
 export * from "./EditObjectScreen";
