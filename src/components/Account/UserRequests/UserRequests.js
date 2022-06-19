@@ -42,6 +42,19 @@ export function UserRequests(props) {
   //     })</View>
   //     );
 
+  const pendingReq = async (dato) => {
+    try {
+      const response = await getRequest(dato);
+      forEach(response, async (item) => {
+        await updateDoc(doc(db, "requests", item.id), {
+          status: "Pendiente",
+        });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const acceptReq = async (dato) => {
     try {
       const response = await getRequest(dato);
@@ -50,6 +63,34 @@ export function UserRequests(props) {
           status: "Aceptado",
         });
       });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const confirmReq = async (dato) => {
+    try {
+      const response = await getRequest(dato);
+      forEach(response, async (item) => {
+        await updateDoc(doc(db, "requests", item.id), {
+          status: "Entregado",
+        });
+      });
+
+      await cancelAllReq(dato);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const cancelAllReq = async (dato) => {
+    try {
+      const response = await getAllRequest(dato);
+
+      forEach(response, async (item) => {
+        await deleteDoc(doc(db, "requests", item.id));
+      });
+      onReload();
     } catch (error) {
       console.log(error);
     }
@@ -79,97 +120,131 @@ export function UserRequests(props) {
     return result.docs;
   };
 
+  const getAllRequest = async (dato) => {
+    const q = query(
+      collection(db, "requests"),
+      where("idObjeto", "==", dato.idObjeto),
+      where("idUserReq", "!=", dato.idUserReq)
+    );
+
+    const result = await getDocs(q);
+    return result.docs;
+  };
+
   return (
     <View style={styles.screen}>
       <FlatList
         data={dato}
         renderItem={({ item }) => {
-          console.log("idobjet " + item.idObjeto);
-          console.log("id userreq " + item.idUserReq);
-
           // const peticion = doc.item.data();
           //  require("../../../../assets/icon.png")
           return (
-            <View style={styles.objeto}>
-              <Avatar
-                size="large"
-                icon={{ type: "material", name: "person" }}
-                source={avatarUri(item.foto)}
-                containerStyle={styles.imageContainer}
-                avatarStyle={styles.image}
-              />
-
-              <View style={styles.container}>
-                <View style={styles.informacion}>
-                  <Text style={styles.name}>
-                    {item.datosPersonales.nombre +
-                      " " +
-                      item.datosPersonales.apellido}
-                  </Text>
-                </View>
-
-                {item.status == "Aceptado" ? (
-                  <View style={styles.iconContainer}>
-                    <Button
-                      title={"Confirmar entrega"}
-                      containerStyle={styles.btnContainer}
-                      buttonStyle={styles.btnSolicitudes}
-                      onPress={() => {
-                        console.log("Confirmar");
-                      }}
+            <View style={styles.objetoContainer}>
+              {item.status == "Aceptado" ? (
+                <>
+                  <View style={styles.objeto}>
+                    <Avatar
+                      size="large"
+                      icon={{ type: "material", name: "person" }}
+                      source={avatarUri(item.foto)}
+                      containerStyle={styles.imageContainer}
+                      avatarStyle={styles.image}
                     />
 
-                    <Icon
-                      type="material-community"
-                      name="account-remove-outline"
-                      size={35}
-                      containerStyle={styles.delete}
-                      onPress={() => {
-                        declineReq(item);
-                      }}
-                    />
+                    <View style={styles.container}>
+                      <View style={styles.informacion}>
+                        <Text style={styles.name}>
+                          {item.datosPersonales.nombre +
+                            " " +
+                            item.datosPersonales.apellido}
+                        </Text>
+                      </View>
 
-                    <Icon
-                      type="material-community"
-                      name="account-search-outline"
-                      size={35}
-                      containerStyle={styles.eye}
-                      onPress={console.log(selectComponent)}
-                    />
+                      <View style={styles.iconContainer2}>
+                        <Icon
+                          type="material-community"
+                          name="account-remove-outline"
+                          size={35}
+                          containerStyle={styles.delete}
+                          onPress={() => {
+                            pendingReq(item);
+                          }}
+                        />
+
+                        <Icon
+                          type="material-community"
+                          name="account-search-outline"
+                          size={35}
+                          containerStyle={styles.eye}
+                          onPress={console.log(selectComponent)}
+                        />
+                      </View>
+                    </View>
                   </View>
-                ) : (
-                  <View style={styles.iconContainer}>
-                    <Icon
-                      solid="true"
-                      type="material-community"
-                      name="account-check-outline"
-                      size={35}
-                      containerStyle={styles.accept}
-                      onPress={() => {
-                        acceptReq(item);
-                      }}
+                  <Button
+                    title={"Confirmar entrega"}
+                    containerStyle={styles.btnContainer}
+                    buttonStyle={styles.btnSolicitudes}
+                    onPress={() => {
+                      console.log("Confirmar");
+                      //confirmReq(item)
+                    }}
+                  />
+                </>
+              ) : (
+                <>
+                  <View style={styles.objeto}>
+                    <Avatar
+                      size="large"
+                      icon={{ type: "material", name: "person" }}
+                      source={avatarUri(item.foto)}
+                      containerStyle={styles.imageContainer}
+                      avatarStyle={styles.image}
                     />
 
-                    <Icon
-                      type="material-community"
-                      name="account-remove-outline"
-                      size={35}
-                      containerStyle={styles.delete}
-                      onPress={() => {
-                        declineReq(item);
-                      }}
-                    />
+                    <View style={styles.container}>
+                      <View style={styles.informacion}>
+                        <Text style={styles.name}>
+                          {item.datosPersonales.nombre +
+                            " " +
+                            item.datosPersonales.apellido}
+                        </Text>
+                      </View>
 
-                    <Icon
-                      type="material-community"
-                      name="account-search-outline"
-                      size={35}
-                      containerStyle={styles.eye}
-                      onPress={console.log(selectComponent)}
-                    />
+                      <View style={styles.iconContainer}>
+                        <Icon
+                          solid="true"
+                          type="material-community"
+                          name="account-check-outline"
+                          size={35}
+                          containerStyle={styles.accept}
+                          onPress={() => {
+                            acceptReq(item);
+                          }}
+                        />
+
+                        <Icon
+                          type="material-community"
+                          name="account-remove-outline"
+                          size={35}
+                          containerStyle={styles.delete}
+                          onPress={() => {
+                            declineReq(item);
+                          }}
+                        />
+
+                        <Icon
+                          type="material-community"
+                          name="account-search-outline"
+                          size={35}
+                          containerStyle={styles.eye}
+                          onPress={console.log(selectComponent)}
+                        />
+                      </View>
+                    </View>
                   </View>
-                )}
-              </View>
+                </>
+              )}
             </View>
           );
         }}
@@ -196,3 +271,82 @@ export function UserRequests(props) {
     }
   }
 }
+/*
+return (
+  <View style={styles.screen}>
+    <FlatList
+      data={dato}
+      renderItem={({ item }) => {
+        console.log("idobjet " + item.idObjeto);
+        console.log("id userreq " + item.idUserReq);
+
+        // const peticion = doc.item.data();
+        //  require("../../../../assets/icon.png")
+        return (
+          <View style={styles.objeto}>
+            <Avatar
+              size="large"
+              icon={{ type: "material", name: "person" }}
+              source={avatarUri(item.foto)}
+              containerStyle={styles.imageContainer}
+              avatarStyle={styles.image}
+            />
+
+            <View style={styles.container}>
+              <View style={styles.informacion}>
+                <Text style={styles.name}>
+                  {item.datosPersonales.nombre +
+                    " " +
+                    item.datosPersonales.apellido}
+                </Text>
+              </View>
+
+              <View style={styles.iconContainer}>
+                <Icon
+                  solid="true"
+                  type="material-community"
+                  name="account-check-outline"
+                  size={35}
+                  containerStyle={styles.accept}
+                  onPress={() => {
+                    acceptReq(item);
+                  }}
+                />
+
+                <Icon
+                  type="material-community"
+                  name="account-remove-outline"
+                  size={35}
+                  containerStyle={styles.delete}
+                  onPress={() => {
+                    declineReq(item);
+                  }}
+                />
+
+                <Icon
+                  type="material-community"
+                  name="account-search-outline"
+                  size={35}
+                  containerStyle={styles.eye}
+                  onPress={console.log(selectComponent)}
+                />
+              </View>
+            </View>
+          </View>
+        );
+      }}
+    />
+    <Modal show={userModal}>
+      <Text>Información sobre el usuario</Text>
+      <Avatar
+        size="large"
+        icon={{ type: "material", name: "person" }}
+        containerStyle={styles.image}
+      />
+      <Text>Email</Text>
+      <Text>Telefono</Text>
+      <Text>Descripcion</Text>
+    </Modal>
+  </View>
+);
+*/

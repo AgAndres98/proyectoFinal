@@ -11,12 +11,15 @@ export const styles = StyleSheet.create({
     //alignItems: "center",
     justifyContent: "space-between",
   },
+  objetoContainer: {
+    flexDirection: "column",
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderRadius: 10,
+    backgroundColor: "#fff",
+  },
   objeto: {
     flexDirection: "row",
-    marginVertical: 10,
-    marginHorizontal: 20,
-    backgroundColor: "#fff",
-    borderRadius: 10,
   },
   imageContainer: {
     width: 140,
@@ -36,6 +39,13 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     //right: 40,
     fontSize: 18,
+  },
+  iconContainer2: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginRight: 15,
+    justifyContent: "space-around",
+    marginBottom: 10,
   },
 
   iconContainer: {
@@ -70,8 +80,16 @@ export const styles = StyleSheet.create({
     backgroundColor: "green",
     borderRadius: 10,
   },
-
-  containerIcons: {
-    //right: 45,
+  btnContainer: {
+    width: "100%",
+    marginTop: 5,
+  },
+  btnSolicitudes: {
+    borderRadius: 10,
+    borderTopWidth: 1,
+    borderTopColor: "#e3e3e3",
+    borderBottomWidth: 1,
+    borderBottomColor: "#e3e3e3",
+    backgroundColor: "#62BD60",
   },
 });
