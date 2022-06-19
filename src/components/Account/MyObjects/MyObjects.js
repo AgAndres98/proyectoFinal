@@ -107,6 +107,95 @@ export function MyObjects(props) {
           const objeto = doc.item.data();
           return (
             <View style={styles.objetoContainer}>
+              {objeto.status == "Aceptado" ? (
+                <>
+                  <View style={styles.objeto}>
+                    <Image
+                      source={{ uri: objeto.fotos[0] }}
+                      style={styles.image}
+                    />
+
+                    <View style={styles.container}>
+                      <Text style={styles.name}>{objeto.titulo}</Text>
+
+                      <View style={styles.descripcionContainer}>
+                        <Text style={styles.info}>{objeto.descripcion}</Text>
+                      </View>
+                    </View>
+                  </View>
+
+                  <View style={styles.content}>
+                    <Button
+                      title={"Objeto entregado"}
+                      containerStyle={styles.btnContainer}
+                      buttonStyle={styles.btnSolicitudes}
+                      disabled={true}
+                    />
+                  </View>
+                </>
+              ) : (
+                <>
+                  <View style={styles.objeto}>
+                    <Image
+                      source={{ uri: objeto.fotos[0] }}
+                      style={styles.image}
+                    />
+
+                    <View style={styles.container}>
+                      <Text style={styles.name}>{objeto.titulo}</Text>
+
+                      <SwitchBtn activa={objeto.activa} idObjeto={objeto.id} />
+
+                      <View style={styles.descripcionContainer}>
+                        <Text style={styles.info}>{objeto.descripcion}</Text>
+                      </View>
+
+                      <View style={styles.iconosContainer}>
+                        <Icon
+                          type="material-community"
+                          name="pencil-outline"
+                          size={35}
+                          containerStyle={styles.edit}
+                          onPress={() => {
+                            goToEdit(objeto.id);
+                          }}
+                        />
+
+                        <Icon
+                          type="material-community"
+                          name="delete-outline"
+                          size={35}
+                          containerStyle={styles.delete}
+                          onPress={() => {
+                            buttonDelete(objeto.id);
+                          }}
+                        />
+                      </View>
+                    </View>
+                  </View>
+
+                  <View style={styles.content}>
+                    <Button
+                      title={"Ver solicitudes"}
+                      containerStyle={styles.btnContainer}
+                      buttonStyle={styles.btnSolicitudes}
+                      onPress={() => {
+                        goToRequest(objeto.id, objeto.tipo);
+                      }}
+                    />
+                  </View>
+                </>
+              )}
+            </View>
+          );
+        }}
+      />
+    </View>
+  );
+}
+
+/*
+
               <View style={styles.objeto}>
                 <Image source={{ uri: objeto.fotos[0] }} style={styles.image} />
 
@@ -153,10 +242,4 @@ export function MyObjects(props) {
                   }}
                 />
               </View>
-            </View>
-          );
-        }}
-      />
-    </View>
-  );
-}
+              */
