@@ -88,53 +88,51 @@ export function ListObjects(props) {
     });
     setObjetosCompletos(objetosRefresh);
     setMasterObjetosCompletos(objetosRefresh);
-    wait(3500).then(() => setRefreshing(false));
+    wait(3500).then(() => {
+      setRefreshing(false);
+      setSearch("");
+    });
   }, [objetosRefresh]);
 
   return (
     <View style={{ flex: 1 }}>
+      <View style={styles.buscar}>
+        <Icon
+          type="material-community"
+          name="magnify"
+          color="#c2c2c2"
+          size={30}
+          style={styles.searchIcon}
+        />
+        <TextInput
+          style={styles.inputStyle}
+          onChangeText={(text) => searchFilterFunction(text)}
+          value={search}
+          underlineColorAndroid="transparent"
+          placeholder="Buscar objeto"
+        />
+        {search != "" && (
+          <Icon
+            type="material-community"
+            name="close"
+            color="black"
+            size={20}
+            containerStyle={styles.deleteContainer}
+            style={styles.deleteIcon}
+            onPress={() => {
+              setObjetosCompletos(masterObjetosCompletos);
+              setSearch("");
+            }}
+          />
+        )}
+      </View>
       {refreshing ? (
         <LoadingModal show text="Cargando" />
       ) : (
-        <View style={{ flex: 1 }}>
-          <ScrollView
-            style={{ height: "12%" }}
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
-          >
-            <View style={styles.buscar}>
-              <Icon
-                type="material-community"
-                name="magnify"
-                color="#c2c2c2"
-                size={30}
-                style={styles.searchIcon}
-              />
-              <TextInput
-                style={styles.inputStyle}
-                onChangeText={(text) => searchFilterFunction(text)}
-                value={search}
-                underlineColorAndroid="transparent"
-                placeholder="Buscar objeto"
-              />
-              {search != "" && (
-                <Icon
-                  type="material-community"
-                  name="close"
-                  color="black"
-                  size={20}
-                  containerStyle={styles.deleteContainer}
-                  style={styles.deleteIcon}
-                  onPress={() => {
-                    setObjetosCompletos(masterObjetosCompletos);
-                    setSearch("");
-                  }}
-                />
-              )}
-            </View>
-          </ScrollView>
+        <>
           <FlatList
+            refreshing={refreshing}
+            onRefresh={onRefresh}
             data={objetosCompletos}
             keyExtractor={(item, index) => index.toString()}
             renderItem={(doc) => {
@@ -158,7 +156,7 @@ export function ListObjects(props) {
             }}
             extraData={objetosCompletos}
           />
-        </View>
+        </>
       )}
     </View>
   );
