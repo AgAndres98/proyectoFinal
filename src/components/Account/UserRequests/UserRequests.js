@@ -144,25 +144,32 @@ export function UserRequests(props) {
 
   const confirmReq = async (dato) => {
     try {
+      //solicitud entregada
       /*
       const response = await getRequest(dato);
       forEach(response, async (item) => {
         await updateDoc(doc(db, "requests", item.id), {
           status: "Entregado",
         });
+      });*/
+      await updateDoc(doc(db, "requests", dato.id), {
+        status: "Entregado",
       });
-
+      //objeto entregado
+      await updateDoc(doc(db, "objetos", dato.idObjeto), {
+        status: "Entregado",
+        activa: false,
+      });
+      //favs eliminados
       const favoritesCollection = await getFavorites(dato);
 
       forEach(favoritesCollection, async (item) => {
         await deleteDoc(doc(db, "favorites", item.id));
       });
 
-
+      //reqs eliminadas
       await cancelAllReq(dato);
 
-
-      */
       Toast.show({
         type: "success",
         position: "bottom",

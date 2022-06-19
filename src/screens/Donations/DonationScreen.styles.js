@@ -20,10 +20,11 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     width: "94%",
     marginHorizontal: "3%",
-    borderRadius: 5,
     marginBottom: 10,
   },
   btn: {
+    borderRadius: 10,
+
     backgroundColor: "#62bd60",
   },
 });

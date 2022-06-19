@@ -107,7 +107,7 @@ export function MyObjects(props) {
           const objeto = doc.item.data();
           return (
             <View style={styles.objetoContainer}>
-              {objeto.status == "Aceptado" ? (
+              {objeto.status == "Entregado" ? (
                 <>
                   <View style={styles.objeto}>
                     <Image
