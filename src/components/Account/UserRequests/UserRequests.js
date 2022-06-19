@@ -177,6 +177,25 @@ export function UserRequests(props) {
     }
   };
 
+  const buttonDeclineReq = (dato) =>
+    Alert.alert(
+      "Rechazar solicitud",
+      "Al rechazar la solicitud ya no aparecera en el listado de solicitud. Atención, esto no es reversible. ",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancelar"),
+          style: "cancel",
+        },
+        {
+          text: "Si",
+          onPress: () => declineReq(dato),
+          style: "destructive",
+        },
+      ],
+      { cancelable: true }
+    );
+
   const declineReq = async (dato) => {
     try {
       const response = await getRequest(dato);
@@ -184,6 +203,12 @@ export function UserRequests(props) {
         await updateDoc(doc(db, "requests", item.id), {
           status: "Rechazado",
         });
+      });
+
+      Toast.show({
+        type: "success",
+        position: "bottom",
+        text1: "Se ha rechazado la solicitud",
       });
     } catch (error) {
       console.log(error);
@@ -310,7 +335,7 @@ export function UserRequests(props) {
                           size={35}
                           containerStyle={styles.delete}
                           onPress={() => {
-                            declineReq(item);
+                            buttonDeclineReq(item);
                           }}
                         />
 
