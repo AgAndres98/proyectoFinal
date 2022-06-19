@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Button } from "react-native-elements";
 import { useFormik } from "formik";
@@ -12,6 +12,7 @@ import {
   getDoc,
   onSnapshot,
   updateDoc,
+  setDoc
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db, screen } from "../../../../utils";
@@ -27,6 +28,8 @@ import {
 
 export function EditDonorQuestionnaireScreen() {
   const uid = getAuth().currentUser;
+  const [cuestionario, setCuestionario] = useState(null);
+
   useEffect(() => {
     const q = query(
       collection(db, "cuestionarioDonador"),
@@ -40,6 +43,8 @@ export function EditDonorQuestionnaireScreen() {
         const docSnap = await getDoc(docRef);
 
         const dato = docSnap.data();
+
+        setCuestionario(dato);
 
         formik.setFieldValue("incendios", dato.incendios);
         formik.setFieldValue("inundaciones", dato.inundaciones);
@@ -63,8 +68,15 @@ export function EditDonorQuestionnaireScreen() {
       try {
         const nuevaData = formValues;
 
+        if (cuestionario != null) {
+          await updateDoc(doc(db, "cuestionarioDonador", uid.uid), nuevaData);
+        }else {
+          nuevaData.idUsuario = uid.uid;
+          nuevaData.id = uid.uid;
+  
+          await setDoc(doc(db, "cuestionarioDonador", nuevaData.id), nuevaData);
+        }
 
-        await updateDoc(doc(db, "cuestionarioDonador", uid.uid), nuevaData);
 
         navigation.navigate(screen.account.account);
       } catch (error) {

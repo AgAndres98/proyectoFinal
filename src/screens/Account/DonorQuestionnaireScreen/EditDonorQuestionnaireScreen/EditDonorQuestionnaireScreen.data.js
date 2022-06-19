@@ -6,9 +6,9 @@ export function initialValues() {
         inundaciones: null,
         tsunamis: null,
         gente: null,
-        grupoFamiliar: null,
-        mayoresDeEdad: null,
-        cercania: null,
+        grupoFamiliar: "nada",
+        mayoresDeEdad: "nada",
+        cercania: "nada",
         idUsuario: null,
     };
 }

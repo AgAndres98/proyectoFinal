@@ -42,6 +42,7 @@ export function UserRequestsScreen(props) {
     setRefreshing(true);
     const auth = getAuth();
     getSolicitudes();
+
     getFormularioDonante(auth);
 
     ordenamientoPorMacheo();
