@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { styles } from "./UserRequests.styles";
 import { getAuth } from "firebase/auth";
 import { Modal } from "../../Shared";
-import { db } from "../../../utils";
+import { db, screen } from "../../../utils";
 import { size, forEach } from "lodash";
 import Toast from "react-native-toast-message";
 import {
@@ -76,6 +76,8 @@ export function UserRequests(props) {
         text1: "Solicitud pendiente",
         text2: "La solicitud se ha devuelto a estado pendiente",
       });
+
+      navigation.navigate(screen.account.myObjects);
     } catch (error) {
       console.log(error);
     }
@@ -115,6 +117,7 @@ export function UserRequests(props) {
         text1: "Solicitud aceptada",
         text2: "Al entregar el objeto confirme la entrega porfavor",
       });
+      navigation.navigate(screen.account.myObjects);
     } catch (error) {
       console.log(error);
     }
@@ -149,6 +152,13 @@ export function UserRequests(props) {
         });
       });
 
+      const favoritesCollection = await getFavorites(dato);
+
+      forEach(favoritesCollection, async (item) => {
+        await deleteDoc(doc(db, "favorites", item.id));
+      });
+
+
       await cancelAllReq(dato);
 
 
@@ -159,6 +169,7 @@ export function UserRequests(props) {
         text1: "Confirmación de entrega",
         text2: "¡Muchas gracias por ayudar!",
       });
+      navigation.navigate(screen.account.myObjects);
     } catch (error) {
       console.log(error);
     }
@@ -175,6 +186,16 @@ export function UserRequests(props) {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const getFavorites = async (dato) => {
+    const q = query(
+      collection(db, "favorites"),
+      where("idObjeto", "==", dato.idObjeto)
+    );
+
+    const result = await getDocs(q);
+    return result.docs;
   };
 
   const buttonDeclineReq = (dato) =>
@@ -210,6 +231,7 @@ export function UserRequests(props) {
         position: "bottom",
         text1: "Se ha rechazado la solicitud",
       });
+      navigation.navigate(screen.account.myObjects);
     } catch (error) {
       console.log(error);
     }
@@ -282,7 +304,9 @@ export function UserRequests(props) {
                           name="account-search-outline"
                           size={35}
                           containerStyle={styles.eye}
-                          onPress={console.log(selectComponent)}
+                          onPress={() => {
+                            console.log(selectComponent);
+                          }}
                         />
                       </View>
                     </View>
@@ -344,7 +368,9 @@ export function UserRequests(props) {
                           name="account-search-outline"
                           size={35}
                           containerStyle={styles.eye}
-                          onPress={console.log(selectComponent)}
+                          onPress={() => {
+                            console.log(selectComponent);
+                          }}
                         />
                       </View>
                     </View>

@@ -53,7 +53,8 @@ export function BtnRequest(props) {
   const addRequest = async () => {
     try {
       await queryDatosPersonales();
-      //const response = await getObject();
+      // const response = await getObject();
+      //await updateTest("add", response.solicitudes);
       //await updateSolicitudes("add", response.solicitudes);
     } catch (error) {
       onReload();
@@ -111,6 +112,21 @@ export function BtnRequest(props) {
   };
 
   const getObject = async () => {
+    // const objectRef = db.collection('cities').doc('DC');
+
+    console.log(idObjeto);
+    const docRef = doc(db, "objetos", idObjeto);
+    const docSnap = await getDoc(docRef);
+    const res = await docRef.update({
+      population: FieldValue.increment(50),
+    });
+    //const q = query(collection(db, "objetos"), where("id", "==", idObjeto));
+    //db, "objetos", idObjeto
+    //const result = await getDocs(q);
+    return docSnap;
+  };
+  /*
+  const getObject = async () => {
     console.log(idObjeto);
     const docRef = doc(db, "objetos", idObjeto);
     const docSnap = await getDoc(docRef);
@@ -118,6 +134,23 @@ export function BtnRequest(props) {
     //db, "objetos", idObjeto
     //const result = await getDocs(q);
     return docSnap;
+  };
+  */
+
+  const updateTest = async (tipo, value) => {
+    console.log(tipo + "-" + value.solicitudes);
+    if (tipo == "cancel") {
+      let cant = value.solicitudes - 1;
+      await updateDoc(doc(db, "objetos", idObjeto), {
+        solicitudes: cant,
+      });
+    } else {
+      console.log(value);
+      let cant = value.solicitudes + 1;
+      await updateDoc(doc(db, "objetos", idObjeto), {
+        solicitudes: cant,
+      });
+    }
   };
 
   const updateSolicitudes = async (tipo, value) => {

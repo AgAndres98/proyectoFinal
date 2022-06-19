@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     marginTop: 15,
     width: "50%",
   },
+
   switchView: {
     flexDirection: "row",
     alignItems: "center",
@@ -37,10 +38,12 @@ export const styles = StyleSheet.create({
   },
   name: {
     fontWeight: "bold",
+    fontSize: 18,
   },
   info: {
     color: "#828282",
     marginBottom: 30,
+    fontSize: 16,
   },
   delete: {
     borderWidth: 1,
