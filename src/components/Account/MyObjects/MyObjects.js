@@ -45,6 +45,12 @@ export function MyObjects(props) {
     });
   };
 
+  const goToEdit = (idObjeto) => {
+    navigation.navigate(screen.account.editObject, {
+      idObjeto: idObjeto,
+    });
+  };
+
   const getFavorites = async (idObjeto) => {
     const q = query(
       collection(db, "favorites"),
@@ -112,7 +118,7 @@ export function MyObjects(props) {
                       name="pencil-outline"
                       size={35}
                       containerStyle={styles.edit}
-                      // onPress={console.log("editar1")}
+                      onPress={() => { goToEdit(objeto.id)}}
                     />
 
                     <Icon
