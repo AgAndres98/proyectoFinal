@@ -1,22 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, FlatList, TouchableOpacity } from "react-native";
 import { Image, Icon, Text } from "react-native-elements";
+import { forEach } from "lodash";
 import { useNavigation } from "@react-navigation/native";
 import { screen } from "./../../../utils";
 import { styles } from "./ListEvents.styles";
-import {CalendarView } from "../../../components/Calendar";
+import { CalendarView } from "../../../components/Calendar";
 
 export function ListEvents(props) {
   const { events } = props;
   const navigation = useNavigation();
+  let eventosFormateados = [];
+  let fechaFormateada = [];
+  let dates = {};
+
+  events.map(function (doc) {
+    eventosFormateados.push(doc.data());
+  });
+  forEach(eventosFormateados, async (item) => {
+    const date = new Date(item.fecha);
+
+    const dateDay = date.getDate();
+
+    const dateMonth = date.getMonth() + 1;
+
+    const dateYear = date.getFullYear();
+
+    item.fecha = `${dateYear}-${("0" + dateMonth).slice(-2)}-${(
+      "0" + dateDay
+    ).slice(-2)}`;
+    fechaFormateada.push(item.fecha);
+    // console.log(fechaFormateada);
+  });
+
+  fechaFormateada.forEach((val) => {
+    dates[val] = { selected: true, selectedColor: "#62bd60" };
+  });
 
   const goToEvent = (id) => {
     navigation.navigate(screen.calendar.eventsDetail, { id: id });
   };
 
   return (
-    <View style={{flex:1}}>
-      <CalendarView events={events}/>
+    <View style={{ flex: 1 }}>
+      <CalendarView events={events} dates={dates} />
       <FlatList
         data={events}
         renderItem={(doc) => {
