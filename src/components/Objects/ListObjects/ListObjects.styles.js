@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
   },
   informacion: {
+    width: "60%",
     marginVertical: 15,
     marginHorizontal: 5,
   },
@@ -34,7 +35,6 @@ export const styles = StyleSheet.create({
   },
   info: {
     color: "#828282",
-    paddingRight: 100,
     marginTop: 3,
   },
   scrollView: {

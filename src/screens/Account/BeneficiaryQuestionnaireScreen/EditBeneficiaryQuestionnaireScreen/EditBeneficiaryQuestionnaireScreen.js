@@ -108,7 +108,6 @@ export function EditBeneficiaryQuestionnaireScreen() {
       <KeyboardAwareScrollView>
         <View style={styles.content}>
           <BeneficiaryQuestionnaireForm formik={formik} />
-
           <Button
             title="Modificar"
             containerStyle={styles.btnContainer}

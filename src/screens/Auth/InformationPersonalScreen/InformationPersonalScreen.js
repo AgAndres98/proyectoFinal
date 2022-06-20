@@ -130,14 +130,14 @@ export function InformationPersonalScreen() {
             title="Donante"
             containerStyle={styles.btnContainer}
             buttonStyle={styles.btn}
-            onPress={cuestionarioDonante}
+            onPress={() => cuestionarioDonante()}
             loading={formik.isSubmitting}
           />
           <Button
             title="Beneficiario"
             containerStyle={styles.btnContainer}
             buttonStyle={styles.btn}
-            onPress={cuestionarioBeneficiario}
+            onPress={() => cuestionarioBeneficiario()}
             loading={formik.isSubmitting}
           />
         </View>
