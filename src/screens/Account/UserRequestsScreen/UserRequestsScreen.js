@@ -9,10 +9,11 @@ import {
   collection,
   onSnapshot,
 } from "firebase/firestore";
+import { size } from "lodash";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { forEach } from "lodash";
 import { db } from "../../../utils";
-import { LoadingModal } from "../../../components/Shared";
+import { LoadingModal, NotFound } from "../../../components/Shared";
 import { UserRequests } from "../../../components/Account";
 import { styles } from "./UserRequestsScreen.styles";
 
@@ -33,10 +34,9 @@ export function UserRequestsScreen(props) {
 
   const [refreshing, setRefreshing] = useState(false);
 
-
   const wait = (timeout) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  }
+    return new Promise((resolve) => setTimeout(resolve, timeout));
+  };
 
   useEffect(() => {
     setRefreshing(true);
@@ -267,13 +267,15 @@ export function UserRequestsScreen(props) {
     });
   };
 
+  if (refreshing) return <LoadingModal show text="Cargando" />;
+
+  if (size(dato) === 0) {
+    return <NotFound texto={"No tienes ninguna solicitud"} />;
+  }
+
   return (
     <View style={styles.content}>
-      {refreshing ? (
-        <LoadingModal show text="Cargando" />
-      ) : (
-        <UserRequests dato={dato} />
-      )}
+      <UserRequests dato={dato} />
     </View>
   );
 }
