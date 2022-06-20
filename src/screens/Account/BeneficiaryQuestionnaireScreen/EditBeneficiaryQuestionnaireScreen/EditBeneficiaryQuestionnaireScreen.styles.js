@@ -8,8 +8,8 @@ export const styles = StyleSheet.create({
   },
   content: {
     backgroundColor: "#fff",
-    marginVertical: 10,
     marginHorizontal: 15,
+    marginVertical: 15,
     borderRadius: 10,
   },
   contentBtn: {
@@ -21,6 +21,7 @@ export const styles = StyleSheet.create({
     width: "90%",
     borderRadius: 10,
     marginBottom: 10,
+    marginLeft: 20,
   },
   btn: {
     backgroundColor: "#62bd60",

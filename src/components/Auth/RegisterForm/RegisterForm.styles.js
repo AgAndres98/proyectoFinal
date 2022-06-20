@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
     width: "95%",
   },
   btn: {
+    borderRadius: 10,
     backgroundColor: "#62bd60",
   },
 });

@@ -22,8 +22,8 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 50,
     padding: 15,
-    top: -120,
-    right: 30,
+    top: -140,
+    right: 10,
   },
   description: {
     color: "#828282",

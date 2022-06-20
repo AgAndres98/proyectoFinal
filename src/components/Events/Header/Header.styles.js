@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   content: {
     marginHorizontal: 15,
-    marginTop: 15,
+    marginTop: 20,
   },
   titleView: {
     flexDirection: "row",

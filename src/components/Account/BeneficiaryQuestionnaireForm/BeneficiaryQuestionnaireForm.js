@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView, Alert } from "react-native";
+import { View, Text, ScrollView, Alert, TouchableOpacity } from "react-native";
 import { Icon, Avatar } from "react-native-elements";
 import { Input } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
@@ -174,20 +174,23 @@ export function BeneficiaryQuestionnaireForm(props) {
           <Picker.Item label="Inundación" value="inundacion" />
           <Picker.Item label="Situación de calle" value="gente" />
         </Picker>
-        <Input
-          placeholder={
-            formik.values.ubicacion
-              ? "Ubicación registrada"
-              : "Ingrese ubicación"
-          }
-          editable={false}
-          rightIcon={{
-            type: "material-community",
-            name: "map-marker-radius",
-            color: getColorIconoMapa(formik),
-            onPress: onOpenCloseMap,
-          }}
-        />
+        <TouchableOpacity onPress={onOpenCloseMap}>
+          <Input
+            placeholder={
+              formik.values.ubicacion
+                ? "Ubicación registrada"
+                : "Ingrese ubicación"
+            }
+            editable={false}
+            rightIcon={{
+              type: "material-community",
+              name: "map-marker-radius",
+              color: getColorIconoMapa(formik),
+              onPress: onOpenCloseMap,
+            }}
+          />
+        </TouchableOpacity>
+
         <Text style={styles.tituloNecesidad}>¿Cuales son tus necesidades?</Text>
         <View style={{ flex: 1, flexDirection: "row" }}>
           <View style={styles.section}>
