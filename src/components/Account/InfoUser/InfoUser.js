@@ -13,7 +13,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { db } from "../../../utils";
-import { Loading, LoadingModal } from "../../../components/Shared";
+import { Loading } from "../../../components/Shared";
 import { styles } from "./InfoUser.styles";
 import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 

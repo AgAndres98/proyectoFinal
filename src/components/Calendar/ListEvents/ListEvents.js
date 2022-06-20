@@ -19,6 +19,12 @@ export function ListEvents(props) {
         data={events}
         renderItem={(doc) => {
           const event = doc.item.data();
+          const date = new Date(event.fecha);
+          const dateDay = date.getDate();
+          const dateMonth = date.getMonth() + 1;
+          const dateYear = date.getFullYear();
+
+          const dateFormatted = `${dateDay}/${dateMonth}/${dateYear}`;
           return (
             <TouchableOpacity
               onPress={() => {
@@ -29,7 +35,7 @@ export function ListEvents(props) {
                 <Image source={{ uri: event.fotos[0] }} style={styles.image} />
                 <View style={styles.infoContent}>
                   <Text style={styles.name}>{event.titulo}</Text>
-                  <Text style={styles.fecha}>{event.fecha}</Text>
+                  <Text style={styles.fecha}>{dateFormatted}</Text>
 
                   <Text style={styles.descripcion}>{event.descripcion}</Text>
 
