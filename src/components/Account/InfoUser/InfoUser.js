@@ -13,7 +13,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { db } from "../../../utils";
-import { Loading } from "../../../components/Shared";
+import { Loading, LoadingModal } from "../../../components/Shared";
 import { styles } from "./InfoUser.styles";
 import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 
@@ -44,7 +44,7 @@ export function InfoUser(props) {
     });
     return () => {
       setState({});
-    }
+    };
   }, []);
 
   const changeAvatar = async () => {
@@ -82,7 +82,12 @@ export function InfoUser(props) {
     setLoading(false);
   };
 
-  if (!datos) return <Loading show text="Cargando" />;
+  if (!datos)
+    return (
+      <View style={styles.loading}>
+        <Loading show text="Cargando" />
+      </View>
+    );
 
   return (
     <View style={styles.content}>

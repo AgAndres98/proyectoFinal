@@ -23,7 +23,9 @@ export function UserLoggedScreen() {
       <InfoUser setLoading={loadingText} setloadingText={setLoadingText} />
 
       <AccountOptions onReload={onReload} />
-      <LoadingModal show={setLoading} text={loading} />
+      {
+        //<LoadingModal show={setLoading} text={loading} />
+      }
       <Button
         title={"Cerrar sesión"}
         containerStyle={styles.btnContainer}

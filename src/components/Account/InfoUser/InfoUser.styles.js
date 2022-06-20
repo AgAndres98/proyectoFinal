@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  loading: {
+    height: 135,
+    paddingVertical: 30,
+  },
   content: {
     alignItems: "center",
     justifyContent: "center",
