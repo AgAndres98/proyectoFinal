@@ -8,7 +8,7 @@ export function initialValues(dato) {
         telefono: "",
         email: "",
         direccion: "",
-        ubicacion: null,
+        ubicacion: "",
         fecha: "",
         fotos: [],
         idUsuario: "",
@@ -30,13 +30,5 @@ export function validationSchem() {
         email: Yup.string()
             .email("El email no es válido")
             .required("El email es obligatorio"),
-        direccion: Yup.string()
-            .required("Campo obligatorio")
-            .max(140, "Tiene más de 140 caracteres"),
-        ubicacion: Yup.object().required("La localización es obligatoria"),
-        fecha: Yup.string().required("La fecha es obligatoria"),
-        fotos: Yup.array()
-            .min(1, "Se requiere una foto como minimo")
-            .required("La foto es requerida"),
     });
 }

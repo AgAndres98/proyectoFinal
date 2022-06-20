@@ -63,6 +63,14 @@ export function EditEventCard(props) {
         />
 
         <Input
+          placeholder="Direccion"
+          value={formik.values.direccion}
+          multiline={true}
+          onChangeText={(text) => formik.setFieldValue("direccion", text)}
+          errorMessage={formik.errors.direccion}
+        />
+
+        <Input
           placeholder="Número de celular"
           keyboardType="number-pad"
           onChangeText={(text) => formik.setFieldValue("telefono", text)}

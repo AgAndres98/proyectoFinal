@@ -1,7 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollView, View } from "react-native";
 import { Button, Text } from "react-native-elements";
 import { useFormik } from "formik";
+import Toast from "react-native-toast-message";
+import { EditEventCard } from "../../../../components/Admin/EditEventCard/EditEventCard";
+import { UploadImageForm } from "../../../../components/Donation/UploadImage/UploadImageForm";
+import { ImageObject } from "../../../../components/Donation/ImageObject/ImageObject";
+import { styles } from "./EditEventScreen.style";
 import {
   doc,
   query,
@@ -12,26 +17,27 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
-import Toast from "react-native-toast-message";
 import { db, screen } from "../../../../utils";
 import { initialValues, validationSchem } from "./EditEventScreen.data";
-import { EditEventCard } from "../../../../components/Admin";
-import { UploadImageForm, ImageObject } from "../../../../components/Donation";
-import { styles } from "./EditEventScreen.style";
+
+
+
+let evento = [];
 
 export function EditEventScreen(props) {
   const { route } = props;
-
-  const idEvento = route.params.idEvento;
-  console.log(route.params.idEvento);
+  const [state, setState] = useState({});
 
   useEffect(() => {
-    const q = query(collection(db, "eventos"), where("id", "==", idEvento));
+    const q = query(
+      collection(db, "eventos"),
+      where("id", "==", route.params.idEvento)
+    );
 
     onSnapshot(q, async (snapshot) => {
       for await (const item of snapshot.docs) {
         const data = item.data();
-        const docRef = doc(db, "eventos", idEvento);
+        const docRef = doc(db, "eventos", route.params.idEvento);
         const docSnap = await getDoc(docRef);
 
         const dato = docSnap.data();
@@ -44,8 +50,13 @@ export function EditEventScreen(props) {
         formik.setFieldValue("ubicacion", dato.ubicacion);
         formik.setFieldValue("fotos", dato.fotos);
         formik.setFieldValue("id", dato.id);
+        formik.setFieldValue("direccion", dato.direccion);
       }
     });
+
+    return () => {
+      setState({}); // This worked for me
+    };
   }, []);
 
   const navigation = useNavigation();
@@ -57,15 +68,13 @@ export function EditEventScreen(props) {
     onSubmit: async (formValues) => {
       try {
         const nuevaData = formValues;
-        //ARREGLAR ACA
-        await updateDoc(doc(db, "eventos", idEvento), nuevaData);
 
+        await updateDoc(doc(db, "eventos", route.params.idEvento), nuevaData);
         Toast.show({
           type: "success",
           position: "bottom",
           text1: "Evento editado",
         });
-
         navigation.navigate(screen.account.account);
       } catch (error) {
         console.log(error);
@@ -82,7 +91,7 @@ export function EditEventScreen(props) {
         <UploadImageForm formik={formik} />
 
         <Button
-          title="Editar evento"
+          title="Editar objeto"
           containerStyle={styles.btnContainer}
           buttonStyle={styles.btn}
           onPress={formik.handleSubmit}
