@@ -4,6 +4,7 @@ import { Image, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { screen } from "./../../../utils";
 import { styles } from "./ListEvents.styles";
+import {CalendarView } from "../../../components/Calendar";
 
 export function ListEvents(props) {
   const { events } = props;
@@ -14,7 +15,8 @@ export function ListEvents(props) {
   };
 
   return (
-    <View>
+    <View style={{flex:1}}>
+      <CalendarView events={events}/>
       <FlatList
         data={events}
         renderItem={(doc) => {
