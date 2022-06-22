@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Input } from "react-native-elements";
 import { MapForm } from "../../Donation/MapForm";
 import { Picker } from "@react-native-picker/picker";
@@ -10,7 +10,7 @@ export function EditEventCard(props) {
   const { formik } = props;
 
   const [showMap, setShowMap] = useState(false);
-  const [date, setDate] = useState(new Date(Date.now()));
+  const [date, setDate] = useState(new Date());
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [selectObjecto, setSelectObjecto] = useState();
 
@@ -21,6 +21,8 @@ export function EditEventCard(props) {
   const onChange = (event, value) => {
     setIsPickerShow(false);
     setDate(value);
+    console.log(value);
+
     formik.setFieldValue("fecha", value.toLocaleDateString("en-GB"));
     if (Platform.OS === "android") {
       setIsPickerShow(false);
@@ -39,13 +41,7 @@ export function EditEventCard(props) {
           onChangeText={(text) => formik.setFieldValue("titulo", text)}
           errorMessage={formik.errors.titulo}
         />
-        <Input
-          placeholder="Descripción"
-          value={formik.values.descripcion}
-          multiline={true}
-          onChangeText={(text) => formik.setFieldValue("descripcion", text)}
-          errorMessage={formik.errors.descripcion}
-        />
+
         <Input
           placeholder="Organizador"
           value={formik.values.organizador}
@@ -54,6 +50,20 @@ export function EditEventCard(props) {
           errorMessage={formik.errors.organizador}
         />
 
+        <Input
+          placeholder="Descripción"
+          value={formik.values.descripcion}
+          multiline={true}
+          onChangeText={(text) => formik.setFieldValue("descripcion", text)}
+          errorMessage={formik.errors.descripcion}
+        />
+        <Input
+          placeholder="Número de celular"
+          keyboardType="number-pad"
+          value={formik.values.telefono}
+          onChangeText={(text) => formik.setFieldValue("telefono", text)}
+          errorMessage={formik.errors.telefono}
+        />
         <Input
           placeholder="Email"
           value={formik.values.email}
@@ -70,30 +80,42 @@ export function EditEventCard(props) {
           errorMessage={formik.errors.direccion}
         />
 
-        <Input
-          placeholder="Número de celular"
-          keyboardType="number-pad"
-          onChangeText={(text) => formik.setFieldValue("telefono", text)}
-          errorMessage={formik.errors.telefono}
-        />
+        <TouchableOpacity onPress={onOpenCloseMap}>
+          <Input
+            placeholder={
+              formik.values.ubicacion
+                ? "Ubicación registrada"
+                : "Ingrese ubicación"
+            }
+            editable={false}
+            rightIcon={{
+              type: "material-community",
+              name: "map-marker-radius",
+              color: getColorIconoMapa(formik),
+              onPress: onOpenCloseMap,
+            }}
+          />
+        </TouchableOpacity>
 
-        <Input
-          placeholder="Fecha"
-          value={formik.values.fecha}
-          disabled={true}
-          rightIcon={{
-            type: "material-community",
-            name: "calendar",
-            color: "#62bd60",
-            onPress: showPicker,
-          }}
-          errorMessage={formik.errors.fecha}
-        />
+        <TouchableOpacity onPress={showPicker}>
+          <Input
+            placeholder="Fecha"
+            value={formik.values.fecha}
+            disabled={true}
+            rightIcon={{
+              type: "material-community",
+              name: "calendar",
+              color: "#62bd60",
+              onPress: showPicker,
+            }}
+            errorMessage={formik.errors.fecha}
+          />
+        </TouchableOpacity>
 
         {/* The date picker */}
         {isPickerShow && (
           <DateTimePicker
-            value={date}
+            value={new Date()}
             mode={"date"}
             minimumDate={new Date()}
             display={Platform.OS === "ios" ? "spinner" : "default"}
@@ -101,21 +123,6 @@ export function EditEventCard(props) {
             style={styles.datePicker}
           />
         )}
-
-        <Input
-          placeholder={
-            formik.values.ubicacion
-              ? "Ubicación registrada"
-              : "Ingrese ubicación"
-          }
-          editable={false}
-          rightIcon={{
-            type: "material-community",
-            name: "map-marker-radius",
-            color: getColorIconoMapa(formik),
-            onPress: onOpenCloseMap,
-          }}
-        />
       </View>
       <MapForm show={showMap} close={onOpenCloseMap} formik={formik} />
     </>

@@ -20,13 +20,12 @@ import { useNavigation } from "@react-navigation/native";
 import { db, screen } from "../../../../utils";
 import { initialValues, validationSchem } from "./EditEventScreen.data";
 
-
-
 let evento = [];
 
 export function EditEventScreen(props) {
   const { route } = props;
   const [state, setState] = useState({});
+  let event;
 
   useEffect(() => {
     const q = query(
@@ -52,6 +51,14 @@ export function EditEventScreen(props) {
         formik.setFieldValue("fotos", dato.fotos);
         formik.setFieldValue("id", dato.id);
         formik.setFieldValue("direccion", dato.direccion);
+        event = dato.fecha;
+        const date = new Date(event);
+        const dateDay = date.getDate();
+        const dateMonth = date.getMonth() + 1;
+        const dateYear = date.getFullYear();
+
+        const dateFormatted = `${dateYear}-${dateMonth}-${dateDay}T23:58:58.110Z`;
+        //console.log(dateFormatted);
       }
     });
 
@@ -71,7 +78,6 @@ export function EditEventScreen(props) {
         const nuevaData = formValues;
 
         nuevaData.fechaDate = new Date(nuevaData.fecha + " 23:59:59");
-
 
         await updateDoc(doc(db, "eventos", route.params.idEvento), nuevaData);
         Toast.show({
@@ -95,7 +101,7 @@ export function EditEventScreen(props) {
         <UploadImageForm formik={formik} />
 
         <Button
-          title="Editar objeto"
+          title="Editar evento"
           containerStyle={styles.btnContainer}
           buttonStyle={styles.btn}
           onPress={formik.handleSubmit}
