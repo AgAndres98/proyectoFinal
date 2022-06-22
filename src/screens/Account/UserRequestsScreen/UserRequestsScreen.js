@@ -58,7 +58,7 @@ export function UserRequestsScreen(props) {
       return 0;
     });
     setDato(arrayOrdenado);
-    wait(5000).then(() => setRefreshing(false));
+    wait(3000).then(() => setRefreshing(false));
   }, [listaSolicitudes]);
 
   const eliminarRepetidos = (a, key) => {
