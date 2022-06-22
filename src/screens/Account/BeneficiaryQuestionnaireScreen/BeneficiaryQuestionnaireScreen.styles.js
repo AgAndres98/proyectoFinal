@@ -3,6 +3,8 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   screen: {
     backgroundColor: "#F4F4FC",
+    height: "100%",
+    width: "100%",
   },
   content: {
     backgroundColor: "#fff",
@@ -13,7 +15,7 @@ export const styles = StyleSheet.create({
   btnContainer: {
     marginTop: 20,
     width: "90%",
-    marginHorizontal: "20%",
+    marginHorizontal: "5%",
     marginBottom: 10,
   },
   btn: {
