@@ -79,7 +79,7 @@ export function EditEventCard(props) {
 
         <Input
           placeholder="Fecha"
-          value={date.toLocaleDateString("en-GB")}
+          value={formik.values.fecha}
           disabled={true}
           rightIcon={{
             type: "material-community",

@@ -47,6 +47,7 @@ export function EditEventScreen(props) {
         formik.setFieldValue("organizador", dato.organizador);
         formik.setFieldValue("email", dato.email);
         formik.setFieldValue("telefono", dato.telefono);
+        formik.setFieldValue("fecha", dato.fecha);
         formik.setFieldValue("ubicacion", dato.ubicacion);
         formik.setFieldValue("fotos", dato.fotos);
         formik.setFieldValue("id", dato.id);
@@ -68,6 +69,9 @@ export function EditEventScreen(props) {
     onSubmit: async (formValues) => {
       try {
         const nuevaData = formValues;
+
+        nuevaData.fechaDate = new Date(nuevaData.fecha + " 23:59:59");
+
 
         await updateDoc(doc(db, "eventos", route.params.idEvento), nuevaData);
         Toast.show({
