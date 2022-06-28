@@ -14,6 +14,14 @@ export function DonationObjectCard(props) {
 
   const onOpenCloseMap = () => setShowMap((prevState) => !prevState);
 
+  const [element,setElement] = useState(true)
+
+
+  const updateElement= () => {
+      setElement(true);
+      
+ };
+ 
   return (
     <>
       <View style={styles.contentAdentro}>
@@ -54,8 +62,9 @@ export function DonationObjectCard(props) {
           selectedValue={formik.values.tipo}
           style={styles.selectDeObjeto}
           onValueChange={(itemValue, itemIndex) =>
-            formik.setFieldValue("tipo", itemValue)
-          }
+            formik.setFieldValue("tipo", itemValue) 
+          } 
+          
         >
           <Picker.Item label="Alimento" value="Alimento" />
           <Picker.Item label="Electrodoméstico" value="Electrodoméstico" />
@@ -69,8 +78,16 @@ export function DonationObjectCard(props) {
           <Picker.Item label="Salud" value="Salud" />
           <Picker.Item label="Servicio" value="Servicio" />
           <Picker.Item label="Utiles escolares" value="Utiles escolares" />
-          <Picker.Item label="Otro" value="Otro" />
+          <Picker.Item label="Otro" value="Otro"  />
         </Picker>
+        <Input
+          style={showInput(element)}
+          placeholder="Especifique Otro"
+          value={formik.values.otro}
+          multiline={true}
+          onChangeText={(text) => formik.setFieldValue("otro", text)}
+          errorMessage={formik.errors.otro}
+        />
       </View>
       <MapForm show={showMap} close={onOpenCloseMap} formik={formik} />
     </>
@@ -84,3 +101,13 @@ const getColorIconoMapa = (formik) => {
 
   return "#c2c2c2";
 };
+
+
+function showInput(element){
+  if(element){ 
+   return styles.hiddenInput
+  }else{
+    return styles.showInput
+  }
+
+}

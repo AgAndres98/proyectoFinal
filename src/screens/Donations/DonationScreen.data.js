@@ -7,6 +7,7 @@ export function initialValues() {
     ubicacion: null,
     tipo: "Ropa",
     fotos: [],
+    otro:"",
     activa: true,
     idUsuario: "",
   };
@@ -24,5 +25,8 @@ export function validationSchem() {
     fotos: Yup.array()
       .min(1, "Se requiere una foto como minimo")
       .required("La foto es requerida"),
+    otro:Yup.string()
+      .required("Campo obligatorio")
+      .max(30, "Tiene más de 30 caracteres"),
   });
 }

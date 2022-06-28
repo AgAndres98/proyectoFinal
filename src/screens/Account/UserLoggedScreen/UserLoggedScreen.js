@@ -20,7 +20,7 @@ export function UserLoggedScreen() {
 
   return (
     <View style={styles.screen}>
-      <InfoUser setLoading={loadingText} setloadingText={setLoadingText} />
+      <InfoUser setLoading={setLoading} setLoadingText={setLoadingText} />
 
       <AccountOptions onReload={onReload} />
       {
@@ -32,6 +32,7 @@ export function UserLoggedScreen() {
         buttonStyle={styles.btnLogout}
         onPress={logOut}
       />
+      <LoadingModal show={loading} text={loadingText}/>
     </View>
   );
 }

@@ -57,8 +57,8 @@ export function InfoUser(props) {
   };
 
   const uploadImage = async (uri) => {
-    // setLoadingText("Actualizando Avatar");
-    //setLoading(true);
+    setLoadingText("Actualizando Avatar");
+    setLoading(true);
 
     const response = await fetch(uri);
     const blob = await response.blob();
@@ -82,12 +82,14 @@ export function InfoUser(props) {
     setLoading(false);
   };
 
+
   if (!datos)
     return (
       <View style={styles.loading}>
         <Loading show text="Cargando" />
       </View>
     );
+
 
   return (
     <View style={styles.content}>

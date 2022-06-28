@@ -32,5 +32,15 @@ export const styles = StyleSheet.create({
   selectDeObjeto: {
     borderWidth: 20,
     color: "grey",
+  },
+  hiddenInput: {
+    width: 0,
+    height: 0,
+    display:"none",
+  },
+  showInput: {
+    width: 0,
+    height: 0,
+   
   }
 });
