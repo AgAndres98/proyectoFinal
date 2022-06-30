@@ -73,7 +73,7 @@ export function MyObjects(props) {
   };
 
   const onRemoveObject = async (id) => {
-    console.log(id);
+
     try {
       const favoritesCollection = await getFavorites(id);
 

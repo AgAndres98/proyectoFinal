@@ -30,7 +30,7 @@ export function ListEvents(props) {
       "0" + dateDay
     ).slice(-2)}`;
     fechaFormateada.push(item.fecha);
-    // console.log(fechaFormateada);
+
   });
 
   fechaFormateada.forEach((val) => {

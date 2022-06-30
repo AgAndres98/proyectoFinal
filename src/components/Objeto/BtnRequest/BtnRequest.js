@@ -73,7 +73,7 @@ export function BtnRequest(props) {
       id: idRequest,
       idObjeto,
       idUsuario,
-      tipo: tipo,
+      tipo,
       idUserReq: auth.currentUser.uid,
       datosPersonales: dato,
       status: "Pendiente",

@@ -12,8 +12,8 @@ export function ListEvents(props) {
   const navigation = useNavigation();
 
   const goEditEvent = (idEvento) => {
-    console.log(idEvento);
-    console.log("dentro de navegacion");
+
+
     navigation.navigate(screen.account.editEvent, {
       idEvento: idEvento,
     });
