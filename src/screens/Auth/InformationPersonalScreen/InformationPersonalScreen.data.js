@@ -8,6 +8,7 @@ export function initialValues() {
     fechaNacimiento: "",
     celular: "",
     idUsuario: "",
+    email: "",
     cuestionarioBeneficiario: [],
   };
 }

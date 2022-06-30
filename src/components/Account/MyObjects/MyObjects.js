@@ -99,6 +99,8 @@ export function MyObjects(props) {
     }
   };
 
+
+
   return (
     <View style={styles.screen}>
       <FlatList

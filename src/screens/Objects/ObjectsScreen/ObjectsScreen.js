@@ -38,7 +38,7 @@ export function ObjectsScreen(props) {
       {!objects ? (
         <LoadingModal show text="Cargando" />
       ) : (
-          <ListObjects objects={objects} />
+        <ListObjects objects={objects} />
       )}
     </View>
   );

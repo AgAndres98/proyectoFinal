@@ -33,7 +33,7 @@ export function UserRequests(props) {
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  const selectComponent = () => {};
+  const selectComponent = () => { };
 
   // Create a reference to the file we want to download
 
@@ -257,6 +257,11 @@ export function UserRequests(props) {
     return result.docs;
   };
 
+  const goToUser = (id) => {
+    console.log(id);
+    navigation.navigate(screen.account.DetailUser, { id: id });
+  };
+
   return (
     <View style={styles.screen}>
       <FlatList
@@ -303,7 +308,7 @@ export function UserRequests(props) {
                           size={35}
                           containerStyle={styles.eye}
                           onPress={() => {
-                            console.log(selectComponent);
+                            goToUser(item.idUserReq);
                           }}
                         />
                       </View>
@@ -367,7 +372,7 @@ export function UserRequests(props) {
                           size={35}
                           containerStyle={styles.eye}
                           onPress={() => {
-                            console.log(selectComponent);
+                            goToUser(item.idUserReq);
                           }}
                         />
                       </View>

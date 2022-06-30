@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 import { Button } from "react-native-elements";
+import Toast from "react-native-toast-message";
 import { getAuth } from "firebase/auth";
 import {
   doc,
@@ -14,12 +15,15 @@ import {
   onSnapshot,
   updateDoc,
 } from "firebase/firestore";
-import { db } from "../../../utils";
+import { db, screen } from "../../../utils";
 import { v4 as uuid } from "uuid";
 import { size, forEach } from "lodash";
 import { styles } from "./BtnRequest.styles";
+import { useNavigation } from "@react-navigation/native";
+
 
 export function BtnRequest(props) {
+  const navigation = useNavigation();
   const { idObjeto, idUsuario } = props;
   const auth = getAuth();
   const [isRequested, setIsRequested] = useState(undefined);
@@ -169,9 +173,71 @@ export function BtnRequest(props) {
     }
   };
 
+
+  const buttonDelete = (idObjeto) =>
+    Alert.alert(
+      "Eliminar objeto",
+      "¿Esta seguro que desea eliminar este objeto?",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancelar"),
+          style: "cancel",
+        },
+        {
+          text: "Si",
+          onPress: () => onRemoveObject(idObjeto),
+          style: "destructive",
+        },
+      ],
+      { cancelable: true }
+    );
+
+
+
+  const getFavorites = async (idObjeto) => {
+    const q = query(
+      collection(db, "favorites"),
+      where("idObjeto", "==", idObjeto)
+    );
+
+    const result = await getDocs(q);
+    return result.docs;
+  };
+
+
+  const onRemoveObject = async (id) => {
+    console.log(id);
+    try {
+      const favoritesCollection = await getFavorites(id);
+
+      forEach(favoritesCollection, async (item) => {
+        await deleteDoc(doc(db, "favorites", item.id));
+      });
+
+      const requestsCollection = await getRequested(id);
+
+      forEach(requestsCollection, async (item) => {
+        await deleteDoc(doc(db, "requests", item.id));
+      });
+
+      await deleteDoc(doc(db, "objetos", id));
+
+      Toast.show({
+        type: "success",
+        position: "bottom",
+        text1: "Objeto eliminado",
+      });
+
+      navigation.navigate(screen.objects.objects);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={styles.content}>
-      {isRequested !== undefined && auth.currentUser.uid !== idUsuario && (
+      {isRequested !== undefined && auth.currentUser.uid !== idUsuario && auth.currentUser.email !== "exporeact.ayudar@gmail.com" && (
         <Button
           title={isRequested ? "Cancelar solicitud" : "Solicitar objeto"}
           containerStyle={styles.btnContainer}
@@ -179,6 +245,19 @@ export function BtnRequest(props) {
           onPress={isRequested ? cancelRequest : addRequest}
         />
       )}
+
+
+      {auth.currentUser.email == "exporeact.ayudar@gmail.com" && (
+        <Button
+          title={"Eliminar objeto"}
+          containerStyle={styles.btnContainer}
+          buttonStyle={styles.btnCancel}
+          onPress={() => {
+            buttonDelete(idObjeto);
+          }}
+        />
+      )}
     </View>
   );
 }
+

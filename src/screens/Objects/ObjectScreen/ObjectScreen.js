@@ -11,6 +11,8 @@ import {
 } from "../../../components/Objeto";
 import { styles } from "./ObjectScreen.styles";
 
+
+
 const { width } = Dimensions.get("window");
 
 export function ObjectScreen(props) {
@@ -23,6 +25,9 @@ export function ObjectScreen(props) {
       setObjeto(doc.data());
     });
   }, [route.params.id]);
+
+
+
 
   if (!objeto) return <Loading show text="Cargando objeto" />;
 
@@ -38,6 +43,8 @@ export function ObjectScreen(props) {
         idUsuario={objeto.idUsuario}
         style={styles.container}
       />
+
+
     </ScrollView>
   );
 }

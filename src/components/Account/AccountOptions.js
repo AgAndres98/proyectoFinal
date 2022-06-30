@@ -9,6 +9,7 @@ import { Modal } from "../../components/Shared";
 import { ChangeEmailForm } from "./ChangeEmailForm";
 import { ChangePasswordForm } from "./ChangePasswordForm";
 
+
 export function AccountOptions(props) {
   const { onReload } = props;
   const navigation = useNavigation();

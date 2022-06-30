@@ -11,6 +11,7 @@ export function Info(props) {
     <View style={styles.content}>
       <Text style={styles.title}>Información:</Text>
       <Map ubicacion={objeto.ubicacion} titulo={objeto.titulo} />
+
       {/*map(listInfo, (item, index) => (
         <ListItem key={index} bottomDivider>
           <Icon type={item.iconType} name={item.iconName} />
