@@ -10,6 +10,8 @@ export function initialValues() {
     otro: "",
     activa: true,
     idUsuario: "",
+    solicitudes: 0,
+    distancia: 0,
   };
 }
 

@@ -4,7 +4,7 @@ export function initialValues() {
 
 
     return {
-        motivo: null,
+        motivo: "incendio",
         descripcion: null,
         ubicacion: null,
         herramientas: null,
