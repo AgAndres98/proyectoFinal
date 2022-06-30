@@ -32,6 +32,13 @@ export function InformationPersonalScreen() {
   const [flagDonor, setFlagDonor] = useState(null);
 
   const navigation = useNavigation();
+
+  if (!datosPersonales) {
+    navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
+  } else {
+    navigation.getParent()?.setOptions({ tabBarStyle: { display: "flex" } });
+  }
+
   const auth = getAuth();
   const uid = auth.currentUser;
   useEffect(() => {
@@ -122,6 +129,7 @@ export function InformationPersonalScreen() {
         } else {
           navigation.navigate(screen.account.beneficiary);
         }
+
         setDatosPersonales(true);
       } catch (error) {
         console.log(error);
