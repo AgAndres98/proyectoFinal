@@ -29,10 +29,11 @@ let datosPer = [];
 
 export function InformationPersonalScreen() {
   const [datosPersonales, setDatosPersonales] = useState(false);
+  const [flagDonor, setFlagDonor] = useState(null);
+
   const navigation = useNavigation();
   const auth = getAuth();
   const uid = auth.currentUser;
-
   useEffect(() => {
     const q = query(collection(db, "datosPersonales"));
 
@@ -74,6 +75,7 @@ export function InformationPersonalScreen() {
     if (
       datosPer.find((elemento) => elemento === formik.values.dni) == undefined
     ) {
+      setFlagDonor(true);
       formik.handleSubmit();
     } else {
       Toast.show({
@@ -88,6 +90,7 @@ export function InformationPersonalScreen() {
     if (
       datosPer.find((elemento) => elemento === formik.values.dni) == undefined
     ) {
+      setFlagDonor(false);
       formik.handleSubmit();
     } else {
       Toast.show({
@@ -107,10 +110,18 @@ export function InformationPersonalScreen() {
         nuevaData.idUsuario = uid.uid;
         nuevaData.id = uid.uid;
         nuevaData.email = auth.currentUser.email;
-
+        if (flagDonor == true) {
+          nuevaData.rolInicial = "Donante";
+        } else if (flagDonor == false) {
+          nuevaData.rolInicial = "Beneficiario";
+        }
         await setDoc(doc(db, "datosPersonales", nuevaData.id), nuevaData);
 
-        navigation.navigate(screen.account.beneficiary);
+        if (nuevaData.rolInicial == "Donante") {
+          navigation.navigate(screen.account.donador);
+        } else {
+          navigation.navigate(screen.account.beneficiary);
+        }
         setDatosPersonales(true);
       } catch (error) {
         console.log(error);
