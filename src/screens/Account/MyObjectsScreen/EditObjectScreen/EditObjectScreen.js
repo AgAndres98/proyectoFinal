@@ -50,6 +50,7 @@ export function EditObjectScreen(props) {
         formik.setFieldValue("activa", dato.activa);
         formik.setFieldValue("idUsuario", dato.idUsuario);
         formik.setFieldValue("id", dato.id);
+        formik.setFieldValue("distancia", dato.distancia);
       }
     });
 

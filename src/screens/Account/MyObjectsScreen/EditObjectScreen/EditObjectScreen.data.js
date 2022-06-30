@@ -9,6 +9,7 @@ export function initialValues(dato) {
     fotos: [],
     activa: null,
     idUsuario: null,
+    distancia: 0,
   };
 }
 

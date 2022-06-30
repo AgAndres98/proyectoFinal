@@ -7,6 +7,7 @@ import { getAuth } from "firebase/auth";
 import { Modal } from "../../Shared";
 import { db, screen } from "../../../utils";
 import { size, forEach } from "lodash";
+import { v4 as uuid } from "uuid";
 import Toast from "react-native-toast-message";
 import {
   doc,
@@ -26,6 +27,7 @@ export function UserRequests(props) {
 
   const { dato } = props;
   // const { idUsuario } = dato;
+  const auth = getAuth();
   const { photoURL } = getAuth();
 
   const navigation = useNavigation();
@@ -33,7 +35,7 @@ export function UserRequests(props) {
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  const selectComponent = () => { };
+  const selectComponent = () => {};
 
   // Create a reference to the file we want to download
 
@@ -160,6 +162,17 @@ export function UserRequests(props) {
 
       await cancelAllReq(dato);
 
+      const idDelivered = uuid();
+      const data = {
+        id: idDelivered,
+        idReq: dato.id,
+        idObjeto: dato.idObjeto,
+        idUserDonator: auth.currentUser.uid,
+        idUserReq: dato.idUserReq,
+      };
+
+      await setDoc(doc(db, "delivered", idDelivered), data);
+
       Toast.show({
         type: "success",
         position: "bottom",
@@ -180,7 +193,6 @@ export function UserRequests(props) {
       forEach(response, async (item) => {
         await deleteDoc(doc(db, "requests", item.id));
       });
-      onReload();
     } catch (error) {
       console.log(error);
     }
