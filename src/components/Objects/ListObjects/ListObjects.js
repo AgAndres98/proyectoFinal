@@ -47,7 +47,7 @@ export function ListObjects(props) {
   }, []);
 
   const goToObject = (objeto) => {
-    navigation.navigate(screen.objects.objeto, { id: objeto.id });
+    navigation.navigate(screen.objects.objeto, { id: objeto.id, tipo: objeto.tipo });
   };
 
   const searchFilterFunction = (text) => {
