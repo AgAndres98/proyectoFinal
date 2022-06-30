@@ -30,8 +30,8 @@ let datosPer = [];
 export function InformationPersonalScreen() {
   const [datosPersonales, setDatosPersonales] = useState(false);
   const navigation = useNavigation();
-
-  const uid = getAuth().currentUser;
+  const auth = getAuth();
+  const uid = auth.currentUser;
 
   useEffect(() => {
     const q = query(collection(db, "datosPersonales"));
@@ -75,8 +75,6 @@ export function InformationPersonalScreen() {
       datosPer.find((elemento) => elemento === formik.values.dni) == undefined
     ) {
       formik.handleSubmit();
-      navigation.navigate(screen.account.donador);
-      setDatosPersonales(true);
     } else {
       Toast.show({
         type: "error",
@@ -91,8 +89,6 @@ export function InformationPersonalScreen() {
       datosPer.find((elemento) => elemento === formik.values.dni) == undefined
     ) {
       formik.handleSubmit();
-      navigation.navigate(screen.account.beneficiary);
-      setDatosPersonales(true);
     } else {
       Toast.show({
         type: "error",
@@ -110,8 +106,12 @@ export function InformationPersonalScreen() {
         const nuevaData = formValues;
         nuevaData.idUsuario = uid.uid;
         nuevaData.id = uid.uid;
+        nuevaData.email = auth.currentUser.email;
 
         await setDoc(doc(db, "datosPersonales", nuevaData.id), nuevaData);
+
+        navigation.navigate(screen.account.beneficiary);
+        setDatosPersonales(true);
       } catch (error) {
         console.log(error);
       }
