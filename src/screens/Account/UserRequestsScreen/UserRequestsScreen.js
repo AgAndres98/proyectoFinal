@@ -16,11 +16,14 @@ import { db } from "../../../utils";
 import { LoadingModal, NotFound } from "../../../components/Shared";
 import { UserRequests } from "../../../components/Account";
 import { styles } from "./UserRequestsScreen.styles";
+import { getDistance } from "geolib";
 
 export function UserRequestsScreen(props) {
   const { route } = props;
 
   const [listaSolicitudes, setListaSolicitudes] = useState([]);
+
+  const [listaSolicitudesSinRepeticion, setListaSolicitudesSinRepeticion] = useState([]);
 
   let solicitud = [];
 
@@ -44,6 +47,8 @@ export function UserRequestsScreen(props) {
     getSolicitudes();
 
     getFormularioDonante(auth);
+
+    //setListaSolicitudesSinRepeticion(eliminarRepetidos(listaSolicitudes, it => it.idUsuario))
 
     ordenamientoPorMacheo();
 
@@ -182,6 +187,41 @@ export function UserRequestsScreen(props) {
             formularioDonante.grupoFamiliar == "una"
               ? (item.puntuacion += 5)
               : "";
+          }
+          if (
+            item.datosPersonales.cuestionarioBeneficiario.ubicacion !== null
+          ) {
+            const metros = getDistance(
+              {
+                latitude:
+                  item.datosPersonales.cuestionarioBeneficiario.ubicacion
+                    .latitude,
+                longitude:
+                  item.datosPersonales.cuestionarioBeneficiario.ubicacion
+                    .longitude,
+              },
+              {
+                latitude: route.params.ubicacionObjeto.latitude,
+                longitude: route.params.ubicacionObjeto.longitude,
+              }
+            );
+            const km = Math.round((metros / 1000) * 10) / 10;
+            console.log(km);
+            if (formularioDonante.cercania == "nada") {
+              item.puntuacion += 10;
+            } else {
+              if (km < 2 && formularioDonante.cercania == "-2") {
+                item.puntuacion += 10;
+              } else {
+                if (km < 5 && formularioDonante.cercania == "2y5") {
+                  item.puntuacion += 10;
+                } else {
+                  if (km >= 5 && formularioDonante.cercania == "+5") {
+                    item.puntuacion += 10;
+                  }
+                }
+              }
+            }
           }
         }
         arrayOrdenado.push(item);
