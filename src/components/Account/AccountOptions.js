@@ -8,9 +8,11 @@ import { screen } from "./../../utils";
 import { Modal } from "../../components/Shared";
 import { ChangeEmailForm } from "./ChangeEmailForm";
 import { ChangePasswordForm } from "./ChangePasswordForm";
+import { Estadistica } from "../../screens/Estadistica";
 
 
 export function AccountOptions(props) {
+
   const { onReload } = props;
   const navigation = useNavigation();
 
@@ -48,6 +50,10 @@ export function AccountOptions(props) {
 
     if (key === "editBeneficiary") {
       navigation.navigate(screen.account.editBeneficiary);
+    }
+    if (key === "estadisticas") {
+      setRenderComponent(<Estadistica onClose={onCloseOpenModal} />);
+      onCloseOpenModal();
     }
   };
 
@@ -114,6 +120,13 @@ function getMenuOptions(selectedComponent) {
       iconNameRight: "arrow-right",
       iconColorRight: "#62bd60",
       onPress: () => selectedComponent("editDonnor"),
+    },
+    {
+      title: "Ver estadisticas",
+      iconType: "material-community",
+      iconNameRight: "arrow-right",
+      iconColorRight: "#62bd60",
+      onPress: () => selectedComponent("estadisticas"),
     },
   ];
 }

@@ -35,7 +35,7 @@ export function UserRequests(props) {
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  const selectComponent = () => {};
+  const selectComponent = () => { };
 
   // Create a reference to the file we want to download
 
@@ -167,6 +167,7 @@ export function UserRequests(props) {
         id: idDelivered,
         idReq: dato.id,
         idObjeto: dato.idObjeto,
+        tipo: dato.tipo,
         idUserDonator: auth.currentUser.uid,
         idUserReq: dato.idUserReq,
       };
