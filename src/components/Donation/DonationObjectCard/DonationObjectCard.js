@@ -81,7 +81,7 @@ export function DonationObjectCard(props) {
           <Picker.Item label="Utiles escolares" value="Utiles escolares" />
           <Picker.Item label="Otro" value="Otro"  />
         </Picker>
-      
+      <InputAutoComplete/>
       </View>
       <MapForm show={showMap} close={onOpenCloseMap} formik={formik} />
     </>

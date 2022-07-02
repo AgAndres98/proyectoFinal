@@ -1,31 +1,48 @@
 import React, { useState,useEffect } from 'react';
-import { View, Text } from 'react-native';
 import { collection, doc, getDoc, onSnapshot, query } from "firebase/firestore";
+import { AutocompleteDropdown } from 'react-native-autocomplete-dropdown';
+import {db} from "../../../utils";
 
-export function inputAutoComplete(){
-    const[datos,setDatos]=useState([]);
+export  function InputAutoComplete(){
+  const[datos,setDatos]=useState(null);
 
-    useEffect(()=>{
-        const q=query(collection(db,"Otros"),
-        );
-        onSnapshot(q,(snapshot)=>{
-            setDatos(snapshot.docs);
-        });
+  useEffect(()=>{
+    const q=query(collection(db,"Otros"),
+    );
+    onSnapshot(q,(snapshot)=>{
+        setDatos(snapshot.docs);
+    });
     },[]);
-    console.log(datos.docs);
 
-  return (
-    <View>
-      <Autocomplete
-         disablePortal
-         id="combo-box-demo"
-         getOptionLabel={(datos)=>'$datos.nombre'}
-         options={datos}
-         sx={{ width: 300 }}
-         isOptionEqualToValue={(option,value)=>option.nombre===value.nombre}
-        renderInput={(params) => <TextField {...params} label="Otros" />}
-        noOptionsText={"No hay coincidencias"}
-       />
-    </View>
-  )
+    {
+      id: 'some uniq string id';
+      title: 'list item title';
+  }
+
+
+   const [selectedItem, setSelectedItem] = useState(null);
+
+   return(
+   <AutocompleteDropdown
+     clearOnFocus={false}
+       closeOnBlur={true}
+         closeOnSubmit={false}
+           initialValue={{ id: '2' }} // or just '2'
+             onSelectItem={setSelectedItem}
+               dataSet={[
+                   { id: '1', title: 'Alpha' },
+                       { id: '2', title: 'Beta' },
+                           { id: '3', title: 'Gamma' },
+                             ]}
+                             />
+   );
+
+
 }
+
+
+
+
+    
+
+
