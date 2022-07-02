@@ -63,7 +63,7 @@ export function UserRequestsScreen(props) {
       return 0;
     });
     setDato(arrayOrdenado);
-    wait(3000).then(() => setRefreshing(false));
+    wait(4000).then(() => setRefreshing(false));
   }, [listaSolicitudes]);
 
   const eliminarRepetidos = (a, key) => {
@@ -315,7 +315,7 @@ export function UserRequestsScreen(props) {
 
   return (
     <View style={styles.content}>
-      <UserRequests dato={dato} />
+      <UserRequests dato={dato} solicitudesObjeto={route.params.solicitudesObjeto} idObjeto={route.params.idObjeto} />
     </View>
   );
 }

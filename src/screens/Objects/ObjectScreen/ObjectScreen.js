@@ -43,6 +43,7 @@ export function ObjectScreen(props) {
       <BtnRequest
         idObjeto={route.params.id}
         tipo={tipo}
+        solicitudesObjeto={objeto.solicitudes}
         idUsuario={objeto.idUsuario}
         style={styles.container}
       />

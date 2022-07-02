@@ -39,11 +39,13 @@ export function MyObjects(props) {
       { cancelable: true }
     );
 
-  const goToRequest = (idObjeto, tipoObjeto, ubicacionObjeto) => {
+  const goToRequest = (idObjeto, tipoObjeto, ubicacionObjeto, solicitudesObjeto) => {
+    console.log(solicitudesObjeto)
     navigation.navigate(screen.account.userRequests, {
       idObjeto: idObjeto,
       tipoObjeto: tipoObjeto,
       ubicacionObjeto: ubicacionObjeto,
+      solicitudesObjeto: solicitudesObjeto,
     });
   };
 
@@ -183,7 +185,7 @@ export function MyObjects(props) {
                       containerStyle={styles.btnContainer}
                       buttonStyle={styles.btnSolicitudes}
                       onPress={() => {
-                        goToRequest(objeto.id, objeto.tipo, objeto.ubicacion);
+                        goToRequest(objeto.id, objeto.tipo, objeto.ubicacion, objeto.solicitudes);
                       }}
                     />
                   </View>

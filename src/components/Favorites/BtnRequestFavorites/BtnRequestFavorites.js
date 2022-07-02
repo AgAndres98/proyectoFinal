@@ -12,25 +12,32 @@ import {
   deleteDoc,
   onSnapshot,
   getDoc,
+  updateDoc
 } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import { size, forEach } from "lodash";
 import { db } from "../../../utils";
 import { styles } from "./BtnRequestFavorites.styles";
-
+let valor = 0;
 export function BtnRequestFavorites(props) {
-  const { idObjeto, idUsuario } = props;
+  const { idObjeto, idUsuario, solicitudesObjeto } = props;
   const auth = getAuth();
   const [isRequested, setIsRequested] = useState(undefined);
   const [isReload, setIsReload] = useState(false);
+  const [flag, isFlag] = useState(true)
+  
 
   useEffect(() => {
     (async () => {
       const response = await getRequested();
 
+      valor=valor+1;
+      console.log(valor);
       if (size(response) > 0) {
+        valor === 1 ? isFlag(true) : "";
         setIsRequested(true);
       } else {
+        valor === 1 ? isFlag(false) : "";
         setIsRequested(false);
       }
     })();
@@ -52,6 +59,18 @@ export function BtnRequestFavorites(props) {
   const addRequest = async () => {
     try {
       await queryDatosPersonales();
+      if(flag === true){
+        await updateDoc(doc(db, "objetos", idObjeto), {
+          solicitudes: solicitudesObjeto,
+        });
+      }
+      else{
+        await updateDoc(doc(db, "objetos", idObjeto), {
+          solicitudes: solicitudesObjeto+1,
+        });
+      }
+
+      onReload();
     } catch (error) {
       onReload();
       console.log(error);
@@ -65,6 +84,16 @@ export function BtnRequestFavorites(props) {
       forEach(response, async (item) => {
         await deleteDoc(doc(db, "requests", item.id));
       });
+      if(flag === true){
+        await updateDoc(doc(db, "objetos", idObjeto), {
+          solicitudes: solicitudesObjeto - 1,
+        });
+      }
+      else{
+        await updateDoc(doc(db, "objetos", idObjeto), {
+          solicitudes: solicitudesObjeto,
+        });
+      }
       onReload();
     } catch (error) {
       console.log(error);

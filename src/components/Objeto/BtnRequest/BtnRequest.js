@@ -24,7 +24,7 @@ import { useNavigation } from "@react-navigation/native";
 
 export function BtnRequest(props) {
   const navigation = useNavigation();
-  const { idObjeto, idUsuario, tipo } = props;
+  const { idObjeto, idUsuario, tipo, solicitudesObjeto } = props;
   const auth = getAuth();
   const [isRequested, setIsRequested] = useState(undefined);
   const [isReload, setIsReload] = useState(false);
@@ -32,6 +32,7 @@ export function BtnRequest(props) {
   useEffect(() => {
     (async () => {
       const response = await getRequested();
+      console.log(response);
 
       if (size(response) > 0) {
         setIsRequested(true);
@@ -57,6 +58,9 @@ export function BtnRequest(props) {
   const addRequest = async () => {
     try {
       await queryDatosPersonales();
+      await updateDoc(doc(db, "objetos", idObjeto), {
+        solicitudes: solicitudesObjeto +1,
+      });
       // const response = await getObject();
       //await updateTest("add", response.solicitudes);
       //await updateSolicitudes("add", response.solicitudes);
@@ -105,6 +109,10 @@ export function BtnRequest(props) {
 
       forEach(response, async (item) => {
         await deleteDoc(doc(db, "requests", item.id));
+      });
+
+      await updateDoc(doc(db, "objetos", idObjeto), {
+        solicitudes: solicitudesObjeto - 1,
       });
 
       //const objeto = await getObject();

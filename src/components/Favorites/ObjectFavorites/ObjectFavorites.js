@@ -43,6 +43,7 @@ export function ObjectFavorites(props) {
 
         <BtnRequestFavorites
           idObjeto={objeto.id}
+          solicitudesObjeto={objeto.solicitudes}
           idUsuario={objeto.idUsuario}
           style={styles.container}
         />

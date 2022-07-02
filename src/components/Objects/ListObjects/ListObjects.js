@@ -46,14 +46,21 @@ export function ListObjects(props) {
   useEffect(() => {
     if(formulario !== undefined){
       objects.map(function (doc) {
-        const metros = getDistance(
-          { latitude: formulario.ubicacion.latitude, longitude: formulario.ubicacion.longitude },
-          { latitude: doc.data().ubicacion.latitude, longitude: doc.data().ubicacion.longitude }
-        );
-        const dato = doc.data();
-        dato.distancia = Math.round((metros/1000) * 10) / 10;
-        console.log(dato)
-        objetos.push(dato);
+        if(formulario.ubicacion !== null ){
+          const metros = getDistance(
+            { latitude: formulario.ubicacion.latitude, longitude: formulario.ubicacion.longitude },
+            { latitude: doc.data().ubicacion.latitude, longitude: doc.data().ubicacion.longitude }
+          );
+          const dato = doc.data();
+          dato.distancia = Math.round((metros/1000) * 10) / 10;
+          objetos.push(dato);
+        }
+        else{
+          const dato = doc.data();
+          objetos.push(dato);
+        }
+        
+        
       });
       setObjetosCompletos(objetos);
       setMasterObjetosCompletos(objetos);
