@@ -11,6 +11,7 @@ import {
   query,
   where,
   onSnapshot,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../../../utils";
 import { Loading } from "../../../components/Shared";
@@ -77,7 +78,13 @@ export function InfoUser(props) {
     const imageUrl = await getDownloadURL(imageRef);
     const auth = getAuth();
     updateProfile(auth.currentUser, { photoURL: imageUrl });
+   
+    const updateRef = doc(db, "datosPersonales", "imagePath");
 
+      // Set the "capital" field of the city 'DC'
+      await updateDoc(updateRef, {
+        imagen: true
+        });
     setAvatar(imageUrl);
     setLoading(false);
   };

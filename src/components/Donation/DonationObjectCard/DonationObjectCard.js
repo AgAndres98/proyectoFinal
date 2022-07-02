@@ -4,6 +4,7 @@ import { Input } from "react-native-elements";
 import { MapForm } from "../MapForm";
 import { Picker } from "@react-native-picker/picker";
 import { styles } from "./DonationObjectCard.styles";
+import {InputAutoComplete} from "../InputAutoComplete";
 
 export function DonationObjectCard(props) {
   const { formik } = props;
@@ -80,14 +81,7 @@ export function DonationObjectCard(props) {
           <Picker.Item label="Utiles escolares" value="Utiles escolares" />
           <Picker.Item label="Otro" value="Otro"  />
         </Picker>
-        <Input
-          style={showInput(element)}
-          placeholder="Especifique Otro"
-          value={formik.values.otro}
-          multiline={true}
-          onChangeText={(text) => formik.setFieldValue("otro", text)}
-          errorMessage={formik.errors.otro}
-        />
+      
       </View>
       <MapForm show={showMap} close={onOpenCloseMap} formik={formik} />
     </>
@@ -103,11 +97,3 @@ const getColorIconoMapa = (formik) => {
 };
 
 
-function showInput(element){
-  if(element){ 
-   return styles.hiddenInput
-  }else{
-    return styles.showInput
-  }
-
-}
