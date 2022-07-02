@@ -25,7 +25,8 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 export function UserRequests(props) {
   const [userModal, setUserModal] = useState(false);
 
-  const { dato } = props;
+  const { dato, solicitudesObjeto, idObjeto } = props;
+
   // const { idUsuario } = dato;
   const auth = getAuth();
   const { photoURL } = getAuth();
@@ -235,6 +236,11 @@ export function UserRequests(props) {
         await updateDoc(doc(db, "requests", item.id), {
           status: "Rechazado",
         });
+      });
+
+      
+      await updateDoc(doc(db, "objetos", idObjeto), {
+        solicitudes: solicitudesObjeto -1,
       });
 
       Toast.show({
