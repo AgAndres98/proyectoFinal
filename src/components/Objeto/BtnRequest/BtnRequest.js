@@ -21,7 +21,6 @@ import { size, forEach } from "lodash";
 import { styles } from "./BtnRequest.styles";
 import { useNavigation } from "@react-navigation/native";
 
-
 export function BtnRequest(props) {
   const navigation = useNavigation();
   const { idObjeto, idUsuario, tipo, solicitudesObjeto } = props;
@@ -59,7 +58,7 @@ export function BtnRequest(props) {
     try {
       await queryDatosPersonales();
       await updateDoc(doc(db, "objetos", idObjeto), {
-        solicitudes: solicitudesObjeto +1,
+        solicitudes: solicitudesObjeto + 1,
       });
       // const response = await getObject();
       //await updateTest("add", response.solicitudes);
@@ -73,6 +72,8 @@ export function BtnRequest(props) {
   const cargarRequest = async (dato) => {
     const idRequest = uuid();
     onReload();
+    let createdAt = new Date();
+
     const data = {
       id: idRequest,
       idObjeto,
@@ -81,6 +82,7 @@ export function BtnRequest(props) {
       idUserReq: auth.currentUser.uid,
       datosPersonales: dato,
       status: "Pendiente",
+      createdAt: createdAt,
     };
     await setDoc(doc(db, "requests", idRequest), data);
   };
@@ -127,7 +129,6 @@ export function BtnRequest(props) {
   const getObject = async () => {
     // const objectRef = db.collection('cities').doc('DC');
 
-
     const docRef = doc(db, "objetos", idObjeto);
     const docSnap = await getDoc(docRef);
     const res = await docRef.update({
@@ -151,14 +152,12 @@ export function BtnRequest(props) {
   */
 
   const updateTest = async (tipo, value) => {
-
     if (tipo == "cancel") {
       let cant = value.solicitudes - 1;
       await updateDoc(doc(db, "objetos", idObjeto), {
         solicitudes: cant,
       });
     } else {
-
       let cant = value.solicitudes + 1;
       await updateDoc(doc(db, "objetos", idObjeto), {
         solicitudes: cant,
@@ -167,21 +166,18 @@ export function BtnRequest(props) {
   };
 
   const updateSolicitudes = async (tipo, value) => {
-
     if (tipo == "cancel") {
       let cant = value.solicitudes - 1;
       await updateDoc(doc(db, "objetos", idObjeto), {
         solicitudes: cant,
       });
     } else {
-
       let cant = value.solicitudes + 1;
       await updateDoc(doc(db, "objetos", idObjeto), {
         solicitudes: cant,
       });
     }
   };
-
 
   const buttonDelete = (idObjeto) =>
     Alert.alert(
@@ -202,8 +198,6 @@ export function BtnRequest(props) {
       { cancelable: true }
     );
 
-
-
   const getFavorites = async (idObjeto) => {
     const q = query(
       collection(db, "favorites"),
@@ -214,9 +208,7 @@ export function BtnRequest(props) {
     return result.docs;
   };
 
-
   const onRemoveObject = async (id) => {
-
     try {
       const favoritesCollection = await getFavorites(id);
 
@@ -246,15 +238,16 @@ export function BtnRequest(props) {
 
   return (
     <View style={styles.content}>
-      {isRequested !== undefined && auth.currentUser.uid !== idUsuario && auth.currentUser.email !== "exporeact.ayudar@gmail.com" && (
-        <Button
-          title={isRequested ? "Cancelar solicitud" : "Solicitar objeto"}
-          containerStyle={styles.btnContainer}
-          buttonStyle={isRequested ? styles.btnCancel : styles.btnReq}
-          onPress={isRequested ? cancelRequest : addRequest}
-        />
-      )}
-
+      {isRequested !== undefined &&
+        auth.currentUser.uid !== idUsuario &&
+        auth.currentUser.email !== "exporeact.ayudar@gmail.com" && (
+          <Button
+            title={isRequested ? "Cancelar solicitud" : "Solicitar objeto"}
+            containerStyle={styles.btnContainer}
+            buttonStyle={isRequested ? styles.btnCancel : styles.btnReq}
+            onPress={isRequested ? cancelRequest : addRequest}
+          />
+        )}
 
       {auth.currentUser.email == "exporeact.ayudar@gmail.com" && (
         <Button
@@ -269,4 +262,3 @@ export function BtnRequest(props) {
     </View>
   );
 }
-

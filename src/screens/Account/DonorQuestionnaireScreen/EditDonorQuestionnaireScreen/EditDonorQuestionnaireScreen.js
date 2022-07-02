@@ -12,7 +12,7 @@ import {
   getDoc,
   onSnapshot,
   updateDoc,
-  setDoc
+  setDoc,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db, screen } from "../../../../utils";
@@ -23,8 +23,6 @@ import {
   initialValues,
   validationSchem,
 } from "./EditDonorQuestionnaireScreen.data";
-
-
 
 export function EditDonorQuestionnaireScreen() {
   const uid = getAuth().currentUser;
@@ -70,13 +68,13 @@ export function EditDonorQuestionnaireScreen() {
 
         if (cuestionario != null) {
           await updateDoc(doc(db, "cuestionarioDonador", uid.uid), nuevaData);
-        }else {
+        } else {
           nuevaData.idUsuario = uid.uid;
           nuevaData.id = uid.uid;
-  
+          nuevaData.createdAt = new Date();
+
           await setDoc(doc(db, "cuestionarioDonador", nuevaData.id), nuevaData);
         }
-
 
         navigation.navigate(screen.account.account);
       } catch (error) {

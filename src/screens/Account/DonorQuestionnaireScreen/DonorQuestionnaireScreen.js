@@ -27,6 +27,7 @@ export function DonorQuestionnaireScreen() {
         const nuevaData = formValues;
         nuevaData.idUsuario = uid.uid;
         nuevaData.id = uid.uid;
+        nuevaData.createdAt = new Date();
 
         await setDoc(doc(db, "cuestionarioDonador", nuevaData.id), nuevaData);
 

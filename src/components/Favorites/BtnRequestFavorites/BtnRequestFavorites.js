@@ -12,7 +12,7 @@ import {
   deleteDoc,
   onSnapshot,
   getDoc,
-  updateDoc
+  updateDoc,
 } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import { size, forEach } from "lodash";
@@ -24,14 +24,13 @@ export function BtnRequestFavorites(props) {
   const auth = getAuth();
   const [isRequested, setIsRequested] = useState(undefined);
   const [isReload, setIsReload] = useState(false);
-  const [flag, isFlag] = useState(true)
-  
+  const [flag, isFlag] = useState(true);
 
   useEffect(() => {
     (async () => {
       const response = await getRequested();
 
-      valor=valor+1;
+      valor = valor + 1;
       console.log(valor);
       if (size(response) > 0) {
         valor === 1 ? isFlag(true) : "";
@@ -59,14 +58,13 @@ export function BtnRequestFavorites(props) {
   const addRequest = async () => {
     try {
       await queryDatosPersonales();
-      if(flag === true){
+      if (flag === true) {
         await updateDoc(doc(db, "objetos", idObjeto), {
           solicitudes: solicitudesObjeto,
         });
-      }
-      else{
+      } else {
         await updateDoc(doc(db, "objetos", idObjeto), {
-          solicitudes: solicitudesObjeto+1,
+          solicitudes: solicitudesObjeto + 1,
         });
       }
 
@@ -84,12 +82,11 @@ export function BtnRequestFavorites(props) {
       forEach(response, async (item) => {
         await deleteDoc(doc(db, "requests", item.id));
       });
-      if(flag === true){
+      if (flag === true) {
         await updateDoc(doc(db, "objetos", idObjeto), {
           solicitudes: solicitudesObjeto - 1,
         });
-      }
-      else{
+      } else {
         await updateDoc(doc(db, "objetos", idObjeto), {
           solicitudes: solicitudesObjeto,
         });
@@ -121,6 +118,7 @@ export function BtnRequestFavorites(props) {
   const cargarRequest = async (dato) => {
     const idRequest = uuid();
     onReload();
+    let createdAt = new Date();
     const data = {
       id: idRequest,
       idObjeto,
@@ -128,6 +126,7 @@ export function BtnRequestFavorites(props) {
       idUserReq: auth.currentUser.uid,
       datosPersonales: dato,
       status: "Pendiente",
+      createdAt: createdAt,
     };
     await setDoc(doc(db, "requests", idRequest), data);
   };

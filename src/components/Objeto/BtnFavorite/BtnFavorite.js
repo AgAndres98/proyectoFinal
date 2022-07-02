@@ -51,10 +51,13 @@ export function BtnFavorite(props) {
   const addFavorite = async () => {
     try {
       const idFavorite = uuid();
+      let createdAt = new Date();
+
       const data = {
         id: idFavorite,
         idObjeto,
         idUser: auth.currentUser.uid,
+        createdAt: createdAt,
       };
 
       await setDoc(doc(db, "favorites", idFavorite), data);

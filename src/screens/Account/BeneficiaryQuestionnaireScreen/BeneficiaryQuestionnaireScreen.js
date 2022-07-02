@@ -7,9 +7,7 @@ import { doc, setDoc, updateDoc, onSnapshot } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 import { getAuth } from "firebase/auth";
 import { db, screen } from "../../../utils";
-import {
-  BeneficiaryQuestionnaireForm
-} from "../../../components/Account/BeneficiaryQuestionnaireForm";
+import { BeneficiaryQuestionnaireForm } from "../../../components/Account/BeneficiaryQuestionnaireForm";
 import {
   initialValues,
   validationSchem,
@@ -41,6 +39,7 @@ export function BeneficiaryQuestionnaireScreen() {
         const nuevaData = formValues;
         nuevaData.idUsuario = uid.uid;
         nuevaData.id = uid.uid;
+        nuevaData.createdAt = new Date();
 
         await setDoc(
           doc(db, "cuestionarioBeneficiario", nuevaData.id),

@@ -87,6 +87,8 @@ export function EditBeneficiaryQuestionnaireScreen() {
         } else {
           nuevaData.idUsuario = uid.uid;
           nuevaData.id = uid.uid;
+          nuevaData.createdAt = new Date();
+
           await setDoc(
             doc(db, "cuestionarioBeneficiario", nuevaData.id),
             nuevaData
