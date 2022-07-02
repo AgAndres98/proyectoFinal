@@ -79,12 +79,7 @@ export function InfoUser(props) {
     const auth = getAuth();
     updateProfile(auth.currentUser, { photoURL: imageUrl });
    
-    const updateRef = doc(db, "datosPersonales", "imagePath");
-
-      // Set the "capital" field of the city 'DC'
-      await updateDoc(updateRef, {
-        imagen: true
-        });
+   db.collection('datosPersonales')
     setAvatar(imageUrl);
     setLoading(false);
   };

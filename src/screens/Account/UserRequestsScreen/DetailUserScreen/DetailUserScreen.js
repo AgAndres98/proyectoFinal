@@ -22,7 +22,7 @@ export function DetailUserScreen(props) {
   }, [route.params.id]);
 
   if (!usuario) return <Loading show text="Cargando usuario" />;
-  console.log(usuario.fotos);
+
   return (
     <ScrollView style={styles.content}>
       <Carousel arrayImages={usuario.cuestionarioBeneficiario.fotos} height={330} width={width} />

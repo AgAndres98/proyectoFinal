@@ -105,7 +105,6 @@ export function AccountStack() {
           title: "Detalle usuario",
         }}
       />
-
     </Stack.Navigator>
   );
 }

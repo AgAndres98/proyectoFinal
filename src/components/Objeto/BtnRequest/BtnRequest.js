@@ -24,7 +24,7 @@ import { useNavigation } from "@react-navigation/native";
 
 export function BtnRequest(props) {
   const navigation = useNavigation();
-  const { idObjeto, idUsuario } = props;
+  const { idObjeto, idUsuario, tipo } = props;
   const auth = getAuth();
   const [isRequested, setIsRequested] = useState(undefined);
   const [isReload, setIsReload] = useState(false);
@@ -73,6 +73,7 @@ export function BtnRequest(props) {
       id: idRequest,
       idObjeto,
       idUsuario,
+      tipo,
       idUserReq: auth.currentUser.uid,
       datosPersonales: dato,
       status: "Pendiente",
@@ -118,7 +119,7 @@ export function BtnRequest(props) {
   const getObject = async () => {
     // const objectRef = db.collection('cities').doc('DC');
 
-    console.log(idObjeto);
+
     const docRef = doc(db, "objetos", idObjeto);
     const docSnap = await getDoc(docRef);
     const res = await docRef.update({
@@ -131,7 +132,7 @@ export function BtnRequest(props) {
   };
   /*
   const getObject = async () => {
-    console.log(idObjeto);
+    
     const docRef = doc(db, "objetos", idObjeto);
     const docSnap = await getDoc(docRef);
     //const q = query(collection(db, "objetos"), where("id", "==", idObjeto));
@@ -142,14 +143,14 @@ export function BtnRequest(props) {
   */
 
   const updateTest = async (tipo, value) => {
-    console.log(tipo + "-" + value.solicitudes);
+
     if (tipo == "cancel") {
       let cant = value.solicitudes - 1;
       await updateDoc(doc(db, "objetos", idObjeto), {
         solicitudes: cant,
       });
     } else {
-      console.log(value);
+
       let cant = value.solicitudes + 1;
       await updateDoc(doc(db, "objetos", idObjeto), {
         solicitudes: cant,
@@ -158,14 +159,14 @@ export function BtnRequest(props) {
   };
 
   const updateSolicitudes = async (tipo, value) => {
-    console.log(tipo + "-" + value.solicitudes);
+
     if (tipo == "cancel") {
       let cant = value.solicitudes - 1;
       await updateDoc(doc(db, "objetos", idObjeto), {
         solicitudes: cant,
       });
     } else {
-      console.log(value);
+
       let cant = value.solicitudes + 1;
       await updateDoc(doc(db, "objetos", idObjeto), {
         solicitudes: cant,
@@ -207,7 +208,7 @@ export function BtnRequest(props) {
 
 
   const onRemoveObject = async (id) => {
-    console.log(id);
+
     try {
       const favoritesCollection = await getFavorites(id);
 

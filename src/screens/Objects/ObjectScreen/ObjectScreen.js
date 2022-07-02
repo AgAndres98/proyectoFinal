@@ -19,6 +19,8 @@ export function ObjectScreen(props) {
   const { route } = props;
   const [objeto, setObjeto] = useState(null);
 
+  const tipo = route.params.tipo;
+
   useEffect(() => {
     setObjeto(null);
     onSnapshot(doc(db, "objetos", route.params.id), (doc) => {
@@ -40,6 +42,7 @@ export function ObjectScreen(props) {
 
       <BtnRequest
         idObjeto={route.params.id}
+        tipo={tipo}
         idUsuario={objeto.idUsuario}
         style={styles.container}
       />

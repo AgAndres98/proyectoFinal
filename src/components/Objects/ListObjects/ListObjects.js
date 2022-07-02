@@ -7,6 +7,7 @@ import {
   ScrollView,
   RefreshControl,
 } from "react-native";
+import { getAuth } from "firebase/auth";
 import {
   collection,
   onSnapshot,
@@ -21,6 +22,7 @@ import { useNavigation } from "@react-navigation/native";
 import { styles } from "./ListObjects.styles";
 import { screen, db } from "../../../utils/";
 import { LoadingModal } from "../../../components/Shared";
+import { getDistance } from "geolib"
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -38,16 +40,46 @@ export function ListObjects(props) {
 
   let objetosRefresh = [];
 
+  const [formulario, setFormulario] = useState();
+  const auth = getAuth();
+
   useEffect(() => {
-    objects.map(function (doc) {
-      objetos.push(doc.data());
-    });
-    setObjetosCompletos(objetos);
-    setMasterObjetosCompletos(objetos);
-  }, []);
+    if(formulario !== undefined){
+      objects.map(function (doc) {
+        const metros = getDistance(
+          { latitude: formulario.ubicacion.latitude, longitude: formulario.ubicacion.longitude },
+          { latitude: doc.data().ubicacion.latitude, longitude: doc.data().ubicacion.longitude }
+        );
+        const dato = doc.data();
+        dato.distancia = Math.round((metros/1000) * 10) / 10;
+        console.log(dato)
+        objetos.push(dato);
+      });
+      setObjetosCompletos(objetos);
+      setMasterObjetosCompletos(objetos);
+    }
+    else{
+      const r = query(
+        collection(db, "cuestionarioBeneficiario"),
+        where("id", "==", auth.currentUser.uid)
+      );
+  
+      onSnapshot(r, async (snapshot) => {
+        for await (const item of snapshot.docs) {
+          const data = item.data();
+          const docRef = doc(db, "cuestionarioBeneficiario", data.id);
+          const docSnap = await getDoc(docRef);
+          const newData = docSnap.data();
+          newData.id = data.id;
+          setFormulario(newData);
+        }
+      });
+    }
+
+  }, [formulario]);
 
   const goToObject = (objeto) => {
-    navigation.navigate(screen.objects.objeto, { id: objeto.id });
+    navigation.navigate(screen.objects.objeto, { id: objeto.id, tipo: objeto.tipo });
   };
 
   const searchFilterFunction = (text) => {
@@ -149,6 +181,7 @@ export function ListObjects(props) {
                       <Text style={styles.name}>{objeto.titulo}</Text>
                       <Text style={styles.info}>{objeto.tipo}</Text>
                       <Text style={styles.info}>{objeto.descripcion}</Text>
+                      <Text style={styles.info}>{objeto.distancia} Km</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
