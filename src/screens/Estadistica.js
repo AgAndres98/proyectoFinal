@@ -4,9 +4,6 @@ import {
     Text,
     SafeAreaView,
     StyleSheet,
-    Dimensions,
-    ScrollView,
-    Modal
 } from "react-native";
 import { db, screen } from "../utils";
 import { NotFound, Loading } from "../components/Shared";
@@ -25,6 +22,8 @@ import {
     StackedBarChart,
 } from 'react-native-chart-kit';
 import { Button } from "react-native-elements";
+import { Dimensions } from 'react-native';
+import { async } from "@firebase/util";
 
 
 
@@ -34,6 +33,12 @@ export function Estadistica() {
     const [showModal, setShowModal] = useState(false);
     const onCloseOpenModal = () => setShowModal((prevState) => !prevState);
     const [datosPersonales, setDatosPersonales] = useState(null);
+    const [delivered, setDelivered] = useState(null);
+    let ranking = [];
+    let aux = [];
+    let rankingFinal = [];
+
+
     let countRopa = 0;
     let countJuguetes = 0;
     let countLibros = 0;
@@ -48,6 +53,10 @@ export function Estadistica() {
     let countElectrodomesticos = 0;
     let countUtiles = 0;
     let count = 0;
+    let count1st = 0;
+    let count2st = 0;
+    let count3st = 0;
+    let count4ts = 0;
 
 
     useEffect(() => {
@@ -60,8 +69,75 @@ export function Estadistica() {
         });
     }, []);
 
-    forEach(datosPersonales, async (item) => {
+    useEffect(() => {
+        const q2 = query(
+            collection(db, "delivered"),
+        );
 
+        onSnapshot(q2, (snapshot) => {
+            setDelivered(snapshot.docs);
+        });
+    }, []);
+
+
+
+    forEach(delivered, (item) => {
+
+        if (ranking[0] === undefined) {
+            const rankingCount = {
+                idUserDonator: item.data().idUserDonator,
+                count: 1,
+            }
+            ranking.push(rankingCount);
+        } else {
+
+
+            for (var i = 0; i < ranking.length; i++) {
+
+                if (ranking[i].idUserDonator === item.data().idUserDonator) {
+                    ranking[i].count = ranking[i].count + 1;
+
+                }
+            }
+            const rankingCount = {
+                idUserDonator: item.data().idUserDonator,
+                count: 1,
+            }
+            ranking.push(rankingCount);
+            console.log(ranking);
+        }
+    });
+
+
+    ranking.sort(function (a, b) {
+        if (a.count < b.count) {
+            return 1;
+        }
+        if (a.count > b.count) {
+            return -1;
+        }
+        // a must be equal to b
+        return 0;
+    });
+
+    //HACER UN FOR QUE RECORRA 4 POSICIONES Y GUARDE EN ARRAY FINAL
+
+    for (var i = 0; i < 4; i++) {
+        rankingFinal[i] = ranking[i];
+    }
+    console.log(rankingFinal[0].count);
+
+    const data = {
+        labels: ["Jehiel", "Juanmanuel", "Agustin", "Carlos"],
+        datasets: [
+            {
+                data: [rankingFinal[0].count, rankingFinal[1].count, rankingFinal[2].count, 0]
+            }
+        ]
+    };
+
+
+    forEach(datosPersonales, (item) => {
 
         if (item.data().cuestionarioBeneficiario.alimentos === true) {
             countAlimentos = countAlimentos + 1;
@@ -235,7 +311,7 @@ export function Estadistica() {
     const arrayFinal = [];
     array.forEach(item => {
         if (item.population !== 0) {
-            console.log(item);
+
             arrayFinal.push(item);
         }
 
@@ -252,12 +328,30 @@ export function Estadistica() {
         return 0;
     });
 
+
+    const chartConfig = {
+        backgroundGradientFrom: "white",
+        backgroundGradientFromOpacity: 0,
+        backgroundGradientTo: "white",
+        backgroundGradientToOpacity: 0.5,
+        color: (opacity = 0) => `rgba(0, 0, 0, ${opacity})`,
+        strokeWidth: 2, // optional, default 3
+        barPercentage: 0.5,
+        useShadowColorFromDataset: false // optional,
+
+    };
+
+
+
     return (
         <View>
             <Text style={{
                 fontSize: 15,
                 fontWeight: "bold",
-                textAlign: "center"
+                textAlign: "center",
+                marginTop: 50,
+                marginBottom: 50,
+
             }}>Objetos mas solicitados por usuarios:</Text>
 
 
@@ -267,7 +361,7 @@ export function Estadistica() {
             <PieChart
                 data={arrayFinal}
                 width={Dimensions.get('window').width - 16}
-                height={220}
+                height={240}
                 chartConfig={{
                     backgroundColor: '#1cc910',
                     backgroundGradientFrom: '#eff3ff',
@@ -288,6 +382,27 @@ export function Estadistica() {
                 absolute //for the absolute number remove if you want percentage
             />
 
+
+            <Text style={{
+                fontSize: 15,
+                fontWeight: "bold",
+                textAlign: "center",
+                marginTop: 50,
+                marginBottom: 50,
+            }}>Usuarios con mas donaciones:</Text>
+
+            <BarChart
+                style={{
+                    marginVertical: 8,
+                    borderRadius: 16,
+                }}
+                data={data}
+                width={Dimensions.get('window').width - 16}
+                height={300}
+                yAxisLabel=""
+                chartConfig={chartConfig}
+                verticalLabelRotation={30}
+            />
 
 
         </View >

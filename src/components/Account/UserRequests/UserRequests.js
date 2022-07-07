@@ -36,7 +36,7 @@ export function UserRequests(props) {
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  const selectComponent = () => {};
+  const selectComponent = () => { };
 
   // Create a reference to the file we want to download
 

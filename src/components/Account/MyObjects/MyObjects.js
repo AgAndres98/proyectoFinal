@@ -20,6 +20,13 @@ export function MyObjects(props) {
   const { objects } = props;
   const navigation = useNavigation();
 
+
+
+
+
+
+
+
   const buttonDelete = (idObjeto) =>
     Alert.alert(
       "Eliminar objeto",
