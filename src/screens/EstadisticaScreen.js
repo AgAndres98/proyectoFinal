@@ -83,7 +83,7 @@ export function EstadisticaScreen() {
   if (!datosPersonales || !delivered) return <Loading show text="Cargando" />;
   //if (!datosPersonales || !delivered) return <Loading show text="Cargando" />;
   //if (!datosPersonales) return <Loading show text="Cargando" />;
-
+  /*
   return (
     <ScrollView>
       {map(delivered, (objeto) => (
@@ -107,9 +107,8 @@ export function EstadisticaScreen() {
       ))}
     </ScrollView>
   );
-  /*
+  */
   return (
     <Estadistica delivered={delivered} datosPersonales={datosPersonales} />
   );
-  */
 }

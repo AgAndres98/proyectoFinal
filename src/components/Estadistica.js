@@ -14,7 +14,7 @@ export function Estadistica(props) {
   let arrayFinal = [];
   const delivered = props.delivered;
   const datosPersonales = props.datosPersonales;
-  console.log("DATOSSS" + datosPersonales[0][0]);
+  console.log("DATOSSS" + JSON.stringify(datosPersonales[0]));
   const arrayfiltrado = [];
 
   let countRopa = 0;
@@ -228,18 +228,18 @@ export function Estadistica(props) {
     forEach(delivered, (item) => {
       if (ranking[0] === undefined) {
         const rankingCount = {
-          idUserDonator: item.data().idUserDonator,
+          idUserDonator: item.idUserDonator,
           cantidad: 1,
         };
         ranking.push(rankingCount);
       } else {
         for (var i = 0; i < ranking.length; i++) {
-          if (ranking[i].idUserDonator === item.data().idUserDonator) {
+          if (ranking[i].idUserDonator === item.idUserDonator) {
             ranking[i].cantidad = ranking[i].cantidad + 1;
           }
         }
         const rankingCount = {
-          idUserDonator: item.data().idUserDonator,
+          idUserDonator: item.idUserDonator,
           cantidad: 1,
         };
         ranking.push(rankingCount);
@@ -278,8 +278,8 @@ export function Estadistica(props) {
     useShadowColorFromDataset: false, // optional,
   };
 
-  if (!arrayFinal) return <Loading show text="Cargando" />;
-  if (!arrayFinal) return <Loading show text="Cargando" />;
+  if (size(arrayFinal) == 0) return <Loading show text="Cargando" />;
+  //if (!arrayFinal) return <Loading show text="Cargando" />;
 
   return (
     <View>
