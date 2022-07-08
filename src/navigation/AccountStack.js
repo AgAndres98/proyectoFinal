@@ -13,7 +13,7 @@ import {
 } from "../screens/Account";
 import { EditEventScreen, MyEventsScreen } from "./../screens/Admin";
 import { DetailUserScreen } from "../screens/Account/UserRequestsScreen/DetailUserScreen/DetailUserScreen";
-import { Estadistica } from "../screens/Estadistica";
+import { EstadisticaScreen } from "../screens/EstadisticaScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -100,7 +100,7 @@ export function AccountStack() {
 
       <Stack.Screen
         name={screen.account.Estadistica}
-        component={Estadistica}
+        component={EstadisticaScreen}
         options={{
           title: "Detalle usuario",
         }}

@@ -8,7 +8,7 @@ import { screen } from "./../../utils";
 import { Modal } from "../../components/Shared";
 import { ChangeEmailForm } from "./ChangeEmailForm";
 import { ChangePasswordForm } from "./ChangePasswordForm";
-import { Estadistica } from "../../screens/Estadistica";
+import { Estadistica } from "../Estadistica";
 
 
 export function AccountOptions(props) {
@@ -52,8 +52,7 @@ export function AccountOptions(props) {
       navigation.navigate(screen.account.editBeneficiary);
     }
     if (key === "estadisticas") {
-      setRenderComponent(<Estadistica onClose={onCloseOpenModal} />);
-      onCloseOpenModal();
+      navigation.navigate(screen.account.Estadistica);
     }
   };
 
