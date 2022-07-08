@@ -218,7 +218,9 @@ export function Estadistica(props) {
         array.forEach((item) => {
 
             if (isNaN(item.population) !== true) {
-                arrayFinal.push(item);
+                if (item.population > 0) {
+                    arrayFinal.push(item);
+                }
             } else {
 
             }
@@ -362,7 +364,7 @@ export function Estadistica(props) {
 
 
     return (
-        <View>
+        <ScrollView>
             <Text
                 style={{
                     fontSize: 15,
@@ -385,6 +387,7 @@ export function Estadistica(props) {
                         backgroundGradientFrom: "#eff3ff",
                         backgroundGradientTo: "#efefef",
                         decimalPlaces: 2,
+
                         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                         style: {
                             borderRadius: 16,
@@ -442,6 +445,6 @@ export function Estadistica(props) {
 
             </View>
 
-        </View>
+        </ScrollView>
     );
 }
