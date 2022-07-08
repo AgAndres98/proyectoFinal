@@ -70,14 +70,7 @@ export function Info(props) {
             titulo="Ubicacion"
           />
         */}
-      <Button
-        title={"Ver stats"}
-        containerStyle={styles.btnContainer}
-        buttonStyle={styles.btnCancel}
-        onPress={() => {
-          navigateStats();
-        }}
-      />
+
 
     </View>
   );
