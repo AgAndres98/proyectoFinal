@@ -118,7 +118,7 @@ export function InformationPersonalScreen() {
         nuevaData.id = uid.uid;
         nuevaData.email = auth.currentUser.email;
         nuevaData.createdAt = new Date();
-
+        nuevaData.year=new Date().getFullYear();
         if (flagDonor == true) {
           nuevaData.rolInicial = "Donante";
         } else if (flagDonor == false) {
