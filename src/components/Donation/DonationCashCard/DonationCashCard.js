@@ -1,6 +1,5 @@
-import { View, Text, Clipboard } from "react-native";
+import { View, Text, Clipboard, ToastAndroid, Linking } from "react-native";
 import { Icon, Button } from "react-native-elements";
-import { ToastAndroid, Linking } from "react-native";
 import { styles } from "./DonationCashCard.styles";
 
 export function DonationCashCard() {
