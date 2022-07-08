@@ -22,7 +22,7 @@ import { useNavigation } from "@react-navigation/native";
 import { styles } from "./ListObjects.styles";
 import { screen, db } from "../../../utils/";
 import { LoadingModal } from "../../../components/Shared";
-import { getDistance } from "geolib"
+import { getDistance } from "geolib";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -44,33 +44,45 @@ export function ListObjects(props) {
   const auth = getAuth();
 
   useEffect(() => {
-    if(formulario !== undefined){
+    if (formulario !== undefined) {
       objects.map(function (doc) {
-        if(formulario.ubicacion !== null ){
+        if (formulario.ubicacion !== null) {
           const metros = getDistance(
-            { latitude: formulario.ubicacion.latitude, longitude: formulario.ubicacion.longitude },
-            { latitude: doc.data().ubicacion.latitude, longitude: doc.data().ubicacion.longitude }
+            {
+              latitude: formulario.ubicacion.latitude,
+              longitude: formulario.ubicacion.longitude,
+            },
+            {
+              latitude: doc.data().ubicacion.latitude,
+              longitude: doc.data().ubicacion.longitude,
+            }
           );
           const dato = doc.data();
-          dato.distancia = Math.round((metros/1000) * 10) / 10;
+          dato.distancia = Math.round((metros / 1000) * 10) / 10;
           objetos.push(dato);
-        }
-        else{
+        } else {
           const dato = doc.data();
           objetos.push(dato);
         }
-        
-        
+      });
+      objetos.sort(function (a, b) {
+        if (a.distancia > b.distancia) {
+          return 1;
+        }
+        if (a.distancia < b.distancia) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
       });
       setObjetosCompletos(objetos);
       setMasterObjetosCompletos(objetos);
-    }
-    else{
+    } else {
       const r = query(
         collection(db, "cuestionarioBeneficiario"),
         where("id", "==", auth.currentUser.uid)
       );
-  
+
       onSnapshot(r, async (snapshot) => {
         for await (const item of snapshot.docs) {
           const data = item.data();
@@ -82,11 +94,13 @@ export function ListObjects(props) {
         }
       });
     }
-
   }, [formulario]);
 
   const goToObject = (objeto) => {
-    navigation.navigate(screen.objects.objeto, { id: objeto.id, tipo: objeto.tipo });
+    navigation.navigate(screen.objects.objeto, {
+      id: objeto.id,
+      tipo: objeto.tipo,
+    });
   };
 
   const searchFilterFunction = (text) => {
@@ -114,17 +128,37 @@ export function ListObjects(props) {
       orderBy("createdAt", "desc")
     );
 
-    onSnapshot(q, async (snapshot) => {
-      for await (const item of snapshot.docs) {
-        const data = item.data();
-        const docRef = doc(db, "objetos", data.id);
-        const docSnap = await getDoc(docRef);
+    if (formulario !== undefined) {
+      onSnapshot(q, async (snapshot) => {
+        for await (const item of snapshot.docs) {
+          const data = item.data();
+          const docRef = doc(db, "objetos", data.id);
+          const docSnap = await getDoc(docRef);
 
-        const dato = docSnap.data();
+          const dato = docSnap.data();
 
-        objetosRefresh.push(dato);
-      }
-    });
+          if(formulario.ubicacion !== null ){
+            const metros = getDistance(
+              { latitude: formulario.ubicacion.latitude, longitude: formulario.ubicacion.longitude },
+              { latitude: dato.ubicacion.latitude, longitude: dato.ubicacion.longitude }
+            );
+            dato.distancia = Math.round((metros/1000) * 10) / 10;
+          }
+          objetosRefresh.push(dato);
+          objetosRefresh.sort(function (a, b) {
+            if (a.distancia > b.distancia) {
+              return 1;
+            }
+            if (a.distancia < b.distancia) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+        }
+      });
+    }
+
     setObjetosCompletos(objetosRefresh);
     setMasterObjetosCompletos(objetosRefresh);
     wait(3500).then(() => {
