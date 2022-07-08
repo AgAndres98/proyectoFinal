@@ -278,7 +278,7 @@ export function Estadistica(props) {
     useShadowColorFromDataset: false, // optional,
   };
 
-  if (size(arrayFinal) == 0) return <Loading show text="Cargando" />;
+  //if (size(arrayFinal) == 0) return <Loading show text="Cargando" />;
   //if (!arrayFinal) return <Loading show text="Cargando" />;
 
   return (
