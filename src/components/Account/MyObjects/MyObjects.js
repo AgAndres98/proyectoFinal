@@ -154,11 +154,15 @@ export function MyObjects(props) {
                     />
 
                     <View style={styles.container}>
+
+                      <Text style={styles.solicitudes}>{objeto.solicitudes}</Text>
+
                       <Text style={styles.name}>{objeto.titulo}</Text>
 
                       <SwitchBtn activa={objeto.activa} idObjeto={objeto.id} />
 
                       <View style={styles.descripcionContainer}>
+
                         <Text style={styles.info}>{objeto.descripcion}</Text>
                       </View>
 
