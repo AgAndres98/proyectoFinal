@@ -78,4 +78,17 @@ export const styles = StyleSheet.create({
     borderBottomColor: "#e3e3e3",
     backgroundColor: "#62BD60",
   },
+  solicitudes: {
+    borderRadius: 25,
+    borderTopColor: "#e3e3e3",
+    borderBottomColor: "#e3e3e3",
+    backgroundColor: "#62bd60",
+    color: "#fff",
+    width: 40,
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 30,
+    marginLeft: -40,
+    marginTop: -10,
+  },
 });

@@ -34,9 +34,10 @@ export function UserRequests(props) {
   const navigation = useNavigation();
 
   const [isEnabled, setIsEnabled] = useState(true);
+  const [name, setName] = useState(true);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  const selectComponent = () => {};
+  const selectComponent = () => { };
 
   // Create a reference to the file we want to download
 
@@ -145,6 +146,8 @@ export function UserRequests(props) {
       { cancelable: true }
     );
 
+
+
   const confirmReq = async (dato) => {
     try {
       await updateDoc(doc(db, "requests", dato.id), {
@@ -163,8 +166,12 @@ export function UserRequests(props) {
 
       await cancelAllReq(dato);
 
+
+
+
       const idDelivered = uuid();
       let createdAt = new Date();
+      console.log(dato);
       const data = {
         id: idDelivered,
         idReq: dato.id,
@@ -173,6 +180,8 @@ export function UserRequests(props) {
         idUserDonator: auth.currentUser.uid,
         idUserReq: dato.idUserReq,
         createdAt: createdAt,
+        nombre: dato.datosPersonales.apellido,
+
       };
 
       await setDoc(doc(db, "delivered", idDelivered), data);
