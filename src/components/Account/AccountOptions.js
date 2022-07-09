@@ -8,7 +8,8 @@ import { screen } from "./../../utils";
 import { Modal } from "../../components/Shared";
 import { ChangeEmailForm } from "./ChangeEmailForm";
 import { ChangePasswordForm } from "./ChangePasswordForm";
-import { Estadistica } from "../../screens/Estadistica";
+import { Estadistica} from "../../screens/Estadistica";
+import { MisEstadistica } from "../../screens/MisEstadisticas";
 
 
 export function AccountOptions(props) {
@@ -53,6 +54,10 @@ export function AccountOptions(props) {
     }
     if (key === "estadisticas") {
       setRenderComponent(<Estadistica onClose={onCloseOpenModal} />);
+      onCloseOpenModal();
+    }
+    if(key==="misEstadisticas"){
+      setRenderComponent(<MisEstadistica onClose={onCloseOpenModal} />)
       onCloseOpenModal();
     }
   };
@@ -127,6 +132,13 @@ function getMenuOptions(selectedComponent) {
       iconNameRight: "arrow-right",
       iconColorRight: "#62bd60",
       onPress: () => selectedComponent("estadisticas"),
+    },
+    {
+      title: "Mis estadisticas",
+      iconType: "material-community",
+      iconNameRight: "arrow-right",
+      iconColorRight: "#62bd60",
+      onPress: () => selectedComponent("misEstadisticas"),
     },
   ];
 }
