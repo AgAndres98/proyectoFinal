@@ -39,7 +39,8 @@ const accountStack = {
   userRequests: "Solicitudes de usuarios",
   myEvents: "Mis eventos",
   DetailUser: "Dettalle usuario",
-  Estadistica: "Estadistica",
+  Estadistica: "Estadistica Donante",
+  EstadisticaBeneficiario: "Estadistica Beneficiario",
 };
 
 const authStack = {

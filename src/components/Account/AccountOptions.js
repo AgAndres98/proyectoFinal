@@ -8,7 +8,7 @@ import { screen } from "./../../utils";
 import { Modal } from "../../components/Shared";
 import { ChangeEmailForm } from "./ChangeEmailForm";
 import { ChangePasswordForm } from "./ChangePasswordForm";
-import { Estadistica } from "../Estadistica";
+
 
 
 export function AccountOptions(props) {
@@ -53,6 +53,9 @@ export function AccountOptions(props) {
     }
     if (key === "estadisticas") {
       navigation.navigate(screen.account.Estadistica);
+    }
+    if (key === "estadisticasBeneficiario") {
+      navigation.navigate(screen.account.EstadisticaBeneficiario);
     }
   };
 
@@ -121,11 +124,18 @@ function getMenuOptions(selectedComponent) {
       onPress: () => selectedComponent("editDonnor"),
     },
     {
-      title: "Ver estadisticas",
+      title: "Ver estadisticas donante",
       iconType: "material-community",
       iconNameRight: "arrow-right",
       iconColorRight: "#62bd60",
       onPress: () => selectedComponent("estadisticas"),
+    },
+    {
+      title: "Ver estadisticas Beneficiario",
+      iconType: "material-community",
+      iconNameRight: "arrow-right",
+      iconColorRight: "#62bd60",
+      onPress: () => selectedComponent("estadisticasBeneficiario"),
     },
   ];
 }
