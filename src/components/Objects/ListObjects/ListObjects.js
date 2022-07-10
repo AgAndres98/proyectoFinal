@@ -93,6 +93,13 @@ export function ListObjects(props) {
           setFormulario(newData);
         }
       });
+
+      objects.map(function (doc) {
+          const dato = doc.data();
+          objetos.push(dato);
+      });
+      setObjetosCompletos(objetos);
+      setMasterObjetosCompletos(objetos);
     }
   }, [formulario]);
 
@@ -155,6 +162,18 @@ export function ListObjects(props) {
             // a must be equal to b
             return 0;
           });
+        }
+      });
+    } else {
+      onSnapshot(q, async (snapshot) => {
+        for await (const item of snapshot.docs) {
+          const data = item.data();
+          const docRef = doc(db, "objetos", data.id);
+          const docSnap = await getDoc(docRef);
+
+          const dato = docSnap.data();
+
+          objetosRefresh.push(dato);
         }
       });
     }
@@ -222,7 +241,7 @@ export function ListObjects(props) {
                       <Text style={styles.name}>{objeto.titulo}</Text>
                       <Text style={styles.info}>{objeto.tipo}</Text>
                       <Text style={styles.info}>{objeto.descripcion}</Text>
-                      <Text style={styles.info}>{objeto.distancia} Km</Text>
+                      <Text style={styles.info}>{objeto.distancia !== 0 && objeto.distancia + "Km"}</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
