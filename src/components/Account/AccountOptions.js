@@ -54,10 +54,6 @@ export function AccountOptions(props) {
     if (key === "estadisticas") {
       navigation.navigate(screen.account.Estadistica);
     }
-    if(key==="misEstadisticas"){
-      setRenderComponent(<MisEstadistica onClose={onCloseOpenModal} />)
-      onCloseOpenModal();
-    }
   };
 
   let menuOptions = getMenuOptions(selectedComponent);
@@ -130,13 +126,6 @@ function getMenuOptions(selectedComponent) {
       iconNameRight: "arrow-right",
       iconColorRight: "#62bd60",
       onPress: () => selectedComponent("estadisticas"),
-    },
-    {
-      title: "Mis estadisticas",
-      iconType: "material-community",
-      iconNameRight: "arrow-right",
-      iconColorRight: "#62bd60",
-      onPress: () => selectedComponent("misEstadisticas"),
     },
   ];
 }

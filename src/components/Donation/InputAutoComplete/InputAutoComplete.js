@@ -18,19 +18,20 @@ export  function InputAutoComplete(){
 
 
     const [selectedItem, setSelectedItem] = useState(null);
-
-<AutocompleteDropdown
-  clearOnFocus={false}
-  closeOnBlur={true}
-  closeOnSubmit={false}
-  initialValue={{ id: '2' }} // or just '2'
-  onSelectItem={setSelectedItem}
-  dataSet={[
-    { id: '1', title: 'Alpha' },
-    { id: '2', title: 'Beta' },
-    { id: '3', title: 'Gamma' },
-  ]}
-/>;
+    return(
+      <AutocompleteDropdown
+        clearOnFocus={false}
+        closeOnBlur={true}
+        closeOnSubmit={false}
+        initialValue={{ id: '2' }} // or just '2'
+        onSelectItem={setSelectedItem}
+        dataSet={[
+          { id: '1', title: 'Alpha' },
+          { id: '2', title: 'Beta' },
+          { id: '3', title: 'Gamma' },
+        ]}
+      />
+    );
 
 
 
