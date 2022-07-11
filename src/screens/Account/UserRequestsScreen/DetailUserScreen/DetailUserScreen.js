@@ -11,6 +11,8 @@ import { styles } from "./DetailUserScreen.styles";
 const { width } = Dimensions.get("window");
 export function DetailUserScreen(props) {
   const { route } = props;
+  let fotos = [];
+
 
   const [usuario, setusuario] = useState(null);
 
@@ -23,9 +25,17 @@ export function DetailUserScreen(props) {
 
   if (!usuario) return <Loading show text="Cargando usuario" />;
 
+  fotos = usuario.cuestionarioBeneficiario.fotos;
+  fotos.push(route.params.item);
+
+
+  if (fotos[0] === undefined) {
+    fotos = [];
+  }
+  console.log(fotos);
   return (
     <ScrollView style={styles.content}>
-      <Carousel arrayImages={usuario.cuestionarioBeneficiario.fotos} height={330} width={width} />
+      <Carousel arrayImages={fotos} height={330} width={width} />
       <Header usuario={usuario} />
       <Info usuario={usuario} />
     </ScrollView>

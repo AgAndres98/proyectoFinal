@@ -5,6 +5,7 @@ import {
   ToastAndroid,
   Linking,
   Clipboard,
+  ScrollView
 } from "react-native";
 import { Text, Icon, ListItem, Button } from "react-native-elements";
 import { map } from "lodash";
@@ -56,11 +57,20 @@ export function Info(props) {
   ];
 
   return (
-    <View style={styles.content}>
+    <ScrollView style={styles.content}>
       <Text style={styles.title}>Información:</Text>
       <Text style={styles.texto}>
-        {usuario.cuestionarioBeneficiario.descripcion}
+        {usuario.cuestionarioBeneficiario.descripcion.charAt(0).toUpperCase() + usuario.cuestionarioBeneficiario.descripcion.slice(1)}
       </Text>
+      {usuario.cuestionarioBeneficiario.motivo != undefined ? (
+
+        <Text style={styles.texto}>
+          {usuario.cuestionarioBeneficiario.motivo.charAt(0).toUpperCase() + usuario.cuestionarioBeneficiario.motivo.slice(1)}
+        </Text>
+      ) : (
+
+        <></>
+      )}
       <Text style={styles.title}>Tipo de ayuda:</Text>
 
       {usuario.cuestionarioBeneficiario.ayuda == "familia" ? (
@@ -86,15 +96,23 @@ export function Info(props) {
         </TouchableOpacity>
       ))}
 
-      {/* 
+      {usuario.cuestionarioBeneficiario.ubicacion != undefined ? (
+
+        <View>
+          <Text style={styles.title}>Ubicacion:</Text>
           <Map
             style={styles.mapa}
             ubicacion={usuario.cuestionarioBeneficiario.ubicacion}
             titulo="Ubicacion"
           />
-        */}
+        </View>
+      ) : (
+
+        <></>
+      )}
 
 
-    </View>
+
+    </ScrollView>
   );
 }

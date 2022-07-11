@@ -124,14 +124,14 @@ function getMenuOptions(selectedComponent) {
       onPress: () => selectedComponent("editDonnor"),
     },
     {
-      title: "Ver estadisticas donante",
+      title: "Ver estadisticas solicitudes ",
       iconType: "material-community",
       iconNameRight: "arrow-right",
       iconColorRight: "#62bd60",
       onPress: () => selectedComponent("estadisticas"),
     },
     {
-      title: "Ver estadisticas Beneficiario",
+      title: "Ver estadisticas objetos",
       iconType: "material-community",
       iconNameRight: "arrow-right",
       iconColorRight: "#62bd60",
