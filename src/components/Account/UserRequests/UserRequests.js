@@ -171,7 +171,7 @@ export function UserRequests(props) {
 
       const idDelivered = uuid();
       let createdAt = new Date();
-      console.log(dato);
+
       const data = {
         id: idDelivered,
         idReq: dato.id,
@@ -286,9 +286,9 @@ export function UserRequests(props) {
     return result.docs;
   };
 
-  const goToUser = (id) => {
+  const goToUser = (id, item) => {
     console.log(id);
-    navigation.navigate(screen.account.DetailUser, { id: id });
+    navigation.navigate(screen.account.DetailUser, { id: id, item: item });
   };
 
   return (
@@ -401,7 +401,7 @@ export function UserRequests(props) {
                           size={35}
                           containerStyle={styles.eye}
                           onPress={() => {
-                            goToUser(item.idUserReq);
+                            goToUser(item.idUserReq, item.foto);
                           }}
                         />
                       </View>
