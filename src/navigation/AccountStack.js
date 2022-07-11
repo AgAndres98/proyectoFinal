@@ -103,14 +103,14 @@ export function AccountStack() {
         name={screen.account.Estadistica}
         component={EstadisticaScreen}
         options={{
-          title: "Estadisticas donante",
+          title: "Estadisticas solcitudes",
         }} />
 
       <Stack.Screen
         name={screen.account.EstadisticaBeneficiario}
         component={EstadisticaBeneficiarioScreen}
         options={{
-          title: "Estadisticas beneficiario",
+          title: "Estadisticas objetos",
         }}
       />
     </Stack.Navigator>
