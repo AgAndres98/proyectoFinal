@@ -20,6 +20,9 @@ export function Estadistica(props) {
     const datosPersonales = props.datosPersonales;
     const arrayfiltrado = [];
     const rankingFinal = [];
+    if (props===null)
+    return <NotFound texto={"No hay estadisticas"} />;
+
     let data = [];
     let cantidadFinal = [];
     let nombresFinal = [];
@@ -362,6 +365,7 @@ export function Estadistica(props) {
 
     if (!arrayFinal) return <Loading show text="Cargando" />;
 
+    if (size(arrayFinal) === 0) return <NotFound texto={"No hay estadisticas"} />;
 
     return (
         <ScrollView>

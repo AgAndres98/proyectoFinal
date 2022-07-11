@@ -171,6 +171,7 @@ export function UserRequests(props) {
 
       const idDelivered = uuid();
       let createdAt = new Date();
+      let year=new Date().getFullYear();
       console.log(dato);
       const data = {
         id: idDelivered,
@@ -180,6 +181,7 @@ export function UserRequests(props) {
         idUserDonator: auth.currentUser.uid,
         idUserReq: dato.idUserReq,
         createdAt: createdAt,
+        year:year,
         nombre: dato.datosPersonales.apellido,
 
       };

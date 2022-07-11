@@ -3,7 +3,7 @@ import { db, screen } from "../utils";
 import { View, Text, ScrollView } from "react-native";
 
 import { NotFound, Loading } from "../components/Shared";
-import { collection, query, onSnapshot, doc, getDoc } from "firebase/firestore";
+import { collection, query, onSnapshot, doc, getDoc, where } from "firebase/firestore";
 import { size, forEach, map } from "lodash";
 import {
     LineChart,
@@ -18,14 +18,15 @@ import { Dimensions } from "react-native";
 import { async } from "@firebase/util";
 import { Estadistica } from "../components/Estadistica";
 
-export function EstadisticaScreen() {
+export function EstadisticaScreen(props) {
+    const {route}=props;
     const [showModal, setShowModal] = useState(false);
     const onCloseOpenModal = () => setShowModal((prevState) => !prevState);
     const [datosPersonales, setDatosPersonales] = useState(null);
     const [delivered, setDelivered] = useState(null);
-
+    
     useEffect(() => {
-        const q = query(collection(db, "datosPersonales"));
+        const q = query(collection(db, "datosPersonales"), where("year","==",route.params.year));
 
         onSnapshot(q, async (snapshot) => {
             let objectArray = [];
@@ -44,7 +45,7 @@ export function EstadisticaScreen() {
     }, []);
 
     useEffect(() => {
-        const q2 = query(collection(db, "delivered"));
+        const q2 = query(collection(db, "delivered"),where("year","==",route.params.year));
 
         onSnapshot(q2, async (snapshot) => {
             let objectArray = [];
@@ -87,7 +88,7 @@ export function EstadisticaScreen() {
       </ScrollView>
     );
     */
-
+  
 
     return (
         <Estadistica delivered={delivered} datosPersonales={datosPersonales} />

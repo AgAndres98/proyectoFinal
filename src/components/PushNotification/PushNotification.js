@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Text, View, Button, Platform } from 'react-native';
-import {Notifications} from "expo";
-import * as Permissions from "expo-permissions"; 
+//import {Notifications} from "expo";
+//import * as Permissions from "expo-permissions"; 
 
 
 export function PushNotification() {

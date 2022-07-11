@@ -12,7 +12,7 @@ import { ChangePasswordForm } from "./ChangePasswordForm";
 
 
 export function AccountOptions(props) {
-
+  const year=new Date().getFullYear();
   const { onReload } = props;
   const navigation = useNavigation();
 
@@ -52,10 +52,10 @@ export function AccountOptions(props) {
       navigation.navigate(screen.account.editBeneficiary);
     }
     if (key === "estadisticas") {
-      navigation.navigate(screen.account.Estadistica);
+      navigation.navigate(screen.account.Estadistica,{year:year});
     }
     if (key === "estadisticasBeneficiario") {
-      navigation.navigate(screen.account.EstadisticaBeneficiario);
+      navigation.navigate(screen.account.EstadisticaBeneficiario,{year:year});
     }
   };
 

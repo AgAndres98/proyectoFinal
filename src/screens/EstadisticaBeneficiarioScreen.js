@@ -3,7 +3,7 @@ import { db, screen } from "../utils";
 import { View, Text, ScrollView } from "react-native";
 
 import { NotFound, Loading } from "../components/Shared";
-import { collection, query, onSnapshot, doc, getDoc } from "firebase/firestore";
+import { collection, query, onSnapshot, doc, getDoc,where } from "firebase/firestore";
 import { size, forEach, map } from "lodash";
 import {
     LineChart,
@@ -19,16 +19,18 @@ import { async } from "@firebase/util";
 import { Estadistica } from "../components/Estadistica";
 import { EstadisticaBeneficiario } from "../components/EstadisticaBeneficiario";
 
-export function EstadisticaBeneficiarioScreen() {
+export function EstadisticaBeneficiarioScreen(props) {
+    const {route}=props;
     const [showModal, setShowModal] = useState(false);
     const onCloseOpenModal = () => setShowModal((prevState) => !prevState);
     const [objetos, setObjetos] = useState(null);
     const [requests, setRequests] = useState(null);
     const [delivered, setDelivered] = useState(null);
     let arrayRequestDelivered = [];
-
+  
+    
     useEffect(() => {
-        const q = query(collection(db, "objetos"));
+        const q = query(collection(db, "objetos"),where("year","==",route.params.year));
 
         onSnapshot(q, async (snapshot) => {
             let objectArray = [];
@@ -47,7 +49,7 @@ export function EstadisticaBeneficiarioScreen() {
     }, []);
 
     useEffect(() => {
-        const q2 = query(collection(db, "delivered"));
+        const q2 = query(collection(db, "delivered"),where("year","==",route.params.year));
 
         onSnapshot(q2, async (snapshot) => {
             let objectArray = [];
@@ -67,7 +69,7 @@ export function EstadisticaBeneficiarioScreen() {
 
 
     useEffect(() => {
-        const q3 = query(collection(db, "requests"));
+        const q3 = query(collection(db, "requests"),where("year","==",route.params.year));
 
         onSnapshot(q3, async (snapshot) => {
             let objectArray = [];
@@ -86,7 +88,7 @@ export function EstadisticaBeneficiarioScreen() {
     }, []);
     if (!objetos || !delivered) return <Loading show text="Cargando" />;
 
-
+    
     const porcentaje = Math.trunc((size(delivered) * 100) / size(requests));
     const porcentajeFinal = porcentaje / 100;
 

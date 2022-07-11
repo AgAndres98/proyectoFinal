@@ -73,7 +73,7 @@ export function BtnRequest(props) {
     const idRequest = uuid();
     onReload();
     let createdAt = new Date();
-
+    let year=new Date().getFullYear();
     const data = {
       id: idRequest,
       idObjeto,
@@ -83,6 +83,7 @@ export function BtnRequest(props) {
       datosPersonales: dato,
       status: "Pendiente",
       createdAt: createdAt,
+      year:year,
     };
     await setDoc(doc(db, "requests", idRequest), data);
   };

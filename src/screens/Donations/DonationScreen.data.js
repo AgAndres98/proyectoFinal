@@ -12,6 +12,7 @@ export function initialValues() {
     idUsuario: "",
     solicitudes: 0,
     distancia: 0,
+    tipoOtro:"",
   };
 }
 

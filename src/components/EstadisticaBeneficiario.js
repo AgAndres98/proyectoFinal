@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,Form } from "react";
 import { db, screen } from "../utils";
 import { View, Alert, ScrollView } from "react-native";
-import { Image, Text, Icon, Button } from "react-native-elements";
+import { Image, Text, Icon, Button,Input } from "react-native-elements";
 import { Loading, NotFound } from "../components/Shared";
 import { size, forEach, map } from "lodash";
 import { BarChart, PieChart, ProgressChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
-import { array } from "yup";
+import { array, number } from "yup";
+import { EstadisticaScreen } from "../screens/EstadisticaScreen";
+import { useNavigation } from "@react-navigation/native";
 
 export function EstadisticaBeneficiario(props) {
     let arrayFinal = [];
     const [arrayPie, setArrayPie] = useState(null);
     const objetos = props.objetos;
     const porcentajeFinal = props.porcentajeFinal;
-
+    const [myYear,setMyYear]=useState(2022);
     let data = [];
 
     console.log(porcentajeFinal)
@@ -32,6 +34,7 @@ export function EstadisticaBeneficiario(props) {
     let countUtiles = 0;
     let count = 0;
 
+    const navigation=useNavigation();
     // const filterByYear = (year) => {
     //     datosPersonales.forEach((element) => {
     //         if (element.year !== year) {
@@ -41,6 +44,8 @@ export function EstadisticaBeneficiario(props) {
     //        
     //     });
     // };
+
+   
 
     useEffect(() => {
         forEach(objetos, (item) => {
@@ -252,13 +257,23 @@ export function EstadisticaBeneficiario(props) {
         data: [0.2, 1]
     };
 
+    const goToStatistics=(year)=>{
+        navigation.navigate(screen.EstadisticaScreen,{year:year});
+    };
 
 
     if (!arrayFinal) return <Loading show text="Cargando" />;
-
-
+   // if (size(arrayFinal) === 0) return <NotFound texto={"No hay estadisticas"} />;
+    console.log(myYear);
     return (
+        
+     <View>
         <ScrollView>
+          
+            <Input type="number" onChange={(e)=>{setMyYear(e.target.value)}} placeholder='Ingrese el año de la estadistica ej :2000' style={{margin:10}}/>
+            <Button title="Ver estadisticas por año" style={{margin:10,marginBottom:10,}} onPress={() => { goToStatistics(myYear) }}/>
+        
+       
             <Text
                 style={{
                     fontSize: 15,
@@ -298,6 +313,7 @@ export function EstadisticaBeneficiario(props) {
                 />
             ) : (
                 <Loading show text="Cargando" />
+               
             )}
 
             <Text
@@ -322,9 +338,10 @@ export function EstadisticaBeneficiario(props) {
                 hideLegend={false}
             />
 
+                    
 
 
-
-        </ScrollView>
+        </ScrollView></View>
     );
+    
 }

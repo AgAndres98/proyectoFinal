@@ -11,24 +11,25 @@ export const styles = StyleSheet.create({
     color: "grey",
   },
   inputIncendios: {
-      width: 70,
+      width: 60,
       height: 30,
       marginLeft: 190,
+      textAlign:"right",
   },
   inputInundaciones: {
-    width: 70,
+    width: 60,
     height: 30,
     marginLeft: 165,
   },
   inputTsunamis: {
-    width: 70,
+    width: 60,
     height: 30,
     marginLeft: 190,
   },
   inputCalle: {
-    width: 70,
+    width: 60,
     height: 30,
-    marginLeft: 72,
+    marginLeft: 85,
   },
   text: {
       marginTop: 7,

@@ -81,7 +81,8 @@ export function DonationObjectCard(props) {
           <Picker.Item label="Utiles escolares" value="Utiles escolares" />
           <Picker.Item label="Otro" value="Otro"  />
         </Picker>
-        <InputAutoComplete/>
+        {formik.values.tipo=="Otro"&& <InputAutoComplete/>}
+        
         
       </View>
       <MapForm show={showMap} close={onOpenCloseMap} formik={formik} />
@@ -98,11 +99,3 @@ const getColorIconoMapa = (formik) => {
 };
 
 
-function showInput(element){
-  if(element){ 
-   return styles.hiddenInput
-  }else{
-    return styles.showInput
-  }
-
-}
