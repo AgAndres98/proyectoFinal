@@ -18,5 +18,6 @@ export function CalendarStack() {
         options={{ title: "Eventos" }}
       />
     </Stack.Navigator>
+    
   );
 }

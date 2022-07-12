@@ -3,3 +3,4 @@ export * from "./DonorQuestionnaireScreen";
 export * from "./MyObjectsScreen";
 export * from "./UserLoggedScreen";
 export * from "./UserRequestsScreen";
+export * from "./RedirectScreen";

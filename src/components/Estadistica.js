@@ -20,8 +20,8 @@ export function Estadistica(props) {
     const datosPersonales = props.datosPersonales;
     const arrayfiltrado = [];
     const rankingFinal = [];
-    if (props===null)
-    return <NotFound texto={"No hay estadisticas"} />;
+    //if (props===null)
+   // return <NotFound texto={"No hay estadisticas"} />;
 
     let data = [];
     let cantidadFinal = [];
@@ -295,7 +295,7 @@ export function Estadistica(props) {
             if (!rankingFinal.includes(ranking[i].idUserDonator)) {
                 rankingFinal.push(elemento);
                 cantidadFinal.push(cantidad);
-                console.log(nombre);
+                //console.log(nombre);
                 nombresFinal.push(nombre);
 
             }
@@ -305,7 +305,7 @@ export function Estadistica(props) {
         setCantidadRanking(cantidadFinal);
     }, []);
 
-    console.log(arrayNombres);
+    //console.log(arrayNombres);
 
 
 
@@ -365,7 +365,7 @@ export function Estadistica(props) {
 
     if (!arrayFinal) return <Loading show text="Cargando" />;
 
-    if (size(arrayFinal) === 0) return <NotFound texto={"No hay estadisticas"} />;
+  //  if (size(arrayFinal) === 0) return <NotFound texto={"No hay estadisticas"} />;
 
     return (
         <ScrollView>

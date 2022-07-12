@@ -21,7 +21,7 @@ export function EditEventCard(props) {
   const onChange = (event, value) => {
     setIsPickerShow(false);
     setDate(value);
-    console.log(value);
+    //console.log(value);
 
     formik.setFieldValue("fecha", value.toLocaleDateString("en-GB"));
     if (Platform.OS === "android") {

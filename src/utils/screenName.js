@@ -38,9 +38,10 @@ const accountStack = {
   editBeneficiary: "Editar cuestionario beneficiario",
   userRequests: "Solicitudes de usuarios",
   myEvents: "Mis eventos",
-  DetailUser: "Dettalle usuario",
+  DetailUser: "Detalle usuario",
   Estadistica: "Estadistica Donante",
   EstadisticaBeneficiario: "Estadistica Beneficiario",
+  redirect:"Redirect",
 };
 
 const authStack = {

@@ -31,7 +31,7 @@ export function BtnRequest(props) {
   useEffect(() => {
     (async () => {
       const response = await getRequested();
-      console.log(response);
+     // console.log(response);
 
       if (size(response) > 0) {
         setIsRequested(true);

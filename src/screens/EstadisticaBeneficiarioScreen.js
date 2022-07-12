@@ -30,7 +30,7 @@ export function EstadisticaBeneficiarioScreen(props) {
   
     
     useEffect(() => {
-        const q = query(collection(db, "objetos"),where("year","==",route.params.year));
+        const q = query(collection(db, "objetos"),where("year","==",parseInt(route.params.year)));
 
         onSnapshot(q, async (snapshot) => {
             let objectArray = [];
@@ -49,7 +49,7 @@ export function EstadisticaBeneficiarioScreen(props) {
     }, []);
 
     useEffect(() => {
-        const q2 = query(collection(db, "delivered"),where("year","==",route.params.year));
+        const q2 = query(collection(db, "delivered"),where("year","==",parseInt(route.params.year)));
 
         onSnapshot(q2, async (snapshot) => {
             let objectArray = [];
@@ -69,7 +69,7 @@ export function EstadisticaBeneficiarioScreen(props) {
 
 
     useEffect(() => {
-        const q3 = query(collection(db, "requests"),where("year","==",route.params.year));
+        const q3 = query(collection(db, "requests"),where("year","==",parseInt(route.params.year)));
 
         onSnapshot(q3, async (snapshot) => {
             let objectArray = [];
@@ -92,7 +92,7 @@ export function EstadisticaBeneficiarioScreen(props) {
     const porcentaje = Math.trunc((size(delivered) * 100) / size(requests));
     const porcentajeFinal = porcentaje / 100;
 
-
+   // console.log(objetos);
 
 
     return (

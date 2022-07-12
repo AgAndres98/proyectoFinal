@@ -206,7 +206,7 @@ export function UserRequestsScreen(props) {
               }
             );
             const km = Math.round((metros / 1000) * 10) / 10;
-            console.log(km);
+           // console.log(km);
             if (formularioDonante.cercania == "nada") {
               item.puntuacion += 10;
             } else {

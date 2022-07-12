@@ -1,7 +1,7 @@
 import React, { useState, useEffect,Form } from "react";
 import { db, screen } from "../utils";
 import { View, Alert, ScrollView } from "react-native";
-import { Image, Text, Icon, Button,Input } from "react-native-elements";
+import { Image, Text, Icon, Button,Input,TextInput } from "react-native-elements";
 import { Loading, NotFound } from "../components/Shared";
 import { size, forEach, map } from "lodash";
 import { BarChart, PieChart, ProgressChart } from "react-native-chart-kit";
@@ -9,16 +9,29 @@ import { Dimensions } from "react-native";
 import { array, number } from "yup";
 import { EstadisticaScreen } from "../screens/EstadisticaScreen";
 import { useNavigation } from "@react-navigation/native";
+import { useFormik } from "formik";
+import { color } from "react-native-elements/dist/helpers";
+import { RedirectScreen } from "../screens/Account/RedirectScreen/RedirectScreen";
 
 export function EstadisticaBeneficiario(props) {
     let arrayFinal = [];
     const [arrayPie, setArrayPie] = useState(null);
     const objetos = props.objetos;
+    //console.log(objetos);
     const porcentajeFinal = props.porcentajeFinal;
-    const [myYear,setMyYear]=useState(2022);
+    const [year,setYear]=useState("2022");
     let data = [];
+    const formik=useFormik({
+        initialValues:{
+            myYear:""
+        },
+        onsubmit:values=>{
+            
+        }
+    }
+    );
 
-    console.log(porcentajeFinal)
+   
     let countRopa = 0;
     let countJuguetes = 0;
     let countLibros = 0;
@@ -239,7 +252,7 @@ export function EstadisticaBeneficiario(props) {
 
     }, []);
 
-
+  
     const chartConfig = {
         backgroundGradientFrom: "white",
         backgroundGradientFromOpacity: 0,
@@ -253,25 +266,40 @@ export function EstadisticaBeneficiario(props) {
     };
 
     data = {
-        labels: ["Entregas", "Solcitudes"], // optional
+        labels: ["Entregas", "Solicitudes"], // optional
         data: [0.2, 1]
     };
 
-    const goToStatistics=(year)=>{
-        navigation.navigate(screen.EstadisticaScreen,{year:year});
-    };
+    
+   const  ChangeYear=(year)=>{
+        setYear(year) ;
+    }
 
+    const goToRequest = (year) => {
+        navigation.navigate(screen.account.redirect,{year:year});
+    
+      }
 
-    if (!arrayFinal) return <Loading show text="Cargando" />;
+    //if (!arrayFinal) return <NotFound texto={"No hay estadisticas"} />;
    // if (size(arrayFinal) === 0) return <NotFound texto={"No hay estadisticas"} />;
-    console.log(myYear);
+   
     return (
         
      <View>
         <ScrollView>
-          
-            <Input type="number" onChange={(e)=>{setMyYear(e.target.value)}} placeholder='Ingrese el año de la estadistica ej :2000' style={{margin:10}}/>
-            <Button title="Ver estadisticas por año" style={{margin:10,marginBottom:10,}} onPress={() => { goToStatistics(myYear) }}/>
+{/*          
+             <Input value={formik.values.myYear} placeholder='Ingrese el año de la estadistica ej :2000' 
+            onChangeText={(text)=>formik.setFieldValue("myYear",text)} keyboardType="number-pad"/>
+            <Button onPress={formik.handleSubmit} title="Ver estadisticas por año" />  */}
+           <Input 
+           values={year}
+          placeholder="Ingrese el año"
+          onChangeText= { (year) => ChangeYear(year)}
+            
+          />
+          <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} style={{margin:100,width:100}}/>
+        {console.log(new Date().getFullYear())}
+          <Text>{year}</Text> 
         
        
             <Text

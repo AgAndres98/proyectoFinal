@@ -31,7 +31,7 @@ export function BtnRequestFavorites(props) {
       const response = await getRequested();
 
       valor = valor + 1;
-      console.log(valor);
+     // console.log(valor);
       if (size(response) > 0) {
         valor === 1 ? isFlag(true) : "";
         setIsRequested(true);

@@ -45,7 +45,7 @@ export function MyObjects(props) {
     ubicacionObjeto,
     solicitudesObjeto
   ) => {
-    console.log(solicitudesObjeto);
+   // console.log(solicitudesObjeto);
     navigation.navigate(screen.account.userRequests, {
       idObjeto: idObjeto,
       tipoObjeto: tipoObjeto,
@@ -102,7 +102,7 @@ export function MyObjects(props) {
         text1: "Objeto eliminado",
       });
     } catch (error) {
-      console.log(error);
+     // console.log(error);
     }
   };
 

@@ -55,7 +55,7 @@ export function CalendarView(props) {
     <View style={styles.screen}>
       <Calendar
         onDayPress={(day) => {
-          console.log("selected day", day);
+          //console.log("selected day", day);
         }}
         markedDates={dates}
       />

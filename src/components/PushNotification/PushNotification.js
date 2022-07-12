@@ -11,7 +11,7 @@ export function PushNotification() {
             return;
         }
         const token=Notifications.getExpoPushTokenAsync();
-        console.log(token);
+      //  console.log(token);
         return token;
       };
 

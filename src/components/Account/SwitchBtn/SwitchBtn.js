@@ -18,7 +18,7 @@ export function SwitchBtn(props) {
       }
     } catch (error) {
       setIsEnabled((prevState) => !prevState);
-      console.log(error);
+     // console.log(error);
     }
   };
 

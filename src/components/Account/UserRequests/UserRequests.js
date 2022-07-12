@@ -83,7 +83,7 @@ export function UserRequests(props) {
 
       navigation.navigate(screen.account.myObjects);
     } catch (error) {
-      console.log(error);
+     // console.log(error);
     }
   };
 
@@ -123,7 +123,7 @@ export function UserRequests(props) {
       });
       navigation.navigate(screen.account.myObjects);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -288,7 +288,7 @@ export function UserRequests(props) {
   };
 
   const goToUser = (id, item) => {
-    console.log(id);
+   // console.log(id);
     navigation.navigate(screen.account.DetailUser, { id: id, item: item });
   };
 
