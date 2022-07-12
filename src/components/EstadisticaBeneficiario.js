@@ -1,7 +1,7 @@
-import React, { useState, useEffect,Form } from "react";
+import React, { useState, useEffect, Form } from "react";
 import { db, screen } from "../utils";
 import { View, Alert, ScrollView } from "react-native";
-import { Image, Text, Icon, Button,Input,TextInput } from "react-native-elements";
+import { Image, Text, Icon, Button, Input, TextInput } from "react-native-elements";
 import { Loading, NotFound } from "../components/Shared";
 import { size, forEach, map } from "lodash";
 import { BarChart, PieChart, ProgressChart } from "react-native-chart-kit";
@@ -17,32 +17,33 @@ export function EstadisticaBeneficiario(props) {
     let arrayFinal = [];
     const [arrayPie, setArrayPie] = useState(null);
     const objetos = props.objetos;
-    const myYear=props.year;
+    const myYear = props.year;
     //console.log(objetos);
     const porcentajeFinal = props.porcentajeFinal;
-    const [year,setYear]=useState("");
+    console.log(porcentajeFinal);
+    const [year, setYear] = useState("");
     let data = [];
 
     //  if((myYear)!==""){
     //      setYear(myYear);
-         
+
     //  }else{
     //     setYear(new Date().getFullYear())
-        
-    // }
-    
 
-    const formik=useFormik({
-        initialValues:{
-            myYear:""
+    // }
+
+
+    const formik = useFormik({
+        initialValues: {
+            myYear: ""
         },
-        onsubmit:values=>{
-            
+        onsubmit: values => {
+
         }
     }
     );
 
-   
+
     let countRopa = 0;
     let countJuguetes = 0;
     let countLibros = 0;
@@ -58,7 +59,7 @@ export function EstadisticaBeneficiario(props) {
     let countUtiles = 0;
     let count = 0;
 
-    const navigation=useNavigation();
+    const navigation = useNavigation();
     // const filterByYear = (year) => {
     //     datosPersonales.forEach((element) => {
     //         if (element.year !== year) {
@@ -69,7 +70,7 @@ export function EstadisticaBeneficiario(props) {
     //     });
     // };
 
-   
+
 
     useEffect(() => {
         forEach(objetos, (item) => {
@@ -263,7 +264,7 @@ export function EstadisticaBeneficiario(props) {
 
     }, []);
 
-  
+
     const chartConfig = {
         backgroundGradientFrom: "white",
         backgroundGradientFromOpacity: 0,
@@ -276,112 +277,113 @@ export function EstadisticaBeneficiario(props) {
         decimalPlaces: 0, // optional,
     };
 
-    
+
+    if (porcentajeFinal == Infinity) return <Loading show text="Cargando" />;
     data = {
         labels: ["Entregas", "Solicitudes"], // optional
-        data: [0.2, 1]
+        data: [porcentajeFinal, 1]
     };
 
-    
-   const  ChangeYear=(year)=>{
-        setYear(year) ;
+
+    const ChangeYear = (year) => {
+        setYear(year);
     }
 
     const goToRequest = (year) => {
-        
-        navigation.navigate(screen.account.redirect,{year:year});
-       
-      }
+
+        navigation.navigate(screen.account.redirect, { year: year });
+
+    }
 
     //if (!arrayFinal) return <NotFound texto={"No hay estadisticas"} />;
-   // if (size(arrayFinal) === 0) return <NotFound texto={"No hay estadisticas"} />;
-   
+    // if (size(arrayFinal) === 0) return <NotFound texto={"No hay estadisticas"} />;
+
     return (
-        
-     <View>
-        <ScrollView>
-{/*          
+
+        <View>
+            <ScrollView>
+                {/*          
              <Input value={formik.values.myYear} placeholder='Ingrese el año de la estadistica ej :2000' 
             onChangeText={(text)=>formik.setFieldValue("myYear",text)} keyboardType="number-pad"/>
             <Button onPress={formik.handleSubmit} title="Ver estadisticas por año" />  */}
-           <Input 
-           values={year}
-           placeholder="Ingrese el año"
-           onChangeText= { (year) => ChangeYear(year)}
-           />
-           <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} style={{margin:100,width:100}}/>
-       
-          {/* <Text>{year}</Text>  */}
-        
-       
-            <Text
-                style={{
-                    fontSize: 15,
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    marginTop: 50,
-                    marginBottom: 50,
-                }}
-            >
-                Tipos de objetos mas publicados:
-            </Text>
-
-            {size(arrayPie) != 0 ? (
-                <PieChart
-                    data={arrayPie}
-                    width={Dimensions.get("window").width - 16}
-                    height={240}
-                    chartConfig={{
-                        backgroundColor: "#1cc910",
-                        backgroundGradientFrom: "#eff3ff",
-                        backgroundGradientTo: "#efefef",
-                        decimalPlaces: 2,
-
-                        color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                        style: {
-                            borderRadius: 16,
-                        },
-                    }}
-                    style={{
-                        marginVertical: 8,
-                        borderRadius: 16,
-                    }}
-                    accessor="population"
-                    backgroundColor="transparent"
-                    paddingLeft="15"
-                    absolute //for the absolute number remove if you want percentage
+                <Input
+                    values={year}
+                    placeholder="Ingrese el año"
+                    onChangeText={(year) => ChangeYear(year)}
                 />
-            ) : (
-                <Loading show text="Cargando" />
-               
-            )}
+                <Button title={"Enviar"} onPress={() => { goToRequest(year) }} style={{ margin: 100, width: 100 }} />
 
-            <Text
-                style={{
-                    fontSize: 15,
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    marginTop: 50,
-                    marginBottom: 50,
-                }}
-            >
-                Porcentaje de entregas:
-            </Text>
-
-            <ProgressChart
-                data={data}
-                width={Dimensions.get("window").width - 16}
-                height={300}
-                strokeWidth={16}
-                radius={32}
-                chartConfig={chartConfig}
-                hideLegend={false}
-            />
-
-                    
+                {/* <Text>{year}</Text>  */}
 
 
-        </ScrollView></View>
+                <Text
+                    style={{
+                        fontSize: 15,
+                        fontWeight: "bold",
+                        textAlign: "center",
+                        marginTop: 50,
+                        marginBottom: 50,
+                    }}
+                >
+                    Tipos de objetos mas publicados:
+                </Text>
+
+                {size(arrayPie) != 0 ? (
+                    <PieChart
+                        data={arrayPie}
+                        width={Dimensions.get("window").width - 16}
+                        height={240}
+                        chartConfig={{
+                            backgroundColor: "#1cc910",
+                            backgroundGradientFrom: "#eff3ff",
+                            backgroundGradientTo: "#efefef",
+                            decimalPlaces: 2,
+
+                            color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                            style: {
+                                borderRadius: 16,
+                            },
+                        }}
+                        style={{
+                            marginVertical: 8,
+                            borderRadius: 16,
+                        }}
+                        accessor="population"
+                        backgroundColor="transparent"
+                        paddingLeft="15"
+                        absolute //for the absolute number remove if you want percentage
+                    />
+                ) : (
+                    <Loading show text="Cargando" />
+
+                )}
+
+                <Text
+                    style={{
+                        fontSize: 15,
+                        fontWeight: "bold",
+                        textAlign: "center",
+                        marginTop: 50,
+                        marginBottom: 50,
+                    }}
+                >
+                    Porcentaje de entregas:
+                </Text>
+
+                <ProgressChart
+                    data={data}
+                    width={Dimensions.get("window").width - 16}
+                    height={300}
+                    strokeWidth={16}
+                    radius={32}
+                    chartConfig={chartConfig}
+                    hideLegend={false}
+                />
+
+
+
+
+            </ScrollView></View>
     );
-    
+
 }
