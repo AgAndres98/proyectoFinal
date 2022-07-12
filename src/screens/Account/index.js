@@ -4,3 +4,4 @@ export * from "./MyObjectsScreen";
 export * from "./UserLoggedScreen";
 export * from "./UserRequestsScreen";
 export * from "./RedirectScreen";
+export * from "./RedirectEstadisticaScreen";

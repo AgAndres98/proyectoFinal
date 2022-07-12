@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { db, screen } from "../utils";
 import { View, Alert, ScrollView } from "react-native";
 import { Image, Text, Icon, Button,Input } from "react-native-elements";
-import { Loading, NotFound } from "../components/Shared";
+import { Loading } from "./Shared";
 import { useNavigation } from "@react-navigation/native";
 import { size, forEach, map } from "lodash";
 import { BarChart, PieChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import { array } from "yup";
 
-export function Estadistica(props) {
+export function EstadisticaFiltrado(props) {
     const ranking = [];
     let arrayFinal = [];
     const [arrayPie, setArrayPie] = useState(null);
@@ -22,7 +22,6 @@ export function Estadistica(props) {
     const rankingFinal = [];
     //if (props===null)
    // return <NotFound texto={"No hay estadisticas"} />;
-   
    const [year,setYear]=useState("");
     let data = [];
     let cantidadFinal = [];
@@ -371,7 +370,7 @@ export function Estadistica(props) {
 
     const goToRequest = (year) => {
         
-        navigation.navigate(screen.account.redirectEstadistica,{year:year});
+        navigation.navigate(screen.account.Estadistica,{year:year});
        
       }
 
@@ -388,7 +387,7 @@ export function Estadistica(props) {
           placeholder="Ingrese el año"
           onChangeText= { (year) => ChangeYear(year)}
         />
-        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} style={{margin:100,width:100}}/>
+        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} style={{margin:100,width:100,padding:10,}}/>
        
 
 

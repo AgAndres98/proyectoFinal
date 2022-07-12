@@ -15,7 +15,7 @@ import { EditEventScreen, MyEventsScreen } from "./../screens/Admin";
 import { DetailUserScreen } from "../screens/Account/UserRequestsScreen/DetailUserScreen/DetailUserScreen";
 import { EstadisticaScreen } from "../screens/EstadisticaScreen";
 import { EstadisticaBeneficiarioScreen } from "../screens/EstadisticaBeneficiarioScreen";
-import { RedirectScreen } from "../screens/Account";
+import { RedirectScreen,RedirectEstadisticaScreen } from "../screens/Account";
 
 const Stack = createNativeStackNavigator();
 
@@ -117,7 +117,12 @@ export function AccountStack() {
        <Stack.Screen
         name={screen.account.redirect}
         component={RedirectScreen}
-        options={{ title: "Redirigiendo"}}
+        options={{ title: "Estadisticas Objetos"}}
+      />
+      <Stack.Screen
+        name={screen.account.redirectEstadistica}
+        component={RedirectEstadisticaScreen}
+        options={{ title: "Estadisticas Solicitudes"}}
       />
       
     </Stack.Navigator>

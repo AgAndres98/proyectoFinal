@@ -1,34 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,Form } from "react";
 import { db, screen } from "../utils";
 import { View, Alert, ScrollView } from "react-native";
-import { Image, Text, Icon, Button,Input } from "react-native-elements";
-import { Loading, NotFound } from "../components/Shared";
-import { useNavigation } from "@react-navigation/native";
+import { Image, Text, Icon, Button,Input,TextInput } from "react-native-elements";
+import { Loading, NotFound } from "./Shared";
 import { size, forEach, map } from "lodash";
-import { BarChart, PieChart } from "react-native-chart-kit";
+import { BarChart, PieChart, ProgressChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
-import { array } from "yup";
+import { array, number } from "yup";
+import { EstadisticaScreen } from "../screens/EstadisticaScreen";
+import { useNavigation } from "@react-navigation/native";
+import { useFormik } from "formik";
+import { color } from "react-native-elements/dist/helpers";
+import { RedirectScreen } from "../screens/Account/RedirectScreen/RedirectScreen";
 
-export function Estadistica(props) {
-    const ranking = [];
+export function EstadisticaBeneficiarioFiltrado(props) {
     let arrayFinal = [];
     const [arrayPie, setArrayPie] = useState(null);
-    const [arrayRanking, setArrayRanking] = useState(null);
-    const [arrayNombres, setArrayNombres] = useState(null);
-    const [arrayCantidad, setCantidadRanking] = useState(null);
-    const delivered = props.delivered;
-    const datosPersonales = props.datosPersonales;
-    const arrayfiltrado = [];
-    const rankingFinal = [];
-    //if (props===null)
-   // return <NotFound texto={"No hay estadisticas"} />;
-   
-   const [year,setYear]=useState("");
+    const objetos = props.objetos;
+    const myYear=props.year;
+    //console.log(objetos);
+    const porcentajeFinal = props.porcentajeFinal;
+    const [year,setYear]=useState("");
     let data = [];
-    let cantidadFinal = [];
-    let nombresFinal = [];
 
+    //  if((myYear)!==""){
+    //      setYear(myYear);
+         
+    //  }else{
+    //     setYear(new Date().getFullYear())
+        
+    // }
+    
 
+    const formik=useFormik({
+        initialValues:{
+            myYear:""
+        },
+        onsubmit:values=>{
+            
+        }
+    }
+    );
+
+   
     let countRopa = 0;
     let countJuguetes = 0;
     let countLibros = 0;
@@ -55,57 +69,59 @@ export function Estadistica(props) {
     //     });
     // };
 
+   
+
     useEffect(() => {
-        forEach(datosPersonales, (item) => {
-            if (item.cuestionarioBeneficiario.alimentos === true) {
+        forEach(objetos, (item) => {
+            if (item.tipo === "Alimento") {
                 countAlimentos = countAlimentos + 1;
                 count = count + 1;
             }
-            if (item.cuestionarioBeneficiario.ropa === true) {
+            if (item.tipo === "Ropa") {
                 countRopa = countRopa + 1;
                 count = count + 1;
             }
-            if (item.cuestionarioBeneficiario.juguetes === true) {
+            if (item.tipo === "Juguetes") {
                 countJuguetes = countJuguetes + 1;
                 count = count + 1;
             }
-            if (item.cuestionarioBeneficiario.libros === true) {
+            if (item.tipo === "Libros") {
                 countLibros = countLibros + 1;
                 count = count + 1;
             }
-            if (item.cuestionarioBeneficiario.materiales === true) {
+            if (item.tipo === "Materiales") {
                 countMateriales = countMateriales + 1;
                 count = count + 1;
             }
-            if (item.cuestionarioBeneficiario.muebles === true) {
+            if (item.tipo === "Muebles") {
                 countMuebles = countMuebles + 1;
                 count = count + 1;
             }
-            if (item.cuestionarioBeneficiario.objetos === true) {
+            if (item.tipo === "Objetos") {
                 countObjetos = countObjetos + 1;
                 count = count + 1;
             }
-            if (item.cuestionarioBeneficiario.otros === true) {
+            if (item.tipo === "Otros") {
                 countOtros = countOtros + 1;
                 count = count + 1;
             }
-            if (item.cuestionarioBeneficiario.salud === true) {
+            if (item.tipo === "Salud") {
                 countSalud = countSalud + 1;
                 count = count + 1;
             }
-            if (item.cuestionarioBeneficiario.servicio === true) {
+            if (item.tipo === "Servicio") {
                 countServicio = countServicio + 1;
                 count = count + 1;
             }
-            if (item.cuestionarioBeneficiario.herramientas === true) {
+            if (item.tipo === "Herramientas") {
                 countHerramientas = countHerramientas + 1;
                 count = count + 1;
             }
-            if (item.cuestionarioBeneficiario.electrodomesticos === true) {
+            if (item.tipo === "Electrodomesticos") {
                 countElectrodomesticos = countElectrodomesticos + 1;
                 count = count + 1;
             }
-            if (item.cuestionarioBeneficiario.utiles === true) {
+            if (item.tipo === "Utiles escolares") {
                 countUtiles = countUtiles + 1;
                 count = count + 1;
             }
@@ -247,96 +263,7 @@ export function Estadistica(props) {
 
     }, []);
 
-
-
-
-    useEffect(() => {
-        forEach(delivered, (item) => {
-
-            if (ranking[0] === undefined) {
-                const rankingCount = {
-                    idUserDonator: item.idUserDonator,
-                    cantidad: 1,
-                    nombre: item.nombre,
-                };
-                ranking.push(rankingCount);
-            } else {
-                for (var i = 0; i < ranking.length; i++) {
-                    if (ranking[i].idUserDonator === item.idUserDonator) {
-                        ranking[i].cantidad = ranking[i].cantidad + 1;
-                        ranking[i].nombre = item.nombre;
-                    } else {
-                        const rankingCount = {
-                            idUserDonator: item.idUserDonator,
-                            cantidad: 1,
-                            nombre: item.nombre,
-                        };
-                        ranking.push(rankingCount);
-                    }
-                }
-            }
-        });
-
-        ranking.sort(function (a, b) {
-            if (a.cantidad < b.cantidad) {
-                return 1;
-            }
-            if (a.cantidad > b.cantidad) {
-                return -1;
-            }
-            // a must be equal to b
-            return 0;
-        });
-
-        for (var i = 0; i < ranking.length; i++) {
-
-            const elemento = ranking[i].idUserDonator;
-            const cantidad = ranking[i].cantidad;
-            const nombre = ranking[i].nombre;
-
-            if (!rankingFinal.includes(ranking[i].idUserDonator)) {
-                rankingFinal.push(elemento);
-                cantidadFinal.push(cantidad);
-                //console.log(nombre);
-                nombresFinal.push(nombre);
-
-            }
-        }
-        setArrayNombres(nombresFinal);
-        setArrayRanking(rankingFinal);
-        setCantidadRanking(cantidadFinal);
-    }, []);
-
-    //console.log(arrayNombres);
-
-
-
-
-
-
-
-    if (size(arrayRanking)) {
-        data = {
-            labels: [arrayNombres[0], arrayNombres[1], arrayNombres[2], arrayNombres[3]],
-            datasets: [
-                {
-                    data: [arrayCantidad[0], arrayCantidad[1], arrayCantidad[2], arrayCantidad[3]],
-                },
-            ],
-        };
-    } else {
-        data = {
-            labels: ["A"],
-            datasets: [
-                {
-                    data: [1],
-                },
-            ],
-        };
-    }
-
-
-
+  
     const chartConfig = {
         backgroundGradientFrom: "white",
         backgroundGradientFromOpacity: 0,
@@ -349,49 +276,41 @@ export function Estadistica(props) {
         decimalPlaces: 0, // optional,
     };
 
-    // return (
-    //     <ScrollView>
-    //         {map(arrayPie, (objeto) => (
-    //             <View>
-    //                 <Text>{objeto.population}{objeto.name}</Text>
-    //             </View>
-    //         ))}
-    //         {map(arrayRanking, (objeto) => (
-    //             <View>
-    //                 <Text>{objeto.cantidad}</Text>
-    //             </View>
-    //         ))}
+    data = {
+        labels: ["Entregas", "Solicitudes"], // optional
+        data: [0.2, 1]
+    };
 
-    //     </ScrollView>
-    // );
-
-    const  ChangeYear=(year)=>{
+    
+   const  ChangeYear=(year)=>{
         setYear(year) ;
     }
 
     const goToRequest = (year) => {
-        
-        navigation.navigate(screen.account.redirectEstadistica,{year:year});
-       
+        navigation.navigate(screen.account.EstadisticaBeneficiario,{year:year});
       }
 
-
-    if (!arrayFinal) return <Loading show text="Cargando" />;
-
-  //  if (size(arrayFinal) === 0) return <NotFound texto={"No hay estadisticas"} />;
-
+    //if (!arrayFinal) return <NotFound texto={"No hay estadisticas"} />;
+   // if (size(arrayFinal) === 0) return <NotFound texto={"No hay estadisticas"} />;
+   
     return (
+        
+     <View>
         <ScrollView>
-
+{/*          
+             <Input value={formik.values.myYear} placeholder='Ingrese el año de la estadistica ej :2000' 
+            onChangeText={(text)=>formik.setFieldValue("myYear",text)} keyboardType="number-pad"/>
+            <Button onPress={formik.handleSubmit} title="Ver estadisticas por año" />  */}
         <Input 
-         values={year}
-          placeholder="Ingrese el año"
-          onChangeText= { (year) => ChangeYear(year)}
+        values={year}
+        placeholder="Ingrese el año"
+        onChangeText= { (year) => ChangeYear(year)}
         />
         <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} style={{margin:100,width:100}}/>
        
-
-
+          {/* <Text>{year}</Text>  */}
+        
+       
             <Text
                 style={{
                     fontSize: 15,
@@ -401,7 +320,7 @@ export function Estadistica(props) {
                     marginBottom: 50,
                 }}
             >
-                Objetos mas solicitados por usuarios:
+                Tipos de objetos mas publicados:
             </Text>
 
             {size(arrayPie) != 0 ? (
@@ -431,6 +350,7 @@ export function Estadistica(props) {
                 />
             ) : (
                 <Loading show text="Cargando" />
+               
             )}
 
             <Text
@@ -442,28 +362,23 @@ export function Estadistica(props) {
                     marginBottom: 50,
                 }}
             >
-                Usuarios con mas donaciones:
+                Porcentaje de entregas:
             </Text>
 
-            {size(arrayRanking) != 0 ? (
-                <BarChart
-                    style={{
-                        marginVertical: 8,
-                        borderRadius: 16,
-                    }}
-                    data={data}
-                    width={Dimensions.get("window").width - 16}
-                    height={300}
-                    yAxisLabel=""
-                    chartConfig={chartConfig}
-                    verticalLabelRotation={30}
-                />
-            ) : (
-                <Loading show text="Cargando" />
-            )}
+            <ProgressChart
+                data={data}
+                width={Dimensions.get("window").width - 16}
+                height={300}
+                strokeWidth={16}
+                radius={32}
+                chartConfig={chartConfig}
+                hideLegend={false}
+            />
 
-           
+                    
 
-        </ScrollView>
+
+        </ScrollView></View>
     );
+    
 }

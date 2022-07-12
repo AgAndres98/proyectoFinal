@@ -27,7 +27,10 @@ export function EstadisticaBeneficiarioScreen(props) {
     const [requests, setRequests] = useState(null);
     const [delivered, setDelivered] = useState(null);
     let arrayRequestDelivered = [];
-  
+    const year=route.params.year;
+    //year.toString();
+   //console.log(typeof(year))
+    console.log("EstadisticaBeneficiarioScreen",route.params.year)
     
     useEffect(() => {
         const q = query(collection(db, "objetos"),where("year","==",parseInt(route.params.year)));
@@ -96,6 +99,6 @@ export function EstadisticaBeneficiarioScreen(props) {
 
 
     return (
-        <EstadisticaBeneficiario objetos={objetos} porcentajeFinal={porcentajeFinal} />
+        <EstadisticaBeneficiario objetos={objetos} porcentajeFinal={porcentajeFinal} year={year}/>
     );
 }

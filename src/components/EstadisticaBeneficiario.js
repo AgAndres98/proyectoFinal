@@ -17,10 +17,21 @@ export function EstadisticaBeneficiario(props) {
     let arrayFinal = [];
     const [arrayPie, setArrayPie] = useState(null);
     const objetos = props.objetos;
+    const myYear=props.year;
     //console.log(objetos);
     const porcentajeFinal = props.porcentajeFinal;
-    const [year,setYear]=useState("2022");
+    const [year,setYear]=useState("");
     let data = [];
+
+    //  if((myYear)!==""){
+    //      setYear(myYear);
+         
+    //  }else{
+    //     setYear(new Date().getFullYear())
+        
+    // }
+    
+
     const formik=useFormik({
         initialValues:{
             myYear:""
@@ -265,6 +276,7 @@ export function EstadisticaBeneficiario(props) {
         decimalPlaces: 0, // optional,
     };
 
+    
     data = {
         labels: ["Entregas", "Solicitudes"], // optional
         data: [0.2, 1]
@@ -276,8 +288,9 @@ export function EstadisticaBeneficiario(props) {
     }
 
     const goToRequest = (year) => {
+        
         navigation.navigate(screen.account.redirect,{year:year});
-    
+       
       }
 
     //if (!arrayFinal) return <NotFound texto={"No hay estadisticas"} />;
@@ -293,13 +306,12 @@ export function EstadisticaBeneficiario(props) {
             <Button onPress={formik.handleSubmit} title="Ver estadisticas por año" />  */}
            <Input 
            values={year}
-          placeholder="Ingrese el año"
-          onChangeText= { (year) => ChangeYear(year)}
-            
-          />
-          <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} style={{margin:100,width:100}}/>
-        {console.log(new Date().getFullYear())}
-          <Text>{year}</Text> 
+           placeholder="Ingrese el año"
+           onChangeText= { (year) => ChangeYear(year)}
+           />
+           <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} style={{margin:100,width:100}}/>
+       
+          {/* <Text>{year}</Text>  */}
         
        
             <Text
