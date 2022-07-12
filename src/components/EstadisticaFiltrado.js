@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { db, screen } from "../utils";
 import { View, Alert, ScrollView } from "react-native";
 import { Image, Text, Icon, Button,Input } from "react-native-elements";
-import { Loading } from "./Shared";
+import { Loading,NoEstadistica } from "./Shared";
 import { useNavigation } from "@react-navigation/native";
 import { size, forEach, map } from "lodash";
 import { BarChart, PieChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import { array } from "yup";
-
+import { Picker } from "@react-native-picker/picker";
 export function EstadisticaFiltrado(props) {
     const ranking = [];
     let arrayFinal = [];
@@ -383,12 +383,27 @@ export function EstadisticaFiltrado(props) {
         <ScrollView>
 
         <Input 
+         keyboardType = 'numeric'
          values={year}
           placeholder="Ingrese el año"
           onChangeText= { (year) => ChangeYear(year)}
+          style={{height:50,}}
+          containerStyle={{
+            width: 200,
+            marginHorizontal: 90,
+            marginVertical: 10,
+            alignContent:"center",
+          }}
         />
-        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} style={{margin:100,width:100,padding:10,}}/>
-       
+
+        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} 
+           containerStyle={{
+            width: 200,
+            marginHorizontal: 90,
+            marginVertical: 10,
+          }}
+          buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)'}}
+          />
 
 
             <Text
@@ -429,7 +444,7 @@ export function EstadisticaFiltrado(props) {
                     absolute //for the absolute number remove if you want percentage
                 />
             ) : (
-                <Loading show text="Cargando" />
+                <NoEstadistica texto={"No hay estadistica"}/>
             )}
 
             <Text
@@ -458,7 +473,7 @@ export function EstadisticaFiltrado(props) {
                     verticalLabelRotation={30}
                 />
             ) : (
-                <Loading show text="Cargando" />
+                <NoEstadistica texto={"No hay estadistica"}/>
             )}
 
            

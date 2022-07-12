@@ -2,7 +2,7 @@ import React, { useState, useEffect,Form } from "react";
 import { db, screen } from "../utils";
 import { View, Alert, ScrollView } from "react-native";
 import { Image, Text, Icon, Button,Input,TextInput } from "react-native-elements";
-import { Loading, NotFound } from "./Shared";
+import { Loading } from "./Shared";
 import { size, forEach, map } from "lodash";
 import { BarChart, PieChart, ProgressChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useFormik } from "formik";
 import { color } from "react-native-elements/dist/helpers";
 import { RedirectScreen } from "../screens/Account/RedirectScreen/RedirectScreen";
+import { NoEstadistica } from "./Shared/NoEstadistica/NoEstadistica";
 
 export function EstadisticaBeneficiarioFiltrado(props) {
     let arrayFinal = [];
@@ -302,15 +303,29 @@ export function EstadisticaBeneficiarioFiltrado(props) {
             onChangeText={(text)=>formik.setFieldValue("myYear",text)} keyboardType="number-pad"/>
             <Button onPress={formik.handleSubmit} title="Ver estadisticas por año" />  */}
         <Input 
+        keyboardType = 'numeric'
         values={year}
         placeholder="Ingrese el año"
         onChangeText= { (year) => ChangeYear(year)}
+        containerStyle={{
+            width: 200,
+            marginHorizontal: 90,
+            marginVertical: 10,
+            alignContent:"center",
+          }}
         />
-        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} style={{margin:100,width:100}}/>
+        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} 
+           containerStyle={{
+            width: 200,
+            marginHorizontal: 90,
+            marginVertical: 10,
+          }}
+          buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)'}}
+          />
        
           {/* <Text>{year}</Text>  */}
         
-       
+          
             <Text
                 style={{
                     fontSize: 15,
@@ -349,8 +364,8 @@ export function EstadisticaBeneficiarioFiltrado(props) {
                     absolute //for the absolute number remove if you want percentage
                 />
             ) : (
-                <Loading show text="Cargando" />
-               
+               // <Loading show text="cargando" />
+                <NoEstadistica texto={"No hay estadistica"}/>
             )}
 
             <Text

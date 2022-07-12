@@ -5,3 +5,4 @@ export * from "./Loading";
 export * from "./Map";
 export * from "./UserDataModal";
 export * from "./NotFound";
+export * from "./NoEstadistica";

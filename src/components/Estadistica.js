@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { db, screen } from "../utils";
 import { View, Alert, ScrollView } from "react-native";
 import { Image, Text, Icon, Button,Input } from "react-native-elements";
-import { Loading, NotFound } from "../components/Shared";
+import { Loading, NoEstadistica } from "../components/Shared";
 import { useNavigation } from "@react-navigation/native";
 import { size, forEach, map } from "lodash";
 import { BarChart, PieChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import { array } from "yup";
-
+import { Picker } from "@react-native-picker/picker";
 export function Estadistica(props) {
     const ranking = [];
     let arrayFinal = [];
@@ -384,11 +384,26 @@ export function Estadistica(props) {
         <ScrollView>
 
         <Input 
+         keyboardType = 'numeric'
          values={year}
           placeholder="Ingrese el año"
           onChangeText= { (year) => ChangeYear(year)}
+          style={{height:50,}}
+          containerStyle={{
+            width: 200,
+            marginHorizontal: 90,
+            marginVertical: 10,
+            alignContent:"center",
+          }}
         />
-        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} style={{margin:100,width:100}}/>
+        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} 
+           containerStyle={{
+            width: 200,
+            marginHorizontal: 90,
+            marginVertical: 10,
+          }}
+          buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)'}}
+          />
        
 
 
@@ -430,7 +445,8 @@ export function Estadistica(props) {
                     absolute //for the absolute number remove if you want percentage
                 />
             ) : (
-                <Loading show text="Cargando" />
+               // <NotFound texto={"No hay estadisticas"} />
+               <NoEstadistica texto={"No hay estadistica"}/>
             )}
 
             <Text
@@ -459,11 +475,12 @@ export function Estadistica(props) {
                     verticalLabelRotation={30}
                 />
             ) : (
-                <Loading show text="Cargando" />
+                //<Loading show text="Cargando" />
+                <NoEstadistica texto={"No hay estadistica"}/>
             )}
 
-           
 
+        
         </ScrollView>
     );
 }

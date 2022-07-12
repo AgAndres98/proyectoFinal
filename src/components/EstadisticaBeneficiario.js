@@ -2,7 +2,7 @@ import React, { useState, useEffect,Form } from "react";
 import { db, screen } from "../utils";
 import { View, Alert, ScrollView } from "react-native";
 import { Image, Text, Icon, Button,Input,TextInput } from "react-native-elements";
-import { Loading, NotFound } from "../components/Shared";
+import { Loading, NoEstadistica } from "../components/Shared";
 import { size, forEach, map } from "lodash";
 import { BarChart, PieChart, ProgressChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
@@ -305,11 +305,25 @@ export function EstadisticaBeneficiario(props) {
             onChangeText={(text)=>formik.setFieldValue("myYear",text)} keyboardType="number-pad"/>
             <Button onPress={formik.handleSubmit} title="Ver estadisticas por año" />  */}
            <Input 
+           keyboardType = 'numeric'
            values={year}
            placeholder="Ingrese el año"
            onChangeText= { (year) => ChangeYear(year)}
+           containerStyle={{
+            width: 200,
+            marginHorizontal: 90,
+            marginVertical: 10,
+            alignContent:"center",
+          }}
            />
-           <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} style={{margin:100,width:100}}/>
+           <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} 
+           containerStyle={{
+            width: 200,
+            marginHorizontal: 90,
+            marginVertical: 10,
+          }}
+          buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)'}}
+          />
        
           {/* <Text>{year}</Text>  */}
         
@@ -336,10 +350,11 @@ export function EstadisticaBeneficiario(props) {
                         backgroundGradientFrom: "#eff3ff",
                         backgroundGradientTo: "#efefef",
                         decimalPlaces: 2,
-
+                        
                         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                         style: {
                             borderRadius: 16,
+                          
                         },
                     }}
                     style={{
@@ -352,8 +367,8 @@ export function EstadisticaBeneficiario(props) {
                     absolute //for the absolute number remove if you want percentage
                 />
             ) : (
-                <Loading show text="Cargando" />
-               
+                //<Loading show text="Cargando" />
+                <NoEstadistica texto={"No hay estadistica"}/>
             )}
 
             <Text
@@ -367,7 +382,7 @@ export function EstadisticaBeneficiario(props) {
             >
                 Porcentaje de entregas:
             </Text>
-
+            {size(data) != 0 ? (    
             <ProgressChart
                 data={data}
                 width={Dimensions.get("window").width - 16}
@@ -376,7 +391,12 @@ export function EstadisticaBeneficiario(props) {
                 radius={32}
                 chartConfig={chartConfig}
                 hideLegend={false}
-            />
+                style={{
+                paddingRight:110,
+                }}
+            />):(
+                <NoEstadistica texto={"No hay estadistica"}/>
+            )}
 
                     
 

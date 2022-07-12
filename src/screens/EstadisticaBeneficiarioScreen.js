@@ -90,7 +90,8 @@ export function EstadisticaBeneficiarioScreen(props) {
         });
     }, []);
     if (!objetos || !delivered) return <Loading show text="Cargando" />;
-
+    if (size(objetos) === 0)
+    return <NotFound texto={"No tienes estadisticas de objetos "} />;
     
     const porcentaje = Math.trunc((size(delivered) * 100) / size(requests));
     const porcentajeFinal = porcentaje / 100;
