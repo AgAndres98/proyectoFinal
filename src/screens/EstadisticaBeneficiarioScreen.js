@@ -28,6 +28,8 @@ export function EstadisticaBeneficiarioScreen(props) {
     const [delivered, setDelivered] = useState(null);
     let arrayRequestDelivered = [];
     const year=route.params.year;
+    let porcentaje;
+    let porcentajeFinal;
     //year.toString();
    //console.log(typeof(year))
     console.log("EstadisticaBeneficiarioScreen",route.params.year)
@@ -87,17 +89,22 @@ export function EstadisticaBeneficiarioScreen(props) {
                 objectArray.push(newData);
             }
             setRequests(objectArray);
+           
         });
     }, []);
-    if (!objetos || !delivered) return <Loading show text="Cargando" />;
-    if (size(objetos) === 0)
-    return <NotFound texto={"No tienes estadisticas de objetos "} />;
     
-    const porcentaje = Math.trunc((size(delivered) * 100) / size(requests));
-    const porcentajeFinal = porcentaje / 100;
+    // if (size(objetos) === 0)
+    // return <NotFound texto={"No tienes estadisticas de objetos "} />;
 
+    if(size(delivered)>0&&size(requests)>0){
+     porcentaje = Math.trunc((size(delivered) * 100) / size(requests));
+     porcentajeFinal = porcentaje / 100;
+    }else{
+        porcentaje=0;
+        porcentajeFinal=0;
+    }
    // console.log(objetos);
-
+   if (!objetos || !delivered) return <Loading show text="Cargando" />;
 
     return (
         <EstadisticaBeneficiario objetos={objetos} porcentajeFinal={porcentajeFinal} year={year}/>

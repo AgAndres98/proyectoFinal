@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useFormik } from "formik";
 import { color } from "react-native-elements/dist/helpers";
 import { RedirectScreen } from "../screens/Account/RedirectScreen/RedirectScreen";
-
+import { Picker } from "@react-native-picker/picker";
 export function EstadisticaBeneficiario(props) {
     let arrayFinal = [];
     const [arrayPie, setArrayPie] = useState(null);
@@ -20,7 +20,11 @@ export function EstadisticaBeneficiario(props) {
     const myYear=props.year;
     //console.log(objetos);
     const porcentajeFinal = props.porcentajeFinal;
-    const [year,setYear]=useState("");
+  
+    
+    const [year,setYear]=useState(myYear);
+    
+
     let data = [];
 
     //  if((myYear)!==""){
@@ -275,16 +279,25 @@ export function EstadisticaBeneficiario(props) {
         useShadowColorFromDataset: false,
         decimalPlaces: 0, // optional,
     };
-
-    
+   // if(porcentajeFinal==undefined){
+    if (porcentajeFinal == Infinity) return <Loading show text="Cargando" />;
     data = {
         labels: ["Entregas", "Solicitudes"], // optional
-        data: [0.2, 1]
-    };
+        data: [porcentajeFinal, 1]
+    }
+
+    console.log(data.data[0])
+   
+    // }else{data = {
+    //     labels: ["Entregas", "Solicitudes"], // optional
+    //     data: [0, 0]
+    // }}
 
     
    const  ChangeYear=(year)=>{
-        setYear(year) ;
+    console.log(year);    
+    setYear(year) ;
+        
     }
 
     const goToRequest = (year) => {
@@ -304,26 +317,7 @@ export function EstadisticaBeneficiario(props) {
              <Input value={formik.values.myYear} placeholder='Ingrese el año de la estadistica ej :2000' 
             onChangeText={(text)=>formik.setFieldValue("myYear",text)} keyboardType="number-pad"/>
             <Button onPress={formik.handleSubmit} title="Ver estadisticas por año" />  */}
-           <Input 
-           keyboardType = 'numeric'
-           values={year}
-           placeholder="Ingrese el año"
-           onChangeText= { (year) => ChangeYear(year)}
-           containerStyle={{
-            width: 200,
-            marginHorizontal: 90,
-            marginVertical: 10,
-            alignContent:"center",
-          }}
-           />
-           <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} 
-           containerStyle={{
-            width: 200,
-            marginHorizontal: 90,
-            marginVertical: 10,
-          }}
-          buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)'}}
-          />
+        
        
           {/* <Text>{year}</Text>  */}
         
@@ -360,6 +354,7 @@ export function EstadisticaBeneficiario(props) {
                     style={{
                         marginVertical: 8,
                         borderRadius: 16,
+                        marginLeft:45,
                     }}
                     accessor="population"
                     backgroundColor="transparent"
@@ -382,7 +377,7 @@ export function EstadisticaBeneficiario(props) {
             >
                 Porcentaje de entregas:
             </Text>
-            {size(data) != 0 ? (    
+            {size(data) != 0 ||data.data[0]!=0 ? (    
             <ProgressChart
                 data={data}
                 width={Dimensions.get("window").width - 16}
@@ -399,7 +394,32 @@ export function EstadisticaBeneficiario(props) {
             )}
 
                     
+<View style={{justifyContent: 'center', //Centered vertically
+   alignItems: 'center', // Centered horizontally
+   flex:1}}>
+        <Picker
+        selectedValue={year}
+        style={{width:150,}}
+        onValueChange={(value) =>(
+          ChangeYear(value))
+        
+        }>
+        <Picker.Item label="2022" value="2022" />
+        <Picker.Item label="2021" value="2021" />
+        <Picker.Item label="2020" value="2020" />
+        <Picker.Item label="2019" value="2019" />
+    
+      </Picker>
+        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} 
+           containerStyle={{
+            width: 200,
+            marginHorizontal: 140,
+            marginVertical: 10,
+          }}
+          buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)'}}
+          /></View>                   
 
+       
 
         </ScrollView></View>
     );

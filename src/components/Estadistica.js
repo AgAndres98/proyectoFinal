@@ -383,27 +383,7 @@ export function Estadistica(props) {
     return (
         <ScrollView>
 
-        <Input 
-         keyboardType = 'numeric'
-         values={year}
-          placeholder="Ingrese el año"
-          onChangeText= { (year) => ChangeYear(year)}
-          style={{height:50,}}
-          containerStyle={{
-            width: 200,
-            marginHorizontal: 90,
-            marginVertical: 10,
-            alignContent:"center",
-          }}
-        />
-        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} 
-           containerStyle={{
-            width: 200,
-            marginHorizontal: 90,
-            marginVertical: 10,
-          }}
-          buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)'}}
-          />
+       
        
 
 
@@ -479,6 +459,30 @@ export function Estadistica(props) {
                 <NoEstadistica texto={"No hay estadistica"}/>
             )}
 
+<View style={{justifyContent: 'center', //Centered vertically
+   alignItems: 'center', // Centered horizontally
+   flex:1}}>
+        <Picker
+        selectedValue={year}
+        style={{width:150,}}
+        onValueChange={(value) =>(
+          ChangeYear(value))
+        
+        }>
+        <Picker.Item label="2022" value="2022" />
+        <Picker.Item label="2021" value="2021" />
+        <Picker.Item label="2020" value="2020" />
+        <Picker.Item label="2019" value="2019" />
+    
+      </Picker>
+        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} 
+           containerStyle={{
+            width: 200,
+            marginHorizontal: 140,
+            marginVertical: 10,
+          }}
+          buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)'}}
+          /></View>                   
 
         
         </ScrollView>
