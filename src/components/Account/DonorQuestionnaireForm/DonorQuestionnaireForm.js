@@ -17,7 +17,7 @@ export function DonorQuestionnaireForm(props) {
           value={formik.values.incendios}
           inputContainerStyle={styles.inputIncendios}
           errorStyle={{ marginLeft: 190 }}
-          inputStyle={{ fontSize: 12 }}
+          inputStyle={{ fontSize: 12, textAlign: "center", }}
           keyboardType="number-pad"
           onChangeText={(text) => formik.setFieldValue("incendios", text)}
           errorMessage={formik.errors.incendios}
@@ -30,7 +30,7 @@ export function DonorQuestionnaireForm(props) {
           value={formik.values.inundaciones}
           inputContainerStyle={styles.inputInundaciones}
           errorStyle={{ marginLeft: 165 }}
-          inputStyle={{ fontSize: 12 }}
+          inputStyle={{ fontSize: 12, textAlign: "center", }}
           keyboardType="number-pad"
           onChangeText={(text) => formik.setFieldValue("inundaciones", text)}
           errorMessage={formik.errors.inundaciones}
@@ -43,7 +43,7 @@ export function DonorQuestionnaireForm(props) {
           value={formik.values.tsunamis}
           inputContainerStyle={styles.inputTsunamis}
           errorStyle={{ marginLeft: 190 }}
-          inputStyle={{ fontSize: 12 }}
+          inputStyle={{ fontSize: 12, textAlign: "center", }}
           keyboardType="number-pad"
           onChangeText={(text) => formik.setFieldValue("tsunamis", text)}
           errorMessage={formik.errors.tsunamis}
@@ -56,7 +56,7 @@ export function DonorQuestionnaireForm(props) {
           value={formik.values.gente}
           inputContainerStyle={styles.inputCalle}
           errorStyle={{ marginLeft: 72 }}
-          inputStyle={{ fontSize: 12 }}
+          inputStyle={{ fontSize: 12, textAlign: "center", }}
           keyboardType="number-pad"
           onChangeText={(text) => formik.setFieldValue("gente", text)}
           errorMessage={formik.errors.gente}
