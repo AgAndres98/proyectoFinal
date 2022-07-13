@@ -13,11 +13,12 @@ export const styles = StyleSheet.create({
     left: 20,
   },
   btn: {
+    width: "90%",
     borderRadius: 10,
     borderTopWidth: 1,
-    borderTopColor: "green",
+    borderTopColor: "#e3e3e3",
     borderBottomWidth: 1,
-    borderBottomColor: "green",
-    backgroundColor: "green",
+    borderBottomColor: "#e3e3e3",
+    backgroundColor: "#BD2225",
   },
 });

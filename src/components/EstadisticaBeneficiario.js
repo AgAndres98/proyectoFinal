@@ -1,13 +1,8 @@
 import React, { useState, useEffect, Form } from "react";
 import { db, screen } from "../utils";
 import { View, Alert, ScrollView } from "react-native";
-<<<<<<< HEAD
 import { Image, Text, Icon, Button, Input, TextInput } from "react-native-elements";
 import { Loading, NotFound } from "../components/Shared";
-=======
-import { Image, Text, Icon, Button,Input,TextInput } from "react-native-elements";
-import { Loading, NoEstadistica } from "../components/Shared";
->>>>>>> 0971be0e8250e2383c3c664cc659a011e461ff6c
 import { size, forEach, map } from "lodash";
 import { BarChart, PieChart, ProgressChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
@@ -17,7 +12,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useFormik } from "formik";
 import { color } from "react-native-elements/dist/helpers";
 import { RedirectScreen } from "../screens/Account/RedirectScreen/RedirectScreen";
-import { Picker } from "@react-native-picker/picker";
+import { styles } from "./Estadistica.styles";
+
 export function EstadisticaBeneficiario(props) {
     let arrayFinal = [];
     const [arrayPie, setArrayPie] = useState(null);
@@ -25,16 +21,8 @@ export function EstadisticaBeneficiario(props) {
     const myYear = props.year;
     //console.log(objetos);
     const porcentajeFinal = props.porcentajeFinal;
-<<<<<<< HEAD
     console.log(porcentajeFinal);
     const [year, setYear] = useState("");
-=======
-  
-    
-    const [year,setYear]=useState(myYear);
-    
-
->>>>>>> 0971be0e8250e2383c3c664cc659a011e461ff6c
     let data = [];
 
     //  if((myYear)!==""){
@@ -289,38 +277,17 @@ export function EstadisticaBeneficiario(props) {
         useShadowColorFromDataset: false,
         decimalPlaces: 0, // optional,
     };
-<<<<<<< HEAD
 
 
-=======
-   // if(porcentajeFinal==undefined){
->>>>>>> 0971be0e8250e2383c3c664cc659a011e461ff6c
     if (porcentajeFinal == Infinity) return <Loading show text="Cargando" />;
     data = {
         labels: ["Entregas", "Solicitudes"], // optional
         data: [porcentajeFinal, 1]
-<<<<<<< HEAD
     };
 
 
     const ChangeYear = (year) => {
         setYear(year);
-=======
-    }
-
-    console.log(data.data[0])
-   
-    // }else{data = {
-    //     labels: ["Entregas", "Solicitudes"], // optional
-    //     data: [0, 0]
-    // }}
-
-    
-   const  ChangeYear=(year)=>{
-    console.log(year);    
-    setYear(year) ;
-        
->>>>>>> 0971be0e8250e2383c3c664cc659a011e461ff6c
     }
 
     const goToRequest = (year) => {
@@ -335,18 +302,11 @@ export function EstadisticaBeneficiario(props) {
     return (
 
         <View>
-            <ScrollView>
+            <ScrollView style={styles.screen}>
                 {/*          
              <Input value={formik.values.myYear} placeholder='Ingrese el año de la estadistica ej :2000' 
             onChangeText={(text)=>formik.setFieldValue("myYear",text)} keyboardType="number-pad"/>
             <Button onPress={formik.handleSubmit} title="Ver estadisticas por año" />  */}
-<<<<<<< HEAD
-                <Input
-                    values={year}
-                    placeholder="Ingrese el año"
-                    onChangeText={(year) => ChangeYear(year)}
-                />
-                <Button title={"Enviar"} onPress={() => { goToRequest(year) }} style={{ margin: 100, width: 100 }} />
 
                 {/* <Text>{year}</Text>  */}
 
@@ -358,41 +318,6 @@ export function EstadisticaBeneficiario(props) {
                         textAlign: "center",
                         marginTop: 50,
                         marginBottom: 50,
-=======
-        
-       
-          {/* <Text>{year}</Text>  */}
-        
-       
-            <Text
-                style={{
-                    fontSize: 15,
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    marginTop: 50,
-                    marginBottom: 50,
-                }}
-            >
-                Tipos de objetos mas publicados:
-            </Text>
-
-            {size(arrayPie) != 0 ? (
-                <PieChart
-                    data={arrayPie}
-                    width={Dimensions.get("window").width - 16}
-                    height={240}
-                    chartConfig={{
-                        backgroundColor: "#1cc910",
-                        backgroundGradientFrom: "#eff3ff",
-                        backgroundGradientTo: "#efefef",
-                        decimalPlaces: 2,
-                        
-                        color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                        style: {
-                            borderRadius: 16,
-                          
-                        },
->>>>>>> 0971be0e8250e2383c3c664cc659a011e461ff6c
                     }}
                 >
                     Tipos de objetos mas publicados:
@@ -430,17 +355,11 @@ export function EstadisticaBeneficiario(props) {
 
                 <Text
                     style={{
-<<<<<<< HEAD
                         fontSize: 15,
                         fontWeight: "bold",
                         textAlign: "center",
                         marginTop: 50,
                         marginBottom: 50,
-=======
-                        marginVertical: 8,
-                        borderRadius: 16,
-                        marginLeft:45,
->>>>>>> 0971be0e8250e2383c3c664cc659a011e461ff6c
                     }}
                 >
                     Porcentaje de entregas:
@@ -455,75 +374,39 @@ export function EstadisticaBeneficiario(props) {
                     chartConfig={chartConfig}
                     hideLegend={false}
                 />
-<<<<<<< HEAD
 
 
+                <Picker
+                    selectedValue={year}
+                    style={{ width: 150, }}
+                    onValueChange={(value) => (
+                        ChangeYear(value))
+
+                    }>
+                    <Picker.Item label="2022" value="2022" />
+                    <Picker.Item label="2021" value="2021" />
+                    <Picker.Item label="2020" value="2020" />
+                    <Picker.Item label="2019" value="2019" />
+
+                </Picker>
+                <Button title={"Filtrar"} onPress={() => { goToRequest(year) }}
+                    containerStyle={{
+                        width: 200,
+                        marginHorizontal: 140,
+                        marginVertical: 10,
+                    }}
+                    buttonStyle={{
+                        borderRadius: 10,
+                        borderTopWidth: 1,
+                        borderTopColor: "#62bd60",
+                        borderBottomWidth: 1,
+                        borderBottomColor: "#62bd60",
+                        backgroundColor: "#62bd60",
+                    }}
+                />
 
 
             </ScrollView></View>
-=======
-            ) : (
-                //<Loading show text="Cargando" />
-                <NoEstadistica texto={"No hay estadistica"}/>
-            )}
-
-            <Text
-                style={{
-                    fontSize: 15,
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    marginTop: 50,
-                    marginBottom: 50,
-                }}
-            >
-                Porcentaje de entregas:
-            </Text>
-            {size(data) != 0 ||data.data[0]!=0 ? (    
-            <ProgressChart
-                data={data}
-                width={Dimensions.get("window").width - 16}
-                height={300}
-                strokeWidth={16}
-                radius={32}
-                chartConfig={chartConfig}
-                hideLegend={false}
-                style={{
-                paddingRight:110,
-                }}
-            />):(
-                <NoEstadistica texto={"No hay estadistica"}/>
-            )}
-
-                    
-<View style={{justifyContent: 'center', //Centered vertically
-   alignItems: 'center', // Centered horizontally
-   flex:1}}>
-        <Picker
-        selectedValue={year}
-        style={{width:150,}}
-        onValueChange={(value) =>(
-          ChangeYear(value))
-        
-        }>
-        <Picker.Item label="2022" value="2022" />
-        <Picker.Item label="2021" value="2021" />
-        <Picker.Item label="2020" value="2020" />
-        <Picker.Item label="2019" value="2019" />
-    
-      </Picker>
-        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} 
-           containerStyle={{
-            width: 200,
-            marginHorizontal: 140,
-            marginVertical: 10,
-          }}
-          buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)'}}
-          /></View>                   
-
-       
-
-        </ScrollView></View>
->>>>>>> 0971be0e8250e2383c3c664cc659a011e461ff6c
     );
 
 }
