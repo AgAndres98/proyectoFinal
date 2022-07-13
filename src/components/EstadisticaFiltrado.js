@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { db, screen } from "../utils";
 import { View, Alert, ScrollView } from "react-native";
 import { Image, Text, Icon, Button,Input } from "react-native-elements";
-import { Loading } from "./Shared";
+import { Loading,NoEstadistica } from "./Shared";
 import { useNavigation } from "@react-navigation/native";
 import { size, forEach, map } from "lodash";
 import { BarChart, PieChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import { array } from "yup";
-
+import { Picker } from "@react-native-picker/picker";
 export function EstadisticaFiltrado(props) {
     const ranking = [];
     let arrayFinal = [];
@@ -382,13 +382,7 @@ export function EstadisticaFiltrado(props) {
     return (
         <ScrollView>
 
-        <Input 
-         values={year}
-          placeholder="Ingrese el año"
-          onChangeText= { (year) => ChangeYear(year)}
-        />
-        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} style={{margin:100,width:100,padding:10,}}/>
-       
+        
 
 
             <Text
@@ -429,7 +423,7 @@ export function EstadisticaFiltrado(props) {
                     absolute //for the absolute number remove if you want percentage
                 />
             ) : (
-                <Loading show text="Cargando" />
+                <NoEstadistica texto={"No hay estadistica"}/>
             )}
 
             <Text
@@ -458,10 +452,33 @@ export function EstadisticaFiltrado(props) {
                     verticalLabelRotation={30}
                 />
             ) : (
-                <Loading show text="Cargando" />
+                <NoEstadistica texto={"No hay estadistica"}/>
             )}
 
-           
+<View style={{justifyContent: 'center', //Centered vertically
+   alignItems: 'center', // Centered horizontally
+   flex:1}}>
+        <Picker
+        selectedValue={year}
+        style={{width:150,}}
+        onValueChange={(value) =>(
+          ChangeYear(value))
+        
+        }>
+        <Picker.Item label="2022" value="2022" />
+        <Picker.Item label="2021" value="2021" />
+        <Picker.Item label="2020" value="2020" />
+        <Picker.Item label="2019" value="2019" />
+    
+      </Picker>
+        <Button title={"Enviar"} onPress={()=>{ goToRequest(year)}} 
+           containerStyle={{
+            width: 200,
+            marginHorizontal: 140,
+            marginVertical: 10,
+          }}
+          buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)'}}
+          /></View>     
 
         </ScrollView>
     );
