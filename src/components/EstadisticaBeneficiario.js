@@ -13,6 +13,7 @@ import { useFormik } from "formik";
 import { color } from "react-native-elements/dist/helpers";
 import { RedirectScreen } from "../screens/Account/RedirectScreen/RedirectScreen";
 import { styles } from "./Estadistica.styles";
+import { Picker } from "@react-native-picker/picker";
 
 export function EstadisticaBeneficiario(props) {
     let arrayFinal = [];
@@ -376,34 +377,40 @@ export function EstadisticaBeneficiario(props) {
                 />
 
 
-                <Picker
-                    selectedValue={year}
-                    style={{ width: 150, }}
-                    onValueChange={(value) => (
-                        ChangeYear(value))
+                <View style={{
+                    justifyContent: 'center', //Centered vertically
+                    alignItems: 'center', // Centered horizontally
+                    flex: 1
+                }}>
+                    <Picker
+                        selectedValue={year}
+                        style={{ width: 150, }}
+                        onValueChange={(value) => (
+                            ChangeYear(value))
 
-                    }>
-                    <Picker.Item label="2022" value="2022" />
-                    <Picker.Item label="2021" value="2021" />
-                    <Picker.Item label="2020" value="2020" />
-                    <Picker.Item label="2019" value="2019" />
+                        }>
+                        <Picker.Item label="2022" value="2022" />
+                        <Picker.Item label="2021" value="2021" />
+                        <Picker.Item label="2020" value="2020" />
+                        <Picker.Item label="2019" value="2019" />
 
-                </Picker>
-                <Button title={"Filtrar"} onPress={() => { goToRequest(year) }}
-                    containerStyle={{
-                        width: 200,
-                        marginHorizontal: 140,
-                        marginVertical: 10,
-                    }}
-                    buttonStyle={{
-                        borderRadius: 10,
-                        borderTopWidth: 1,
-                        borderTopColor: "#62bd60",
-                        borderBottomWidth: 1,
-                        borderBottomColor: "#62bd60",
-                        backgroundColor: "#62bd60",
-                    }}
-                />
+                    </Picker>
+                    <Button title={"Filtrar"} onPress={() => { goToRequest(year) }}
+                        containerStyle={{
+                            width: 200,
+                            marginHorizontal: 140,
+                            marginVertical: 10,
+                        }}
+                        buttonStyle={{
+                            borderRadius: 10,
+                            borderTopWidth: 1,
+                            borderTopColor: "#62bd60",
+                            borderBottomWidth: 1,
+                            borderBottomColor: "#62bd60",
+                            backgroundColor: "#62bd60",
+                        }}
+                    />
+                </View>
 
 
             </ScrollView></View>
