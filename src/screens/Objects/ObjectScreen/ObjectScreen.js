@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, Dimensions } from "react-native";
 import { doc, onSnapshot } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 import { Carousel, Loading } from "../../../components/Shared";
 import { db } from "../../../utils";
 import {
@@ -11,14 +12,12 @@ import {
 } from "../../../components/Objeto";
 import { styles } from "./ObjectScreen.styles";
 
-
-
 const { width } = Dimensions.get("window");
 
 export function ObjectScreen(props) {
   const { route } = props;
   const [objeto, setObjeto] = useState(null);
-
+  const auth = getAuth();
   const tipo = route.params.tipo;
 
   useEffect(() => {
@@ -28,16 +27,16 @@ export function ObjectScreen(props) {
     });
   }, [route.params.id]);
 
-
-
-
   if (!objeto) return <Loading show text="Cargando objeto" />;
 
   return (
     <ScrollView style={styles.content}>
       <Carousel arrayImages={objeto.fotos} height={330} width={width} />
       <Header objeto={objeto} />
-      <BtnFavorite idObjeto={route.params.id} />
+
+      {auth.currentUser.email !== "exporeact.ayudar@gmail.com" && (
+        <BtnFavorite idObjeto={route.params.id} />
+      )}
       <Info objeto={objeto} />
 
       <BtnRequest
@@ -47,8 +46,6 @@ export function ObjectScreen(props) {
         idUsuario={objeto.idUsuario}
         style={styles.container}
       />
-
-
     </ScrollView>
   );
 }
