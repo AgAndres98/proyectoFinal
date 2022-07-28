@@ -8,3 +8,4 @@ export * from "./DonorQuestionnaireForm";
 export * from "./MyObjects";
 export * from "./UserRequests";
 export * from "./SwitchBtn";
+export * from "./Statistics";

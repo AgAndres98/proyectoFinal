@@ -9,10 +9,8 @@ import { Modal } from "../../components/Shared";
 import { ChangeEmailForm } from "./ChangeEmailForm";
 import { ChangePasswordForm } from "./ChangePasswordForm";
 
-
-
 export function AccountOptions(props) {
-  const year=new Date().getFullYear();
+  const year = new Date().getFullYear();
   const { onReload } = props;
   const navigation = useNavigation();
 
@@ -51,11 +49,16 @@ export function AccountOptions(props) {
     if (key === "editBeneficiary") {
       navigation.navigate(screen.account.editBeneficiary);
     }
-    if (key === "estadisticas") {
-      navigation.navigate(screen.account.Estadistica,{year:year});
+    if (key === "estadisticasOld") {
+      navigation.navigate(screen.account.Estadistica, { year: year });
     }
     if (key === "estadisticasBeneficiario") {
-      navigation.navigate(screen.account.EstadisticaBeneficiario,{year:year});
+      navigation.navigate(screen.account.EstadisticaBeneficiario, {
+        year: year,
+      });
+    }
+    if (key === "estadisticas") {
+      navigation.navigate(screen.account.statistics);
     }
   };
 
@@ -128,7 +131,7 @@ function getMenuOptions(selectedComponent) {
       iconType: "material-community",
       iconNameRight: "arrow-right",
       iconColorRight: "#62bd60",
-      onPress: () => selectedComponent("estadisticas"),
+      onPress: () => selectedComponent("estadisticasOld"),
     },
     {
       title: "Ver estadisticas objetos",
@@ -136,6 +139,13 @@ function getMenuOptions(selectedComponent) {
       iconNameRight: "arrow-right",
       iconColorRight: "#62bd60",
       onPress: () => selectedComponent("estadisticasBeneficiario"),
+    },
+    {
+      title: "Estadísticas",
+      iconType: "material-community",
+      iconNameRight: "arrow-right",
+      iconColorRight: "#62bd60",
+      onPress: () => selectedComponent("estadisticas"),
     },
   ];
 }

@@ -10,12 +10,13 @@ import {
   EditBeneficiaryQuestionnaireScreen,
   MyObjectsScreen,
   UserRequestsScreen,
+  StatisticsScreen,
 } from "../screens/Account";
 import { EditEventScreen, MyEventsScreen } from "./../screens/Admin";
 import { DetailUserScreen } from "../screens/Account/UserRequestsScreen/DetailUserScreen/DetailUserScreen";
 import { EstadisticaScreen } from "../screens/EstadisticaScreen";
 import { EstadisticaBeneficiarioScreen } from "../screens/EstadisticaBeneficiarioScreen";
-import { RedirectScreen,RedirectEstadisticaScreen } from "../screens/Account";
+import { RedirectScreen, RedirectEstadisticaScreen } from "../screens/Account";
 
 const Stack = createNativeStackNavigator();
 
@@ -105,7 +106,8 @@ export function AccountStack() {
         component={EstadisticaScreen}
         options={{
           title: "Estadisticas solicitudes",
-        }} />
+        }}
+      />
 
       <Stack.Screen
         name={screen.account.EstadisticaBeneficiario}
@@ -114,17 +116,22 @@ export function AccountStack() {
           title: "Estadisticas objetos",
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name={screen.account.redirect}
         component={RedirectScreen}
-        options={{ title: "Estadisticas Objetos"}}
+        options={{ title: "Estadisticas Objetos" }}
       />
       <Stack.Screen
         name={screen.account.redirectEstadistica}
         component={RedirectEstadisticaScreen}
-        options={{ title: "Estadisticas Solicitudes"}}
+        options={{ title: "Estadisticas Solicitudes" }}
       />
-      
+
+      <Stack.Screen
+        name={screen.account.statistics}
+        component={StatisticsScreen}
+        options={{ title: "Estadísticas" }}
+      />
     </Stack.Navigator>
   );
 }

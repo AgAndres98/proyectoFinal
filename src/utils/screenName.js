@@ -41,8 +41,9 @@ const accountStack = {
   DetailUser: "Detalle usuario",
   Estadistica: "Estadistica Donante",
   EstadisticaBeneficiario: "Estadistica Beneficiario",
-  redirect:"Estadisticas Objetos",
-  redirectEstadistica:"Estadisticas solicitudes",
+  redirect: "Estadisticas Objetos",
+  redirectEstadistica: "Estadisticas solicitudes",
+  statistics: "Estadísticas",
 };
 
 const authStack = {
