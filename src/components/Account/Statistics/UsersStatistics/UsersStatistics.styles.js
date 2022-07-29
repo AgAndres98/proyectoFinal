@@ -11,4 +11,10 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
+  statisticsTypeNoBold: {
+    fontSize: 15,
+    textAlign: "center",
+    marginTop: 10,
+    marginBottom: 10,
+  },
 });

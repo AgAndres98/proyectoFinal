@@ -14,6 +14,10 @@ export function UsersStatistics(props) {
   let ranking = [];
   let arrayFinal = [];
   const [arrayPie, setArrayPie] = useState(null);
+  const [arrayPieUsuarios, setArrayPieUsuarios] = useState(null);
+
+  const [cantidadDonantes, setCantidadDonantes] = useState(null);
+  const [cantidadBeneficiarios, setCantidadBeneficiarios] = useState(null);
 
   const [arrayRanking, setArrayRanking] = useState(null);
   const [arrayNombres, setArrayNombres] = useState(null);
@@ -38,9 +42,18 @@ export function UsersStatistics(props) {
   let countElectrodomesticos = 0;
   let countUtiles = 0;
   let count = 0;
+  let donantes = 0;
+  let beneficiarios = 0;
 
   useEffect(() => {
     forEach(datosPersonales, (item) => {
+      if (item.rolInicial === "Beneficiario") {
+        beneficiarios++;
+      }
+      if (item.rolInicial === "Donante") {
+        donantes++;
+      }
+
       if (item.cuestionarioBeneficiario.alimentos === true) {
         countAlimentos = countAlimentos + 1;
         count = count + 1;
@@ -108,6 +121,10 @@ export function UsersStatistics(props) {
     const porcentajeLibros = (countLibros * 100) / count;
     const porcentajeMateriales = (countMateriales * 100) / count;
     const porcentajeObjetos = (countObjetos * 100) / count;
+    let totalRoles = donantes + beneficiarios;
+    const porcentajeDonantes = (donantes * 100) / totalRoles;
+    const porcentajeBeneficiarios = (beneficiarios * 100) / totalRoles;
+
     const array = [
       {
         name: "Ropa",
@@ -202,27 +219,38 @@ export function UsersStatistics(props) {
       },
     ];
 
+    const arrayUsuarios = [
+      {
+        name: "Donantes",
+        population: porcentajeDonantes,
+        color: "rgba(131, 167, 234, 1)",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15,
+      },
+      {
+        name: "Beneficiarios",
+        population: porcentajeBeneficiarios,
+        color: "#F00",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15,
+      },
+    ];
     array.forEach((item) => {
       if (isNaN(item.population) !== true) {
         if (item.population > 0) {
           arrayFinal.push(item);
         }
-      } else {
       }
     });
 
-    arrayFinal.sort(function (a, b) {
-      if (a.population < b.population) {
-        return 1;
-      }
-      if (a.population > b.population) {
-        return -1;
-      }
-      // a must be equal to b
-      return 0;
+    arrayFinal.sort((a, b) => {
+      return b.population - a.population;
     });
 
     setArrayPie(arrayFinal);
+    setArrayPieUsuarios(arrayUsuarios);
+    setCantidadDonantes(beneficiarios);
+    setCantidadBeneficiarios(donantes);
   }, []);
 
   useEffect(() => {
@@ -328,6 +356,38 @@ export function UsersStatistics(props) {
       {size(arrayPie) != 0 ? (
         <PieChart
           data={arrayPie}
+          width={Dimensions.get("window").width - 16}
+          height={240}
+          chartConfig={{
+            backgroundColor: "#1cc910",
+            backgroundGradientFrom: "#eff3ff",
+            backgroundGradientTo: "#efefef",
+            decimalPlaces: 2,
+
+            color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            style: {
+              borderRadius: 16,
+            },
+          }}
+          style={{
+            marginVertical: 8,
+            borderRadius: 16,
+          }}
+          accessor="population"
+          backgroundColor="transparent"
+          paddingLeft="5"
+          //absolute //for the absolute number remove if you want percentage
+        />
+      ) : (
+        // <NotFound texto={"No hay estadisticas"} />
+        <NoEstadistica texto={"No hay estadística"} />
+      )}
+
+      <Text style={styles.statisticsType}>Roles iniciales de usuarios:</Text>
+
+      {size(arrayPieUsuarios) != 0 ? (
+        <PieChart
+          data={arrayPieUsuarios}
           width={Dimensions.get("window").width - 16}
           height={240}
           chartConfig={{
